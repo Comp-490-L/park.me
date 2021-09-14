@@ -1,6 +1,6 @@
 # Parking App
 
-Senior Design Project - Comp. 484 - Fall 2020
+Senior Design Project - Comp. 484 - Fall 2021
 
 ## Contributing
 
