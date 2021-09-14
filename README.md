@@ -4,8 +4,6 @@ Senior Design Project - Comp. 484 - Fall 2020
 
 ## Contributing
 
----
-
 A Jira Project where will we assign tasks can be found [here.][jira-project]
 
 Our Documentation is kept in Google Drive [here.][google-drive]
