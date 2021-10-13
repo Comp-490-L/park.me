@@ -1,0 +1,606 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		803E65C027177C9500E341F6 /* soundspotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65BF27177C9500E341F6 /* soundspotApp.swift */; };
+		803E65C227177C9500E341F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65C127177C9500E341F6 /* ContentView.swift */; };
+		803E65C427177C9900E341F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803E65C327177C9900E341F6 /* Assets.xcassets */; };
+		803E65C727177C9900E341F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803E65C627177C9900E341F6 /* Preview Assets.xcassets */; };
+		803E65D127177C9900E341F6 /* soundspotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65D027177C9900E341F6 /* soundspotTests.swift */; };
+		803E65DB27177C9900E341F6 /* soundspotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65DA27177C9900E341F6 /* soundspotUITests.swift */; };
+		803E65DD27177C9900E341F6 /* soundspotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		803E65CD27177C9900E341F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 803E65B427177C9500E341F6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 803E65BB27177C9500E341F6;
+			remoteInfo = soundspot;
+		};
+		803E65D727177C9900E341F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 803E65B427177C9500E341F6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 803E65BB27177C9500E341F6;
+			remoteInfo = soundspot;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		803E65BC27177C9500E341F6 /* soundspot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = soundspot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		803E65BF27177C9500E341F6 /* soundspotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotApp.swift; sourceTree = "<group>"; };
+		803E65C127177C9500E341F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		803E65C327177C9900E341F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		803E65C627177C9900E341F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		803E65CC27177C9900E341F6 /* soundspotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = soundspotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		803E65D027177C9900E341F6 /* soundspotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotTests.swift; sourceTree = "<group>"; };
+		803E65D627177C9900E341F6 /* soundspotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = soundspotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		803E65DA27177C9900E341F6 /* soundspotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotUITests.swift; sourceTree = "<group>"; };
+		803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		803E65B927177C9500E341F6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		803E65C927177C9900E341F6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		803E65D327177C9900E341F6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		803E65B327177C9500E341F6 = {
+			isa = PBXGroup;
+			children = (
+				803E65BE27177C9500E341F6 /* soundspot */,
+				803E65CF27177C9900E341F6 /* soundspotTests */,
+				803E65D927177C9900E341F6 /* soundspotUITests */,
+				803E65BD27177C9500E341F6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		803E65BD27177C9500E341F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				803E65BC27177C9500E341F6 /* soundspot.app */,
+				803E65CC27177C9900E341F6 /* soundspotTests.xctest */,
+				803E65D627177C9900E341F6 /* soundspotUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		803E65BE27177C9500E341F6 /* soundspot */ = {
+			isa = PBXGroup;
+			children = (
+				803E65BF27177C9500E341F6 /* soundspotApp.swift */,
+				803E65C127177C9500E341F6 /* ContentView.swift */,
+				803E65C327177C9900E341F6 /* Assets.xcassets */,
+				803E65C527177C9900E341F6 /* Preview Content */,
+			);
+			path = soundspot;
+			sourceTree = "<group>";
+		};
+		803E65C527177C9900E341F6 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				803E65C627177C9900E341F6 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		803E65CF27177C9900E341F6 /* soundspotTests */ = {
+			isa = PBXGroup;
+			children = (
+				803E65D027177C9900E341F6 /* soundspotTests.swift */,
+			);
+			path = soundspotTests;
+			sourceTree = "<group>";
+		};
+		803E65D927177C9900E341F6 /* soundspotUITests */ = {
+			isa = PBXGroup;
+			children = (
+				803E65DA27177C9900E341F6 /* soundspotUITests.swift */,
+				803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */,
+			);
+			path = soundspotUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		803E65BB27177C9500E341F6 /* soundspot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 803E65E027177C9900E341F6 /* Build configuration list for PBXNativeTarget "soundspot" */;
+			buildPhases = (
+				803E65B827177C9500E341F6 /* Sources */,
+				803E65B927177C9500E341F6 /* Frameworks */,
+				803E65BA27177C9500E341F6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = soundspot;
+			productName = soundspot;
+			productReference = 803E65BC27177C9500E341F6 /* soundspot.app */;
+			productType = "com.apple.product-type.application";
+		};
+		803E65CB27177C9900E341F6 /* soundspotTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 803E65E327177C9900E341F6 /* Build configuration list for PBXNativeTarget "soundspotTests" */;
+			buildPhases = (
+				803E65C827177C9900E341F6 /* Sources */,
+				803E65C927177C9900E341F6 /* Frameworks */,
+				803E65CA27177C9900E341F6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				803E65CE27177C9900E341F6 /* PBXTargetDependency */,
+			);
+			name = soundspotTests;
+			productName = soundspotTests;
+			productReference = 803E65CC27177C9900E341F6 /* soundspotTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		803E65D527177C9900E341F6 /* soundspotUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 803E65E627177C9900E341F6 /* Build configuration list for PBXNativeTarget "soundspotUITests" */;
+			buildPhases = (
+				803E65D227177C9900E341F6 /* Sources */,
+				803E65D327177C9900E341F6 /* Frameworks */,
+				803E65D427177C9900E341F6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				803E65D827177C9900E341F6 /* PBXTargetDependency */,
+			);
+			name = soundspotUITests;
+			productName = soundspotUITests;
+			productReference = 803E65D627177C9900E341F6 /* soundspotUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		803E65B427177C9500E341F6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
+				TargetAttributes = {
+					803E65BB27177C9500E341F6 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					803E65CB27177C9900E341F6 = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 803E65BB27177C9500E341F6;
+					};
+					803E65D527177C9900E341F6 = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 803E65BB27177C9500E341F6;
+					};
+				};
+			};
+			buildConfigurationList = 803E65B727177C9500E341F6 /* Build configuration list for PBXProject "soundspot" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 803E65B327177C9500E341F6;
+			productRefGroup = 803E65BD27177C9500E341F6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				803E65BB27177C9500E341F6 /* soundspot */,
+				803E65CB27177C9900E341F6 /* soundspotTests */,
+				803E65D527177C9900E341F6 /* soundspotUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		803E65BA27177C9500E341F6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				803E65C727177C9900E341F6 /* Preview Assets.xcassets in Resources */,
+				803E65C427177C9900E341F6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		803E65CA27177C9900E341F6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		803E65D427177C9900E341F6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		803E65B827177C9500E341F6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				803E65C227177C9500E341F6 /* ContentView.swift in Sources */,
+				803E65C027177C9500E341F6 /* soundspotApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		803E65C827177C9900E341F6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				803E65D127177C9900E341F6 /* soundspotTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		803E65D227177C9900E341F6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				803E65DD27177C9900E341F6 /* soundspotUITestsLaunchTests.swift in Sources */,
+				803E65DB27177C9900E341F6 /* soundspotUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		803E65CE27177C9900E341F6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 803E65BB27177C9500E341F6 /* soundspot */;
+			targetProxy = 803E65CD27177C9900E341F6 /* PBXContainerItemProxy */;
+		};
+		803E65D827177C9900E341F6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 803E65BB27177C9500E341F6 /* soundspot */;
+			targetProxy = 803E65D727177C9900E341F6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		803E65DE27177C9900E341F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		803E65DF27177C9900E341F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		803E65E127177C9900E341F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"soundspot/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.soundspot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		803E65E227177C9900E341F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"soundspot/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.soundspot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		803E65E427177C9900E341F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.soundspotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/soundspot.app/soundspot";
+			};
+			name = Debug;
+		};
+		803E65E527177C9900E341F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.soundspotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/soundspot.app/soundspot";
+			};
+			name = Release;
+		};
+		803E65E727177C9900E341F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.soundspotUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = soundspot;
+			};
+			name = Debug;
+		};
+		803E65E827177C9900E341F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.soundspotUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = soundspot;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		803E65B727177C9500E341F6 /* Build configuration list for PBXProject "soundspot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				803E65DE27177C9900E341F6 /* Debug */,
+				803E65DF27177C9900E341F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		803E65E027177C9900E341F6 /* Build configuration list for PBXNativeTarget "soundspot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				803E65E127177C9900E341F6 /* Debug */,
+				803E65E227177C9900E341F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		803E65E327177C9900E341F6 /* Build configuration list for PBXNativeTarget "soundspotTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				803E65E427177C9900E341F6 /* Debug */,
+				803E65E527177C9900E341F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		803E65E627177C9900E341F6 /* Build configuration list for PBXNativeTarget "soundspotUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				803E65E727177C9900E341F6 /* Debug */,
+				803E65E827177C9900E341F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 803E65B427177C9500E341F6 /* Project object */;
+}
