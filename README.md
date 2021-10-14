@@ -1,6 +1,6 @@
 # Music Streaming app
 
-Senior Design Project - Comp. 484 - Fall 2021
+Senior Design Project - Comp. 490 - Fall 2021
 
 ## Contributing
 
