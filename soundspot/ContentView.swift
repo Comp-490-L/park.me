@@ -10,9 +10,11 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack{
+            Text("SoundSpot").font(.headline)
             CardView(title: "Email", secureField : false)
             CardView(title: "Password", secureField : true)
-            Button("Sign in ", action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/)
+            CTAButton(title: "Sign in")
+            
         }.padding(10)
     }
 }
@@ -35,10 +37,24 @@ struct CardView: View{
                     TextField("", text: $input)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
-                        .padding(.horizontal, 10)
+                        
                 }
                 
             }.frame(height: 35.0)
+        }
+    }
+}
+
+struct CTAButton: View{
+    var title : String
+    var body: some View{
+        ZStack{
+            Button(title,action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/)
+                .frame(maxWidth: .infinity, maxHeight:35.0)
+                .foregroundColor(.white)
+                .background(Color("lightBlue"))
+                .padding(.horizontal, 100)
+                .cornerRadius(10)
         }
     }
 }
