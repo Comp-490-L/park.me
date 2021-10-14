@@ -14,6 +14,7 @@
 		803E65D127177C9900E341F6 /* soundspotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65D027177C9900E341F6 /* soundspotTests.swift */; };
 		803E65DB27177C9900E341F6 /* soundspotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65DA27177C9900E341F6 /* soundspotUITests.swift */; };
 		803E65DD27177C9900E341F6 /* soundspotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */; };
+		80D1BEEA2717D24200300524 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D1BEE92717D24200300524 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		803E65D627177C9900E341F6 /* soundspotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = soundspotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		803E65DA27177C9900E341F6 /* soundspotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotUITests.swift; sourceTree = "<group>"; };
 		803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		80D1BEE92717D24200300524 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				803E65C127177C9500E341F6 /* ContentView.swift */,
 				803E65C327177C9900E341F6 /* Assets.xcassets */,
 				803E65C527177C9900E341F6 /* Preview Content */,
+				80D1BEE92717D24200300524 /* Colors.xcassets */,
 			);
 			path = soundspot;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80D1BEEA2717D24200300524 /* Colors.xcassets in Resources */,
 				803E65C727177C9900E341F6 /* Preview Assets.xcassets in Resources */,
 				803E65C427177C9900E341F6 /* Assets.xcassets in Resources */,
 			);
