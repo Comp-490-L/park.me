@@ -18,12 +18,12 @@ struct Card : Identifiable {
 }
 
 var TrendingCard = [
-    Card(id: 0, image: "maxresdefault1", title: "song0", descrip: "Genre",stars: 5, expand: false),
-    Card(id: 1, image: "maxresdefault2", title: "song1", descrip: "Genre",stars: 3, expand: false),
-    Card(id: 2, image: "maxresdefault3", title: "song2", descrip: "Genre",stars: 4, expand: false),
-    Card(id: 3, image: "maxresdefault1", title: "song3", descrip: "Genre",stars: 5, expand: false),
-    Card(id: 4, image: "maxresdefault2", title: "song4", descrip: "Genre",stars: 3, expand: false),
-    Card(id: 5, image: "maxresdefault3", title: "song5", descrip: "Genre",stars: 1, expand: false),
+    Card(id: 0, image: " ", title: "song0", descrip: "Genre",stars: 5, expand: false),
+    Card(id: 1, image: " ", title: "song1", descrip: "Genre",stars: 3, expand: false),
+    Card(id: 2, image: " ", title: "song2", descrip: "Genre",stars: 4, expand: false),
+    Card(id: 3, image: " ", title: "song3", descrip: "Genre",stars: 5, expand: false),
+    Card(id: 4, image: " ", title: "song4", descrip: "Genre",stars: 3, expand: false),
+    Card(id: 5, image: " ", title: "song5", descrip: "Genre",stars: 1, expand: false),
 ]
 
 var SongTypes = ["HIPHOP","RAP","HOME","TECHNO","GENRE","GENRE"]
