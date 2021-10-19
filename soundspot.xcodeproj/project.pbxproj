@@ -15,6 +15,17 @@
 		803E65DB27177C9900E341F6 /* soundspotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65DA27177C9900E341F6 /* soundspotUITests.swift */; };
 		803E65DD27177C9900E341F6 /* soundspotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */; };
 		80D1BEEA2717D24200300524 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D1BEE92717D24200300524 /* Colors.xcassets */; };
+		E5A48A2E271F4BF800110DDD /* Boarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A2D271F4BF800110DDD /* Boarding.swift */; };
+		E5A48A32271F4C0A00110DDD /* BoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A2F271F4C0A00110DDD /* BoardingPage.swift */; };
+		E5A48A33271F4C0A00110DDD /* CheckOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A30271F4C0A00110DDD /* CheckOut.swift */; };
+		E5A48A34271F4C0A00110DDD /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A31271F4C0A00110DDD /* Card.swift */; };
+		E5A48A38271F4C2200110DDD /* OurPicks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A35271F4C2200110DDD /* OurPicks.swift */; };
+		E5A48A39271F4C2200110DDD /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A36271F4C2200110DDD /* NavBar.swift */; };
+		E5A48A3A271F4C2200110DDD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A37271F4C2200110DDD /* HomeView.swift */; };
+		E5A48A3F271F4C2F00110DDD /* soundspotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A3B271F4C2F00110DDD /* soundspotApp.swift */; };
+		E5A48A40271F4C2F00110DDD /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A3C271F4C2F00110DDD /* Song.swift */; };
+		E5A48A41271F4C2F00110DDD /* StartUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A3D271F4C2F00110DDD /* StartUp.swift */; };
+		E5A48A42271F4C2F00110DDD /* TrendingWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A3E271F4C2F00110DDD /* TrendingWeek.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +57,17 @@
 		803E65DA27177C9900E341F6 /* soundspotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotUITests.swift; sourceTree = "<group>"; };
 		803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		80D1BEE92717D24200300524 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		E5A48A2D271F4BF800110DDD /* Boarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boarding.swift; sourceTree = "<group>"; };
+		E5A48A2F271F4C0A00110DDD /* BoardingPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardingPage.swift; sourceTree = "<group>"; };
+		E5A48A30271F4C0A00110DDD /* CheckOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOut.swift; sourceTree = "<group>"; };
+		E5A48A31271F4C0A00110DDD /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		E5A48A35271F4C2200110DDD /* OurPicks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OurPicks.swift; sourceTree = "<group>"; };
+		E5A48A36271F4C2200110DDD /* NavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
+		E5A48A37271F4C2200110DDD /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E5A48A3B271F4C2F00110DDD /* soundspotApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = soundspotApp.swift; sourceTree = "<group>"; };
+		E5A48A3C271F4C2F00110DDD /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		E5A48A3D271F4C2F00110DDD /* StartUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartUp.swift; sourceTree = "<group>"; };
+		E5A48A3E271F4C2F00110DDD /* TrendingWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingWeek.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,8 +118,19 @@
 		803E65BE27177C9500E341F6 /* soundspot */ = {
 			isa = PBXGroup;
 			children = (
+				E5A48A3C271F4C2F00110DDD /* Song.swift */,
 				803E65BF27177C9500E341F6 /* soundspotApp.swift */,
+				E5A48A2D271F4BF800110DDD /* Boarding.swift */,
+				E5A48A2F271F4C0A00110DDD /* BoardingPage.swift */,
+				E5A48A37271F4C2200110DDD /* HomeView.swift */,
+				E5A48A36271F4C2200110DDD /* NavBar.swift */,
+				E5A48A35271F4C2200110DDD /* OurPicks.swift */,
+				E5A48A31271F4C0A00110DDD /* Card.swift */,
+				E5A48A30271F4C0A00110DDD /* CheckOut.swift */,
 				803E65C127177C9500E341F6 /* ContentView.swift */,
+				E5A48A3B271F4C2F00110DDD /* soundspotApp.swift */,
+				E5A48A3D271F4C2F00110DDD /* StartUp.swift */,
+				E5A48A3E271F4C2F00110DDD /* TrendingWeek.swift */,
 				803E65C327177C9900E341F6 /* Assets.xcassets */,
 				803E65C527177C9900E341F6 /* Preview Content */,
 				80D1BEE92717D24200300524 /* Colors.xcassets */,
@@ -261,8 +294,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5A48A3A271F4C2200110DDD /* HomeView.swift in Sources */,
+				E5A48A32271F4C0A00110DDD /* BoardingPage.swift in Sources */,
+				E5A48A39271F4C2200110DDD /* NavBar.swift in Sources */,
+				E5A48A41271F4C2F00110DDD /* StartUp.swift in Sources */,
+				E5A48A34271F4C0A00110DDD /* Card.swift in Sources */,
 				803E65C227177C9500E341F6 /* ContentView.swift in Sources */,
+				E5A48A40271F4C2F00110DDD /* Song.swift in Sources */,
 				803E65C027177C9500E341F6 /* soundspotApp.swift in Sources */,
+				E5A48A38271F4C2200110DDD /* OurPicks.swift in Sources */,
+				E5A48A3F271F4C2F00110DDD /* soundspotApp.swift in Sources */,
+				E5A48A42271F4C2F00110DDD /* TrendingWeek.swift in Sources */,
+				E5A48A33271F4C0A00110DDD /* CheckOut.swift in Sources */,
+				E5A48A2E271F4BF800110DDD /* Boarding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
