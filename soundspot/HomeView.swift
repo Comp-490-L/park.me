@@ -6,9 +6,6 @@
 //
 
 import Foundation
-
-//
-
 import SwiftUI
 
  struct HomeView: View {
@@ -35,7 +32,6 @@ import SwiftUI
                                 .padding(.trailing, 20)
                         }
                         // Card View
-
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach(TrendingCard) { card in
