@@ -87,7 +87,10 @@ struct Song: View {
             
             HStack{
                 Spacer()
-
+                NavigationLink(destination: PlayerView(Song: Song),
+                    label: {
+                    Image(systemName: "play.circle.fill").resizable()
+                }).frame(width: 70, height: 30, alignment: .center).padding()
                 Spacer()
             }
             .padding(.all, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)

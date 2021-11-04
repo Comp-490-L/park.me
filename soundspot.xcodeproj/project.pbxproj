@@ -26,6 +26,7 @@
 		E5A48A40271F4C2F00110DDD /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A3C271F4C2F00110DDD /* Song.swift */; };
 		E5A48A41271F4C2F00110DDD /* StartUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A3D271F4C2F00110DDD /* StartUp.swift */; };
 		E5A48A42271F4C2F00110DDD /* TrendingWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A3E271F4C2F00110DDD /* TrendingWeek.swift */; };
+		EA40FDDE271F59F6000B5067 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA40FDDD271F59F6000B5067 /* PlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		E5A48A3C271F4C2F00110DDD /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		E5A48A3D271F4C2F00110DDD /* StartUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartUp.swift; sourceTree = "<group>"; };
 		E5A48A3E271F4C2F00110DDD /* TrendingWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingWeek.swift; sourceTree = "<group>"; };
+		EA40FDDD271F59F6000B5067 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				E5A48A3C271F4C2F00110DDD /* Song.swift */,
+				EA40FDDD271F59F6000B5067 /* PlayerView.swift */,
 				803E65BF27177C9500E341F6 /* soundspotApp.swift */,
 				E5A48A2D271F4BF800110DDD /* Boarding.swift */,
 				E5A48A2F271F4C0A00110DDD /* BoardingPage.swift */,
@@ -303,6 +306,7 @@
 				E5A48A40271F4C2F00110DDD /* Song.swift in Sources */,
 				803E65C027177C9500E341F6 /* soundspotApp.swift in Sources */,
 				E5A48A38271F4C2200110DDD /* OurPicks.swift in Sources */,
+				EA40FDDE271F59F6000B5067 /* PlayerView.swift in Sources */,
 				E5A48A3F271F4C2F00110DDD /* soundspotApp.swift in Sources */,
 				E5A48A42271F4C2F00110DDD /* TrendingWeek.swift in Sources */,
 				E5A48A33271F4C0A00110DDD /* CheckOut.swift in Sources */,
