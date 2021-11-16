@@ -11,7 +11,7 @@ import SwiftUI
 struct soundspotApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Boarding_View()
         }
     }
 }

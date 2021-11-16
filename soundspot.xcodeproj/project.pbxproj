@@ -8,17 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		803E65C027177C9500E341F6 /* soundspotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65BF27177C9500E341F6 /* soundspotApp.swift */; };
-		803E65C227177C9500E341F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65C127177C9500E341F6 /* ContentView.swift */; };
 		803E65C427177C9900E341F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803E65C327177C9900E341F6 /* Assets.xcassets */; };
 		803E65C727177C9900E341F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803E65C627177C9900E341F6 /* Preview Assets.xcassets */; };
 		803E65D127177C9900E341F6 /* soundspotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65D027177C9900E341F6 /* soundspotTests.swift */; };
 		803E65DB27177C9900E341F6 /* soundspotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65DA27177C9900E341F6 /* soundspotUITests.swift */; };
 		803E65DD27177C9900E341F6 /* soundspotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */; };
+		8046647B273CC9EE00797543 /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046647A273CC9EE00797543 /* AuthenticationModel.swift */; };
+		80524E8C273E199E00FD7DE0 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80524E8B273E199E00FD7DE0 /* UserRepository.swift */; };
+		80848C2427388B9300AF5ACC /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80848C2327388B9300AF5ACC /* SignUp.swift */; };
+		80848C322738963900AF5ACC /* AuthenticateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80848C312738963900AF5ACC /* AuthenticateUser.swift */; };
+		80947782273E1782009B9930 /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80947781273E1782009B9930 /* UserDTO.swift */; };
 		80D1BEEA2717D24200300524 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D1BEE92717D24200300524 /* Colors.xcassets */; };
+		80E5FDE62740B08600247717 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E5FDE52740B08600247717 /* UserService.swift */; };
 		E5263F212734789F004FF1B8 /* StartUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5263F202734789E004FF1B8 /* StartUp.swift */; };
 		E5263F23273478E7004FF1B8 /* LoginFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5263F22273478E6004FF1B8 /* LoginFields.swift */; };
-		E5263F25273478FC004FF1B8 /* selectedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5263F24273478FC004FF1B8 /* selectedState.swift */; };
-		E5263F2727347911004FF1B8 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5263F2627347911004FF1B8 /* SignUp.swift */; };
 		E5A48A2E271F4BF800110DDD /* Boarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A2D271F4BF800110DDD /* Boarding.swift */; };
 		E5A48A32271F4C0A00110DDD /* BoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A2F271F4C0A00110DDD /* BoardingPage.swift */; };
 		E5A48A33271F4C0A00110DDD /* CheckOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A30271F4C0A00110DDD /* CheckOut.swift */; };
@@ -26,7 +29,6 @@
 		E5A48A38271F4C2200110DDD /* OurPicks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A35271F4C2200110DDD /* OurPicks.swift */; };
 		E5A48A39271F4C2200110DDD /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A36271F4C2200110DDD /* NavBar.swift */; };
 		E5A48A3A271F4C2200110DDD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A37271F4C2200110DDD /* HomeView.swift */; };
-		E5A48A3F271F4C2F00110DDD /* soundspotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A3B271F4C2F00110DDD /* soundspotApp.swift */; };
 		E5A48A40271F4C2F00110DDD /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A3C271F4C2F00110DDD /* Song.swift */; };
 		E5A48A42271F4C2F00110DDD /* TrendingWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A3E271F4C2F00110DDD /* TrendingWeek.swift */; };
 		EA40FDDE271F59F6000B5067 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA40FDDD271F59F6000B5067 /* PlayerView.swift */; };
@@ -52,7 +54,6 @@
 /* Begin PBXFileReference section */
 		803E65BC27177C9500E341F6 /* soundspot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = soundspot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		803E65BF27177C9500E341F6 /* soundspotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotApp.swift; sourceTree = "<group>"; };
-		803E65C127177C9500E341F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		803E65C327177C9900E341F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		803E65C627177C9900E341F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		803E65CC27177C9900E341F6 /* soundspotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = soundspotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,11 +61,16 @@
 		803E65D627177C9900E341F6 /* soundspotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = soundspotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		803E65DA27177C9900E341F6 /* soundspotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotUITests.swift; sourceTree = "<group>"; };
 		803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8044488A2741C9C000B6C10A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8046647A273CC9EE00797543 /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
+		80524E8B273E199E00FD7DE0 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		80848C2327388B9300AF5ACC /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		80848C312738963900AF5ACC /* AuthenticateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateUser.swift; sourceTree = "<group>"; };
+		80947781273E1782009B9930 /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		80D1BEE92717D24200300524 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		E5263F202734789E004FF1B8 /* StartUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartUp.swift; path = ../../../Soundcloud/soundspot/StartUp.swift; sourceTree = "<group>"; };
-		E5263F22273478E6004FF1B8 /* LoginFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginFields.swift; path = ../../../Soundcloud/soundspot/LoginFields.swift; sourceTree = "<group>"; };
-		E5263F24273478FC004FF1B8 /* selectedState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = selectedState.swift; path = ../../../Soundcloud/soundspot/selectedState.swift; sourceTree = "<group>"; };
-		E5263F2627347911004FF1B8 /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUp.swift; path = ../../../Soundcloud/soundspot/SignUp.swift; sourceTree = "<group>"; };
+		80E5FDE52740B08600247717 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		E5263F202734789E004FF1B8 /* StartUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartUp.swift; sourceTree = "<group>"; };
+		E5263F22273478E6004FF1B8 /* LoginFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginFields.swift; sourceTree = "<group>"; };
 		E5A48A2D271F4BF800110DDD /* Boarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boarding.swift; sourceTree = "<group>"; };
 		E5A48A2F271F4C0A00110DDD /* BoardingPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardingPage.swift; sourceTree = "<group>"; };
 		E5A48A30271F4C0A00110DDD /* CheckOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOut.swift; sourceTree = "<group>"; };
@@ -72,7 +78,6 @@
 		E5A48A35271F4C2200110DDD /* OurPicks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OurPicks.swift; sourceTree = "<group>"; };
 		E5A48A36271F4C2200110DDD /* NavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
 		E5A48A37271F4C2200110DDD /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		E5A48A3B271F4C2F00110DDD /* soundspotApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = soundspotApp.swift; sourceTree = "<group>"; };
 		E5A48A3C271F4C2F00110DDD /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		E5A48A3E271F4C2F00110DDD /* TrendingWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingWeek.swift; sourceTree = "<group>"; };
 		EA40FDDD271F59F6000B5067 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
@@ -126,22 +131,21 @@
 		803E65BE27177C9500E341F6 /* soundspot */ = {
 			isa = PBXGroup;
 			children = (
+				8044488A2741C9C000B6C10A /* Info.plist */,
+				80524E89273E18E600FD7DE0 /* Services */,
+				80524E87273E18BB00FD7DE0 /* Repositories */,
+				80947780273E175A009B9930 /* DTOs */,
+				80DCB9942738DE4200B4C481 /* Boarding */,
+				80848C272738916600AF5ACC /* Authentication */,
 				E5A48A3C271F4C2F00110DDD /* Song.swift */,
 				EA40FDDD271F59F6000B5067 /* PlayerView.swift */,
 				803E65BF27177C9500E341F6 /* soundspotApp.swift */,
-				E5A48A2D271F4BF800110DDD /* Boarding.swift */,
 				E5A48A2F271F4C0A00110DDD /* BoardingPage.swift */,
-				E5263F202734789E004FF1B8 /* StartUp.swift */,
-				E5263F22273478E6004FF1B8 /* LoginFields.swift */,
-				E5263F24273478FC004FF1B8 /* selectedState.swift */,
-				E5263F2627347911004FF1B8 /* SignUp.swift */,
 				E5A48A37271F4C2200110DDD /* HomeView.swift */,
 				E5A48A36271F4C2200110DDD /* NavBar.swift */,
 				E5A48A35271F4C2200110DDD /* OurPicks.swift */,
 				E5A48A31271F4C0A00110DDD /* Card.swift */,
 				E5A48A30271F4C0A00110DDD /* CheckOut.swift */,
-				803E65C127177C9500E341F6 /* ContentView.swift */,
-				E5A48A3B271F4C2F00110DDD /* soundspotApp.swift */,
 				E5A48A3E271F4C2F00110DDD /* TrendingWeek.swift */,
 				803E65C327177C9900E341F6 /* Assets.xcassets */,
 				803E65C527177C9900E341F6 /* Preview Content */,
@@ -173,6 +177,106 @@
 				803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */,
 			);
 			path = soundspotUITests;
+			sourceTree = "<group>";
+		};
+		80524E87273E18BB00FD7DE0 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				80524E8B273E199E00FD7DE0 /* UserRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		80524E89273E18E600FD7DE0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				80524E8A273E18F900FD7DE0 /* APIService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		80524E8A273E18F900FD7DE0 /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				80E5FDE52740B08600247717 /* UserService.swift */,
+			);
+			path = APIService;
+			sourceTree = "<group>";
+		};
+		80848C272738916600AF5ACC /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				80848C2C2738920E00AF5ACC /* Model */,
+				80848C2B2738920200AF5ACC /* ViewModel */,
+				80848C2A273891F800AF5ACC /* View */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		80848C2A273891F800AF5ACC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E5263F202734789E004FF1B8 /* StartUp.swift */,
+				E5263F22273478E6004FF1B8 /* LoginFields.swift */,
+				80848C2327388B9300AF5ACC /* SignUp.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		80848C2B2738920200AF5ACC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				80848C312738963900AF5ACC /* AuthenticateUser.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		80848C2C2738920E00AF5ACC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8046647A273CC9EE00797543 /* AuthenticationModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		80947780273E175A009B9930 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				80947781273E1782009B9930 /* UserDTO.swift */,
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		80DCB9942738DE4200B4C481 /* Boarding */ = {
+			isa = PBXGroup;
+			children = (
+				80DCB9972738DE6D00B4C481 /* Model */,
+				80DCB9962738DE5F00B4C481 /* ViewModel */,
+				80DCB9952738DE5600B4C481 /* View */,
+			);
+			path = Boarding;
+			sourceTree = "<group>";
+		};
+		80DCB9952738DE5600B4C481 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E5A48A2D271F4BF800110DDD /* Boarding.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		80DCB9962738DE5F00B4C481 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		80DCB9972738DE6D00B4C481 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,21 +412,23 @@
 			files = (
 				E5A48A3A271F4C2200110DDD /* HomeView.swift in Sources */,
 				E5A48A32271F4C0A00110DDD /* BoardingPage.swift in Sources */,
+				80524E8C273E199E00FD7DE0 /* UserRepository.swift in Sources */,
+				80848C322738963900AF5ACC /* AuthenticateUser.swift in Sources */,
 				E5A48A39271F4C2200110DDD /* NavBar.swift in Sources */,
 				E5A48A34271F4C0A00110DDD /* Card.swift in Sources */,
 				E5263F23273478E7004FF1B8 /* LoginFields.swift in Sources */,
-				803E65C227177C9500E341F6 /* ContentView.swift in Sources */,
 				E5263F212734789F004FF1B8 /* StartUp.swift in Sources */,
 				E5A48A40271F4C2F00110DDD /* Song.swift in Sources */,
-				E5263F25273478FC004FF1B8 /* selectedState.swift in Sources */,
 				803E65C027177C9500E341F6 /* soundspotApp.swift in Sources */,
 				E5A48A38271F4C2200110DDD /* OurPicks.swift in Sources */,
+				8046647B273CC9EE00797543 /* AuthenticationModel.swift in Sources */,
 				EA40FDDE271F59F6000B5067 /* PlayerView.swift in Sources */,
-				E5A48A3F271F4C2F00110DDD /* soundspotApp.swift in Sources */,
+				80E5FDE62740B08600247717 /* UserService.swift in Sources */,
 				E5A48A42271F4C2F00110DDD /* TrendingWeek.swift in Sources */,
 				E5A48A33271F4C0A00110DDD /* CheckOut.swift in Sources */,
 				E5A48A2E271F4BF800110DDD /* Boarding.swift in Sources */,
-				E5263F2727347911004FF1B8 /* SignUp.swift in Sources */,
+				80947782273E1782009B9930 /* UserDTO.swift in Sources */,
+				80848C2427388B9300AF5ACC /* SignUp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,9 +591,13 @@
 				DEVELOPMENT_ASSET_PATHS = "\"soundspot/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = soundspot/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -514,9 +624,13 @@
 				DEVELOPMENT_ASSET_PATHS = "\"soundspot/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = soundspot/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
