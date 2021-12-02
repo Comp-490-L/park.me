@@ -20,7 +20,10 @@ struct StartUp: View {
                 
                 selectState(viewModel: viewModel).padding(.vertical, 350.0)
             }
-            .background(Color.orange)
+            .background(Image("FLCL").resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .ignoresSafeArea()
+            )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .edgesIgnoringSafeArea(.all)
         }
@@ -43,10 +46,13 @@ struct StartUp: View {
                 
                 HStack{
                     Color.white.opacity(0.7)
-                        .frame(width: 20, height: 1)
+                        .frame(width: 20, height: 1.0)
                     
                     Text("Or")
                         .foregroundColor(.white)
+                        .font(.system(size: 25))
+                        
+                        
                     
                     Color.white.opacity(0.7)
                         .frame(width: 20, height: 1)
@@ -54,7 +60,7 @@ struct StartUp: View {
                 
                 HStack{
                     googleSignInBtn
-                }.padding(.top, 50)
+                }.padding(.top, 0)
             }
         }
         
@@ -63,6 +69,7 @@ struct StartUp: View {
                 }) {
                 Text("Forgot Password?")
                     .foregroundColor(.white)
+                    .font(.system(size: 20))
             }
         }
         
@@ -70,10 +77,10 @@ struct StartUp: View {
             Button(action: {
                 
             }) {
-                Image("googleLogo")
+                Image("GoogleLogo")
                     .renderingMode(.original)
                     .resizable()
-                    .frame(width: 20, height: 20)
+                    .frame(width: 90, height: 90)
             }
         }
             
