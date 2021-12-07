@@ -20,13 +20,14 @@ struct StartUp: View {
                 
                 selectState(viewModel: viewModel).padding(.vertical, 350.0)
             }
-            .background(Image("FLCL").resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .ignoresSafeArea()
+            .background(Image("wavy")
+                            .resizable(resizingMode: .tile)
+                            .ignoresSafeArea(.all)
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .edgesIgnoringSafeArea(.all)
         }.navigationBarBackButtonHidden(true).navigationBarHidden(true)
+        
     }
     
     

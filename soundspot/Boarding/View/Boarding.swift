@@ -18,9 +18,9 @@ struct Boarding_View: View {
     var body: some View {
         NavigationView{
             VStack{
-                pages()
                 
-                Spacer()
+                pages()
+  
             }
         }
     }
@@ -28,15 +28,23 @@ struct Boarding_View: View {
 
 
 struct pages: View {
+    let deviceWidth = UIScreen.main.bounds.width
+    let deviceHeight = UIScreen.main.bounds.height
+    
     var body: some View {
         ZStack{
-            Image("Aux-Cord-1")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea()
+            Image("wavy")
+                .resizable(resizingMode: .tile)
+                .ignoresSafeArea(.all)
+                //.edgesIgnoringSafeArea(.all)
+                //.aspectRatio(contentMode: .fill)
+                //.frame(width: deviceWidth, height: deviceHeight, alignment: .topLeading)
+                
+                
+ 
+            
          
             VStack {
-                
                 TabView {
                     ForEach(Data) { page in
                         GeometryReader { g in
@@ -62,19 +70,27 @@ struct pages: View {
                             }
                         }
                     }
+                
                 NavigationLink(
                     destination: StartUp(viewModel: AuthenticateUser()).navigationBarBackButtonHidden(true).navigationBarHidden(true),
                     label: {
                         Text("Listen Now")
                             .font(.headline)
                             .padding(.init(top: 10.0, leading: 40.0, bottom: 10.0, trailing: 40.0))
-                            .foregroundColor(.white)
-                            .background(Color(#colorLiteral(red: 0.95294118, green: 0.18431373, blue: 0.2, alpha: 1)))
+                            .foregroundColor(.black)
+                            .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
                             .cornerRadius(10)
+                        
                     })
+                
+                
+                
                 }
                 .edgesIgnoringSafeArea(.top)
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+            
+    
+            
             }
         
 

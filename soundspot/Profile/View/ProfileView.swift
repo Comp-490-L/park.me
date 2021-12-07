@@ -10,6 +10,7 @@ import SwiftUI
 import AudioToolbox
 
 struct ProfileView: View{
+    
     @StateObject var viewModel: ProfileViewModel
     var uploadViewModel = UploadViewModel()
     var body: some View{
@@ -21,6 +22,7 @@ struct ProfileView: View{
                         Text("Your music")
                             .font(.title3)
                             .padding(.top, 15.0)
+                            .foregroundColor(.white)
                     }.padding()
                     
                     
@@ -53,13 +55,16 @@ struct ProfileView: View{
                         .padding(.horizontal, 60.0)
                         .padding(.vertical, 10.0)
                         .foregroundColor(.white)
-                        .background(Color(#colorLiteral(red: 0.9580881, green: 0.10593573, blue: 0.3403331637, alpha: 1)))
+                        .background(Color.purple)
                         .cornerRadius(10)
                 }.sheet(isPresented: $viewModel.showFilePicker){
                     uploadViewModel.showDocumentPicker()
                 }
             }.padding()
-        }
+            
+        }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+            .ignoresSafeArea()
+        
     }
     
     struct trackCard : View{

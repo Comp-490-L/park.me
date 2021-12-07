@@ -12,7 +12,7 @@ struct HomeView: View {
     
     @State private var selection = 0
     init() {
-        UITabBar.appearance().backgroundColor = UIColor.white
+        UITabBar.appearance().backgroundColor = UIColor.gray
     }
     var body: some View {
         NavigationView{
@@ -38,6 +38,7 @@ struct HomeView: View {
         }
         
     }.navigationBarBackButtonHidden(true).navigationBarHidden(true)
+    
 }
 }
 
@@ -58,12 +59,13 @@ struct HomeMainView: View {
                             Text("Trending this week")
                                 .bold()
                                 .multilineTextAlignment(.trailing)
+                                .foregroundColor(.white)
                                 .padding(.leading, 20)
 
                             Spacer()
                             Text("View all >")
                                 .multilineTextAlignment(.leading)
-                                .foregroundColor(.red)
+                                .foregroundColor(.white)
                                 .padding(.trailing, 20)
                         }
                         // Card View
@@ -74,9 +76,10 @@ struct HomeMainView: View {
                                         destination: Song(Song :card),
                                         label: {
                                             Trending(trendingSong: card)
-                                                .background(Color.white)
+                                                .background(Color.purple)
                                                 .cornerRadius(15)
                                                 .shadow(radius: 1)
+                                                
                                         })
                                         .buttonStyle(PlainButtonStyle())
                                 }
@@ -96,6 +99,7 @@ struct HomeMainView: View {
                                 .bold()
                                 .multilineTextAlignment(.trailing)
                                 .padding(.leading, 20)
+                                .foregroundColor(.white)
 
                             Spacer()
                         }
@@ -107,13 +111,13 @@ struct HomeMainView: View {
                                     Text(SongTypes[Int(i)-1])
                                         .font(.subheadline)
                                         .bold()
-                                        .foregroundColor(.red)
+                                        .foregroundColor(.white)
 
                                 }
                                 .frame(width: 80, height: 100, alignment: .center)
-                                .background(Color.white)
+                                .background(Color.purple)
                                 .cornerRadius(15)
-                                .foregroundColor(.red)
+                                .foregroundColor(.white)
 
                             }
                         }
@@ -127,8 +131,8 @@ struct HomeMainView: View {
                                         .bold()
                                 }
                                 .frame(width: 80, height: 100, alignment: .center)
-                                .background(Color.white)
-                                .foregroundColor(.red)
+                                .background(Color.purple)
+                                .foregroundColor(.white)
                                 .cornerRadius(15)
                             }
                         }
@@ -144,11 +148,12 @@ struct HomeMainView: View {
                                 .bold()
                                 .multilineTextAlignment(.trailing)
                                 .padding(.leading, 20)
+                                .foregroundColor(.white)
 
                             Spacer()
                             Text("View all >")
                                 .multilineTextAlignment(.leading)
-                                .foregroundColor(.red)
+                                .foregroundColor(.white)
                                 .padding(.trailing, 20)
                         }
                         .opacity(self.hero ? 0 : 1)
@@ -192,7 +197,8 @@ struct HomeMainView: View {
 
 
                 }
-                .background(Color(#colorLiteral(red: 0.9843164086, green: 0.9843164086, blue: 0.9843164086, alpha: 1)))
+                
+                .background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
 
             }
             .background(Color(.white))
@@ -214,7 +220,7 @@ struct SearchBar: View {
     @State var search = ""
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)), Color(#colorLiteral(red: 0.9843164086, green: 0.9843164086, blue: 0.9843164086, alpha: 1))]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 0)), Color(#colorLiteral(red: 0.9843164086, green: 0.9843164086, blue: 0.9843164086, alpha: 0))]), startPoint: .top, endPoint: .bottom)
                 .frame(width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.height)*0.25, alignment: .center)
                 .edgesIgnoringSafeArea(.all)
 
@@ -225,14 +231,14 @@ struct SearchBar: View {
                         .bold()
                         .font(.title)
                         .multilineTextAlignment(.trailing)
-                        .foregroundColor(.red)
+                        .foregroundColor(.white)
                         .padding(.leading, 20)
                         .padding(.top, -40)
                     Spacer()
                     Text("Filter")
                         .font(.title2)
                         .multilineTextAlignment(.leading)
-                        .foregroundColor(.red)
+                        .foregroundColor(.white)
                         .padding(.trailing, 20)
                         .padding(.top, -30)
                 }

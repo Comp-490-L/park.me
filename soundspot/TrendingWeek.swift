@@ -20,7 +20,7 @@ struct Trending: View {
             HStack {
                 Text(trendingSong.title)
                     .bold()
-                    .foregroundColor(.red)
+                    .foregroundColor(.white)
                     .padding(.all, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 Spacer()
             }
@@ -28,7 +28,7 @@ struct Trending: View {
             HStack {
                 Text(trendingSong.descrip)
                     .font(.subheadline)
-                    .foregroundColor(.red)
+                    .foregroundColor(.white)
                     .padding(.leading, 10)
                 Spacer()
             }

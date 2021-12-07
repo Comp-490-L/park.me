@@ -21,6 +21,7 @@ struct OurPicks: View {
                     .frame(width: self.card.expand ? (UIScreen.main.bounds.width) : (UIScreen.main.bounds.width)*0.9 , height: self.card.expand ? (UIScreen.main.bounds.height)*0.3 : (UIScreen.main.bounds.height)*0.25 )
                     .cornerRadius(self.card.expand ? 5 : 20)
                     .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+                    .foregroundColor(.white)
                 if (self.card.expand) {
                     HStack{
                         Spacer()

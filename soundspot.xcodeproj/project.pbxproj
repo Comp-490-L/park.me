@@ -41,6 +41,7 @@
 		D159525E275971F4002EFA28 /* Aux-Cord-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D159525B275971F4002EFA28 /* Aux-Cord-1.jpg */; };
 		D159525F275971F4002EFA28 /* FLCL.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D159525C275971F4002EFA28 /* FLCL.jpg */; };
 		D1595260275971F4002EFA28 /* GoogleLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = D159525D275971F4002EFA28 /* GoogleLogo.png */; };
+		D19B7A5F275F359A00F5F42F /* wavy.png in Resources */ = {isa = PBXBuildFile; fileRef = D19B7A5E275F359A00F5F42F /* wavy.png */; };
 		E5263F212734789F004FF1B8 /* StartUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5263F202734789E004FF1B8 /* StartUp.swift */; };
 		E5263F23273478E7004FF1B8 /* LoginFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5263F22273478E6004FF1B8 /* LoginFields.swift */; };
 		E5A48A2E271F4BF800110DDD /* Boarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A2D271F4BF800110DDD /* Boarding.swift */; };
@@ -72,9 +73,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8025AD62275F150900D7A7FC /* FormType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormType.swift; path = "../../../../../../Downloads/Soundpot Last after clone/soundspot/Authentication/Model/FormType.swift"; sourceTree = "<group>"; };
-		8025AD64275F151800D7A7FC /* RegisterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterModel.swift; path = "../../../../../../Downloads/Soundpot Last after clone/soundspot/Authentication/Model/RegisterModel.swift"; sourceTree = "<group>"; };
-		8025AD65275F151800D7A7FC /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginModel.swift; path = "../../../../../../Downloads/Soundpot Last after clone/soundspot/Authentication/Model/LoginModel.swift"; sourceTree = "<group>"; };
+		8025AD62275F150900D7A7FC /* FormType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormType.swift; sourceTree = "<group>"; };
+		8025AD64275F151800D7A7FC /* RegisterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
+		8025AD65275F151800D7A7FC /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		8025AD6C275F162000D7A7FC /* DownloadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadService.swift; sourceTree = "<group>"; };
 		8025AD71275F166500D7A7FC /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
 		8025AD74275F168C00D7A7FC /* MultipartFormDataRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartFormDataRequest.swift; sourceTree = "<group>"; };
@@ -109,6 +110,7 @@
 		D159525B275971F4002EFA28 /* Aux-Cord-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Aux-Cord-1.jpg"; sourceTree = "<group>"; };
 		D159525C275971F4002EFA28 /* FLCL.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FLCL.jpg; sourceTree = "<group>"; };
 		D159525D275971F4002EFA28 /* GoogleLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoogleLogo.png; sourceTree = "<group>"; };
+		D19B7A5E275F359A00F5F42F /* wavy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wavy.png; sourceTree = "<group>"; };
 		E5263F202734789E004FF1B8 /* StartUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartUp.swift; sourceTree = "<group>"; };
 		E5263F22273478E6004FF1B8 /* LoginFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginFields.swift; sourceTree = "<group>"; };
 		E5A48A2D271F4BF800110DDD /* Boarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boarding.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				D159525B275971F4002EFA28 /* Aux-Cord-1.jpg */,
 				D159525D275971F4002EFA28 /* GoogleLogo.png */,
 				D159525C275971F4002EFA28 /* FLCL.jpg */,
+				D19B7A5E275F359A00F5F42F /* wavy.png */,
 				803E65C327177C9900E341F6 /* Assets.xcassets */,
 				803E65C527177C9900E341F6 /* Preview Content */,
 				80D1BEE92717D24200300524 /* Colors.xcassets */,
@@ -551,6 +554,7 @@
 				D159525E275971F4002EFA28 /* Aux-Cord-1.jpg in Resources */,
 				803E65C427177C9900E341F6 /* Assets.xcassets in Resources */,
 				D1595260275971F4002EFA28 /* GoogleLogo.png in Resources */,
+				D19B7A5F275F359A00F5F42F /* wavy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
