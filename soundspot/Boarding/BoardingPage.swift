@@ -34,7 +34,7 @@ struct Page : Identifiable {
 }
 
 var Data = [
-    Page(id: 0, image: "Aux-Cord-1", title: "SoundSpot", descrip: "Listen to Music for free"),
+    Page(id: 0, image: "Aux-Cord-1", title: "Frequent-C", descrip: "Listen to Music for free"),
     Page(id: 1, image: "Aux-Cord-1", title: "No Ads", descrip: "No Subscriptions"),
     Page(id: 2, image: "On the go", title: "Post Your Own Music", descrip: "And Listen to Your Friends!")
 ]

@@ -15,7 +15,7 @@ struct MusicService{
             
             print("upload tracks called")
             let uploader = FileUploader()
-            let url = URL(string: "http://127.0.0.1:5000/api/UploadTracks")!
+            let url = URL(string: "\(Server.url)/api/UploadTracks")!
             // if let audioFileURL = Bundle.main.url(forResource: "p3", withExtension: ".pdf")
             let audioFileURL = urls[0]
             
@@ -33,24 +33,17 @@ struct MusicService{
             }catch let error{
                 print("Error: \(error)")
             }
-            
-            /*}else{
-             print("audio file not found")
-             }*/
-            
         }
         
     }
     
     struct Download{
-        // Token valid for 12 month since we don't have neither the code to update it every 5 min
-        // nor the local db to save it in
-        /*let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjBiY2MwZmJkLWQzYzAtNGVmMy04N2Y2LWY5MmQ1NWU4YWNmZiIsImp0aSI6IjQ4MGMxNGZkLTAyYTUtNDk2Yi1iYTQ1LTlhYjg2OTlmMTU5MyIsInJvbGUiOiJBcHBVc2VyIiwibmJmIjoxNjM4NTE5NTE4LCJleHAiOjE2NzAwNTU1MTgsImlhdCI6MTYzODUxOTUxOH0.-UQJuG7QWaT1krhKppuQQdGgeu7rS3Ll7X_n7Divjpg"*/
+
+
         
         
         var downloadTask: URLSessionDownloadTask? = nil
         var progressLabel: UILabel? = nil
-        //var percentFormatter:
         
         mutating func tracks(trackId: String){
             let instance = Session()

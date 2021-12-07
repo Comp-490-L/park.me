@@ -12,11 +12,13 @@ import SwiftUI
 struct Trending: View {
     @State var trendingSong : Card
     var body: some View {
-        VStack {
+        ZStack{
             Image(trendingSong.image)
                 .resizable()
-                .frame(width: 270, height: 150)
-            
+                .frame(width: 270, height:270)
+        
+        VStack {
+            Spacer()
             HStack {
                 Text(trendingSong.title)
                     .bold()
@@ -44,6 +46,8 @@ struct Trending: View {
             .padding(.bottom, 30)
             .padding(.leading, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
             .padding(.trailing, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+            
+        }.padding(.leading, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
             
         }
         .frame(width: 250, height: 250)

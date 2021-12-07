@@ -18,11 +18,11 @@ struct ProfileView: View{
             ScrollView(){
                 VStack(alignment: .leading){
                     VStack (alignment: .leading){
-                        Text(viewModel.profile?.displayName ?? "").font(.title2)
+                        Text(viewModel.profile?.displayName ?? "").font(.title2).padding(.top, 60).foregroundColor(.white)
                         Text("Your music")
                             .font(.title3)
                             .padding(.top, 15.0)
-                            .foregroundColor(.white)
+                           .foregroundColor(.white)
                     }.padding()
                     
                     
@@ -43,9 +43,9 @@ struct ProfileView: View{
                         viewModel.getUserMusic()
                     }
                 }
-            }
+            }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
             
-            Spacer()
+            Spacer().background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
             HStack{
                 Button(action: {
                     viewModel.showFilePicker.toggle()
@@ -59,12 +59,11 @@ struct ProfileView: View{
                         .cornerRadius(10)
                 }.sheet(isPresented: $viewModel.showFilePicker){
                     uploadViewModel.showDocumentPicker()
+                    
                 }
-            }.padding()
-            
-        }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
-            .ignoresSafeArea()
-        
+            }.padding().background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+        }.edgesIgnoringSafeArea(.top)
+            // .ignoresSafeArea()
     }
     
     struct trackCard : View{
@@ -79,7 +78,7 @@ struct ProfileView: View{
                         .background(Color.white)
                         .cornerRadius(15)
                         .shadow(radius: 1)
-                }else{
+                }else if(single.pictureData != nil){
                     Image(uiImage: UIImage(data: single.pictureData!)!)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -101,6 +100,5 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(viewModel: ProfileViewModel()).previewDevice("iPhone 13")
     }
-    
 }
 

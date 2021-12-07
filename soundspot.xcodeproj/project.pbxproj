@@ -32,6 +32,7 @@
 		803E65DB27177C9900E341F6 /* soundspotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65DA27177C9900E341F6 /* soundspotUITests.swift */; };
 		803E65DD27177C9900E341F6 /* soundspotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */; };
 		8046647B273CC9EE00797543 /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046647A273CC9EE00797543 /* AuthenticationModel.swift */; };
+		804FD696275FCE5F00D81C74 /* SadMachineSingleCover.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 804FD695275FCE5F00D81C74 /* SadMachineSingleCover.jpeg */; };
 		80524E8C273E199E00FD7DE0 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80524E8B273E199E00FD7DE0 /* UserRepository.swift */; };
 		80848C2427388B9300AF5ACC /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80848C2327388B9300AF5ACC /* SignUp.swift */; };
 		80848C322738963900AF5ACC /* AuthenticateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80848C312738963900AF5ACC /* AuthenticateUser.swift */; };
@@ -101,6 +102,7 @@
 		803E65DA27177C9900E341F6 /* soundspotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotUITests.swift; sourceTree = "<group>"; };
 		803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8046647A273CC9EE00797543 /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
+		804FD695275FCE5F00D81C74 /* SadMachineSingleCover.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SadMachineSingleCover.jpeg; sourceTree = "<group>"; };
 		80524E8B273E199E00FD7DE0 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		80848C2327388B9300AF5ACC /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		80848C312738963900AF5ACC /* AuthenticateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateUser.swift; sourceTree = "<group>"; };
@@ -294,7 +296,6 @@
 				80848C272738916600AF5ACC /* Authentication */,
 				E5A48A3C271F4C2F00110DDD /* Song.swift */,
 				803E65BF27177C9500E341F6 /* soundspotApp.swift */,
-				E5A48A2F271F4C0A00110DDD /* BoardingPage.swift */,
 				E5A48A37271F4C2200110DDD /* HomeView.swift */,
 				E5A48A36271F4C2200110DDD /* NavBar.swift */,
 				E5A48A35271F4C2200110DDD /* OurPicks.swift */,
@@ -304,6 +305,7 @@
 				D159525B275971F4002EFA28 /* Aux-Cord-1.jpg */,
 				D159525D275971F4002EFA28 /* GoogleLogo.png */,
 				D159525C275971F4002EFA28 /* FLCL.jpg */,
+				804FD695275FCE5F00D81C74 /* SadMachineSingleCover.jpeg */,
 				D19B7A5E275F359A00F5F42F /* wavy.png */,
 				803E65C327177C9900E341F6 /* Assets.xcassets */,
 				803E65C527177C9900E341F6 /* Preview Content */,
@@ -415,8 +417,7 @@
 		80DCB9942738DE4200B4C481 /* Boarding */ = {
 			isa = PBXGroup;
 			children = (
-				80DCB9972738DE6D00B4C481 /* Model */,
-				80DCB9962738DE5F00B4C481 /* ViewModel */,
+				E5A48A2F271F4C0A00110DDD /* BoardingPage.swift */,
 				80DCB9952738DE5600B4C481 /* View */,
 			);
 			path = Boarding;
@@ -428,20 +429,6 @@
 				E5A48A2D271F4BF800110DDD /* Boarding.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		80DCB9962738DE5F00B4C481 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		80DCB9972738DE6D00B4C481 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -552,6 +539,7 @@
 				803E65C727177C9900E341F6 /* Preview Assets.xcassets in Resources */,
 				D159525F275971F4002EFA28 /* FLCL.jpg in Resources */,
 				D159525E275971F4002EFA28 /* Aux-Cord-1.jpg in Resources */,
+				804FD696275FCE5F00D81C74 /* SadMachineSingleCover.jpeg in Resources */,
 				803E65C427177C9900E341F6 /* Assets.xcassets in Resources */,
 				D1595260275971F4002EFA28 /* GoogleLogo.png in Resources */,
 				D19B7A5F275F359A00F5F42F /* wavy.png in Resources */,

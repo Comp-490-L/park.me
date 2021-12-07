@@ -13,6 +13,8 @@ import SwiftUI
 
 
 final class UploadViewModel : ObservableObject{
+  
+   
     
     func showDocumentPicker() -> some UIViewControllerRepresentable{
         return DocumentPicker(uploadFunc: uploadTracks)
@@ -21,13 +23,8 @@ final class UploadViewModel : ObservableObject{
     func uploadTracks(urls: [URL]){
         let uploadService = MusicService.Upload()
         uploadService.tracks(urls: urls)
+       
     }
-    
-    /*func downloadTrack(){
-        // use new instance each download
-        var downloadService = MusicService.Download()
-        downloadService.tracks(trackId: "64958ebc-0412-40d4-b622-4389816ab3a7")
-    }*/
 }
 
 struct DocumentPicker: UIViewControllerRepresentable{
@@ -60,7 +57,7 @@ struct DocumentPicker: UIViewControllerRepresentable{
             print("Urls are \(urls)")
             uploadFunc(urls)
             
-            //TODO call upload function from here.
+            
         }
     }
 }

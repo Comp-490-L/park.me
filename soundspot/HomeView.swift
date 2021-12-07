@@ -21,7 +21,8 @@ struct HomeView: View {
             
             .tabItem {
                     VStack {
-                        Image(systemName: "globe") // Use globe symbol
+                        Image(systemName: "globe")
+                            .foregroundColor(Color.white)
                         Text("Categories")
                     }
                 }//.navigationBarBackButtonHidden(true).navigationBarHidden(true)
@@ -30,10 +31,10 @@ struct HomeView: View {
             ProfileView(viewModel: ProfileViewModel()).navigationBarBackButtonHidden(true).navigationBarHidden(true)
             .tabItem {
                 VStack {
-                    Image(systemName: "person") // Use person symbol
+                    Image(systemName: "person").background(Color.white)
                     Text("Profile")
                 }
-            }
+            }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
             .tag(1)
         }
         

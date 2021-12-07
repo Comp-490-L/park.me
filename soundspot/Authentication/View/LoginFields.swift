@@ -44,8 +44,8 @@ struct LoginFields: View {
                     .background(Color.pink)
                     .cornerRadius(10)
                     .onTapGesture {
-                        viewModel.authenticated.toggle()
-                        //viewModel.logInUser()
+                        //viewModel.authenticated.toggle()
+                        viewModel.logInUser()
                     }
                 
             }).navigationBarBackButtonHidden(true).navigationBarHidden(true)
