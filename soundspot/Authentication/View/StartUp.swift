@@ -26,7 +26,7 @@ struct StartUp: View {
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .edgesIgnoringSafeArea(.all)
-        }
+        }.navigationBarBackButtonHidden(true).navigationBarHidden(true)
     }
     
     
@@ -46,13 +46,10 @@ struct StartUp: View {
                 
                 HStack{
                     Color.white.opacity(0.7)
-                        .frame(width: 20, height: 1.0)
+                        .frame(width: 20, height: 1)
                     
                     Text("Or")
                         .foregroundColor(.white)
-                        .font(.system(size: 25))
-                        
-                        
                     
                     Color.white.opacity(0.7)
                         .frame(width: 20, height: 1)
@@ -60,7 +57,7 @@ struct StartUp: View {
                 
                 HStack{
                     googleSignInBtn
-                }.padding(.top, 0)
+                }.padding(.top, 50)
             }
         }
         
@@ -69,7 +66,6 @@ struct StartUp: View {
                 }) {
                 Text("Forgot Password?")
                     .foregroundColor(.white)
-                    .font(.system(size: 20))
             }
         }
         
@@ -77,25 +73,13 @@ struct StartUp: View {
             Button(action: {
                 
             }) {
-                Image("GoogleLogo")
+                Image("googleLogo")
                     .renderingMode(.original)
                     .resizable()
-                    .frame(width: 90, height: 90)
+                    .frame(width: 20, height: 20)
             }
         }
-            
-        struct errorAlert{
-            var showAlert: Binding<Bool>
-            var errorMessage : String
-            var body: some View{
-                return Text("Errorooooo")
-                    .alert(isPresented: showAlert){
-                        Alert(title: Text(""), message: Text(errorMessage),
-                              dismissButton: .default(Text("OK")))
-                    }
-            }
-        }
-        
+                    
         
         
         struct SlidingButton: View{
@@ -171,6 +155,7 @@ struct StartUp_Previews: PreviewProvider {
                 .previewDevice("iPhone 13")
     }
 }
+
 
 
 

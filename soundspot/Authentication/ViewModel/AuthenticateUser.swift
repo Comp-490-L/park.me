@@ -40,7 +40,7 @@ final class AuthenticateUser : ObservableObject{
         print("Create Account Called")
         var allowUser = false
         do{
-           allowUser = try userRepository.createUser(user: signupModel.AsUserSignUpDTO())
+           allowUser = try userRepository.createUser(user: signupModel.AsSignUpDTO())
         }catch(UserRepositoryError.UnableToCreateUser(let e)){
             if(e != nil){
                 let responseError = e! as AuthResult.Errors
@@ -56,10 +56,6 @@ final class AuthenticateUser : ObservableObject{
                 if(responseError.confirmPassword != nil){
                     signupModel.confirmPasswordError = (responseError.confirmPassword)!
                 }
-                print(responseError.email)
-                print(responseError.username)
-                print(responseError.password)
-                print(responseError.confirmPassword)
             }else{
                 
             }
@@ -76,7 +72,20 @@ final class AuthenticateUser : ObservableObject{
             loginModel.usernameError = reason
         }catch(UserValidationError.invalidPassword(let reason)){
             loginModel.passwordError = reason
-        }catch{}
+        }catch(UserRepositoryError.UnableToAuthUser(let reason as AuthResult.Errors?)){
+            if(reason == nil){
+                print("Reason is null")
+            }
+            if(reason?.email != nil){
+                print(reason?.email ?? "email error")
+                loginModel.usernameError = reason?.email ?? "username error"
+            }
+            if(reason?.password != nil){
+                print(reason?.password ?? "password error")
+                loginModel.passwordError = reason?.password ?? "password error"
+            }
+        }catch{
+        }
         
         authenticated = allowUser
     }
@@ -89,3 +98,4 @@ final class AuthenticateUser : ObservableObject{
     func clearSignUpPasswordError(){signupModel.passwordError = ""}
     func clearSignUpConfirmPasswordError(){ signupModel.confirmPasswordError = ""}
 }
+

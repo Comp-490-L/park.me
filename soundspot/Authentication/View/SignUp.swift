@@ -13,18 +13,19 @@ struct SignUp: View {
     var body: some View {
         VStack {
             VStack{
-                LoginFields.usernameField(username: $viewModel.signupModel.username,
-                              usernameError: $viewModel.signupModel.usernameError,
-                            userIdString: viewModel.usernameString)
+                LoginFields.usernameField(
+                    username: $viewModel.signupModel.username,
+                    usernameError: $viewModel.signupModel.usernameError,
+                    userIdString: viewModel.usernameString,
+                    clearError: viewModel.clearSignUpUsernameError)
                 Divider()
-                emailField(emailString: viewModel.emailString,
-                           email : $viewModel.signupModel.email,
-                           emailError: $viewModel.signupModel.emailError)
+                emailField(viewModel: viewModel)
                 Divider()
                 LoginFields.PasswordField(passwordString: viewModel.passwordString,
                               password: $viewModel.signupModel.password,
                               passwordError: $viewModel.signupModel.passwordError,
-                              hidePassword: $viewModel.signupModel.hidePassword)
+                              hidePassword: $viewModel.signupModel.hidePassword,
+                              clearError: viewModel.clearSignUpPasswordError)
                 Divider()
                 confirmPasswordField
             }
@@ -34,7 +35,7 @@ struct SignUp: View {
             .padding(.horizontal, 20)
             
             NavigationLink(
-                destination: HomeView().navigationBarBackButtonHidden(false).navigationBarHidden(false),
+                destination: HomeView().navigationBarBackButtonHidden(true).navigationBarHidden(true),
                 isActive: $viewModel.authenticated,
                 label: {
                     Text("SignUp")
@@ -48,7 +49,7 @@ struct SignUp: View {
                             viewModel.authenticated.toggle() //TODO remove when logging work
                             viewModel.createUserAccount()
                         }
-                })
+                }).navigationBarBackButtonHidden(true).navigationBarHidden(true)
             Spacer()
             
                 .background(
@@ -62,21 +63,21 @@ struct SignUp: View {
     }
     
     struct emailField : View{
-        let emailString : String
-        @Binding var email : String
-        @Binding var emailError: String
+        @ObservedObject var viewModel : AuthenticateUser
         var body: some View{
             VStack{
                 HStack(spacing: 15){
                     Image(systemName: "envelope")
                         .foregroundColor(.black)
                         .frame(width: 25, height: 25)
-                    TextField(emailString, text: $email).onTapGesture {
-                        
+                    TextField(viewModel.emailString, text: $viewModel.signupModel.email).onTapGesture {
+                        if(viewModel.signupModel.emailError != ""){
+                            viewModel.clearSignUpEmailError()
+                        }
                     }
                     
                 }
-                LoginFields.ErrorField(error: $emailError)
+                LoginFields.ErrorField(error: $viewModel.signupModel.emailError)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }.padding(.vertical, 20)
                 .padding(.top, 10)
@@ -96,10 +97,17 @@ struct SignUp: View {
                 Image(systemName: "lock")
                     .foregroundColor(.black)
                 if(viewModel.signupModel.hideConfimPassword){
-                    SecureField(viewModel.confirmPasswordString, text: $viewModel.signupModel.confirmPassword)
-                }
-                else {
-                    TextField(viewModel.confirmPasswordString, text: $viewModel.signupModel.confirmPassword)
+                    SecureField(viewModel.confirmPasswordString, text: $viewModel.signupModel.confirmPassword).onTapGesture {
+                        if(viewModel.signupModel.confirmPasswordError != ""){
+                            viewModel.clearSignUpConfirmPasswordError()
+                        }
+                    }
+                } else {
+                    TextField(viewModel.confirmPasswordString, text: $viewModel.signupModel.confirmPassword).onTapGesture {
+                        if(viewModel.signupModel.confirmPasswordError != ""){
+                            viewModel.clearSignUpConfirmPasswordError()
+                        }
+                    }
                 }
                 
                 Button(action: {

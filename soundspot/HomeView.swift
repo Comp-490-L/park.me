@@ -8,10 +8,45 @@
 import Foundation
 import SwiftUI
 
- struct HomeView: View {
+struct HomeView: View {
+    
+    @State private var selection = 0
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor.white
+    }
+    var body: some View {
+        NavigationView{
+        TabView(selection: $selection){
+                HomeMainView().navigationBarBackButtonHidden(true).navigationBarHidden(true)
+            
+            .tabItem {
+                    VStack {
+                        Image(systemName: "globe") // Use globe symbol
+                        Text("Categories")
+                    }
+                }//.navigationBarBackButtonHidden(true).navigationBarHidden(true)
+                .tag(0)
+           
+            ProfileView(viewModel: ProfileViewModel()).navigationBarBackButtonHidden(true).navigationBarHidden(true)
+            .tabItem {
+                VStack {
+                    Image(systemName: "person") // Use person symbol
+                    Text("Profile")
+                }
+            }
+            .tag(1)
+        }
+        
+    }.navigationBarBackButtonHidden(true).navigationBarHidden(true)
+}
+}
+
+
+struct HomeMainView: View {
     @State var hero = false
     @State var data = TrendingCard
     var body: some View {
+        
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {

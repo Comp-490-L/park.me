@@ -9,30 +9,16 @@ import Foundation
 
 struct AuthenticationModel{
     
-    /*var loginModel : LoginModel
-    var registerModel : RegisterModel
-    // used to show either login or sign up forms
-    var formType : FormType
-    
-    init(){
-        loginModel = LoginModel()
-        registerModel = RegisterModel()
-        // used to show either login or sign up forms
-        formType = FormType.login
-    }*/
-    
-    
-    
     struct LoginModel : Identifiable{
         var id: String = "loginId"
-        var username : String = ""
+        var userId : String = ""
         var password : String = ""
         var hidePassword : Bool = true
         var usernameError = ""
         var passwordError = ""
         
         func AsLoginDTO() -> UserLoginDTO{
-            return UserLoginDTO(Email: username, Password: password)
+            return UserLoginDTO(email: userId, password: password)
         }
     }
     
@@ -49,7 +35,7 @@ struct AuthenticationModel{
         var passwordError = ""
         var confirmPasswordError = ""
         
-        func AsUserSignUpDTO() -> UserSignUpDTO{
+        func AsSignUpDTO() -> UserSignUpDTO{
             return UserSignUpDTO(email: email, username: username, password: password, confirmPassword: confirmPassword)
         }
     }
@@ -59,3 +45,4 @@ struct AuthenticationModel{
         case signup
     }
 }
+

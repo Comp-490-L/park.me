@@ -21,23 +21,37 @@ struct UserRepository{
         if(result!.errors != nil){
             throw UserRepositoryError.UnableToCreateUser(errors: result!.errors)
         }
+        //TODO save tokens
         success = result!.success
         return success
     }
     
     
     func logInUser(user: UserLoginDTO) throws -> Bool {
-        /*if(user.userId == ""){
+        if(user.email == ""){
             throw UserValidationError.invalidUserId(reason: "Username or email cannot be empty")
         }
         if(user.password == ""){
             throw UserValidationError.invalidPassword(reason: "Password cannot be empty")
-        }*/
+        }
+        var result : AuthResult?
+        var success = false
+        do{
+            result = try service.AuthUserInRemoteDataSource(user: user)
+        }catch{
+            throw UserRepositoryError.UnableToAuthUser(errors: nil)
+        }
         
-        return true
+        if(result?.errors != nil){
+            throw UserRepositoryError.UnableToAuthUser(errors: result!.errors)
+        }
+        //TODO save tokens
+        success = result!.success
+        return success
     }
 }
 
 enum UserRepositoryError: Error{
     case UnableToCreateUser(errors: AuthResult.Errors?)
+    case UnableToAuthUser(errors: AuthResult.Errors?)
 }

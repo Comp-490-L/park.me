@@ -15,8 +15,8 @@ struct UserSignUpDTO : Codable{
 }
 
 struct UserLoginDTO : Codable{
-    let Email: String
-    let Password : String
+    let email: String
+    let password : String
 }
 
 enum UserValidationError: Error {

@@ -14,14 +14,16 @@ struct LoginFields: View {
     var body: some View {
         
         VStack(alignment: .center){
-            usernameField(username: $viewModel.loginModel.username,
+            usernameField(username: $viewModel.loginModel.userId,
                           usernameError: $viewModel.loginModel.usernameError,
-                          userIdString: viewModel.userIdString)
+                          userIdString: viewModel.userIdString,
+                          clearError: viewModel.clearLoginUsernameError)
             Divider()
             PasswordField(passwordString: viewModel.passwordString,
                           password: $viewModel.loginModel.password,
                           passwordError: $viewModel.loginModel.passwordError,
-                          hidePassword: $viewModel.loginModel.hidePassword)
+                          hidePassword: $viewModel.loginModel.hidePassword,
+                          clearError: viewModel.clearLoginPasswordError)
             
             
         }
@@ -31,7 +33,7 @@ struct LoginFields: View {
         .padding(.horizontal, 20)
         
         NavigationLink(
-            destination: HomeView().navigationBarBackButtonHidden(false).navigationBarHidden(false),
+            destination: HomeView().navigationBarBackButtonHidden(true).navigationBarHidden(true),
             isActive: $viewModel.authenticated,
             label: {
                 Text("Login")
@@ -39,29 +41,30 @@ struct LoginFields: View {
                     .padding(.horizontal, 60.0)
                     .padding(.vertical, 10.0)
                     .foregroundColor(.white)
-                    .background(Color(#colorLiteral(red: 0.9580881, green: 0.10593573, blue: 0.3403331637, alpha: 1)))
+                    .background(Color.pink)
                     .cornerRadius(10)
                     .onTapGesture {
-                        viewModel.authenticated.toggle() //TODO remove when logging work
+                       // viewModel.authenticated.toggle()
                         viewModel.logInUser()
                     }
                 
-            })
+            }).navigationBarBackButtonHidden(true).navigationBarHidden(true)
         
     }
 
     
     struct usernameField : View{
         @Binding var username : String
-        @Binding var usernameError: String // todo is @State needed
+        @Binding var usernameError: String
         var userIdString : String
+        var clearError: () -> Void
         var body: some View {
             VStack{
                 HStack(alignment: .lastTextBaseline, spacing: 15){
                     Image(systemName: "person")
                         .foregroundColor(.black)
                     TextField(userIdString, text: $username).onTapGesture{
-                        usernameError = ""
+                        clearError()
                     }
                 
                 }
@@ -82,16 +85,21 @@ struct LoginFields: View {
         @Binding var password: String
         @Binding var passwordError: String
         @Binding var hidePassword : Bool
+        var clearError: () -> Void
         var body : some View {
             VStack{
             HStack(spacing: 15){
                 Image(systemName: "lock")
                     .foregroundColor(.black)
                 if(hidePassword){
-                    SecureField(passwordString, text: $password)
+                    SecureField(passwordString, text: $password).onTapGesture {
+                        clearError()
+                    }
                 }
                 else {
-                    TextField(passwordString, text: $password)
+                    TextField(passwordString, text: $password).onTapGesture {
+                        clearError()
+                    }
                 }
                 
                 Button(action: {
@@ -125,4 +133,5 @@ struct LoginField_Previews: PreviewProvider {
         LoginFields(viewModel: AuthenticateUser()).previewLayout(.sizeThatFits)
     }
 }
+
 

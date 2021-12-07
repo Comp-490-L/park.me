@@ -87,7 +87,8 @@ struct Song: View {
             
             HStack{
                 Spacer()
-                NavigationLink(destination: PlayerView(Song: Song),
+                // Next line is temporary
+                NavigationLink(destination: PlayerView(viewModel: PlayerViewModel(trackList: Array<MusicModel>(), trackIndex: 0)),
                     label: {
                     Image(systemName: "play.circle.fill").resizable()
                 }).frame(width: 70, height: 30, alignment: .center).padding()
