@@ -62,20 +62,16 @@ struct UserService{
         
         urlSession.dataTask(with: request, completionHandler:{
             data, response, error in
-            
-            //print("Waiting for Response...")
-            
+                        
             httpResponse = response as? HTTPURLResponse
             
             if let data = data {
                 if let decoded = try? JSONDecoder().decode(AuthResult.self, from: data){
-                    //print("Decoded the response, Request was Successful?: \(decoded.success)")
-                    //print(String(data: data, encoding: .utf8))
                     result = decoded
                     
                 }else{
                     print("Unable to decode response")
-                    print(String(data: data, encoding: .utf8))
+                    print(String(data: data, encoding: .utf8) ?? "data is nil")
                 }
             }else{
                 responseError = error
@@ -94,10 +90,6 @@ struct UserService{
         if(result == nil){
             print("Response is null")
             throw APIServiceError.InvalidResponse(reason: responseError?.localizedDescription ?? "Unknown error")
-        }else if(result?.success == true){
-            if let token = result?.token{
-                Server.token = token
-            }
         }
     
         print("Received response success \(result!.success)")
@@ -141,7 +133,7 @@ struct UserService{
                     
                 }else{
                     print("Unable to decode response")
-                    print(String(data: data, encoding: .utf8))
+                    print(String(data: data, encoding: .utf8) ?? "data is nil")
                 }
             }else{
                 responseError = error
@@ -160,10 +152,6 @@ struct UserService{
         if(result == nil){
             print("Response is null")
             throw APIServiceError.InvalidResponse(reason: responseError?.localizedDescription ?? "Unknown error")
-        } else if(result?.success == true){
-            if let token = result?.token{
-                Server.token = token
-            }
         }
         print("Received response success \(result!.success)")
         return result!

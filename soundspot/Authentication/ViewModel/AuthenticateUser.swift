@@ -36,58 +36,96 @@ final class AuthenticateUser : ObservableObject{
         formType = type
     }
     
-    func createUserAccount(){
-        print("Create Account Called")
-        var allowUser = false
-        do{
-           allowUser = try userRepository.createUser(user: signupModel.AsSignUpDTO())
-        }catch(UserRepositoryError.UnableToCreateUser(let e)){
-            if(e != nil){
-                let responseError = e! as AuthResult.Errors
-                if(responseError.email != nil){
-                    signupModel.emailError = (responseError.email)!
+    
+    func createUserAccountAsync(){
+        attemptSignupAsync(user: signupModel.AsSignUpDTO()){ result in
+            DispatchQueue.main.async {
+                [self] in
+                switch result{
+                case .success(let allowUser):
+                    authenticated = allowUser
+                case .failure(let error):
+                    switch error{
+                    case UserRepositoryError.UnableToCreateUser(let e):
+                        if(e != nil){
+                            let responseError = e! as AuthResult.Errors
+                            if(responseError.email != nil){
+                                signupModel.emailError = (responseError.email)!
+                            }
+                            if(responseError.username != nil){
+                                signupModel.usernameError = (responseError.username)!
+                            }
+                            if(responseError.password != nil){
+                                signupModel.passwordError = (responseError.password)!
+                            }
+                            if(responseError.confirmPassword != nil){
+                                signupModel.confirmPasswordError = (responseError.confirmPassword)!
+                            }
+                        }
+                    default:
+                        showAlert = true
+                    }
                 }
-                if(responseError.username != nil){
-                    signupModel.usernameError = (responseError.username)!
-                }
-                if(responseError.password != nil){
-                    signupModel.passwordError = (responseError.password)!
-                }
-                if(responseError.confirmPassword != nil){
-                    signupModel.confirmPasswordError = (responseError.confirmPassword)!
-                }
-            }else{
-                
+                    
             }
         }
-        catch{}
-        authenticated = allowUser
     }
     
-    func logInUser(){
-        var allowUser = false
-        do{
-            allowUser = try userRepository.logInUser(user: loginModel.AsLoginDTO())
-        }catch(UserValidationError.invalidUserId(let reason)){
-            loginModel.usernameError = reason
-        }catch(UserValidationError.invalidPassword(let reason)){
-            loginModel.passwordError = reason
-        }catch(UserRepositoryError.UnableToAuthUser(let reason as AuthResult.Errors?)){
-            if(reason == nil){
-                print("Reason is null")
+    private func attemptSignupAsync(user : UserSignUpDTO, completion: @escaping (Swift.Result<Bool, Error>) -> Void){
+        DispatchQueue.global(qos: .userInitiated).async{
+            [self] in
+            do{
+                let allowUser = try userRepository.createUser(user)
+                completion(.success(allowUser))
+            }catch{
+                completion(.failure(error))
             }
-            if(reason?.email != nil){
-                print(reason?.email ?? "email error")
-                loginModel.usernameError = reason?.email ?? "username error"
-            }
-            if(reason?.password != nil){
-                print(reason?.password ?? "password error")
-                loginModel.passwordError = reason?.password ?? "password error"
-            }
-        }catch{
         }
-        
-        authenticated = allowUser
+    }
+    
+    func logInUserAsync(){
+        attemptLoginAsync(user: loginModel.AsLoginDTO()){ result in
+            DispatchQueue.main.async {
+                [self] in
+                switch result{
+                case .success(let allowUser):
+                    authenticated = allowUser
+                case .failure(let error):
+                    switch error{
+                    case UserValidationError.invalidEmail(let reason):
+                        loginModel.usernameError = reason
+                    case UserValidationError.invalidPassword(let reason):
+                        loginModel.passwordError = reason
+                    case UserRepositoryError.UnableToAuthUser(let reason):
+                        if(reason == nil){
+                            print("Reason is null")
+                        }
+                        if(reason?.email != nil){
+                            print(reason?.email ?? "email error")
+                            loginModel.usernameError = reason?.email ?? "username error"
+                        }
+                        if(reason?.password != nil){
+                            print(reason?.password ?? "password error")
+                            loginModel.passwordError = reason?.password ?? "password error"
+                        }
+                    default:
+                        showAlert = true
+                    }
+                }
+            }
+        }
+    }
+    
+    private func attemptLoginAsync(user : UserLoginDTO, completion: @escaping (Swift.Result<Bool, Error>) -> Void){
+        DispatchQueue.global(qos: .userInitiated).async{
+            [self] in
+            do{
+                let allowUser = try userRepository.logInUser(user)
+                completion(.success(allowUser))
+            }catch{
+                completion(.failure(error))
+            }
+        }
     }
     
     func clearLoginUsernameError(){loginModel.usernameError = ""}

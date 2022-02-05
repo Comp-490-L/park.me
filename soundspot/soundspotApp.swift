@@ -6,13 +6,43 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 @main
-struct soundspotApp: App {
-    var body: some Scene {
-        WindowGroup {
-            Boarding_View()
-            //HomeView().background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+struct soundspotApp: SwiftUI.App {
+    private var view : OnLaunchView = OnLaunchView.Boarding
+    init(){
+        let stateRepo = AppStateRepository()
+        let state = stateRepo.getAppState()
+        if(state == nil || state!.firstLaunch){
+            stateRepo.updateAppStateAsync(appState: AppState(firstLaunch: false, userLoggedIn: false))
+        }else if(state != nil){
+            if(state!.userLoggedIn){
+                view = OnLaunchView.Home
+                
+            }else{
+            view = OnLaunchView.Authentication
+            }
         }
+    }
+    var body: some Scene {
+        
+        WindowGroup {
+            switch(view){
+            case OnLaunchView.Boarding:
+                Boarding_View()
+            case OnLaunchView.Authentication:
+                StartUp(viewModel: AuthenticateUser())
+            case OnLaunchView.Home:
+                HomeView()
+            }
+        }
+    }
+
+    
+    private enum OnLaunchView{
+        case Boarding
+        case Authentication
+        case Home
     }
 }

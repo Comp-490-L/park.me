@@ -47,7 +47,7 @@ struct SignUp: View {
                         .cornerRadius(10)
                         .onTapGesture {
                             viewModel.authenticated.toggle() //TODO remove when logging work
-                            viewModel.createUserAccount()
+                            viewModel.createUserAccountAsync()
                         }
                 }).navigationBarBackButtonHidden(true).navigationBarHidden(true)
             Spacer()

@@ -21,7 +21,7 @@ struct MusicService{
             
             print(audioFileURL)
             do{
-                let publisher = try uploader.uploadFile(at: audioFileURL, to: url, accessToken: Server.token)
+                let publisher = try uploader.uploadFile(at: audioFileURL, to: url, accessToken: UserRepository.getToken())
                 if(publisher != nil){
                     let subscription = publisher!.sink(receiveCompletion: { print ("completion: \($0)") },
                                                        receiveValue: { print ("receive value: \($0)") })
@@ -53,7 +53,7 @@ struct MusicService{
             
             var request = URLRequest(url: requestUrl)
             request.httpMethod = "GET"
-            request.addValue("Bearer \(Server.token)", forHTTPHeaderField: "Authorization")
+            request.addValue("Bearer \(UserRepository.getToken())", forHTTPHeaderField: "Authorization")
             
             let downloadTask = urlSession.downloadTask(with: request){
                 fileurl, response, error in

@@ -51,7 +51,7 @@ class DownloadService {
       
       var request = URLRequest(url: track.previewURL)
       request.httpMethod = "GET"
-        request.addValue("Bearer \(Server.token)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(UserRepository.getToken())", forHTTPHeaderField: "Authorization")
         
     var fileOutput : URL? = nil
       

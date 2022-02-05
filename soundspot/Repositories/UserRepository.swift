@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct UserRepository{
     private var service = UserService()
-    func createUser(user: UserSignUpDTO) throws -> Bool{
+    func createUser(_ user: UserSignUpDTO) throws -> Bool{
         var result : AuthResult?
         var success = false
         do {
@@ -21,13 +22,46 @@ struct UserRepository{
         if(result!.errors != nil){
             throw UserRepositoryError.UnableToCreateUser(errors: result!.errors)
         }
-        //TODO save tokens
+        
+        if(result?.token != nil && result?.refreshToken != nil){
+            do{
+                try saveToken(token: (result?.token)!, refreshToken: (result?.refreshToken)!)
+            }catch{}
+            
+            updateAppState()
+        }
+        
         success = result!.success
         return success
     }
     
+    private func saveToken(token : String, refreshToken: String) throws{
+        
+            let realm = try Realm()
+            let tokenCollection = realm.objects(TokenData.self)
+            
+                let tokenData = TokenData(token: token, refreshToken: refreshToken)
+                if(tokenCollection.count == 0){
+                    try realm.write{
+                        realm.add(tokenData)
+                    }
+                }else{
+                    if let savedToken = tokenCollection.first{
+                        try realm.write{
+                            savedToken.token = tokenData.token
+                            savedToken.refreshToken = tokenData.refreshToken
+                        }
+                    }
+                }
+    }
     
-    func logInUser(user: UserLoginDTO) throws -> Bool {
+    private func updateAppState(){
+        let appState = AppStateRepository()
+        appState.updateAppStateAsync(appState: AppState(firstLaunch: false, userLoggedIn: true))
+    }
+    
+    
+    func logInUser(_ user: UserLoginDTO) throws -> Bool {
         if(user.email == ""){
             throw UserValidationError.invalidUserId(reason: "Username or email cannot be empty")
         }
@@ -45,9 +79,33 @@ struct UserRepository{
         if(result?.errors != nil){
             throw UserRepositoryError.UnableToAuthUser(errors: result!.errors)
         }
-        //TODO save tokens
+        
+        if(result?.token != nil && result?.refreshToken != nil){
+            do{
+                try saveToken(token: (result?.token)!, refreshToken: (result?.refreshToken)!)
+            }catch{}
+            
+            updateAppState()
+        }
         success = result!.success
         return success
+    }
+    
+    
+    private func InsertToken(){}
+    
+    static func getToken() -> String{
+        do{
+            let realm = try Realm()
+            let tokenCollection = realm.objects(TokenData.self)
+            if(tokenCollection.count == 0){
+                return ""
+            }
+            else{
+                return tokenCollection.first?.token ?? ""
+            }
+        }catch{}
+        return ""
     }
 }
 

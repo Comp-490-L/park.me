@@ -45,7 +45,7 @@ struct LoginFields: View {
                     .cornerRadius(10)
                     .onTapGesture {
                         //viewModel.authenticated.toggle()
-                        viewModel.logInUser()
+                        viewModel.logInUserAsync()
                     }
                 
             }).navigationBarBackButtonHidden(true).navigationBarHidden(true)
@@ -65,7 +65,8 @@ struct LoginFields: View {
                         .foregroundColor(.black)
                     TextField(userIdString, text: $username).onTapGesture{
                         clearError()
-                    }
+                    }.disableAutocorrection(true).autocapitalization(UITextAutocapitalizationType.none)
+                        
                 
                 }
                 ErrorField(error: $usernameError)
