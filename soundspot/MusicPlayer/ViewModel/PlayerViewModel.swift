@@ -26,6 +26,9 @@ class PlayerViewModel : ObservableObject{
     lazy var downloadsSession: URLSession = URLSession(configuration: URLSessionConfiguration.default, delegate: instance, delegateQueue: nil)
     
     func PlayTrack() -> URL?{
+        if(trackList.count - 1 < current){
+            return nil
+        }
         let url = trackList[current].link
         if(url == ""){
             print("Track url is empty")

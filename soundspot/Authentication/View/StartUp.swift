@@ -16,9 +16,9 @@ struct StartUp: View {
     var body: some View {
         
         NavigationView {
-            VStack(spacing: 0){
-                
-                selectState(viewModel: viewModel).padding(.vertical, 350.0)
+            VStack(){Spacer()
+                selectState(viewModel: viewModel).padding(.top, 100)
+                Spacer()
             }
             .background(Image("wavy")
                             .resizable(resizingMode: .tile)
@@ -153,7 +153,7 @@ struct StartUp_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = AuthenticateUser()
         StartUp(viewModel: viewModel)
-                .previewDevice("iPhone 13")
+                .previewDevice("iPod touch")
     }
 }
 

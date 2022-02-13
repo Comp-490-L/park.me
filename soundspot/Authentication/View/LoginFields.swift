@@ -27,7 +27,6 @@ struct LoginFields: View {
             
             
         }
-        .padding(.bottom, 40)
         .background(Color.white)
         .cornerRadius(10)
         .padding(.horizontal, 20)
@@ -72,8 +71,7 @@ struct LoginFields: View {
                 ErrorField(error: $usernameError)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     
-            }.padding(.vertical, 20)
-                .padding(.top, 10)
+            }.padding(.vertical, 10)
                 .padding(.leading, 15)
                 .padding(.trailing, 10)
             
@@ -112,8 +110,7 @@ struct LoginFields: View {
             }
                 ErrorField(error: $passwordError)
                     .frame(maxWidth: .infinity, alignment: .leading)
-            }.padding(.vertical, 20)
-                .padding(.top, 10)
+            }.padding(.vertical, 10)
                 .padding(.leading, 15)
                 .padding(.trailing, 10)
         }

@@ -22,7 +22,7 @@ struct PlayerView : View
         VStack
         {
             //edgesIgnoringSafeArea(.all)
-            if(viewModel.trackList[viewModel.current].pictureData != nil && !viewModel.trackList[viewModel.current].pictureDownloaded){
+            if(viewModel.trackList[viewModel.current].pictureData == nil && !viewModel.trackList[viewModel.current].pictureDownloaded){
                 Image("defaultTrackImg")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -68,7 +68,7 @@ struct PlayerView : View
             }
         }.onAppear{
             
-            viewModel.LoadSession()
+            /*viewModel.LoadSession()
             let fileURL = viewModel.PlayTrack()
             if(fileURL != nil){
                 do{
@@ -87,7 +87,7 @@ struct PlayerView : View
                 
             }else{
                 print("Audio file is nil")
-            }
+            }*/
             
         }
     }
@@ -151,9 +151,8 @@ struct PlayerView_Previews: PreviewProvider {
     static var previews: some View {
     
         
-        
         PlayerView(viewModel: PlayerViewModel(trackList: Array<MusicModel>(), trackIndex: 0))
-                .previewDevice("iPhone 13")
+                .previewDevice("iPhone 13 Pro")
     }
 }
 

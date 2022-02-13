@@ -17,7 +17,7 @@ struct SignUp: View {
                     username: $viewModel.signupModel.username,
                     usernameError: $viewModel.signupModel.usernameError,
                     userIdString: viewModel.usernameString,
-                    clearError: viewModel.clearSignUpUsernameError)
+                    clearError: viewModel.clearSignUpUsernameError).padding(.top, 10)
                 Divider()
                 emailField(viewModel: viewModel)
                 Divider()
@@ -29,7 +29,6 @@ struct SignUp: View {
                 Divider()
                 confirmPasswordField
             }
-            .padding(.bottom, 40)
             .background(Color.white)
             .cornerRadius(10)
             .padding(.horizontal, 20)
@@ -46,7 +45,6 @@ struct SignUp: View {
                         .background(Color(#colorLiteral(red: 0.9580881, green: 0.10593573, blue: 0.3403331637, alpha: 1)))
                         .cornerRadius(10)
                         .onTapGesture {
-                            viewModel.authenticated.toggle() //TODO remove when logging work
                             viewModel.createUserAccountAsync()
                         }
                 }).navigationBarBackButtonHidden(true).navigationBarHidden(true)
@@ -79,8 +77,7 @@ struct SignUp: View {
                 }
                 LoginFields.ErrorField(error: $viewModel.signupModel.emailError)
                     .frame(maxWidth: .infinity, alignment: .leading)
-            }.padding(.vertical, 20)
-                .padding(.top, 10)
+            }.padding(.vertical, 10)
                 .padding(.leading, 15)
                 .padding(.trailing, 10)
         }
@@ -119,8 +116,7 @@ struct SignUp: View {
                 
             }
             LoginFields.ErrorField(error: $viewModel.signupModel.confirmPasswordError)
-        }.padding(.vertical, 20)
-            .padding(.top, 10)
+        }.padding(.vertical, 10)
             .padding(.leading, 15)
             .padding(.trailing, 10)
     }

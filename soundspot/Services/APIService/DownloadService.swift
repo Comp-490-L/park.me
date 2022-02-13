@@ -46,8 +46,6 @@ class DownloadService {
       // 1
       let download = Download(track: track)
       // 2
-      // Token valid for 12 month since we don't have neither the code to update it every 5 min
-      // nor the local db to save it in
       
       var request = URLRequest(url: track.previewURL)
       request.httpMethod = "GET"

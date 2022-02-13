@@ -74,13 +74,16 @@ struct pages: View {
                 NavigationLink(
                     destination: StartUp(viewModel: AuthenticateUser()).navigationBarBackButtonHidden(true).navigationBarHidden(true),
                     label: {
-                        Text("Listen Now")
-                            .font(.headline)
-                            .padding(.init(top: 10.0, leading: 40.0, bottom: 10.0, trailing: 40.0))
-                            .foregroundColor(.black)
-                            .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-                            .cornerRadius(10)
-                        
+                        VStack{
+                            Text("Listen Now")
+                                .font(.headline)
+                                .padding(.init(top: 10.0, leading: 40.0, bottom: 10.0, trailing: 40.0))
+                                .foregroundColor(.black)
+                                .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+                                .cornerRadius(10)
+                            
+                        }.padding(30)
+            
                     })
                 
                 
@@ -111,6 +114,6 @@ struct pages: View {
 
 struct Boarding_Previews: PreviewProvider {
     static var previews: some View {
-        Boarding_View()
+        Boarding_View().previewDevice("iPhone 13")
     }
 }
