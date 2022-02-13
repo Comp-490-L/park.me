@@ -68,7 +68,7 @@ struct PlayerView : View
             }
         }.onAppear{
             
-            /*viewModel.LoadSession()
+            viewModel.LoadSession()
             let fileURL = viewModel.PlayTrack()
             if(fileURL != nil){
                 do{
@@ -87,7 +87,7 @@ struct PlayerView : View
                 
             }else{
                 print("Audio file is nil")
-            }*/
+            }
             
         }
     }
@@ -148,11 +148,21 @@ extension View {
 
 
 struct PlayerView_Previews: PreviewProvider {
+     
+    static func getMusicModel() ->  Array<MusicModel>{
+        var model = MusicModel(name: "music Name", link: "", trackDownloaded: false, pictureLink: nil, pictureDownloaded: false, pictureData: nil)
+        
+        var list = Array<MusicModel>()
+        list.append(model)
+        return list
+    }
+    
     static var previews: some View {
     
-        
-        PlayerView(viewModel: PlayerViewModel(trackList: Array<MusicModel>(), trackIndex: 0))
+    let list = PlayerView_Previews.getMusicModel()
+    PlayerView(viewModel: PlayerViewModel(trackList: list, trackIndex: 0))
                 .previewDevice("iPhone 13 Pro")
     }
 }
+
 

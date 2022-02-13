@@ -16,6 +16,16 @@ struct ProfileModel : Codable, Hashable{
 }
 
 struct MusicModel : Codable, Hashable{
+    
+    init(name : String, link: String, trackDownloaded : Bool, pictureLink : String?, pictureDownloaded : Bool, pictureData: Data? ){
+        self.name = name
+        self.link = link
+        self.trackDownloaded = trackDownloaded
+        self.pictureLink = pictureLink
+        self.pictureDownloaded = pictureDownloaded
+        self.pictureData = pictureData
+    }
+    
     var name: String
     var link: String
     var trackDownloaded: Bool = false
