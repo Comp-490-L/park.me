@@ -13,95 +13,99 @@ import AVFoundation
 struct PlayerView : View
 {
     @StateObject var viewModel : PlayerViewModel
-    @State var player: AVPlayer? = nil
-    @State var isPlaying : Bool = false
+    
     
     var body: some View
     {
         
         VStack
         {
-            //edgesIgnoringSafeArea(.all)
-            if(viewModel.trackList[viewModel.current].pictureData == nil && !viewModel.trackList[viewModel.current].pictureDownloaded){
+            if(viewModel.trackList[viewModel.trackIndex].pictureData == nil && !viewModel.trackList[viewModel.trackIndex].pictureDownloaded){
                 Image("defaultTrackImg")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .background(Color.white)
                     .shadow(radius: 1)
             }else{
-                Image(uiImage: UIImage(data: viewModel.trackList[viewModel.current].pictureData!)!)
+                Image(uiImage: UIImage(data: viewModel.trackList[viewModel.trackIndex].pictureData!)!)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .shadow(radius: 1)
-                //.aspectRatio(2/3, contentMode: .fit)
             }
             
-            Text(viewModel.trackList[viewModel.current].name)
+            Text(viewModel.trackList[viewModel.trackIndex].name)
                 .foregroundColor(Color.gray).padding().font(.title2)
+           
            
             ZStack
             {
                 Spacer()
-                Text(viewModel.trackList[viewModel.current].name).font(.title).fontWeight(.light).foregroundColor(.white)
-                Spacer()
                 ZStack
                 {
                     Color.white.cornerRadius(20).shadow(radius: 10)
-                    HStack
-                    {
-                        Button(action: self.previous,  label: {
-                            Image("previousTrack").resizable()
-                        }).frame(width: 50, height: 50, alignment: .center).foregroundColor(Color.gray.opacity(0.2))
-                           
-                        
-                        Button(action: self.playPause, label: {
-                            Image(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill")
-                                .resizable()
-                                .foregroundColor(Color.pink)
-                        }).frame(width: 70, height: 70, alignment: .center)
-                        
-                        Button(action: self.next, label: {
-                            Image("nextTrack").resizable()
-                        }).frame(width: 50, height: 50, alignment: .center).foregroundColor(Color.gray.opacity(0.2))
+                    
+                    VStack{
+                        PlayerSlider(viewModel: viewModel)
+                        HStack{
+                            Text(viewModel.progress)
+                            Spacer()
+                            Text(viewModel.trackLength)
+                        }.padding(.leading).padding(.trailing)
+                        PlayerControllers(viewModel: viewModel)
+            
                     }
+                    
                 }.edgesIgnoringSafeArea(.bottom).frame(height: 200, alignment: .center)
             }
         }.onAppear{
-            
-            viewModel.LoadSession()
-            let fileURL = viewModel.PlayTrack()
-            if(fileURL != nil){
-                do{
-                    try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-                    //player = try AVAudioPlayer(contentsOf: fileURL!)
-                    //player?.play()
-                }
-                catch{}
-                print("\n\n Playing fileURL \(fileURL)")
-                //player = AVPlayer(playerItem: AVPlayerItem(url: fileURL!))
-                player = AVPlayer(url: fileURL!)
-                playPause()
-                if(player == nil){
-                    print("player is nil")
-                }
+            viewModel.onEvent(event: MusicPlayerEvent.Launched)
+        }
+    }
+    
+    struct PlayerSlider : View {
+        @ObservedObject var viewModel : PlayerViewModel
+        var body: some View{
+            Slider(value: $viewModel.progressPercentage,
+                   in: 0 ... 100, step: 1){
+                // if dragging ended update value
+                if !$0 {
+                       viewModel.onEvent(event: MusicPlayerEvent.SliderChanged)
+                   }
+            }.padding(.leading).padding(.trailing)
+        }
+    }
+    
+    struct PlayerControllers : View {
+        @ObservedObject var viewModel : PlayerViewModel
+        var body: some View{
+            HStack
+            {
+                Button(action: {
+                    viewModel.onEvent(event: MusicPlayerEvent.PreviousPressed)
+                },  label: {
+                    Image("previousTrack").resizable()
+                }).frame(width: 50, height: 50, alignment: .center).foregroundColor(Color.gray.opacity(0.2))
+                   
                 
-            }else{
-                print("Audio file is nil")
+                Button(
+                    action: {viewModel.onEvent(event: MusicPlayerEvent.PlayPausePressed)},
+                       label: {
+                    Image(systemName: viewModel.isPlaying ? "pause.circle.fill" : "play.circle.fill")
+                        .resizable()
+                        .foregroundColor(Color.pink)
+                }).frame(width: 70, height: 70, alignment: .center)
+                
+                Button(action: {
+                    viewModel.onEvent(event: MusicPlayerEvent.NextPressed)
+                }, label: {
+                    Image("nextTrack").resizable()
+                }).frame(width: 50, height: 50, alignment: .center).foregroundColor(Color.gray.opacity(0.2))
             }
-            
         }
     }
+
     
-    
-    func playPause()
-    {
-        isPlaying.toggle()
-        if isPlaying == false{
-            player?.pause()
-        }else{
-            player?.play()
-        }
-    }
+
     
     func next()
     {
