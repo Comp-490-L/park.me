@@ -39,35 +39,34 @@ struct PlayerView : View
            
             ZStack
             {
-                Spacer()
-                ZStack
-                {
-                    Color.white.cornerRadius(20).shadow(radius: 10)
-                    
-                    VStack{
-                        PlayerSlider(viewModel: viewModel)
-                        HStack{
-                            Text(viewModel.progress)
-                            Spacer()
-                            Text(viewModel.trackLength)
-                        }.padding(.leading).padding(.trailing)
-                        PlayerControllers(viewModel: viewModel)
-            
-                    }
-                    
-                }.edgesIgnoringSafeArea(.bottom).frame(height: 200, alignment: .center)
+                VStack{
+                    PlayerSlider(viewModel: viewModel)
+                    HStack{
+                        Text(viewModel.progress)
+                        Spacer()
+                        Text(viewModel.trackLength)
+                    }.padding(.leading).padding(.trailing)
+                    PlayerControllers(viewModel: viewModel)
+        
+                }
             }
         }.onAppear{
-            viewModel.onEvent(event: MusicPlayerEvent.Launched)
-        }
+            viewModel.onEvent(event: MusicPlayerEvent.Launched) 
+        }.background(Color.backgroundColor.edgesIgnoringSafeArea(.all))
     }
     
     struct PlayerSlider : View {
         @ObservedObject var viewModel : PlayerViewModel
         var body: some View{
-            Slider(value: $viewModel.progressPercentage,
+            Slider(value: Binding<Double>(
+                get: {viewModel.progressPercentage},
+                set: {
+                    viewModel.onEvent(event: MusicPlayerEvent.DraggingSlider)
+                    viewModel.progressPercentage = $0
+                }
+            ),
                    in: 0 ... 100, step: 1){
-                // if dragging ended update value
+                // if dragging ended update music player
                 if !$0 {
                        viewModel.onEvent(event: MusicPlayerEvent.SliderChanged)
                    }
@@ -103,19 +102,6 @@ struct PlayerView : View
             }
         }
     }
-
-    
-
-    
-    func next()
-    {
-        
-    }
-    
-    func previous()
-    {
-        
-    }
 }
 
 
@@ -125,29 +111,6 @@ struct PlayerView : View
 
 
 
-struct ViewDidLoadModifier: ViewModifier {
-    @State private var didLoad = false
-    private let action: (() -> Void)?
-
-    init(perform action: (() -> Void)? = nil) {
-        self.action = action
-    }
-    
-    func body(content: Content) -> some View {
-        content.onAppear {
-            if didLoad == false {
-                didLoad = true
-                action?()
-            }
-        }
-    }
-}
-
-extension View {
-    func onLoad(perform action: (() -> Void)? = nil) -> some View {
-        modifier(ViewDidLoadModifier(perform: action))
-    }
-}
 
 
 

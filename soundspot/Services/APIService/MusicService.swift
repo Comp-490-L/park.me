@@ -7,35 +7,44 @@
 
 import Foundation
 import SwiftUI
+import Combine
 struct MusicService{
 
     struct Upload{
-        func tracks(urls: [URL]){
-
-            
-            print("upload tracks called")
+        func tracks(urls: [URL]) -> AnyPublisher<Double, Error>?{
             let uploader = FileUploader()
             let url = URL(string: "\(Server.url)/api/UploadTracks")!
-            // if let audioFileURL = Bundle.main.url(forResource: "p3", withExtension: ".pdf")
             let audioFileURL = urls[0]
             
             print(audioFileURL)
             do{
-                let publisher = try uploader.uploadFile(at: audioFileURL, to: url, accessToken: UserRepository.getToken())
-                if(publisher != nil){
-                    let subscription = publisher!.sink(receiveCompletion: { print ("completion: \($0)") },
-                                                       receiveValue: { print ("receive value: \($0)") })
-                    //TODO cancel subscription on completion
-                }else {
-                    print("publisher is nil")
-                }
-                
+                return try uploader.uploadFile(at: audioFileURL, to: url, accessToken: UserAuthRepository.getToken())
             }catch let error{
                 print("Error: \(error)")
             }
+            return nil
         }
-        
     }
+    
+    
+    /*
+     private func uploadToServer(at fileURL: URL, to targetURL: URL, accessToken token: String) throws{
+         
+         guard let handle: FileHandle = try? FileHandle(forReadingFrom: fileURL)
+         else{
+             print("Cannot open file")
+             throw APIServiceError.FailedToSendRequest(reason: "Cannot open file")
+         }
+         
+         do{
+             if let readData: Data = try handle.readToEnd(){
+                 print("read File... \(readData.count)")
+                 
+             }
+     }
+     
+     **/
+    
     
     struct Download{
 
@@ -53,7 +62,7 @@ struct MusicService{
             
             var request = URLRequest(url: requestUrl)
             request.httpMethod = "GET"
-            request.addValue("Bearer \(UserRepository.getToken())", forHTTPHeaderField: "Authorization")
+            request.addValue("Bearer \(UserAuthRepository.getToken())", forHTTPHeaderField: "Authorization")
             
             let downloadTask = urlSession.downloadTask(with: request){
                 fileurl, response, error in

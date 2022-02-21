@@ -1,17 +1,14 @@
 {
   "images" : [
     {
-      "filename" : "SadMachineSingleCover.jpeg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "SadMachineSingleCover-1.jpeg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "SadMachineSingleCover-2.jpeg",
       "idiom" : "universal",
       "scale" : "3x"
     }

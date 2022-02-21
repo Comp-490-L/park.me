@@ -8,10 +8,12 @@
 import Foundation
 import SwiftUI
 import AudioToolbox
+import RealmSwift
 
 struct ProfileView: View{
     
     @StateObject var viewModel: ProfileViewModel
+    //@ObservedObject var list = viewModel.profile
     var uploadViewModel = UploadViewModel()
     var body: some View{
         VStack{
@@ -32,35 +34,42 @@ struct ProfileView: View{
                             if(viewModel.profile != nil && viewModel.profile!.singlesList != nil){
                                 ForEach(0..<viewModel.profile!.singlesList!.count, id: \.self) {
                                     index in
-                                    NavigationLink(destination:PlayerView(viewModel:
-                                                                            PlayerViewModel(trackList: (viewModel.profile?.singlesList!)!, trackIndex: index))){
-                                        trackCard(single: viewModel.profile!.singlesList![index])
-                                    }
+                                    CardWithNavigationLink(index: index,
+                                                           list:  viewModel.profile!.singlesList!)
                                 }
                             }
                         }
                     }.onAppear{
-                        viewModel.getUserMusic()
+                        viewModel.onEvent(event: ProfileEvents.ProfileViewLoaded)
                     }
                 }
             }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
             
             Spacer().background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
             HStack{
-                Button(action: {
-                    viewModel.showFilePicker.toggle()
-                }){
-                    SwiftUI.Text("Upload file")
-                        .font(.headline)
-                        .padding(.horizontal, 60.0)
-                        .padding(.vertical, 10.0)
-                        .foregroundColor(.white)
-                        .background(Color.purple)
-                        .cornerRadius(10)
-                }.sheet(isPresented: $viewModel.showFilePicker){
-                    uploadViewModel.showDocumentPicker()
-                    
+                
+                if(viewModel.uploadingFile){
+                    VStack(alignment : .leading){
+                        Text("Upload Progress")
+                        ProgressBar(currentProgress: $viewModel.uploadProgress)
+                            .frame(height : 20)
+                    }
+                }else{
+                    Button(action: {
+                        viewModel.showFilePicker.toggle()
+                    }){
+                        SwiftUI.Text("Upload file")
+                            .font(.headline)
+                            .padding(.horizontal, 60.0)
+                            .padding(.vertical, 10.0)
+                            .foregroundColor(.white)
+                            .background(Color.purple)
+                            .cornerRadius(10)
+                    }.sheet(isPresented: $viewModel.showFilePicker){
+                        viewModel.showDocumentPicker()
+                    }
                 }
+                
             }.padding().background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
         }.edgesIgnoringSafeArea(.top)
             // .ignoresSafeArea()
@@ -88,6 +97,45 @@ struct ProfileView: View{
                     //.aspectRatio(2/3, contentMode: .fit)
                 }
                 Text(single.name).foregroundColor(Color.gray)
+            }
+        }
+    }
+    
+    struct CardWithNavigationLink : View{
+        let index : Int
+        @State var list : Array<MusicModel>
+        @ViewBuilder var body: some View{
+            NavigationLink(destination:PlayerView(viewModel: PlayerViewModel(trackList: list, trackIndex: index))){
+                trackCard(single: list[index])
+            }
+        }
+    }
+    
+    
+    struct ProgressBar : View{
+        @Binding var currentProgress : Double
+        var body: some View{
+           
+            GeometryReader{
+                geometry in
+                ZStack{
+                ZStack(alignment: .leading){
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundColor(.purple)
+                        .frame(width: geometry.size.width,
+                               height: geometry.size.height,
+                               alignment: .center)
+                        .opacity(0.5)
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundColor(.purple)
+                        .frame(width: min(currentProgress * geometry.size.width, geometry.size.width),
+                               height: geometry.size.height,
+                               alignment: .center)
+                        .animation(.linear)
+                }
+                    Text("\(String(format: "%.2f", currentProgress * 100)) %")
+                }
             }
         }
     }

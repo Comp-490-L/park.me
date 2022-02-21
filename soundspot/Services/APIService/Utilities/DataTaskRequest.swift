@@ -12,7 +12,7 @@ class DataTaskRequest{
     func sendRequest(body: Data?, url: URL, method: String, completionHander: @escaping (Data?, URLResponse?, Error?) -> Void){
         var request = URLRequest(url: url)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("Bearer \(UserRepository.getToken())", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(UserAuthRepository.getToken())", forHTTPHeaderField: "Authorization")
         request.httpMethod = method
         request.httpBody = body
         

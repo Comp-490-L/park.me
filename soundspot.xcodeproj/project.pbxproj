@@ -35,11 +35,14 @@
 		803E65DD27177C9900E341F6 /* soundspotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */; };
 		8046647B273CC9EE00797543 /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046647A273CC9EE00797543 /* AuthenticationModel.swift */; };
 		804FD696275FCE5F00D81C74 /* SadMachineSingleCover.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 804FD695275FCE5F00D81C74 /* SadMachineSingleCover.jpeg */; };
-		80524E8C273E199E00FD7DE0 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80524E8B273E199E00FD7DE0 /* UserRepository.swift */; };
+		80524E8C273E199E00FD7DE0 /* UserAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80524E8B273E199E00FD7DE0 /* UserAuthRepository.swift */; };
 		80848C2427388B9300AF5ACC /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80848C2327388B9300AF5ACC /* SignUp.swift */; };
 		80848C322738963900AF5ACC /* AuthenticateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80848C312738963900AF5ACC /* AuthenticateUser.swift */; };
 		8088ED3227B9ADE000AB0ABD /* MusicPlayerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8088ED3127B9ADE000AB0ABD /* MusicPlayerEvent.swift */; };
+		808B9CA727C01D430048828D /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808B9CA627C01D430048828D /* extensions.swift */; };
+		808BC6D327C05C4B00B08CC2 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808BC6D227C05C4B00B08CC2 /* ProfileRepository.swift */; };
 		80947782273E1782009B9930 /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80947781273E1782009B9930 /* UserDTO.swift */; };
+		80A3CB7227C03C39005C3CB5 /* ProfileEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A3CB7127C03C39005C3CB5 /* ProfileEvents.swift */; };
 		80D1BEEA2717D24200300524 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D1BEE92717D24200300524 /* Colors.xcassets */; };
 		80E5FDE62740B08600247717 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E5FDE52740B08600247717 /* UserService.swift */; };
 		80F042EA27AA00F40067E8FA /* TokenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F042E927AA00F40067E8FA /* TokenData.swift */; };
@@ -115,11 +118,14 @@
 		803E65DC27177C9900E341F6 /* soundspotUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8046647A273CC9EE00797543 /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		804FD695275FCE5F00D81C74 /* SadMachineSingleCover.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SadMachineSingleCover.jpeg; sourceTree = "<group>"; };
-		80524E8B273E199E00FD7DE0 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		80524E8B273E199E00FD7DE0 /* UserAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRepository.swift; sourceTree = "<group>"; };
 		80848C2327388B9300AF5ACC /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		80848C312738963900AF5ACC /* AuthenticateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateUser.swift; sourceTree = "<group>"; };
 		8088ED3127B9ADE000AB0ABD /* MusicPlayerEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerEvent.swift; sourceTree = "<group>"; };
+		808B9CA627C01D430048828D /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		808BC6D227C05C4B00B08CC2 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		80947781273E1782009B9930 /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
+		80A3CB7127C03C39005C3CB5 /* ProfileEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEvents.swift; sourceTree = "<group>"; };
 		80D1BEE92717D24200300524 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		80E5FDE52740B08600247717 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		80F042E927AA00F40067E8FA /* TokenData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenData.swift; sourceTree = "<group>"; };
@@ -239,6 +245,7 @@
 				8025AD88275F17D200D7A7FC /* ViewModel */,
 				8025AD87275F17C500D7A7FC /* View */,
 				8025AD86275F17B100D7A7FC /* Model */,
+				80A3CB7127C03C39005C3CB5 /* ProfileEvents.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -327,6 +334,7 @@
 				80848C272738916600AF5ACC /* Authentication */,
 				E5A48A3C271F4C2F00110DDD /* Song.swift */,
 				803E65BF27177C9500E341F6 /* soundspotApp.swift */,
+				808B9CA627C01D430048828D /* extensions.swift */,
 				E5A48A37271F4C2200110DDD /* HomeView.swift */,
 				E5A48A36271F4C2200110DDD /* NavBar.swift */,
 				E5A48A35271F4C2200110DDD /* OurPicks.swift */,
@@ -374,8 +382,9 @@
 			isa = PBXGroup;
 			children = (
 				80F042E827AA009A0067E8FA /* Models */,
-				80524E8B273E199E00FD7DE0 /* UserRepository.swift */,
+				80524E8B273E199E00FD7DE0 /* UserAuthRepository.swift */,
 				80F77BDB27AB5D1300FF0AD0 /* AppStateRepository.swift */,
+				808BC6D227C05C4B00B08CC2 /* ProfileRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -729,7 +738,7 @@
 			files = (
 				E5A48A3A271F4C2200110DDD /* HomeView.swift in Sources */,
 				E5A48A32271F4C0A00110DDD /* BoardingPage.swift in Sources */,
-				80524E8C273E199E00FD7DE0 /* UserRepository.swift in Sources */,
+				80524E8C273E199E00FD7DE0 /* UserAuthRepository.swift in Sources */,
 				8025AD8E275F17F800D7A7FC /* ProfileModel.swift in Sources */,
 				8088ED3227B9ADE000AB0ABD /* MusicPlayerEvent.swift in Sources */,
 				8025AD82275F173300D7A7FC /* PlayerView.swift in Sources */,
@@ -757,9 +766,11 @@
 				8025AD7C275F168D00D7A7FC /* DataTaskRequest.swift in Sources */,
 				8046647B273CC9EE00797543 /* AuthenticationModel.swift in Sources */,
 				8025AD8C275F17EE00D7A7FC /* ProfileView.swift in Sources */,
+				808B9CA727C01D430048828D /* extensions.swift in Sources */,
 				80E5FDE62740B08600247717 /* UserService.swift in Sources */,
 				8025AD7A275F168D00D7A7FC /* Session.swift in Sources */,
 				8025AD97275F18A500D7A7FC /* UploadViewModel.swift in Sources */,
+				80A3CB7227C03C39005C3CB5 /* ProfileEvents.swift in Sources */,
 				E5A48A42271F4C2F00110DDD /* TrendingWeek.swift in Sources */,
 				80F77BDA27AB235D00FF0AD0 /* AppState.swift in Sources */,
 				8025AD95275F188400D7A7FC /* Track.swift in Sources */,
@@ -767,6 +778,7 @@
 				E5A48A2E271F4BF800110DDD /* Boarding.swift in Sources */,
 				80947782273E1782009B9930 /* UserDTO.swift in Sources */,
 				80848C2427388B9300AF5ACC /* SignUp.swift in Sources */,
+				808BC6D327C05C4B00B08CC2 /* ProfileRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -940,6 +952,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -975,6 +988,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

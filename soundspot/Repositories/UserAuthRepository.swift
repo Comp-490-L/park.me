@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-struct UserRepository{
+struct UserAuthRepository{
     private var service = UserService()
     func createUser(_ user: UserSignUpDTO) throws -> Bool{
         var result : AuthResult?

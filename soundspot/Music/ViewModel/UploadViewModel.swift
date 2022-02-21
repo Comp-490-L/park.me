@@ -41,7 +41,6 @@ struct DocumentPicker: UIViewControllerRepresentable{
     }
     
     func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: UIViewControllerRepresentableContext<DocumentPicker>) {
-        
     }
     
     class Coordinator : NSObject, UIDocumentPickerDelegate{

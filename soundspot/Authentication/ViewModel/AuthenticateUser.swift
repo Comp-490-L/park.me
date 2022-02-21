@@ -10,7 +10,7 @@ import Foundation
 
 final class AuthenticateUser : ObservableObject{
     
-    private var userRepository = UserRepository()
+    private var userRepository = UserAuthRepository()
     
     private var model : AuthenticationModel = AuthenticationModel()
     let userIdString = "Enter username or email"

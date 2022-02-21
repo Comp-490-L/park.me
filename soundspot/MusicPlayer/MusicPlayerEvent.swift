@@ -13,4 +13,5 @@ enum MusicPlayerEvent{
     case PreviousPressed
     case NextPressed
     case SliderChanged
+    case DraggingSlider
 }

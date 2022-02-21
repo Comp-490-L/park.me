@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import UIKit
 
 
 class PlayerViewModel : ObservableObject{
@@ -17,19 +18,27 @@ class PlayerViewModel : ObservableObject{
     @Published var trackList: Array<MusicModel>
     @Published var trackIndex: Int
     @Published var isPlaying : Bool = false
-    // Slider progress in percent
+    // Slider progress from 0 to 100
     @Published var progressPercentage : Double = 0
     private var player: AVPlayer? = nil
     private var timeObserverToken : Any?
     @Published var trackLength = "0:00"
     @Published var progress = "0:00"
     private var trackLengthInSeconds : Double = 0
+    private var isDraggingSlider : Bool = false
+    private var trackEnded = false
     
     
     var downloadService = DownloadService()
     let instance = Session()
     lazy var downloadsSession: URLSession = URLSession(configuration: URLSessionConfiguration.default, delegate: instance, delegateQueue: nil)
     
+    /*override func willMove(toParent parent: UIViewController?){
+        super.willMove(toParent: parent)
+        if parent == nil {
+            
+        }
+    }*/
     
     func onEvent(event : MusicPlayerEvent) -> Void{
         switch event {
@@ -42,7 +51,9 @@ class PlayerViewModel : ObservableObject{
         case .NextPressed:
             playNextTrack()
         case .SliderChanged:
-            print(progressPercentage)
+            updatePlayerProgress()
+        case .DraggingSlider:
+            DraggingSlider()
         }
     }
     
@@ -56,9 +67,10 @@ class PlayerViewModel : ObservableObject{
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             }
             catch{}
-            print("\n\n Playing fileURL \(fileURL)")
-           
+            
             player = AVPlayer(url: fileURL!)
+            // Adds an observer to the player state that will call playerDidFinishPlaying() when the track end
+            NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
             playPause()
             addPeriodicTimeObserver()
             if let duration = player?.currentItem?.asset.duration {
@@ -74,6 +86,11 @@ class PlayerViewModel : ObservableObject{
         }
     }
     
+    @objc func playerDidFinishPlaying(){
+        trackEnded = true
+        playPause()
+    }
+    
     private func addPeriodicTimeObserver() {
         if(player == nil){return}
         // Notify every half second
@@ -84,10 +101,12 @@ class PlayerViewModel : ObservableObject{
                                                           queue: .main) {
             [weak self] time in
             // update player transport UI
-            self?.progress = time.positionalTime
-            if let seconds = self?.trackLengthInSeconds{
-                self?.progressPercentage = (((time.roundedSeconds / seconds) * 100).rounded())
-                
+            // if the user is not dragging the slider
+            if(!(self?.isDraggingSlider ?? true)){
+                self?.progress = time.positionalTime
+                if let seconds = self?.trackLengthInSeconds{
+                    self?.progressPercentage = (((time.roundedSeconds / seconds) * 100).rounded())
+                    }
             }
         }
     }
@@ -99,6 +118,29 @@ class PlayerViewModel : ObservableObject{
             self.timeObserverToken = nil
         }
     }
+    
+    private func updatePlayerProgress(){
+        let newProgress = (trackLengthInSeconds * (progressPercentage / 100)).rounded()
+        let timeScale = CMTimeScale(NSEC_PER_SEC)
+        let time = CMTime(seconds: newProgress, preferredTimescale: timeScale)
+        if let player = player {
+            player.seek(to: time)
+        }
+        progressPercentage = newProgress
+        isDraggingSlider = false
+    }
+    
+    private func DraggingSlider(){
+        isDraggingSlider = true
+        // gets slider progress and formats it to string
+        let newProgress = (trackLengthInSeconds * (progressPercentage / 100)).rounded()
+        let timeScale = CMTimeScale(NSEC_PER_SEC)
+        let time = CMTime(seconds: newProgress, preferredTimescale: timeScale)
+        // update time text to match slider progress
+        progress = time.positionalTime
+    }
+    
+    
     
     private func playNextTrack(){}
     
@@ -128,6 +170,11 @@ class PlayerViewModel : ObservableObject{
         if isPlaying == false{
             player?.pause()
         }else{
+            if(trackEnded){
+                progressPercentage = 0
+                updatePlayerProgress()
+                trackEnded.toggle()
+            }
             player?.play()
         }
     }

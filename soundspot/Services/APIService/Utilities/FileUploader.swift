@@ -23,15 +23,16 @@ class FileUploader: NSObject {
     private var subjectsByTaskID = [Int : Subject]()
 
     func uploadFile(at fileURL: URL,
-                    to targetURL: URL, accessToken token: String) throws -> Publisher? {
-        
+                    to targetURL: URL,
+                    accessToken token: String) throws -> Publisher? {
+ 
         
         guard let handle: FileHandle = try? FileHandle(forReadingFrom: fileURL)
         else{
             print("Cannot open file")
             throw APIServiceError.FailedToSendRequest(reason: "Cannot open file")
         }
-        do{
+        
             if let readData: Data = try handle.readToEnd(){
                 
                 print("read File... \(readData.count)")
@@ -40,27 +41,9 @@ class FileUploader: NSObject {
 
                 request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
                 
+                // Initialze CurrentValueSubject<Percentage, Error> with with value 0 for percentage
                 let subject = Subject(0)
                 var removeSubject: (() -> Void)?
-                
-                
-                let instance = Session()
-                let urlSession = URLSession(configuration: URLSessionConfiguration.default, delegate: instance, delegateQueue: nil)
-
-                
-                
-                /*let task = urlSession.uploadTask(
-                    with: multipart,
-                    fromFile: fileURL,
-                    completionHandler: { data, response, error in
-                        // Validate response and send completion
-                        if let httpResponse = response as? HTTPURLResponse{
-                            print("Upload File Response \(httpResponse)")
-                        }
-                        subject.send(completion: .finished)
-                        removeSubject?()
-                    }
-                )*/
                 
                 let task = urlSession.dataTask(with: request, completionHandler:{
                     data, response, error in
@@ -71,6 +54,7 @@ class FileUploader: NSObject {
                         }
                         
                     }
+                    
                     subject.send(completion: .finished)
                     removeSubject?()
                     
@@ -82,13 +66,10 @@ class FileUploader: NSObject {
                 }
                 
                 task.resume()
-                
-                
+                return subject.eraseToAnyPublisher()
             }
             try handle.close()
-        }catch let error{
-            print("Error: \(error)")
-        }
+       
         return nil
     }
 }
@@ -104,6 +85,15 @@ extension FileUploader: URLSessionTaskDelegate {
         let progress = Double(totalBytesSent) / Double(totalBytesExpectedToSend)
         let subject = subjectsByTaskID[task.taskIdentifier]
         subject?.send(progress)
+    }
+}
+
+extension FileUploader: URLSessionDelegate {
+    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+       //Trust the certificate even if not valid
+       let urlCredential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+
+       completionHandler(.useCredential, urlCredential)
     }
 }
 

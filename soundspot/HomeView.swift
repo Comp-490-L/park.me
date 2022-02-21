@@ -212,7 +212,7 @@ struct HomeMainView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView().previewDevice("iPhone 13")
     }
 }
 
@@ -248,8 +248,8 @@ struct SearchBar: View {
                         .foregroundColor(.gray)
                         .font(.title)
                     TextField("Search...", text: $search)
-
                         .font(.title3)
+                        .foregroundColor(Color.black)
                 }
                 .frame(width:  ( UIScreen.main.bounds.width)*0.85, height: 40, alignment: .leading)
                 .padding(.leading, 20)
