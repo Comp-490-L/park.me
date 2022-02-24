@@ -84,11 +84,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0570C39027E2020DD9B9007B /* Pods-soundspot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundspot.release.xcconfig"; path = "Target Support Files/Pods-soundspot/Pods-soundspot.release.xcconfig"; sourceTree = "<group>"; };
-		187EFD4E362D0469ACF695C2 /* Pods-soundspot-soundspotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundspot-soundspotUITests.debug.xcconfig"; path = "Target Support Files/Pods-soundspot-soundspotUITests/Pods-soundspot-soundspotUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1A7E8AEA3DEFE9E033D796BE /* Pods-soundspot-soundspotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundspot-soundspotUITests.debug.xcconfig"; path = "Target Support Files/Pods-soundspot-soundspotUITests/Pods-soundspot-soundspotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1B811DC5A1A0DCCEC2F8163A /* Pods_soundspot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_soundspot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2094A4470F16B33CD8E0E6C2 /* Pods_soundspotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_soundspotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E68D8006AEFE84F88EF96A0 /* Pods-soundspot-soundspotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundspot-soundspotUITests.release.xcconfig"; path = "Target Support Files/Pods-soundspot-soundspotUITests/Pods-soundspot-soundspotUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4FB066AC7E6ADEE286939857 /* Pods-soundspotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundspotTests.debug.xcconfig"; path = "Target Support Files/Pods-soundspotTests/Pods-soundspotTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8025AD62275F150900D7A7FC /* FormType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormType.swift; sourceTree = "<group>"; };
 		8025AD64275F151800D7A7FC /* RegisterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		8025AD65275F151800D7A7FC /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -102,7 +101,7 @@
 		8025AD81275F173300D7A7FC /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		8025AD83275F174000D7A7FC /* PlayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		8025AD89275F17E700D7A7FC /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		8025AD8B275F17EE00D7A7FC /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		8025AD8B275F17EE00D7A7FC /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		8025AD8D275F17F800D7A7FC /* ProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		8025AD94275F188400D7A7FC /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		8025AD96275F18A500D7A7FC /* UploadViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewModel.swift; sourceTree = "<group>"; };
@@ -131,14 +130,15 @@
 		80F042E927AA00F40067E8FA /* TokenData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenData.swift; sourceTree = "<group>"; };
 		80F77BD927AB235D00FF0AD0 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		80F77BDB27AB5D1300FF0AD0 /* AppStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateRepository.swift; sourceTree = "<group>"; };
-		8F08BD1E2F5F802716EEDEB6 /* Pods-soundspotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundspotTests.release.xcconfig"; path = "Target Support Files/Pods-soundspotTests/Pods-soundspotTests.release.xcconfig"; sourceTree = "<group>"; };
-		92D940CAB29FD712B24C5FB5 /* Pods-soundspot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundspot.debug.xcconfig"; path = "Target Support Files/Pods-soundspot/Pods-soundspot.debug.xcconfig"; sourceTree = "<group>"; };
-		9EA6A21A0CDC16DB973D3E45 /* Pods-soundspotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundspotTests.debug.xcconfig"; path = "Target Support Files/Pods-soundspotTests/Pods-soundspotTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A354F5046D376D9FA3CE2BD5 /* Pods_soundspot_soundspotUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_soundspot_soundspotUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A58FF6FCD332C1DB967ECF8B /* Pods-soundspot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundspot.release.xcconfig"; path = "Target Support Files/Pods-soundspot/Pods-soundspot.release.xcconfig"; sourceTree = "<group>"; };
+		A6D42D6A8C65E1AEE3CE37A5 /* Pods-soundspot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundspot.debug.xcconfig"; path = "Target Support Files/Pods-soundspot/Pods-soundspot.debug.xcconfig"; sourceTree = "<group>"; };
+		CD30D5AEF1CD60F654FEBB34 /* Pods-soundspotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundspotTests.release.xcconfig"; path = "Target Support Files/Pods-soundspotTests/Pods-soundspotTests.release.xcconfig"; sourceTree = "<group>"; };
 		D159525B275971F4002EFA28 /* Aux-Cord-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Aux-Cord-1.jpg"; sourceTree = "<group>"; };
 		D159525C275971F4002EFA28 /* FLCL.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FLCL.jpg; sourceTree = "<group>"; };
 		D159525D275971F4002EFA28 /* GoogleLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoogleLogo.png; sourceTree = "<group>"; };
 		D19B7A5E275F359A00F5F42F /* wavy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wavy.png; sourceTree = "<group>"; };
+		D276940E7D3AA836F1C770BB /* Pods-soundspot-soundspotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundspot-soundspotUITests.release.xcconfig"; path = "Target Support Files/Pods-soundspot-soundspotUITests/Pods-soundspot-soundspotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E5263F202734789E004FF1B8 /* StartUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartUp.swift; sourceTree = "<group>"; };
 		E5263F22273478E6004FF1B8 /* LoginFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginFields.swift; sourceTree = "<group>"; };
 		E5A48A2D271F4BF800110DDD /* Boarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boarding.swift; sourceTree = "<group>"; };
@@ -180,19 +180,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		68CCCB4DE3CCF3714A063E8B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				92D940CAB29FD712B24C5FB5 /* Pods-soundspot.debug.xcconfig */,
-				0570C39027E2020DD9B9007B /* Pods-soundspot.release.xcconfig */,
-				187EFD4E362D0469ACF695C2 /* Pods-soundspot-soundspotUITests.debug.xcconfig */,
-				7E68D8006AEFE84F88EF96A0 /* Pods-soundspot-soundspotUITests.release.xcconfig */,
-				9EA6A21A0CDC16DB973D3E45 /* Pods-soundspotTests.debug.xcconfig */,
-				8F08BD1E2F5F802716EEDEB6 /* Pods-soundspotTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		8025AD70275F165800D7A7FC /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,8 +293,8 @@
 				803E65CF27177C9900E341F6 /* soundspotTests */,
 				803E65D927177C9900E341F6 /* soundspotUITests */,
 				803E65BD27177C9500E341F6 /* Products */,
-				68CCCB4DE3CCF3714A063E8B /* Pods */,
 				CAA07E6F9E97507AA64020DB /* Frameworks */,
+				A793423CA0259380FA69E637 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -480,6 +467,19 @@
 				80F77BD927AB235D00FF0AD0 /* AppState.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A793423CA0259380FA69E637 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A6D42D6A8C65E1AEE3CE37A5 /* Pods-soundspot.debug.xcconfig */,
+				A58FF6FCD332C1DB967ECF8B /* Pods-soundspot.release.xcconfig */,
+				1A7E8AEA3DEFE9E033D796BE /* Pods-soundspot-soundspotUITests.debug.xcconfig */,
+				D276940E7D3AA836F1C770BB /* Pods-soundspot-soundspotUITests.release.xcconfig */,
+				4FB066AC7E6ADEE286939857 /* Pods-soundspotTests.debug.xcconfig */,
+				CD30D5AEF1CD60F654FEBB34 /* Pods-soundspotTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		CAA07E6F9E97507AA64020DB /* Frameworks */ = {
@@ -933,7 +933,7 @@
 		};
 		803E65E127177C9900E341F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92D940CAB29FD712B24C5FB5 /* Pods-soundspot.debug.xcconfig */;
+			baseConfigurationReference = A6D42D6A8C65E1AEE3CE37A5 /* Pods-soundspot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -969,7 +969,7 @@
 		};
 		803E65E227177C9900E341F6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0570C39027E2020DD9B9007B /* Pods-soundspot.release.xcconfig */;
+			baseConfigurationReference = A58FF6FCD332C1DB967ECF8B /* Pods-soundspot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1005,7 +1005,7 @@
 		};
 		803E65E427177C9900E341F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9EA6A21A0CDC16DB973D3E45 /* Pods-soundspotTests.debug.xcconfig */;
+			baseConfigurationReference = 4FB066AC7E6ADEE286939857 /* Pods-soundspotTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1030,7 +1030,7 @@
 		};
 		803E65E527177C9900E341F6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F08BD1E2F5F802716EEDEB6 /* Pods-soundspotTests.release.xcconfig */;
+			baseConfigurationReference = CD30D5AEF1CD60F654FEBB34 /* Pods-soundspotTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1055,7 +1055,7 @@
 		};
 		803E65E727177C9900E341F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 187EFD4E362D0469ACF695C2 /* Pods-soundspot-soundspotUITests.debug.xcconfig */;
+			baseConfigurationReference = 1A7E8AEA3DEFE9E033D796BE /* Pods-soundspot-soundspotUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1078,7 +1078,7 @@
 		};
 		803E65E827177C9900E341F6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E68D8006AEFE84F88EF96A0 /* Pods-soundspot-soundspotUITests.release.xcconfig */;
+			baseConfigurationReference = D276940E7D3AA836F1C770BB /* Pods-soundspot-soundspotUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
