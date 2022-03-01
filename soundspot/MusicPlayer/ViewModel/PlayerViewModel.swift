@@ -142,13 +142,102 @@ class PlayerViewModel : ObservableObject{
     
     
     
-    private func playNextTrack(){}
+    private func playNextTrack() {
+        guard let trackLink = getNextTrackURL() else {return}
+        let fileURL = downloadTrack(link: trackLink)
+        if(fileURL != nil){
+            do{
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            }
+            catch{}
+            print("\n\n Playing fileURL \(fileURL)")
+            player = AVPlayer(url: fileURL!)
+            playPause()
+            addPeriodicTimeObserver()
+            if let duration = player?.currentItem?.asset.duration {
+                trackLength = duration.positionalTime
+                trackLengthInSeconds = duration.roundedSeconds
+            }
+            if(player == nil){
+                print("player is nil")
+            }
+
+        }else{
+            print("Audio file is nil")
+        }
+    }
     
-    private func playPreviousTrack(){}
+    private func playPreviousTrack() {
+        guard let trackLink = getPrevTrackURL() else {return}
+        let fileURL = downloadTrack(link: trackLink)
+        if(fileURL != nil){
+            do{
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            }
+            catch{}
+            print("\n\n Playing fileURL \(fileURL)")
+            player = AVPlayer(url: fileURL!)
+            playPause()
+            addPeriodicTimeObserver()
+            if let duration = player?.currentItem?.asset.duration {
+                trackLength = duration.positionalTime
+                trackLengthInSeconds = duration.roundedSeconds
+            }
+            if(player == nil){
+                print("player is nil")
+            }
+
+        }else{
+            print("Audio file is nil")
+        }
+    }
+        
+
     
     private func getCurrentTrackURL() -> String? {
         if(trackList.count - 1 < trackIndex){
             return nil
+        }
+        let link = trackList[trackIndex].link
+        if(link == ""){
+            print("Track url is empty")
+            return nil
+        }
+        return link
+    }
+    
+    
+    private func getNextTrackURL() -> String? {
+        if (trackList.count < trackIndex){
+            return nil
+        }
+        
+        if (trackIndex + 1 >= trackList.count) {
+            trackIndex = 0
+        }
+        else {
+            trackIndex = trackIndex + 1
+        }
+        
+        let link = trackList[trackIndex].link
+        
+        if(link == ""){
+            print("Track url is empty")
+            return nil
+        }
+        return link
+    }
+    
+    private func getPrevTrackURL() -> String? {
+        if (trackList.count < trackIndex){
+            return nil
+        }
+        
+        if (trackIndex - 1 <= 0) {
+            trackIndex = trackList.count - 1
+        }
+        else {
+            trackIndex = trackIndex - 1
         }
         let link = trackList[trackIndex].link
         if(link == ""){

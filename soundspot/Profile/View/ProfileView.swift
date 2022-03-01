@@ -16,36 +16,151 @@ struct ProfileView: View{
     //@ObservedObject var list = viewModel.profile
     var uploadViewModel = UploadViewModel()
     var body: some View{
-        VStack{
-            ScrollView(){
-                VStack(alignment: .leading){
-                    VStack (alignment: .leading){
-                        Text(viewModel.profile?.displayName ?? "").font(.title2).padding(.top, 60).foregroundColor(.white)
-                        Text("Your music")
-                            .font(.title3)
-                            .padding(.top, 15.0)
-                           .foregroundColor(.white)
-                    }.padding()
+        
+            VStack{
+                
                     
                     
-                    VStack {
-                        LazyVGrid(columns: [GridItem(), GridItem()]){
-                            // Check if profile is found and user has some music uploaded
-                            if(viewModel.profile != nil && viewModel.profile!.singlesList != nil){
-                                ForEach(0..<viewModel.profile!.singlesList!.count, id: \.self) {
-                                    index in
-                                    CardWithNavigationLink(index: index,
-                                                           list:  viewModel.profile!.singlesList!)
+//<<<<<<< Updated upstream
+                    
+                //ScrollView(){
+                    
+                    ZStack{
+                        VStack{
+                            Rectangle()
+                                .strokeBorder(Color(#colorLiteral(red: 0.5, green: 0, blue: 1, alpha: 1))
+                                              , lineWidth: 10)
+                                .frame(width: .infinity, height: 20)
+                            Rectangle()
+                                .strokeBorder(Color(#colorLiteral(red: 0.6, green: 0.1, blue: 1, alpha: 1)), lineWidth: 10)
+                                .frame(width: .infinity, height: 22)
+                            Rectangle()
+                                .strokeBorder(Color(#colorLiteral(red: 0.7, green: 0.2, blue: 1, alpha: 1)), lineWidth: 8)
+                                .frame(width: .infinity, height: 24)
+                            Rectangle()
+                                .strokeBorder(Color(#colorLiteral(red: 0.8, green: 0.3, blue: 1, alpha: 1)), lineWidth: 6)
+                                .frame(width: .infinity, height: 26)
+                            Rectangle()
+                                .strokeBorder(Color(#colorLiteral(red: 0.9, green: 0.4, blue: 1, alpha: 1)), lineWidth: 4)
+                                .frame(width: .infinity, height: 28)
+                            Rectangle()
+                                .strokeBorder(Color(#colorLiteral(red: 0.9, green: 0.4, blue: 1, alpha: 1)), lineWidth: 4)
+                                .frame(width: .infinity, height: 28)
+                            Rectangle()
+                                .strokeBorder(Color(#colorLiteral(red: 0.8, green: 0.3, blue: 1, alpha: 1)), lineWidth: 6)
+                                .frame(width: .infinity, height: 26)
+                            Rectangle()
+                                .strokeBorder(Color(#colorLiteral(red: 0.7, green: 0.2, blue: 1, alpha: 1)), lineWidth: 8)
+                                .frame(width: .infinity, height: 24)
+                            Rectangle()
+                                .strokeBorder(Color(#colorLiteral(red: 0.6, green: 0.1, blue: 1, alpha: 1)), lineWidth: 10)
+                                .frame(width: .infinity, height: 22)
+                            Rectangle()
+                                .strokeBorder(Color(#colorLiteral(red: 0.5, green: 0, blue: 1, alpha: 1)), lineWidth: 10)
+                                .frame(width: .infinity, height: 20)
+                        }
+                        
+                    VStack(alignment: .center){
+                 
+                            
+                                Image("FLCL")
+                                    .resizable()
+                                    .clipShape(Circle())
+                                    .shadow(radius: 10)
+                                    .overlay(Circle()
+                                    .stroke(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)), lineWidth: 5))
+                                    .frame(width: 200, height: 200)
+                                    .scaledToFit()
+                                    .padding(.top, 40)
+                                
+                                Text(viewModel.profile?.displayName ?? "Username")
+                                    .font(.title2)
+                                    .foregroundColor(.white)
+                                    .fontWeight(.bold)
+                                    
+                     
+                    }
+                    
+                }    // End of Zstack
+                        
+                        
+                        
+                        VStack(alignment: .leading) {
+                            
+                            HStack{
+                                
+                                Button(action: {
+                                    self.didTap = true
+                                }){
+                                    SwiftUI.Text("Your Likes")
+                                        //.font(.headline)
+                                        .font(.system(size: 25))
+                                        .fontWeight(.bold)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.vertical, 10.0)
+                                        .foregroundColor( .white)
+                                        .background(didTap ? Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)): Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)) )
+                                        
+                                        //.cornerRadius(8)
+                                        //.padding()
+                                }
+                                Spacer()
+                                }
+                            HStack{
+                                
+                                Button(action: {
+                                    self.didTap = true
+                                }){
+                                    SwiftUI.Text("Playlists")
+                                        //.font(.headline)
+                                        .font(.system(size: 25))
+                                        .fontWeight(.bold)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.vertical, 10.0)
+                                        .foregroundColor( .white)
+                                        .background(didTap ? Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)): Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)) )
+                                        
+                                        //.cornerRadius(8)
+                                        //.padding()
+                                }
+                                Spacer()
+                                }
+                            
+                            ScrollView{
+                            LazyVGrid(columns: [GridItem(), GridItem()]){
+                                // Check if profile is found and user has some music uploaded
+                                if(viewModel.profile != nil && viewModel.profile!.singlesList != nil){
+                                    ForEach(0..<viewModel.profile!.singlesList!.count, id: \.self) {
+                                        index in
+                                        CardWithNavigationLink(index: index,
+                                                               list:  viewModel.profile!.singlesList!)
+//>>>>>>> Stashed changes
                                 }
                             }
+                        }.onAppear{
+                            viewModel.onEvent(event: ProfileEvents.ProfileViewLoaded)
                         }
-                    }.onAppear{
-                        viewModel.onEvent(event: ProfileEvents.ProfileViewLoaded)
-                    }
-                }
-            }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+                            }
+//<<<<<<< Updated upstream
+                    
+//=======
+                    
+                }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+                
+               
+                        
+//>>>>>>> Stashed changes
+                    
+               
             
-            Spacer().background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+            
+            //             .ignoresSafeArea()
+            
+//
+            
+//<<<<<<< Updated upstream
+            
+                    Spacer().frame(maxHeight: .infinity)
             HStack{
                 
                 if(viewModel.uploadingFile){
@@ -71,9 +186,14 @@ struct ProfileView: View{
                 }
                 
             }.padding().background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
-        }.edgesIgnoringSafeArea(.top)
-            // .ignoresSafeArea()
-    }
+            }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+            .edgesIgnoringSafeArea(.all)
+//             .ignoresSafeArea()
+////=======
+//>>>>>>> Stashed changes
+    
+}
+
     
     struct trackCard : View{
         @State var single : MusicModel

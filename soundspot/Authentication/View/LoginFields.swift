@@ -65,6 +65,7 @@ struct LoginFields: View {
                     TextField(userIdString, text: $username).onTapGesture{
                         clearError()
                     }.disableAutocorrection(true).autocapitalization(UITextAutocapitalizationType.none)
+                    
                         
                 
                 }
