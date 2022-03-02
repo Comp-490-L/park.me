@@ -143,6 +143,24 @@ struct HomeMainView: View {
                     }
                     .shadow(radius: 1)
                     .opacity(self.hero ? 0 : 1)
+                     // PlayList View
+                    Spacer()
+                    Spacer()
+                    HStack{
+                            Text("Playlist")
+                            .bold()
+                            .multilineTextAlignment(.trailing)
+                            .padding(.leading, 20)
+                            .foregroundColor(.white)
+                             Spacer()
+                    }
+                    VStack {
+                          ForEach(0..<10) { indicator in HStack {
+                            playlistview() } }
+                            
+                                    }
+                            
+                    //end of playlist
 
                     //Our picks
                     VStack{
