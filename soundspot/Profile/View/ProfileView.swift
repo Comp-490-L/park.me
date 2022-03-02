@@ -14,17 +14,12 @@ struct ProfileView: View{
     
     @StateObject var viewModel: ProfileViewModel
     //@ObservedObject var list = viewModel.profile
+    @State var didTap = false
     var uploadViewModel = UploadViewModel()
     var body: some View{
         
             VStack{
-                
-                    
-                    
-//<<<<<<< Updated upstream
-                    
-                //ScrollView(){
-                    
+                ScrollView{
                     ZStack{
                         VStack{
                             Rectangle()
@@ -57,7 +52,7 @@ struct ProfileView: View{
                                 .frame(width: .infinity, height: 22)
                             Rectangle()
                                 .strokeBorder(Color(#colorLiteral(red: 0.5, green: 0, blue: 1, alpha: 1)), lineWidth: 10)
-                                .frame(width: .infinity, height: 20)
+                                .frame(maxWidth: .infinity).frame(height : 20)
                         }
                         
                     VStack(alignment: .center){
@@ -115,7 +110,7 @@ struct ProfileView: View{
                                         //.font(.headline)
                                         .font(.system(size: 25))
                                         .fontWeight(.bold)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .frame(alignment: .leading)
                                         .padding(.vertical, 10.0)
                                         .foregroundColor( .white)
                                         .background(didTap ? Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)): Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)) )
@@ -126,7 +121,7 @@ struct ProfileView: View{
                                 Spacer()
                                 }
                             
-                            ScrollView{
+                            //ScrollView{
                             LazyVGrid(columns: [GridItem(), GridItem()]){
                                 // Check if profile is found and user has some music uploaded
                                 if(viewModel.profile != nil && viewModel.profile!.singlesList != nil){
@@ -134,33 +129,23 @@ struct ProfileView: View{
                                         index in
                                         CardWithNavigationLink(index: index,
                                                                list:  viewModel.profile!.singlesList!)
-//>>>>>>> Stashed changes
+
                                 }
                             }
                         }.onAppear{
                             viewModel.onEvent(event: ProfileEvents.ProfileViewLoaded)
                         }
-                            }
-//<<<<<<< Updated upstream
-                    
-//=======
+                            //}
                     
                 }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
                 
                
-                        
-//>>>>>>> Stashed changes
-                    
-               
+            
+                    //Spacer().frame(maxHeight: .infinity)
+            }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+                .edgesIgnoringSafeArea(.all)
             
             
-            //             .ignoresSafeArea()
-            
-//
-            
-//<<<<<<< Updated upstream
-            
-                    Spacer().frame(maxHeight: .infinity)
             HStack{
                 
                 if(viewModel.uploadingFile){
@@ -173,7 +158,7 @@ struct ProfileView: View{
                     Button(action: {
                         viewModel.showFilePicker.toggle()
                     }){
-                        SwiftUI.Text("Upload file")
+                        SwiftUI.Text("Upload music")
                             .font(.headline)
                             .padding(.horizontal, 60.0)
                             .padding(.vertical, 10.0)
@@ -185,13 +170,14 @@ struct ProfileView: View{
                     }
                 }
                 
-            }.padding().background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
-            }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
-            .edgesIgnoringSafeArea(.all)
-//             .ignoresSafeArea()
-////=======
-//>>>>>>> Stashed changes
-    
+            }
+            .padding(.bottom, 10)
+            .background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+            
+        }
+            .background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+            
+        
 }
 
     

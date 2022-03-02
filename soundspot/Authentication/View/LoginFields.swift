@@ -64,7 +64,9 @@ struct LoginFields: View {
                         .foregroundColor(.black)
                     TextField(userIdString, text: $username).onTapGesture{
                         clearError()
-                    }.disableAutocorrection(true).autocapitalization(UITextAutocapitalizationType.none)
+                    }
+                    .disableAutocorrection(true).autocapitalization(UITextAutocapitalizationType.none)
+                        .colorScheme(.light)
                     
                         
                 
@@ -94,12 +96,14 @@ struct LoginFields: View {
                 if(hidePassword){
                     SecureField(passwordString, text: $password).onTapGesture {
                         clearError()
-                    }
+                    }.colorScheme(.light)
                 }
                 else {
                     TextField(passwordString, text: $password).onTapGesture {
                         clearError()
                     }
+                    .colorScheme(.light)
+                    .disableAutocorrection(true).autocapitalization(UITextAutocapitalizationType.none)
                 }
                 
                 Button(action: {

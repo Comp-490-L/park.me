@@ -68,7 +68,10 @@ struct SignUp: View {
                     Image(systemName: "envelope")
                         .foregroundColor(.black)
                         .frame(width: 25, height: 25)
-                    TextField(viewModel.emailString, text: $viewModel.signupModel.email).onTapGesture {
+                    TextField(viewModel.emailString, text: $viewModel.signupModel.email)
+                        .colorScheme(.light)
+                        .disableAutocorrection(true).autocapitalization(UITextAutocapitalizationType.none)
+                        .onTapGesture {
                         if(viewModel.signupModel.emailError != ""){
                             viewModel.clearSignUpEmailError()
                         }
@@ -94,13 +97,19 @@ struct SignUp: View {
                 Image(systemName: "lock")
                     .foregroundColor(.black)
                 if(viewModel.signupModel.hideConfimPassword){
-                    SecureField(viewModel.confirmPasswordString, text: $viewModel.signupModel.confirmPassword).onTapGesture {
+                    SecureField(viewModel.confirmPasswordString, text: $viewModel.signupModel.confirmPassword)
+                        .colorScheme(.light)
+                        .disableAutocorrection(true).autocapitalization(UITextAutocapitalizationType.none)
+                        .onTapGesture {
                         if(viewModel.signupModel.confirmPasswordError != ""){
                             viewModel.clearSignUpConfirmPasswordError()
                         }
                     }
                 } else {
-                    TextField(viewModel.confirmPasswordString, text: $viewModel.signupModel.confirmPassword).onTapGesture {
+                    TextField(viewModel.confirmPasswordString, text: $viewModel.signupModel.confirmPassword)
+                        .colorScheme(.light)
+                        .disableAutocorrection(true).autocapitalization(UITextAutocapitalizationType.none)
+                        .onTapGesture {
                         if(viewModel.signupModel.confirmPasswordError != ""){
                             viewModel.clearSignUpConfirmPasswordError()
                         }
