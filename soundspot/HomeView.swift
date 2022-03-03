@@ -12,13 +12,13 @@ struct HomeView: View {
     
     @State private var selection = 0
     init() {
-        UITabBar.appearance().backgroundColor = UIColor.gray
+        UITabBar.appearance().backgroundColor = UIColor(Color.backgroundColor)
     }
     var body: some View {
         NavigationView{
         TabView(selection: $selection){
-                HomeMainView().navigationBarBackButtonHidden(true).navigationBarHidden(true)
-            
+                HomeMainView()
+                .navigationBarBackButtonHidden(true).navigationBarHidden(true)
             .tabItem {
                     VStack {
                         Image(systemName: "globe")
@@ -26,6 +26,7 @@ struct HomeView: View {
                         Text("Categories")
                     }
                 }//.navigationBarBackButtonHidden(true).navigationBarHidden(true)
+            
                 .tag(0)
            
             ProfileView(viewModel: ProfileViewModel()).navigationBarBackButtonHidden(true).navigationBarHidden(true)
@@ -34,11 +35,12 @@ struct HomeView: View {
                     Image(systemName: "person").background(Color.white)
                     Text("Profile")
                 }
-            }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+            }
+            /*.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))*/
             .tag(1)
-        }
+        }//.foregroundColor(Color.backgroundColor).background(Color.backgroundColor)
         
-    }.navigationBarBackButtonHidden(true).navigationBarHidden(true)
+    }.navigationBarBackButtonHidden(true).navigationBarHidden(false)
     
     }
 }
@@ -89,7 +91,7 @@ struct HomeMainView: View {
 
                             }
                         }
-                    }.padding(.top, -50)
+                    }//.padding(.top, -50)
                     .opacity(self.hero ? 0 : 1)
 
 
@@ -141,6 +143,24 @@ struct HomeMainView: View {
                     }
                     .shadow(radius: 1)
                     .opacity(self.hero ? 0 : 1)
+                     // PlayList View
+                    Spacer()
+                    Spacer()
+                    HStack{
+                            Text("Playlist")
+                            .bold()
+                            .multilineTextAlignment(.trailing)
+                            .padding(.leading, 20)
+                            .foregroundColor(.white)
+                             Spacer()
+                    }
+                    VStack {
+                          ForEach(0..<10) { indicator in HStack {
+                            playlistview() } }
+                            
+                                    }
+                            
+                    //end of playlist
 
                     //Our picks
                     VStack{
@@ -197,34 +217,30 @@ struct HomeMainView: View {
                     Spacer()
 
 
-                }
+                }.padding(.top, 90)
                 
-                .background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
-
             }
-            .background(Color(.white))
+                
+            
+
+
+        }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
             .edgesIgnoringSafeArea(.top)
 
-
-        }
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView().previewDevice("iPhone 13")
-    }
-}
+
 
 
 struct SearchBar: View {
     @State var search = ""
     var body: some View {
-        ZStack {
+       /* ZStack {
             LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 0)), Color(#colorLiteral(red: 0.9843164086, green: 0.9843164086, blue: 0.9843164086, alpha: 0))]), startPoint: .top, endPoint: .bottom)
                 .frame(width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.height)*0.25, alignment: .center)
                 .edgesIgnoringSafeArea(.all)
-
+*/
 
             VStack {
                 HStack {
@@ -249,14 +265,24 @@ struct SearchBar: View {
                         .font(.title)
                     TextField("Search...", text: $search)
                         .font(.title3)
-                        .foregroundColor(Color.black)
+                        .colorScheme(.light)
+                        .foregroundColor(Color.white)
                 }
                 .frame(width:  ( UIScreen.main.bounds.width)*0.85, height: 40, alignment: .leading)
+                
                 .padding(.leading, 20)
                 .background(Color.white)
                 .cornerRadius(10)
-
-            }
-        }
+                
+            }//.foregroundColor(Color.backgroundColor)
+        //}
     }
   }
+
+
+
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView().previewDevice("iPhone 13")
+    }
+}
