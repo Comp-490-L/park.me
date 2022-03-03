@@ -9,4 +9,6 @@ import Foundation
 
 enum ProfileEvents{
     case ProfileViewLoaded
+    case UploadAlbumClicked
+    case UploadTracksClicked
 }

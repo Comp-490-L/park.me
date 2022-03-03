@@ -13,47 +13,16 @@ import RealmSwift
 struct ProfileView: View{
     
     @StateObject var viewModel: ProfileViewModel
-    //@ObservedObject var list = viewModel.profile
     @State var didTap = false
-    var uploadViewModel = UploadViewModel()
+    @State var showUpload = false
+    
     var body: some View{
-        
+        NavigationView{
             VStack{
                 ScrollView{
                     ZStack{
-                        VStack{
-                            Rectangle()
-                                .strokeBorder(Color(#colorLiteral(red: 0.5, green: 0, blue: 1, alpha: 1))
-                                              , lineWidth: 10)
-                                .frame(width: .infinity, height: 20)
-                            Rectangle()
-                                .strokeBorder(Color(#colorLiteral(red: 0.6, green: 0.1, blue: 1, alpha: 1)), lineWidth: 10)
-                                .frame(width: .infinity, height: 22)
-                            Rectangle()
-                                .strokeBorder(Color(#colorLiteral(red: 0.7, green: 0.2, blue: 1, alpha: 1)), lineWidth: 8)
-                                .frame(width: .infinity, height: 24)
-                            Rectangle()
-                                .strokeBorder(Color(#colorLiteral(red: 0.8, green: 0.3, blue: 1, alpha: 1)), lineWidth: 6)
-                                .frame(width: .infinity, height: 26)
-                            Rectangle()
-                                .strokeBorder(Color(#colorLiteral(red: 0.9, green: 0.4, blue: 1, alpha: 1)), lineWidth: 4)
-                                .frame(width: .infinity, height: 28)
-                            Rectangle()
-                                .strokeBorder(Color(#colorLiteral(red: 0.9, green: 0.4, blue: 1, alpha: 1)), lineWidth: 4)
-                                .frame(width: .infinity, height: 28)
-                            Rectangle()
-                                .strokeBorder(Color(#colorLiteral(red: 0.8, green: 0.3, blue: 1, alpha: 1)), lineWidth: 6)
-                                .frame(width: .infinity, height: 26)
-                            Rectangle()
-                                .strokeBorder(Color(#colorLiteral(red: 0.7, green: 0.2, blue: 1, alpha: 1)), lineWidth: 8)
-                                .frame(width: .infinity, height: 24)
-                            Rectangle()
-                                .strokeBorder(Color(#colorLiteral(red: 0.6, green: 0.1, blue: 1, alpha: 1)), lineWidth: 10)
-                                .frame(width: .infinity, height: 22)
-                            Rectangle()
-                                .strokeBorder(Color(#colorLiteral(red: 0.5, green: 0, blue: 1, alpha: 1)), lineWidth: 10)
-                                .frame(maxWidth: .infinity).frame(height : 20)
-                        }
+                        
+                    Banner()
                         
                     VStack(alignment: .center){
                  
@@ -94,7 +63,9 @@ struct ProfileView: View{
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.vertical, 10.0)
                                         .foregroundColor( .white)
-                                        .background(didTap ? Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)): Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)) )
+                                        .background(didTap ? Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)): Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)) ).onTapGesture {
+                                            showUpload.toggle()
+                                        }
                                         
                                         //.cornerRadius(8)
                                         //.padding()
@@ -145,6 +116,7 @@ struct ProfileView: View{
             }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
                 .edgesIgnoringSafeArea(.all)
             
+                //UploadChoice()
             
             HStack{
                 
@@ -155,9 +127,16 @@ struct ProfileView: View{
                             .frame(height : 20)
                     }
                 }else{
-                    Button(action: {
-                        viewModel.showFilePicker.toggle()
-                    }){
+                    
+                    Menu{
+                        Button("Tracks"){
+                            viewModel.onEvent(event: ProfileEvents.UploadTracksClicked)
+                        }
+                        Button("Album"){
+                            viewModel.onEvent(event: ProfileEvents.UploadAlbumClicked)
+                        }
+                        
+                    } label: {
                         SwiftUI.Text("Upload music")
                             .font(.headline)
                             .padding(.horizontal, 60.0)
@@ -165,21 +144,31 @@ struct ProfileView: View{
                             .foregroundColor(.white)
                             .background(Color.purple)
                             .cornerRadius(10)
-                    }.sheet(isPresented: $viewModel.showFilePicker){
-                        viewModel.showDocumentPicker()
                     }
+                    .sheet(isPresented: $viewModel.showFilePicker){
+                            viewModel.showDocumentPicker()
+                        }
+            
                 }
                 
             }
             .padding(.bottom, 10)
             .background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
             
-        }
-            .background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
-            
-        
+                NavigationLink(
+                    destination: MusicUploadView(viewModel: MusicUploadViewModel(uploadChoice: viewModel.uploadChoice, selectedFiles: viewModel.selectedFiles)),
+                    isActive: $viewModel.navigateToUploadView){}
+					
+                
+                
+        }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+		}.onAppear{
+			viewModel.testUpload()
+		}
 }
+    
 
+    
     
     struct trackCard : View{
         @State var single : MusicModel
@@ -248,7 +237,43 @@ struct ProfileView: View{
 }
 
 
-
+struct Banner : View {
+    var body: some View{
+        VStack{
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.5, green: 0, blue: 1, alpha: 1))
+                              , lineWidth: 10)
+                .frame(width: .infinity, height: 20)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.6, green: 0.1, blue: 1, alpha: 1)), lineWidth: 10)
+                .frame(width: .infinity, height: 22)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.7, green: 0.2, blue: 1, alpha: 1)), lineWidth: 8)
+                .frame(width: .infinity, height: 24)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.8, green: 0.3, blue: 1, alpha: 1)), lineWidth: 6)
+                .frame(width: .infinity, height: 26)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.9, green: 0.4, blue: 1, alpha: 1)), lineWidth: 4)
+                .frame(width: .infinity, height: 28)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.9, green: 0.4, blue: 1, alpha: 1)), lineWidth: 4)
+                .frame(width: .infinity, height: 28)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.8, green: 0.3, blue: 1, alpha: 1)), lineWidth: 6)
+                .frame(width: .infinity, height: 26)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.7, green: 0.2, blue: 1, alpha: 1)), lineWidth: 8)
+                .frame(width: .infinity, height: 24)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.6, green: 0.1, blue: 1, alpha: 1)), lineWidth: 10)
+                .frame(width: .infinity, height: 22)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.5, green: 0, blue: 1, alpha: 1)), lineWidth: 10)
+                .frame(maxWidth: .infinity).frame(height : 20)
+        }
+    }
+}
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {

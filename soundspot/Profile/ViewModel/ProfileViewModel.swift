@@ -19,11 +19,35 @@ class ProfileViewModel: ObservableObject{
     @State var tracksList = Array<MusicModel>()
     @Published var uploadingFile = false
     @Published var uploadProgress : Double = 0.0
+    @Published var navigateToUploadView = false
+    
     private var localString = ""
     private var profileRepo = ProfileRepository()
     private var profileFirstLoad = true
+    var uploadChoice : UploadChoice = UploadChoice.tracks
+    var selectedFiles : [URL] = [URL]()
     
-    
+    private var functionCalled = false
+	func testUpload(){
+		
+		if(functionCalled){return}
+		functionCalled = true
+		
+		var filesURL = [URL]()
+		var f : URL = URL(string: "file:///Users/yassineregragui/Library/Developer/CoreSimulator/Devices/CB67FC80-ADA1-4179-8906-EC30F271B58D/data/Containers/Shared/AppGroup/C01D9C52-3FD1-4ABA-9CA0-887EEA24A32E/File%20Provider%20Storage/DVRST%20-%20REASON%20TO%20LIVE.mp3")!
+		filesURL.append(f)
+		
+		f = URL(string: "file:///Users/yassineregragui/Library/Developer/CoreSimulator/Devices/CB67FC80-ADA1-4179-8906-EC30F271B58D/data/Containers/Shared/AppGroup/C01D9C52-3FD1-4ABA-9CA0-887EEA24A32E/File%20Provider%20Storage/Ty%20Dolla%20$ign%20-%20Clout%20(feat.%2021%20Savage).mp3")!
+		filesURL.append(f)
+		
+		f = URL(string:
+					"file:///Users/yassineregragui/Library/Developer/CoreSimulator/Devices/CB67FC80-ADA1-4179-8906-EC30F271B58D/data/Containers/Shared/AppGroup/C01D9C52-3FD1-4ABA-9CA0-887EEA24A32E/File%20Provider%20Storage/Young%20Scooter%20-%20Diamonds.mp3")!
+		filesURL.append(f)
+		selectedFiles = filesURL
+		uploadChoice = UploadChoice.album
+		navigateToUploadView = true
+	}
+	
     func onEvent(event : ProfileEvents){
         switch(event){
         case .ProfileViewLoaded:
@@ -35,6 +59,12 @@ class ProfileViewModel: ObservableObject{
             }else{
                 profileFirstLoad = false
             }
+        case .UploadAlbumClicked:
+            uploadChoice = UploadChoice.album
+            showFilePicker.toggle()
+        case .UploadTracksClicked:
+            uploadChoice = UploadChoice.tracks
+            showFilePicker.toggle()
         }
     }
     
@@ -83,8 +113,16 @@ class ProfileViewModel: ObservableObject{
     
     
     func showDocumentPicker() -> some UIViewControllerRepresentable{
-        return DocumentPicker(uploadFunc: uploadTracks)
+        return DocumentPicker(onDocPicked: launchUploadView)
     }
+    
+
+    
+    private func launchUploadView(urls: [URL]){
+        selectedFiles = urls
+        navigateToUploadView = true
+    }
+    
     
     func uploadTracks(urls: [URL]){
         uploadingFile = true
