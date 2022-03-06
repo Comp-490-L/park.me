@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import UniformTypeIdentifiers
 
 class ProfileViewModel: ObservableObject{
     init(){
@@ -113,7 +114,7 @@ class ProfileViewModel: ObservableObject{
     
     
     func showDocumentPicker() -> some UIViewControllerRepresentable{
-        return DocumentPicker(onDocPicked: launchUploadView)
+		return DocumentPicker(onDocPicked: launchUploadView, contentType: UTType.mp3, allowMutipleSelection: true)
     }
     
 

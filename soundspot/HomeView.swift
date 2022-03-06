@@ -156,7 +156,9 @@ struct HomeMainView: View {
                     }
                     VStack {
                           ForEach(0..<10) { indicator in HStack {
-                            playlistview() } }
+                            //playlistview()
+							  
+						  } }
                             
                                     }
                             

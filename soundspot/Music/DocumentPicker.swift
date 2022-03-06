@@ -10,12 +10,14 @@ import UIKit
 import MobileCoreServices
 import UniformTypeIdentifiers
 import SwiftUI
-import UniformTypeIdentifiers
 
 
 
 struct DocumentPicker: UIViewControllerRepresentable{
     let onDocPicked: (_: [URL]) -> ()
+	
+	var contentType : UTType
+	var allowMutipleSelection : Bool
     
     
     func makeCoordinator() -> DocumentPicker.Coordinator {
@@ -25,8 +27,8 @@ struct DocumentPicker: UIViewControllerRepresentable{
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<DocumentPicker>) -> UIDocumentPickerViewController {
         // Allow only audio files to be picked kUTTypeAudio
-        let picker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.mp3])
-        picker.allowsMultipleSelection = true
+        let picker = UIDocumentPickerViewController(forOpeningContentTypes: [contentType])
+        picker.allowsMultipleSelection = allowMutipleSelection
         picker.delegate = context.coordinator
         return picker
     }

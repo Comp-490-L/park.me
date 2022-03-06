@@ -7,8 +7,20 @@
 
 import Foundation
 
-struct TrackUpload : Hashable{
-    var name : String
-    var picture : URL?
-    var file : URL
+class TrackUpload : HashableClass, PageHeaderData{
+	init(name: String, pictureURL: URL?, fileURL: URL, artists: Artists){
+		self.name = name
+		self.pictureURL = pictureURL
+		self.fileURL = fileURL
+		self.artists = artists
+	}
+	
+	static func == (lhs: TrackUpload, rhs: TrackUpload) -> Bool {
+		false
+	}
+	
+	var name : String = ""
+    var pictureURL : URL?
+    var fileURL : URL
+	var artists : Artists
 }

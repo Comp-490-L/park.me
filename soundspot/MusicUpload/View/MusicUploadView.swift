@@ -7,35 +7,26 @@
 
 import Foundation
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct MusicUploadView : View {
 	@Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @ObservedObject var viewModel : MusicUploadViewModel
     
     var body : some View {
+		NavigationView{
         // 2 VStack, 1 for ignoresafearea, 1 for padding top
         ScrollView{
 			VStack(alignment: .leading){
+				
+				
 				Button("Cancel"){
 					self.mode.wrappedValue.dismiss()
 				}//.alignmentGuide(.leading) {d in d[.leading]}
 				
                 if(viewModel.uploadChoice == UploadChoice.album){
+					UploadPageHeader(viewModel: viewModel.uphViewModel)
                     
-                    HStack{
-                        VStack{
-                        Image("defaultTrackImg")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(maxWidth: 110, maxHeight: 110)
-                            Button("Edit"){}
-                        }
-                        VStack{
-                        TextField("Album title", text: $viewModel.album.name)
-								.font(.largeTitle)
-                            Spacer()
-                        }
-                    }.fixedSize(horizontal: false, vertical: true)
                 }
                 
                 if(viewModel.processing){
@@ -43,19 +34,22 @@ struct MusicUploadView : View {
                 }else{
                     ForEach(viewModel.tracks, id: \.self){ track in
                         HStack{
-                            if(track.picture == nil){
+                            if(track.pictureURL == nil){
                                 Image("defaultTrackImg")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                             }else {
-                                Image(uiImage: UIImage(contentsOfFile: track.picture!.path)!)
+                                Image(uiImage: UIImage(contentsOfFile: track.pictureURL!.path)!)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                             }
                             
-                            Text(track.name)
+							Text(track.name).lineLimit(1)
                             Spacer()
-                        }.frame(height: 50)
+							Image(systemName: "trash")
+						}.frame(height: 50).onTapGesture {
+							viewModel.onEvent(event: MusicUploadEvent.trackClicked(track: track))
+						}
                     }
                 }
                     
@@ -64,10 +58,14 @@ struct MusicUploadView : View {
                 .padding(.horizontal)
         }.background(Color.backgroundColor)
             .ignoresSafeArea(.all).navigationBarHidden(true).navigationBarBackButtonHidden(true)
-            
+		}.onAppear{viewModel.onEvent(event: MusicUploadEvent.onAppear)}
+		
+		if(viewModel.clickedTrack != nil){
+			NavigationLink(destination: ModifyTrack(viewModel: ModifyTrackViewModel(viewModel.clickedTrack!)),
+						   isActive: $viewModel.navigateToModifyTrack){}
+		}
     }
 }
-
 
 
 
@@ -94,3 +92,5 @@ struct MusicUploadView_Previews: PreviewProvider {
         )).previewDevice("iPhone 13")
     }
 }
+
+
