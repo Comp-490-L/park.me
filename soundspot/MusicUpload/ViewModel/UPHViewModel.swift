@@ -9,11 +9,10 @@ import Foundation
 import SwiftUI
 
 class UPHViewModel : ObservableObject{
-	init(placeholder : String, title: String, pictureURL : URL?){
+	init(placeholder : String, headerData : PageHeaderData){
 		self.placeholder = placeholder
-		self.title = title
-		self.pictureURL = pictureURL
-		if let pictureURL = pictureURL {
+		self.headerData = headerData
+		if let pictureURL = headerData.pictureURL {
 			if let image = UIImage(contentsOfFile: pictureURL.path){
 				self.picture = Image(uiImage: image)
 			}
@@ -21,27 +20,21 @@ class UPHViewModel : ObservableObject{
 	}
 	
 	let placeholder : String
-	@Published var title: String = ""
+	var headerData : PageHeaderData
 	@Published var picture : Image = Image("defaultTrackImg")
 	@Published var showPhotoLibrary = false
 	@Published var showImageFilePicker = false
-	var pictureURL : URL? = nil
 
 
-	
-	
-	
-	
-	
 	func picturePicked(_ image : UIImage){
 		if let imageData = image.jpegData(compressionQuality: 1){
 			do{
-				if let pictureURL = pictureURL {
+				if let pictureURL = headerData.pictureURL {
 					try FileManager.overwriteFile(fileURL: pictureURL, data: imageData)
 				}else{
-					pictureURL = try FileManager.saveAsJPEGFile(fileName: FileManager.getRandomJPEGFileName(), data: imageData)
-					picture = Image(uiImage: image)
+					headerData.pictureURL = try FileManager.saveAsJPEGFile(fileName: FileManager.getRandomJPEGFileName(), data: imageData)
 				}
+				picture = Image(uiImage: image)
 			}catch{
 				print("\nImage cannot be saved\n")
 			} // TODO show error: Image cannot be saved to be uploaded later to server
@@ -58,14 +51,18 @@ class UPHViewModel : ObservableObject{
 		if fileManager.fileExists(atPath: imageList[0].path){
 			
 			// Track does not have artwork
-			if(pictureURL == nil){
+			if(headerData.pictureURL == nil){
 				let documentDirectoryUrl = try! FileManager.default.url(
 				   for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-				pictureURL = documentDirectoryUrl.appendingPathComponent(FileManager.getRandomJPEGFileName())
+				headerData.pictureURL = documentDirectoryUrl.appendingPathComponent(FileManager.getRandomJPEGFileName())
 				let fileManager = FileManager.default
-				if let pictureURL = pictureURL {
+				if let pictureURL = headerData.pictureURL {
 					do{
 						try fileManager.copyItem(at: imageList[0], to: pictureURL)
+						let imageData = try SwiftUI.Data(contentsOf: pictureURL)
+						if let uiImage = UIImage(data: imageData){
+							picture = Image(uiImage: uiImage)
+						}
 					}catch{} // TODO show error
 				} // TODO show error
 				return
@@ -73,7 +70,7 @@ class UPHViewModel : ObservableObject{
 			
 			
 			// Replace Artwork
-			else if let pictureURL = pictureURL {
+			else if let pictureURL = headerData.pictureURL {
 				do{
 					try FileManager.overwriteFile(fileURL: pictureURL, replacementURL: imageList[0])
 					let imageData = UIImage(contentsOfFile: imageList[0].path)

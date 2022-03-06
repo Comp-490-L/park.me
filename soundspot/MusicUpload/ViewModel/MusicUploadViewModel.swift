@@ -15,15 +15,18 @@ class MusicUploadViewModel : ObservableObject{
     init(uploadChoice : UploadChoice, selectedFiles : [URL]){
         self.uploadChoice = uploadChoice
         filesURL = selectedFiles
+		let a = AlbumUpload()
+		album = a
+		uphViewModel = UPHViewModel(placeholder: "Album title", headerData: a)
     }
     
     @Published var uploadChoice : UploadChoice
-    @Published var album : AlbumUpload = AlbumUpload()
+    @Published var album : AlbumUpload
     @Published var tracks : [TrackUpload] = []
     @Published var processing = false
 	@Published var showPhotoLibrary = false
 	@Published var albumImage : Image = Image("defaultTrackImg")
-	var uphViewModel = UPHViewModel(placeholder: "Album title", title: "", pictureURL: nil)
+	var uphViewModel : UPHViewModel
 	
 	// Shows the file picker to choose picture for album artwork
 	@Published var showImageFilePicker = false
@@ -32,13 +35,20 @@ class MusicUploadViewModel : ObservableObject{
 	
 	var clickedTrack : TrackUpload? = nil
 	@Published var navigateToModifyTrack = false
+	
+	// Block processing files when coming back from ModifyTrackView
+	private var firstTimeLoad = true
+	
 	func onEvent(event : MusicUploadEvent){
 		switch(event){
 		case .trackClicked(let track):
 			clickedTrack = track
 			navigateToModifyTrack = true
 		case .onAppear:
-			processFiles()
+			if(firstTimeLoad){
+				processFiles()
+			}
+			firstTimeLoad = false
 		}
 	}
     
