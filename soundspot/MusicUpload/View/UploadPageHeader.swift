@@ -11,6 +11,8 @@ import UniformTypeIdentifiers
 
 struct UploadPageHeader : View {
 	@ObservedObject var viewModel : UPHViewModel
+	@State var showPhotoLibrary = false
+	@State var showImageFilePicker = false
 	var body: some View{
 		HStack{
 			VStack{
@@ -20,21 +22,21 @@ struct UploadPageHeader : View {
 				.frame(maxWidth: 110, maxHeight: 110)
 				
 				Menu{
-					Button("Camera roll"){
-						viewModel.showPhotoLibrary = true
+					Button("Photo Library"){
+						showPhotoLibrary = true
 					}
 					
 					Button("Documents"){
-						viewModel.showImageFilePicker = true
+						showImageFilePicker = true
 					}
 				} label: {
 					Text("Edit Artwork")
 				}
 			}.padding(.bottom, 15)
-				.sheet(isPresented: $viewModel.showPhotoLibrary){
+				.sheet(isPresented: $showPhotoLibrary){
 					ImagePicker(onPicturePicked: viewModel.picturePicked(_:))
 				}
-				.sheet(isPresented: $viewModel.showImageFilePicker){
+				.sheet(isPresented: $showImageFilePicker){
 					DocumentPicker(onDocPicked: viewModel.picturePicked, contentType: UTType.jpeg, allowMutipleSelection: false)
 				}
 			

@@ -84,7 +84,8 @@ class MusicUploadViewModel : ObservableObject{
 						name: title ?? "",
 						pictureURL: pictureURL,
 						fileURL: url,
-						artists: Artists(uploader: getUsername(), collaborators: [String]()))
+						artists: [String]())
+					
                     selectedTracks.append(track)
                 }
             }

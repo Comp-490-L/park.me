@@ -147,7 +147,7 @@ struct ProfileView: View{
                     }
                     .sheet(isPresented: $viewModel.showFilePicker){
                             viewModel.showDocumentPicker()
-                        }
+					}
             
                 }
                 
@@ -157,14 +157,20 @@ struct ProfileView: View{
             
                 NavigationLink(
                     destination: MusicUploadView(viewModel: MusicUploadViewModel(uploadChoice: viewModel.uploadChoice, selectedFiles: viewModel.selectedFiles)),
-                    isActive: $viewModel.navigateToUploadView){}
+					isActive: $viewModel.navigateToUploadView){}
+				
+				
 					
                 
                 
         }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
-		}.onAppear{
-			viewModel.testUpload()
-		}
+				.onLoad{
+					viewModel.testUpload()
+				}
+		}.navigationBarTitle("")
+		.navigationBarHidden(true)
+		.navigationBarBackButtonHidden(true)
+		
 }
     
 

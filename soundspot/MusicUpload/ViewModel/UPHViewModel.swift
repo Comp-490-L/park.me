@@ -10,6 +10,7 @@ import SwiftUI
 
 class UPHViewModel : ObservableObject{
 	init(placeholder : String, headerData : PageHeaderData){
+		print("UPH called \(placeholder)")
 		self.placeholder = placeholder
 		self.headerData = headerData
 		if let pictureURL = headerData.pictureURL {
@@ -20,10 +21,8 @@ class UPHViewModel : ObservableObject{
 	}
 	
 	let placeholder : String
-	var headerData : PageHeaderData
+	@Published var headerData : PageHeaderData
 	@Published var picture : Image = Image("defaultTrackImg")
-	@Published var showPhotoLibrary = false
-	@Published var showImageFilePicker = false
 
 
 	func picturePicked(_ image : UIImage){

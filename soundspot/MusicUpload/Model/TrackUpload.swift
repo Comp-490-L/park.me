@@ -8,7 +8,7 @@
 import Foundation
 
 class TrackUpload : HashableClass, PageHeaderData{
-	init(name: String, pictureURL: URL?, fileURL: URL, artists: Artists){
+	init(name: String, pictureURL: URL?, fileURL: URL, artists: [String]){
 		self.name = name
 		self.pictureURL = pictureURL
 		self.fileURL = fileURL
@@ -22,5 +22,5 @@ class TrackUpload : HashableClass, PageHeaderData{
 	var name : String = ""
     var pictureURL : URL?
     var fileURL : URL
-	var artists : Artists
+	var artists : [String]
 }

@@ -37,11 +37,14 @@ struct MusicUploadView : View {
                             if(track.pictureURL == nil){
                                 Image("defaultTrackImg")
                                     .resizable()
-                                    .aspectRatio(contentMode: .fit)
+									.aspectRatio(contentMode: .fit)
+									.frame(width: 50, height: 50)
+									
                             }else {
                                 Image(uiImage: UIImage(contentsOfFile: track.pictureURL!.path)!)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
+									.frame(width: 50, height: 50 )
                             }
                             
 							Text(track.name).lineLimit(1)
@@ -54,16 +57,46 @@ struct MusicUploadView : View {
                 }
                     
                 
-            }.padding(.top, 60)
+            }
+			.padding(.top, 60)
                 .padding(.horizontal)
-        }.background(Color.backgroundColor)
-            .ignoresSafeArea(.all).navigationBarHidden(true).navigationBarBackButtonHidden(true)
-		}.onAppear{viewModel.onEvent(event: MusicUploadEvent.onAppear)}
+			
+			if(viewModel.clickedTrack != nil){
+				if #available(iOS 15.0, *) {
+					NavigationLink(destination: ModifyTrack(viewModel: ModifyTrackViewModel(viewModel.clickedTrack!)),
+								   isActive: $viewModel.navigateToModifyTrack){
+					}.onSubmit {
+						print("Navigation link isActive \(viewModel.navigateToModifyTrack)")
+					}
+				} else {
+					// Fallback on earlier versions
+				}
+			}
+			
+			
+		}.onAppear{
+			viewModel.onEvent(event: MusicUploadEvent.onAppear)
+		}.background(Color.backgroundColor)
+		.navigationBarTitle("")
+				.navigationBarBackButtonHidden(true)
+		  .navigationBarHidden(true)
+		   .ignoresSafeArea(.all)
+		 
+				
+				
+			
+		}.navigationBarTitle("")
+		.navigationBarBackButtonHidden(true)
+		 .navigationBarHidden(true)
+		  .ignoresSafeArea(.all)
 		
-		if(viewModel.clickedTrack != nil){
-			NavigationLink(destination: ModifyTrack(viewModel: ModifyTrackViewModel(viewModel.clickedTrack!)),
-						   isActive: $viewModel.navigateToModifyTrack){}
-		}
+		
+		
+			
+			
+
+		
+		
     }
 }
 

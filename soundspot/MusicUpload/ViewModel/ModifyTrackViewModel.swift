@@ -23,16 +23,32 @@ class ModifyTrackViewModel : ObservableObject{
 		}
 	}
 	
-	
-	var track : TrackUpload
+	@Published var track : TrackUpload
 	@Published var showPhotoLibrary = false
 	@Published var trackImage : Image = Image("defaultTrackImg")
-	
+	@Published var artist : String = ""
 	// Shows the file picker to choose picture for album artwork
 	@Published var showImageFilePicker = false
 	var uphViewModel : UPHViewModel
 	
 	
+	func onEvent(event: ModifyTrackEvents){
+		switch(event){
+		case .addArtist:
+			addArtist()
+		case .removeArtist(let index):
+			removeArtist(index: index)
+		}
+	}
+	
+	private func addArtist(){
+		track.artists.append(artist)
+		artist = ""
+	}
+	
+	private func removeArtist(index : Int){
+		track.artists.remove(at: index)
+	}
 	
 	private func getImage(url : URL) throws -> Image{
 		let fileManager = FileManager.default
