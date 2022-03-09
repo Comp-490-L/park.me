@@ -14,33 +14,17 @@ struct ModifyTrack : View{
 	
 	var body: some View {
 		VStack{
-			VStack(alignment: .leading){
+			VStack(alignment: .center){
 				UploadPageHeader(viewModel: viewModel.uphViewModel)
+					
 				HStack{
 					Text("Artists:").font(.title3)
-				}
-					ForEach(viewModel.track.artists.indices, id: \.self){ i in
-						artistsCard(
-							name: viewModel.track.artists[i],
-							index: i,
-							onXMarkClick: viewModel.onEvent)
-						.padding(4)
-						.overlay(RoundedRectangle(cornerRadius: 5)
-									.stroke(Color.purple, lineWidth: 1))
-					}
-				
-				HStack{
-					TextField("Name", text: $viewModel.artist)
+					TextField("Names", text: $viewModel.track.artists)
 						.disableAutocorrection(true)
 						.autocapitalization(UITextAutocapitalizationType.none)
-					Spacer()
-					Image(systemName: "plus").onTapGesture {
-						viewModel.onEvent(event: ModifyTrackEvents.addArtist)
-					}
-				}.padding(.top, 10)
-					.padding(.bottom, 10)
-					.padding(.leading, 5)
-					.padding(.trailing, 5)
+						.font(.title3)
+				}
+				
 				
 				Spacer()
 				
@@ -49,25 +33,8 @@ struct ModifyTrack : View{
 		}
 		.background(Color.backgroundColor)
 		.ignoresSafeArea(.all)
-			//.navigationBarHidden(true)
-			//.navigationBarBackButtonHidden(false)
 	}
 }
-
-struct artistsCard : View {
-	var name : String
-	var index: Int
-	var onXMarkClick: (_ : ModifyTrackEvents) ->()
-	@ViewBuilder var body: some View{
-		HStack{
-			Text(name)
-			Image(systemName: "xmark").onTapGesture {
-				onXMarkClick(ModifyTrackEvents.removeArtist(index: index))
-			}
-		}
-	}
-}
-
 
 
 
@@ -83,7 +50,7 @@ struct ModifyTrack_Previews : PreviewProvider{
 		let track = TrackUpload(name: "Track name",
 								pictureURL: nil,
 								fileURL: f,
-								artists: ["Yassine", "Mo"])
+								artists: "Yassine")
 		return track
 	}
 	

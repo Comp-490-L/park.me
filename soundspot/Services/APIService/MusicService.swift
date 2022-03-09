@@ -11,14 +11,12 @@ import Combine
 struct MusicService{
 
     struct Upload{
-        func tracks(urls: [URL]) -> AnyPublisher<Double, Error>?{
+        func tracks(fileURL: URL) -> AnyPublisher<Double, Error>?{
             let uploader = FileUploader()
             let url = URL(string: "\(Server.url)/api/UploadTracks")!
-            let audioFileURL = urls[0]
-            
-            print(audioFileURL)
+		
             do{
-                return try uploader.uploadFile(at: audioFileURL, to: url, accessToken: UserAuthRepository.getToken())
+                return try uploader.uploadFile(at: fileURL, to: url, accessToken: UserAuthRepository.getToken())
             }catch let error{
                 print("Error: \(error)")
             }

@@ -93,19 +93,19 @@ extension FileManager{
 		return fileName
 	}
 	
-	public static func overwriteFile(fileURL: URL, replacementURL: URL) throws{
+	public static func overwriteFile(overwrite: URL, with: URL) throws{
 		let fileManager = FileManager.default
-		try fileManager.removeItem(atPath: fileURL.path)
-		try fileManager.copyItem(at: replacementURL, to: fileURL)
+		try fileManager.removeItem(atPath: overwrite.path)
+		try fileManager.copyItem(at: with, to: overwrite)
 	}
 	
-	public static func overwriteFile(fileURL : URL, data : Data) throws{
+	public static func overwriteFile(overwrite : URL, data : Data) throws{
 		let fileManager = FileManager.default
-		if fileManager.fileExists(atPath: fileURL.path){
-			try fileManager.removeItem(atPath: fileURL.path)
+		if fileManager.fileExists(atPath: overwrite.path){
+			try fileManager.removeItem(atPath: overwrite.path)
 		}
 		
-		try data.write(to: fileURL)
+		try data.write(to: overwrite)
 	}
 	
 	public static func saveAsJPEGFile(fileName : String, data : Data) throws -> URL{

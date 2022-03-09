@@ -11,10 +11,8 @@ import Combine
 import UniformTypeIdentifiers
 
 class ProfileViewModel: ObservableObject{
-    init(){
-        getUserProfile()
-    }
-    @Published var profile: ProfileModel? = nil
+  
+	@Published var profile: ProfileModel? = nil
     @Published var showFilePicker = false
     @Published var clickedTrack :Int? = nil
     @State var tracksList = Array<MusicModel>()
@@ -52,14 +50,7 @@ class ProfileViewModel: ObservableObject{
     func onEvent(event : ProfileEvents){
         switch(event){
         case .ProfileViewLoaded:
-            // the profile is loaded on the init function,
-            // and ProfileViewLoad gets called again when the views are loaded
-            // Updates the profile only when coming back from the music player
-            if(!profileFirstLoad){
-                getUserProfile()
-            }else{
-                profileFirstLoad = false
-            }
+			getUserProfile()
         case .UploadAlbumClicked:
             uploadChoice = UploadChoice.album
             showFilePicker.toggle()
@@ -92,8 +83,10 @@ class ProfileViewModel: ObservableObject{
                 profileRepo.getTrackPicture(url: URL(string: (profile?.singlesList![index].pictureLink)!)!) { result in
                     switch result{
                     case .success(let data):
-                        self.profile?.singlesList?[index].pictureData = data
-                        self.profile?.singlesList![index].pictureDownloaded = true
+						DispatchQueue.main.async {
+							self.profile?.singlesList?[index].pictureData = data
+							self.profile?.singlesList![index].pictureDownloaded = true
+						}
                     case .failure(_):
                         print("Failed to get picture of track ")
                     }
@@ -125,11 +118,11 @@ class ProfileViewModel: ObservableObject{
     }
     
     
-    func uploadTracks(urls: [URL]){
+    func uploadTracks(url: URL){
         uploadingFile = true
         DispatchQueue.global(qos: .userInitiated).async{
             let uploadService = MusicService.Upload()
-            let publisher = uploadService.tracks(urls: urls)
+            let publisher = uploadService.tracks(fileURL: url)
             DispatchQueue.main.async {
                 publisher?.subscribe(Subscribers.Sink(
                     receiveCompletion: { result in

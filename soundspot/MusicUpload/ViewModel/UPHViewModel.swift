@@ -9,8 +9,7 @@ import Foundation
 import SwiftUI
 
 class UPHViewModel : ObservableObject{
-	init(placeholder : String, headerData : PageHeaderData){
-		print("UPH called \(placeholder)")
+	init(placeholder : String, headerData: PageHeaderData){
 		self.placeholder = placeholder
 		self.headerData = headerData
 		if let pictureURL = headerData.pictureURL {
@@ -21,7 +20,7 @@ class UPHViewModel : ObservableObject{
 	}
 	
 	let placeholder : String
-	@Published var headerData : PageHeaderData
+	var headerData : PageHeaderData
 	@Published var picture : Image = Image("defaultTrackImg")
 
 
@@ -29,8 +28,9 @@ class UPHViewModel : ObservableObject{
 		if let imageData = image.jpegData(compressionQuality: 1){
 			do{
 				if let pictureURL = headerData.pictureURL {
-					try FileManager.overwriteFile(fileURL: pictureURL, data: imageData)
+					try FileManager.overwriteFile(overwrite: pictureURL, data: imageData)
 				}else{
+					
 					headerData.pictureURL = try FileManager.saveAsJPEGFile(fileName: FileManager.getRandomJPEGFileName(), data: imageData)
 				}
 				picture = Image(uiImage: image)
@@ -53,29 +53,35 @@ class UPHViewModel : ObservableObject{
 			if(headerData.pictureURL == nil){
 				let documentDirectoryUrl = try! FileManager.default.url(
 				   for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-				headerData.pictureURL = documentDirectoryUrl.appendingPathComponent(FileManager.getRandomJPEGFileName())
+				
+				let pictureURL = documentDirectoryUrl.appendingPathComponent(FileManager.getRandomJPEGFileName())
 				let fileManager = FileManager.default
-				if let pictureURL = headerData.pictureURL {
+				
 					do{
 						try fileManager.copyItem(at: imageList[0], to: pictureURL)
 						let imageData = try SwiftUI.Data(contentsOf: pictureURL)
 						if let uiImage = UIImage(data: imageData){
 							picture = Image(uiImage: uiImage)
 						}
+						headerData.pictureURL = pictureURL
 					}catch{} // TODO show error
-				} // TODO show error
+				
 				return
 			}
 			
 			
 			// Replace Artwork
-			else if let pictureURL = headerData.pictureURL {
+			else if let savedPictureURL = headerData.pictureURL {
 				do{
-					try FileManager.overwriteFile(fileURL: pictureURL, replacementURL: imageList[0])
-					let imageData = UIImage(contentsOfFile: imageList[0].path)
+					try FileManager.overwriteFile(overwrite: savedPictureURL, with: imageList[0])
+					let imageData = try SwiftUI.Data(contentsOf: savedPictureURL)
+					if let uiImage = UIImage(data: imageData){
+						picture = Image(uiImage: uiImage)
+					}
+					/*let imageData = UIImage(contentsOfFile: savedPictureURL.path)
 						if let imageData = imageData{
 							picture = Image(uiImage: imageData)
-						}
+						}*/
 				}catch{
 					print("\nImage cannot be saved\n")
 				} // TODO show error: Image cannot be saved to be uploaded later to server

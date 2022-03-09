@@ -10,12 +10,12 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct UploadPageHeader : View {
-	@ObservedObject var viewModel : UPHViewModel
+	@StateObject var viewModel : UPHViewModel
 	@State var showPhotoLibrary = false
 	@State var showImageFilePicker = false
 	var body: some View{
-		HStack{
-			VStack{
+	
+		VStack{
 				viewModel.picture
 				.resizable()
 				.aspectRatio(contentMode: .fit)
@@ -32,20 +32,18 @@ struct UploadPageHeader : View {
 				} label: {
 					Text("Edit Artwork")
 				}
-			}.padding(.bottom, 15)
+			}
 				.sheet(isPresented: $showPhotoLibrary){
 					ImagePicker(onPicturePicked: viewModel.picturePicked(_:))
 				}
 				.sheet(isPresented: $showImageFilePicker){
 					DocumentPicker(onDocPicked: viewModel.picturePicked, contentType: UTType.jpeg, allowMutipleSelection: false)
 				}
-			
-			
-			VStack{
-				TextField(viewModel.placeholder, text: $viewModel.headerData.name)
-					.font(.largeTitle)
-				Spacer()
-			}
-		}.fixedSize(horizontal: false, vertical: true)
+		
+		
+		VStack{
+			TextField(viewModel.placeholder, text: $viewModel.headerData.name)
+				.font(.title).padding(.top)
+		}
 	}
 }

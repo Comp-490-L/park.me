@@ -7,8 +7,7 @@
 
 import Foundation
 
-protocol PageHeaderData{
+protocol PageHeaderData {
 	var name : String { get set }
 	var pictureURL : URL? { get set }
-
 }

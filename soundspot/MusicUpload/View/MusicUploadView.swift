@@ -17,12 +17,19 @@ struct MusicUploadView : View {
 		NavigationView{
         // 2 VStack, 1 for ignoresafearea, 1 for padding top
         ScrollView{
-			VStack(alignment: .leading){
+			VStack(alignment: .center){
 				
-				
-				Button("Cancel"){
-					self.mode.wrappedValue.dismiss()
-				}//.alignmentGuide(.leading) {d in d[.leading]}
+				HStack{
+					Button("Cancel"){
+						self.mode.wrappedValue.dismiss()
+					}
+					Spacer()
+					if(viewModel.tracks.count > 0){
+						Button("Upload"){
+							viewModel.onEvent(event: MusicUploadEvent.uploadClicked)
+						}
+					}
+				}
 				
                 if(viewModel.uploadChoice == UploadChoice.album){
 					UploadPageHeader(viewModel: viewModel.uphViewModel)
@@ -32,27 +39,10 @@ struct MusicUploadView : View {
                 if(viewModel.processing){
                     ProgressView().frame(maxHeight: .infinity)
                 }else{
-                    ForEach(viewModel.tracks, id: \.self){ track in
-                        HStack{
-                            if(track.pictureURL == nil){
-                                Image("defaultTrackImg")
-                                    .resizable()
-									.aspectRatio(contentMode: .fit)
-									.frame(width: 50, height: 50)
-									
-                            }else {
-                                Image(uiImage: UIImage(contentsOfFile: track.pictureURL!.path)!)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-									.frame(width: 50, height: 50 )
-                            }
-                            
-							Text(track.name).lineLimit(1)
-                            Spacer()
-							Image(systemName: "trash")
-						}.frame(height: 50).onTapGesture {
-							viewModel.onEvent(event: MusicUploadEvent.trackClicked(track: track))
-						}
+					ForEach(viewModel.tracks.indices, id: \.self){ i in
+						
+							TrackView(index: i, track: viewModel.tracks[i], onEvent: viewModel.onEvent)
+						
                     }
                 }
                     
@@ -62,19 +52,12 @@ struct MusicUploadView : View {
                 .padding(.horizontal)
 			
 			if(viewModel.clickedTrack != nil){
-				if #available(iOS 15.0, *) {
 					NavigationLink(destination: ModifyTrack(viewModel: ModifyTrackViewModel(viewModel.clickedTrack!)),
-								   isActive: $viewModel.navigateToModifyTrack){
-					}.onSubmit {
-						print("Navigation link isActive \(viewModel.navigateToModifyTrack)")
-					}
-				} else {
-					// Fallback on earlier versions
-				}
+								   isActive: $viewModel.navigateToModifyTrack){}
 			}
 			
-			
 		}.onAppear{
+			print("\n\nMusic Upload View\n\n")
 			viewModel.onEvent(event: MusicUploadEvent.onAppear)
 		}.background(Color.backgroundColor)
 		.navigationBarTitle("")
@@ -89,15 +72,82 @@ struct MusicUploadView : View {
 		.navigationBarBackButtonHidden(true)
 		 .navigationBarHidden(true)
 		  .ignoresSafeArea(.all)
-		
-		
-		
-			
-			
 
-		
-		
     }
+	
+	
+	struct TrackView : View{
+		let index : Int
+		@StateObject var track : TrackUpload
+		let onEvent : (_ : MusicUploadEvent) -> ()
+		
+		@ViewBuilder var body: some View{
+			VStack{
+				HStack{
+					if(track.pictureURL == nil){
+						Image("defaultTrackImg")
+							.resizable()
+							.aspectRatio(contentMode: .fit)
+							.frame(width: 50, height: 50)
+							
+					} else {
+						Image(uiImage: UIImage(contentsOfFile: track.pictureURL!.path)!)
+							.resizable()
+							.aspectRatio(contentMode: .fit)
+							.frame(width: 50, height: 50 )
+					}
+					
+					Text(track.name).lineLimit(1)
+					Spacer()
+					Image(systemName: "trash").onTapGesture {
+						onEvent(MusicUploadEvent.removeTrackClicked(index))
+					}
+				}.frame(height: 50).onTapGesture {
+					onEvent(MusicUploadEvent.trackClicked(track: track))
+				}
+				
+				if(track.uploading){
+					ProgressBar(currentProgress: $track.uploadProgress)
+				}
+			}
+		}
+	}
+	
+	
+	
+	struct ProgressBar : View{
+		@Binding var currentProgress : Double
+		var height : Double = 2.0
+		var body: some View{
+		   
+			HStack{
+			GeometryReader{
+				geometry in
+				VStack{
+					Spacer()
+					ZStack(alignment: .leading){
+						RoundedRectangle(cornerRadius: 20)
+							.foregroundColor(.purple)
+							.frame(width: geometry.size.width,
+								   height: height,
+								   alignment: .center)
+							.opacity(0.5)
+						
+						RoundedRectangle(cornerRadius: 20)
+							.foregroundColor(.purple)
+							.frame(width: min(currentProgress * geometry.size.width, geometry.size.width),
+								   height: height,
+								   alignment: .center)
+							.animation(.linear)
+					}
+					Spacer()
+				}
+				}
+				Text("\(String(format: "%.2f", currentProgress * 100)) %")
+			}
+		}
+	}
+	
 }
 
 

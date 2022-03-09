@@ -155,6 +155,7 @@ struct ProfileView: View{
             .padding(.bottom, 10)
             .background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
             
+				
                 NavigationLink(
                     destination: MusicUploadView(viewModel: MusicUploadViewModel(uploadChoice: viewModel.uploadChoice, selectedFiles: viewModel.selectedFiles)),
 					isActive: $viewModel.navigateToUploadView){}
@@ -165,7 +166,7 @@ struct ProfileView: View{
                 
         }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
 				.onLoad{
-					viewModel.testUpload()
+					//viewModel.testUpload()
 				}
 		}.navigationBarTitle("")
 		.navigationBarHidden(true)

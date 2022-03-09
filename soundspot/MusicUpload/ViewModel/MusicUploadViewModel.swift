@@ -8,7 +8,7 @@
 import Foundation
 import MediaPlayer
 import SwiftUI
-
+import Combine
 
 class MusicUploadViewModel : ObservableObject{
     
@@ -49,6 +49,36 @@ class MusicUploadViewModel : ObservableObject{
 				processFiles()
 			}
 			firstTimeLoad = false
+		case .removeTrackClicked(let index):
+			removeTrackAt(index)
+		case .uploadClicked:
+			upload()
+		}
+	}
+	
+	private func upload(){
+		for i in tracks.indices{
+			tracks[i].uploading = true
+		DispatchQueue.global(qos: .userInitiated).async{
+			[self] in
+			let uploadService = MusicService.Upload()
+			let publisher = uploadService.tracks(fileURL: tracks[i].fileURL)
+			DispatchQueue.main.async {
+				publisher?.subscribe(Subscribers.Sink(
+					receiveCompletion: { result in
+					switch result{
+					case .finished:
+						tracks[i].uploading = false
+					case .failure(_):
+						tracks[i].uploading = false
+						print("completion failure")
+					}
+				},
+				receiveValue: {
+					tracks[i].uploadProgress = $0
+				}))
+			}
+		}
 		}
 	}
     
@@ -84,7 +114,7 @@ class MusicUploadViewModel : ObservableObject{
 						name: title ?? "",
 						pictureURL: pictureURL,
 						fileURL: url,
-						artists: [String]())
+						artists: "")
 					
                     selectedTracks.append(track)
                 }
@@ -124,6 +154,17 @@ class MusicUploadViewModel : ObservableObject{
     private func getFileName(url : URL) -> String{
         return (url.path as NSString).lastPathComponent
     }
+	
+	private func removeTrackAt(_ index : Int){
+		do{
+			let fileManager = FileManager.default
+			try fileManager.removeItem(at: tracks[index].fileURL)
+			if let pictureURL = tracks[index].pictureURL{
+				try fileManager.removeItem(at: pictureURL)
+			}
+		}catch{}
+		tracks.remove(at: index)
+	}
 }
 
 

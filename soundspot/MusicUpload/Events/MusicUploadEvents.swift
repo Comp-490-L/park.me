@@ -10,4 +10,6 @@ import Foundation
 enum MusicUploadEvent{
 	case trackClicked(track : TrackUpload)
 	case onAppear
+	case removeTrackClicked(_ trackIndex : Int)
+	case uploadClicked
 }

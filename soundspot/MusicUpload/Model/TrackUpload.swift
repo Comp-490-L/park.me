@@ -7,8 +7,9 @@
 
 import Foundation
 
-class TrackUpload : HashableClass, PageHeaderData{
-	init(name: String, pictureURL: URL?, fileURL: URL, artists: [String]){
+class TrackUpload : HashableClass, PageHeaderData, ObservableObject{
+	
+	init(name: String, pictureURL: URL?, fileURL: URL, artists: String){
 		self.name = name
 		self.pictureURL = pictureURL
 		self.fileURL = fileURL
@@ -19,8 +20,10 @@ class TrackUpload : HashableClass, PageHeaderData{
 		false
 	}
 	
-	var name : String = ""
-    var pictureURL : URL?
+	@Published var name : String = ""
+	@Published var pictureURL : URL?
     var fileURL : URL
-	var artists : [String]
+	var artists : String
+	@Published var uploadProgress : Double = 0.0
+	@Published var uploading = false
 }
