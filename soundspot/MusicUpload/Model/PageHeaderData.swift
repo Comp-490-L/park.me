@@ -8,6 +8,6 @@
 import Foundation
 
 protocol PageHeaderData {
-	var name : String { get set }
+	var title : String { get set }
 	var pictureURL : URL? { get set }
 }

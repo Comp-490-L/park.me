@@ -9,45 +9,111 @@ import Foundation
 import SwiftUI
 import Combine
 struct MusicService{
-
-    struct Upload{
-        func tracks(fileURL: URL) -> AnyPublisher<Double, Error>?{
-            let uploader = FileUploader()
-            let url = URL(string: "\(Server.url)/api/UploadTracks")!
+	
+	typealias ProgressPublisher = AnyPublisher<Double, Error>
+	typealias ResultPublisher = AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure>
+	let fileUploader = FileUploader()
+	
+	func createAlbum(title: String, pictureURL: URL?)
+	throws -> (ProgressPublisher, ResultPublisher)
+	{
+		let url = URL(string: "\(Server.url)/api/Album")!
+		var requestBuilder = MultipartFormDataRequest(url: url)
+		// Add title to request param
 		
-            do{
-                return try uploader.uploadFile(at: fileURL, to: url, accessToken: UserAuthRepository.getToken())
-            }catch let error{
-                print("Error: \(error)")
-            }
-            return nil
-        }
-    }
+		requestBuilder.addTextField(named: "title", value: "{ \"title\" : \"\(title)\" }")
+		// Add picture to request
+		if let pictureURL = pictureURL {
+			guard let handle: FileHandle = try? FileHandle(forReadingFrom: pictureURL)
+			else{
+				print("Cannot open file")
+				throw APIServiceError.FailedToSendRequest(reason: "Cannot open file")
+			}
+		
+		
+			if let readData: Data = try handle.readToEnd(){
+				requestBuilder.addDataField(fieldName: "picture", fileName: "picture.jpg", fileData: readData, mimeType: "multipart/form-data")
+				do{
+					try handle.close()
+				}catch{}
+			}else{ throw APIServiceError.FailedToSendRequest(reason: "Cannot read from file") }
+		}
+		
+		var request = requestBuilder.getFinalRequest();
+		request.addValue("Bearer \(UserAuthRepository.getToken())", forHTTPHeaderField: "Authorization")
+		
+		let publishers = fileUploader.send(request: request)
+		return publishers
+	}
+
+	func uploadTrack(track : TrackUpload, albumId: String?) throws -> (ProgressPublisher, ResultPublisher){
+		let metadata = TrackMetadata(albumId: albumId, title: track.title, artists: track.artists)
+		let url = URL(string: "\(Server.url)/api/track")
+		guard let url = url else {
+			throw APIServiceError.FailedToSendRequest(reason: "Invalid url")
+		}
+
+		var requestBuilder = MultipartFormDataRequest(url: url)
+		
+		guard let encoded = try? JSONEncoder().encode(metadata)
+		else{throw APIServiceError.FailedToSendRequest(reason: "Unable to encode")}
+		let encodedString = String(decoding: encoded, as: UTF8.self)
+		requestBuilder.addTextField(named: "trackMetadata", value: encodedString)
+		
+		requestBuilder = try addFileToRequest(fileURL: track.fileURL, fieldName: "track", fileName: "track", requestBuilder: requestBuilder)
+		if let pictureURL = track.pictureURL{
+			requestBuilder = try addFileToRequest(fileURL: pictureURL, fieldName: "picture", fileName: "picture.jpeg", requestBuilder: requestBuilder)
+		}
+		var request = requestBuilder.getFinalRequest()
+		request.addValue("Bearer \(UserAuthRepository.getToken())", forHTTPHeaderField: "Authorization")
+		let publishers = fileUploader.send(request: request)
+		return publishers
+		
+	}
+	
+	private func addFileToRequest(fileURL : URL, fieldName: String, fileName: String, requestBuilder: MultipartFormDataRequest)
+	throws -> MultipartFormDataRequest{
+		guard let handle: FileHandle = try? FileHandle(forReadingFrom: fileURL)
+		else{
+			print("Cannot open file")
+			throw APIServiceError.FailedToSendRequest(reason: "Cannot open file")
+		}
+	
+	
+		if let readData: Data = try handle.readToEnd(){
+			requestBuilder.addDataField(fieldName: fieldName, fileName: fileName, fileData: readData, mimeType: "multipart/form-data")
+			do{
+				try handle.close()
+			}catch{}
+		}else{ throw APIServiceError.FailedToSendRequest(reason: "Cannot read from file") }
+		return requestBuilder
+	}
+	
+    
+	func uploadTrack(fileURL: URL) -> AnyPublisher<Double, Error>?{
+		let uploader = FileUploader()
+		let url = URL(string: "\(Server.url)/api/UploadTracks")!
+	
+		do{
+			return try uploader.uploadFile(at: fileURL, to: url, accessToken: UserAuthRepository.getToken())
+		}catch let error{
+			print("Error: \(error)")
+		}
+		return nil
+	}
     
     
-    /*
-     private func uploadToServer(at fileURL: URL, to targetURL: URL, accessToken token: String) throws{
-         
-         guard let handle: FileHandle = try? FileHandle(forReadingFrom: fileURL)
-         else{
-             print("Cannot open file")
-             throw APIServiceError.FailedToSendRequest(reason: "Cannot open file")
-         }
-         
-         do{
-             if let readData: Data = try handle.readToEnd(){
-                 print("read File... \(readData.count)")
-                 
-             }
-     }
-     
-     **/
+	
+	private struct TrackMetadata : Codable{
+		var albumId : String?
+		var title: String
+		var artists: String
+	}
     
     
+	
+	
     struct Download{
-
-
-        
         
         var downloadTask: URLSessionDownloadTask? = nil
         var progressLabel: UILabel? = nil

@@ -7,14 +7,18 @@
 
 import Foundation
 
-
+// one instance per request
 struct MultipartFormDataRequest {
     private let boundary: String = UUID().uuidString
     private var httpBody = NSMutableData()
-    let url: URL
+	let url: URL
+	private var request: URLRequest
 
     init(url: URL) {
         self.url = url
+		request = URLRequest(url: url)
+		request.httpMethod = "POST"
+		request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
     }
     
 
@@ -52,8 +56,15 @@ struct MultipartFormDataRequest {
         
         return fieldData as Data
     }
+	
+	mutating func getFinalRequest() -> URLRequest{
+		httpBody.append("--\(boundary)--")
+		print(String(data: httpBody as Data, encoding: .utf8))
+		request.httpBody = httpBody as Data
+		return request
+	}
     
-    
+    // Will be removed in the future
     func getURLRequest(fieldName: String, fileName: String, fileData: Data, mimeType: String) -> URLRequest{
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -67,6 +78,7 @@ struct MultipartFormDataRequest {
     }
 }
 
+// Move to extensions file
 extension NSMutableData {
   func append(_ string: String) {
     if let data = string.data(using: .utf8) {

@@ -26,6 +26,8 @@ class MusicUploadViewModel : ObservableObject{
     @Published var processing = false
 	@Published var showPhotoLibrary = false
 	@Published var albumImage : Image = Image("defaultTrackImg")
+	// title cannot be empty
+	@Published var showTitleError = false
 	var uphViewModel : UPHViewModel
 	
 	// Shows the file picker to choose picture for album artwork
@@ -52,19 +54,32 @@ class MusicUploadViewModel : ObservableObject{
 		case .removeTrackClicked(let index):
 			removeTrackAt(index)
 		case .uploadClicked:
-			upload()
+			if(uploadChoice == UploadChoice.album){
+				createAlbum() // Track will be uploaded when the album is created
+				return
+			}
+			uploadTracks()
 		}
 	}
 	
-	private func upload(){
+	private func uploadTracks(){
+		let musicService = MusicService()
 		for i in tracks.indices{
 			tracks[i].uploading = true
 		DispatchQueue.global(qos: .userInitiated).async{
 			[self] in
-			let uploadService = MusicService.Upload()
-			let publisher = uploadService.tracks(fileURL: tracks[i].fileURL)
+			var publishers : (AnyPublisher<Double, Error>, AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure>)?
+			= nil
+			do{
+				publishers = try musicService.uploadTrack(track: tracks[i], albumId: album.albumId) // TODO show error
+			}catch{}
 			DispatchQueue.main.async {
-				publisher?.subscribe(Subscribers.Sink(
+				guard let publishers = publishers else {
+					return //TODO show error
+				}
+
+				let progressPublisher = publishers.0
+				progressPublisher.subscribe(Subscribers.Sink(
 					receiveCompletion: { result in
 					switch result{
 					case .finished:
@@ -81,6 +96,39 @@ class MusicUploadViewModel : ObservableObject{
 		}
 		}
 	}
+	
+	private func createAlbum(){
+		let musicService = MusicService()
+		do{
+			let publishers = try musicService.createAlbum(title: album.title, pictureURL: album.pictureURL)
+			let resultPublisher = publishers.1
+			
+			resultPublisher.subscribe(Subscribers.Sink(
+				receiveCompletion: { completion in
+					print ("Received completion: \(completion).")
+					switch(completion){
+					case .finished:
+						if(self.album.albumId != nil){
+							self.uploadTracks()
+						}
+					case .failure(_):
+						break
+					}
+				},
+				receiveValue: {element in
+					guard let httpResponse = element.response as? HTTPURLResponse,
+						  httpResponse.statusCode == 200 else {
+							//throw URLError(.badServerResponse)
+							  return
+						  }
+					if let decoded = try? JSONDecoder().decode(CreateAlbumResult.self, from: element.data){
+						self.album.albumId = decoded.albumId
+					} // TODO show error
+				}
+			))
+		}catch{}
+	}
+	
     
     private func processFiles(){
         processing = true

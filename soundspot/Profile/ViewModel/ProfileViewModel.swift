@@ -121,8 +121,8 @@ class ProfileViewModel: ObservableObject{
     func uploadTracks(url: URL){
         uploadingFile = true
         DispatchQueue.global(qos: .userInitiated).async{
-            let uploadService = MusicService.Upload()
-            let publisher = uploadService.tracks(fileURL: url)
+            let musicService = MusicService()
+			let publisher = musicService.uploadTrack(fileURL: url)
             DispatchQueue.main.async {
                 publisher?.subscribe(Subscribers.Sink(
                     receiveCompletion: { result in

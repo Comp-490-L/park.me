@@ -8,7 +8,7 @@
 import Foundation
 
 class AlbumUpload : PageHeaderData, ObservableObject{
-    @Published var name : String = ""
+    @Published var title : String = ""
     var albumId: String? = nil
 	var pictureURL: URL? = nil
 }

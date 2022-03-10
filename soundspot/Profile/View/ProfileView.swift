@@ -56,7 +56,7 @@ struct ProfileView: View{
                                 Button(action: {
                                     self.didTap = true
                                 }){
-                                    SwiftUI.Text("Your Likes")
+                                    SwiftUI.Text("Playlists")
                                         //.font(.headline)
                                         .font(.system(size: 25))
                                         .fontWeight(.bold)
@@ -70,14 +70,41 @@ struct ProfileView: View{
                                         //.cornerRadius(8)
                                         //.padding()
                                 }
+                                
+                                //Your Likes Playlist
+                                
                                 Spacer()
                                 }
+                            VStack
+                            {
+                                Button(action:{})
+                                {
+                                    HStack
+                                    {
+                                        Image("SadMachineSingleCover")
+                                            .resizable()
+                                            .frame(width: 50, height: 50)
+                                        Text("Your Likes")
+                                    
+                                        Spacer()
+                                        
+                                        Button(action:{})
+                                        {
+                                            HStack
+                                            {
+                                                Image(systemName: "ellipsis").padding(15)
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
                             HStack{
                                 
                                 Button(action: {
                                     self.didTap = true
                                 }){
-                                    SwiftUI.Text("Playlists")
+                                    SwiftUI.Text("Your Music")
                                         //.font(.headline)
                                         .font(.system(size: 25))
                                         .fontWeight(.bold)
@@ -176,29 +203,31 @@ struct ProfileView: View{
     
 
     
-    
-    struct trackCard : View{
+
+    struct trackCard : View
+    {
+
         @State var single : MusicModel
-        var body: some View{
-            VStack{
-                if(!single.pictureDownloaded){
+        var body: some View
+        {
+            VStack
+            {
+                if(!single.pictureDownloaded)
+                {
                     Image("defaultTrackImg")
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
                         .frame(width: 150, height: 150)
-                        .background(Color.white)
-                        .cornerRadius(15)
-                        .shadow(radius: 1)
-                }else if(single.pictureData != nil){
+                }
+                else if(single.pictureData != nil)
+                {
                     Image(uiImage: UIImage(data: single.pictureData!)!)
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
                         .frame(width: 150, height: 150)
-                        .cornerRadius(10)
-                        .shadow(radius: 1)
                     //.aspectRatio(2/3, contentMode: .fit)
                 }
-                Text(single.name).foregroundColor(Color.gray)
+                Text(single.name)
+                    .foregroundColor(Color.gray)
+                    .font(.system(size:10))
             }
         }
     }
@@ -207,9 +236,23 @@ struct ProfileView: View{
         let index : Int
         @State var list : Array<MusicModel>
         @ViewBuilder var body: some View{
-            NavigationLink(destination:PlayerView(viewModel: PlayerViewModel(trackList: list, trackIndex: index))){
-                trackCard(single: list[index])
+            HStack
+            {
+                NavigationLink(destination:PlayerView(viewModel: PlayerViewModel(trackList: list, trackIndex: index)))
+                {
+                    trackCard(single: list[index])
+                }
+                Spacer()
+                
+                Button(action:{})
+                {
+                    HStack
+                    {
+                        Image(systemName: "ellipsis").padding(15)
+                    }
+                }
             }
+
         }
     }
     

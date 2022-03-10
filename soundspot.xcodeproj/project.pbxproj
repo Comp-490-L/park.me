@@ -54,6 +54,7 @@
 		80CB4E7827D2CB1B0042725A /* UPHViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CB4E7727D2CB1B0042725A /* UPHViewModel.swift */; };
 		80CB4E7B27D2D4130042725A /* MusicUploadEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CB4E7A27D2D4130042725A /* MusicUploadEvents.swift */; };
 		80D1BEEA2717D24200300524 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D1BEE92717D24200300524 /* Colors.xcassets */; };
+		80D2D52E27DA75240078AD3A /* CreateAlbumResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D2D52D27DA75240078AD3A /* CreateAlbumResult.swift */; };
 		80E5FDE62740B08600247717 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E5FDE52740B08600247717 /* UserService.swift */; };
 		80EAB5A327D13357007F3F95 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EAB5A227D13357007F3F95 /* ImagePicker.swift */; };
 		80EAB5A727D144AE007F3F95 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EAB5A627D144AE007F3F95 /* Track.swift */; };
@@ -149,6 +150,7 @@
 		80CB4E7727D2CB1B0042725A /* UPHViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPHViewModel.swift; sourceTree = "<group>"; };
 		80CB4E7A27D2D4130042725A /* MusicUploadEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicUploadEvents.swift; sourceTree = "<group>"; };
 		80D1BEE92717D24200300524 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		80D2D52D27DA75240078AD3A /* CreateAlbumResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAlbumResult.swift; sourceTree = "<group>"; };
 		80E5FDE52740B08600247717 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		80EAB5A227D13357007F3F95 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		80EAB5A627D144AE007F3F95 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Track.swift; path = ../../../../.Trash/Track.swift; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 				808C327827CFE46F00D0D485 /* AlbumUpload.swift */,
 				808C327A27CFE51000D0D485 /* TrackUpload.swift */,
 				80B2EF3D27D45D5500675BA5 /* PageHeaderData.swift */,
+				80D2D52D27DA75240078AD3A /* CreateAlbumResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -817,6 +820,7 @@
 				8025AD82275F173300D7A7FC /* PlayerView.swift in Sources */,
 				8025AD67275F151800D7A7FC /* LoginModel.swift in Sources */,
 				80848C322738963900AF5ACC /* AuthenticateUser.swift in Sources */,
+				80D2D52E27DA75240078AD3A /* CreateAlbumResult.swift in Sources */,
 				E5A48A39271F4C2200110DDD /* NavBar.swift in Sources */,
 				E5A48A34271F4C0A00110DDD /* Card.swift in Sources */,
 				8025AD84275F174000D7A7FC /* PlayerViewModel.swift in Sources */,

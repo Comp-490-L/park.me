@@ -42,7 +42,7 @@ struct UploadPageHeader : View {
 		
 		
 		VStack{
-			TextField(viewModel.placeholder, text: $viewModel.headerData.name)
+			TextField(viewModel.placeholder, text: $viewModel.headerData.title)
 				.font(.title).padding(.top)
 		}
 	}

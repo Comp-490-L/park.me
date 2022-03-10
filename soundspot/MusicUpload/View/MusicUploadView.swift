@@ -97,7 +97,7 @@ struct MusicUploadView : View {
 							.frame(width: 50, height: 50 )
 					}
 					
-					Text(track.name).lineLimit(1)
+					Text(track.title).lineLimit(1)
 					Spacer()
 					Image(systemName: "trash").onTapGesture {
 						onEvent(MusicUploadEvent.removeTrackClicked(index))
