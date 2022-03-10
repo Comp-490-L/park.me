@@ -30,7 +30,7 @@ struct SongRow: View
                 {
                     Button("Add to queue", action:{})
                     Button("Add to playlist", action:{})
-                    Button("Like", action:{})
+                    Button("Likes", action:{})
                 } label:
                 {
                     Label("", systemImage: "ellipsis").padding(15)
