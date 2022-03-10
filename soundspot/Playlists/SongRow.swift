@@ -2,13 +2,13 @@
 //  PlaylistRow.swift
 //  soundspot
 //
-//  Created by James Maturino on 3/10/22.
+//  Created by James Maturino on 3/7/22.
 //
 
 import Foundation
 import SwiftUI
 
-struct PlaylistRow: View
+struct SongRow: View
 {
     //var rowThing: PlaylistThing
     let title : String
@@ -26,7 +26,7 @@ struct PlaylistRow: View
             
                 Spacer()
                 
-                /*:Menu
+                Menu
                 {
                     Button("Add to queue", action:{})
                     Button("Add to playlist", action:{})
@@ -34,17 +34,17 @@ struct PlaylistRow: View
                 } label:
                 {
                     Label("", systemImage: "ellipsis").padding(15)
-                }*/
+                }
             }
         }
     }
 }
 
-struct PlaylistRow_Previews: PreviewProvider
+struct SongRow_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        PlaylistRow(title: "ThingTest")
+        SongRow(title: "ThingTest")
             .previewDevice(PreviewDevice(rawValue: "iPhone 13"))
     }
 }
