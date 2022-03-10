@@ -200,10 +200,8 @@ struct ProfileView: View{
 		.navigationBarBackButtonHidden(true)
 		
 }
-    
 
     
-
     struct trackCard : View
     {
 
