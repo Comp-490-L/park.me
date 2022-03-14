@@ -49,13 +49,14 @@ struct ProfileView: View{
                         
                         
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading)
+                        {
                             
-                            HStack{
+                            HStack
+                            {
                                 
-                                Button(action: {
-                                    self.didTap = true
-                                }){
+                                Button(action:{self.didTap = true})
+                                {
                                     SwiftUI.Text("Playlists")
                                         //.font(.headline)
                                         .font(.system(size: 25))
@@ -74,10 +75,15 @@ struct ProfileView: View{
                                 //Your Likes Playlist
                                 
                                 Spacer()
-                                }
+                            }
+                            
                             VStack
                             {
-                                Button(action:{})
+                                    NavigationLink(destination: PlaylistView(), label:
+                                    {
+                                        PlaylistRow(title: "Liked Songs")
+                                    }).buttonStyle(PlainButtonStyle())
+                                /*:Button(action:{})
                                 {
                                     HStack
                                     {
@@ -96,9 +102,12 @@ struct ProfileView: View{
                                             }
                                         }
                                     }
-                                }
+                                }*/
+
 
                             }
+                            
+                            Spacer()
                             HStack{
                                 
                                 Button(action: {
@@ -252,12 +261,14 @@ struct ProfileView: View{
                 }
                 Spacer()
                 
-                Button(action:{})
+                Menu
                 {
-                    HStack
-                    {
-                        Image(systemName: "ellipsis").padding(15)
-                    }
+                    Button("Add to queue", action:{})
+                    Button("Add to playlist", action:{})
+                    Button("Like", action:{})
+                } label:
+                {
+                    Label("", systemImage: "ellipsis").padding(15)
                 }
             }
 
