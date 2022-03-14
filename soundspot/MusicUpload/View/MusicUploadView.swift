@@ -12,6 +12,7 @@ import UniformTypeIdentifiers
 struct MusicUploadView : View {
 	@Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @ObservedObject var viewModel : MusicUploadViewModel
+	@State var uploadClicked = false
     
     var body : some View {
 		NavigationView{
@@ -20,12 +21,13 @@ struct MusicUploadView : View {
 			VStack(alignment: .center){
 				
 				HStack{
-					Button("Cancel"){
+					Button("Dismiss"){
 						self.mode.wrappedValue.dismiss()
 					}
 					Spacer()
-					if(viewModel.tracks.count > 0){
+					if(viewModel.tracks.count > 0 && !uploadClicked){
 						Button("Upload"){
+							uploadClicked = true
 							viewModel.onEvent(event: MusicUploadEvent.uploadClicked)
 						}
 					}

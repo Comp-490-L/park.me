@@ -8,6 +8,6 @@
 import Foundation
 
 class Server{
-    static let url = "https://192.168.1.235:5001"
-	//static let url = "https://10.8.0.1:5005"
+    //static let url = "https://192.168.1.235:5001"
+	static let url = "https://10.8.0.1:5001"
 }

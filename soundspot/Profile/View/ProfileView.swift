@@ -79,10 +79,13 @@ struct ProfileView: View{
                             
                             VStack
                             {
+								/*
                                     NavigationLink(destination: PlaylistView(), label:
                                     {
                                         PlaylistRow(title: "Liked Songs")
                                     }).buttonStyle(PlainButtonStyle())
+								
+								*/
                                 /*:Button(action:{})
                                 {
                                     HStack
