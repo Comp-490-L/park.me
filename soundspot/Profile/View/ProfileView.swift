@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 import AudioToolbox
-import RealmSwift
+
 
 struct ProfileView: View{
     
-    @StateObject var viewModel: ProfileViewModel
+    @ObservedObject var viewModel: ProfileViewModel
     @State var didTap = false
     @State var showUpload = false
     
@@ -112,30 +112,37 @@ struct ProfileView: View{
                                         .padding(.vertical, 10.0)
                                         .foregroundColor( .white)
                                         .background(didTap ? Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)): Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)) )
-                                        
-                                        //.cornerRadius(8)
-                                        //.padding()
                                 }
                                 Spacer()
                                 }
                             
-                            //ScrollView{
-                            LazyVGrid(columns: [GridItem(), GridItem()]){
-                                // Check if profile is found and user has some music uploaded
-                                if(viewModel.profile != nil && viewModel.profile!.singlesList != nil){
-                                    ForEach(0..<viewModel.profile!.singlesList!.count, id: \.self) {
-                                        index in
-                                        CardWithNavigationLink(index: index,
-                                                               list:  viewModel.profile!.singlesList!)
+                           
+							// Check if profile is found and user has some music uploaded
+							if(viewModel.profile != nil && viewModel.profile!.singlesList != nil){
+								ForEach(0..<viewModel.profile!.singlesList!.count, id: \.self)
+								{
+									index in
+									CardWithNavigationLink(
+										index: index,
+										list: Binding(
+											get: {
+												viewModel.profile!.singlesList!
+											},
+											set: {
+												viewModel.profile!.singlesList = $0
+											}
+										)
+									)
 
-                                }
+								}
                             }
-                        }.onAppear{
-                            viewModel.onEvent(event: ProfileEvents.ProfileViewLoaded)
-                        }
-                            //}
+                        
+                         
                     
                 }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+						.onAppear{
+							viewModel.onEvent(event: ProfileEvents.ProfileViewLoaded)
+						}
                 
                
             
@@ -205,7 +212,7 @@ struct ProfileView: View{
     struct trackCard : View
     {
 
-        @State var single : MusicModel
+        @Binding var single : MusicModel
         var body: some View
         {
             VStack
@@ -216,13 +223,16 @@ struct ProfileView: View{
                         .resizable()
                         .frame(width: 150, height: 150)
                 }
-                else if(single.pictureData != nil)
-                {
-                    Image(uiImage: UIImage(data: single.pictureData!)!)
-                        .resizable()
-                        .frame(width: 150, height: 150)
-                    //.aspectRatio(2/3, contentMode: .fit)
-                }
+				
+				else if let data = single.pictureData{
+					if let image = UIImage(data: data){
+							Image(uiImage: image)
+							.resizable()
+							.frame(width: 150, height: 150)
+					}
+				}
+				
+		
                 Text(single.name)
                     .foregroundColor(Color.gray)
                     .font(.system(size:10))
@@ -232,13 +242,13 @@ struct ProfileView: View{
     
     struct CardWithNavigationLink : View{
         let index : Int
-        @State var list : Array<MusicModel>
+        @Binding var list : Array<MusicModel>
         @ViewBuilder var body: some View{
             HStack
             {
                 NavigationLink(destination:PlayerView(viewModel: PlayerViewModel(trackList: list, trackIndex: index)))
                 {
-                    trackCard(single: list[index])
+                    trackCard(single: $list[index])
                 }
                 Spacer()
                 

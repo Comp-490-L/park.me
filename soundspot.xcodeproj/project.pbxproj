@@ -55,6 +55,7 @@
 		80CB4E7B27D2D4130042725A /* MusicUploadEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CB4E7A27D2D4130042725A /* MusicUploadEvents.swift */; };
 		80D1BEEA2717D24200300524 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D1BEE92717D24200300524 /* Colors.xcassets */; };
 		80D2D52E27DA75240078AD3A /* CreateAlbumResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D2D52D27DA75240078AD3A /* CreateAlbumResult.swift */; };
+		80D2D53327DA7F7C0078AD3A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D2D53227DA7F7C0078AD3A /* HomeViewModel.swift */; };
 		80E5FDE62740B08600247717 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E5FDE52740B08600247717 /* UserService.swift */; };
 		80EAB5A327D13357007F3F95 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EAB5A227D13357007F3F95 /* ImagePicker.swift */; };
 		80EAB5A727D144AE007F3F95 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EAB5A627D144AE007F3F95 /* Track.swift */; };
@@ -151,6 +152,7 @@
 		80CB4E7A27D2D4130042725A /* MusicUploadEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicUploadEvents.swift; sourceTree = "<group>"; };
 		80D1BEE92717D24200300524 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		80D2D52D27DA75240078AD3A /* CreateAlbumResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAlbumResult.swift; sourceTree = "<group>"; };
+		80D2D53227DA7F7C0078AD3A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		80E5FDE52740B08600247717 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		80EAB5A227D13357007F3F95 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		80EAB5A627D144AE007F3F95 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Track.swift; path = ../../../../.Trash/Track.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 		803E65BE27177C9500E341F6 /* soundspot */ = {
 			isa = PBXGroup;
 			children = (
+				80D2D52F27DA7E410078AD3A /* Home */,
 				80EAB5A127D13333007F3F95 /* Image Picker */,
 				808C326E27CFDE1100D0D485 /* MusicUpload */,
 				8025AD8F275F183500D7A7FC /* Music */,
@@ -336,7 +339,6 @@
 				E5A48A3C271F4C2F00110DDD /* Song.swift */,
 				803E65BF27177C9500E341F6 /* soundspotApp.swift */,
 				808B9CA627C01D430048828D /* extensions.swift */,
-				E5A48A37271F4C2200110DDD /* HomeView.swift */,
 				E5A48A36271F4C2200110DDD /* NavBar.swift */,
 				E5A48A35271F4C2200110DDD /* OurPicks.swift */,
 				E5A48A31271F4C0A00110DDD /* Card.swift */,
@@ -507,6 +509,31 @@
 				80FADBA327D59A58008B1D79 /* ModifyTrackEvents.swift */,
 			);
 			path = Events;
+			sourceTree = "<group>";
+		};
+		80D2D52F27DA7E410078AD3A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				80D2D53127DA7F230078AD3A /* ViewModel */,
+				80D2D53027DA7E660078AD3A /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		80D2D53027DA7E660078AD3A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E5A48A37271F4C2200110DDD /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		80D2D53127DA7F230078AD3A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				80D2D53227DA7F7C0078AD3A /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		80DCB9942738DE4200B4C481 /* Boarding */ = {
@@ -825,6 +852,7 @@
 				E5A48A34271F4C0A00110DDD /* Card.swift in Sources */,
 				8025AD84275F174000D7A7FC /* PlayerViewModel.swift in Sources */,
 				8025AD7B275F168D00D7A7FC /* Server.swift in Sources */,
+				80D2D53327DA7F7C0078AD3A /* HomeViewModel.swift in Sources */,
 				808C327927CFE46F00D0D485 /* AlbumUpload.swift in Sources */,
 				80F77BDC27AB5D1300FF0AD0 /* AppStateRepository.swift in Sources */,
 				E5263F23273478E7004FF1B8 /* LoginFields.swift in Sources */,

@@ -34,7 +34,7 @@ struct SignUp: View {
             .padding(.horizontal, 20)
             
             NavigationLink(
-                destination: HomeView().navigationBarBackButtonHidden(true).navigationBarHidden(true),
+                destination: HomeView(viewModel: HomeViewModel()).navigationBarBackButtonHidden(true).navigationBarHidden(true),
                 isActive: $viewModel.authenticated,
                 label: {
                     Text("SignUp")

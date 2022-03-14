@@ -34,7 +34,7 @@ struct soundspotApp: SwiftUI.App {
             case OnLaunchView.Authentication:
                 StartUp(viewModel: AuthenticateUser())
             case OnLaunchView.Home:
-                HomeView()
+                HomeView(viewModel: HomeViewModel())
             }
         }
     }

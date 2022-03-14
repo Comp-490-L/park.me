@@ -9,10 +9,11 @@ import Foundation
 import SwiftUI
 
 struct HomeView: View {
-    
+	@ObservedObject var viewModel : HomeViewModel
     @State private var selection = 0
-    init() {
+	init(viewModel : HomeViewModel) {
         UITabBar.appearance().backgroundColor = UIColor(Color.backgroundColor)
+		self.viewModel = viewModel
     }
     var body: some View {
         NavigationView{
@@ -285,6 +286,6 @@ struct SearchBar: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView().previewDevice("iPhone 13")
+        HomeView(viewModel: HomeViewModel()).previewDevice("iPhone 13")
     }
 }

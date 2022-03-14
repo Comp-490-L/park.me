@@ -27,25 +27,7 @@ class ProfileViewModel: ObservableObject{
     var selectedFiles : [URL] = [URL]()
     
     private var functionCalled = false
-	func testUpload(){
-		
-		if(functionCalled){return}
-		functionCalled = true
-		
-		var filesURL = [URL]()
-		var f : URL = URL(string: "file:///Users/yassineregragui/Library/Developer/CoreSimulator/Devices/CB67FC80-ADA1-4179-8906-EC30F271B58D/data/Containers/Shared/AppGroup/C01D9C52-3FD1-4ABA-9CA0-887EEA24A32E/File%20Provider%20Storage/DVRST%20-%20REASON%20TO%20LIVE.mp3")!
-		filesURL.append(f)
-		
-		f = URL(string: "file:///Users/yassineregragui/Library/Developer/CoreSimulator/Devices/CB67FC80-ADA1-4179-8906-EC30F271B58D/data/Containers/Shared/AppGroup/C01D9C52-3FD1-4ABA-9CA0-887EEA24A32E/File%20Provider%20Storage/Ty%20Dolla%20$ign%20-%20Clout%20(feat.%2021%20Savage).mp3")!
-		filesURL.append(f)
-		
-		f = URL(string:
-					"file:///Users/yassineregragui/Library/Developer/CoreSimulator/Devices/CB67FC80-ADA1-4179-8906-EC30F271B58D/data/Containers/Shared/AppGroup/C01D9C52-3FD1-4ABA-9CA0-887EEA24A32E/File%20Provider%20Storage/Young%20Scooter%20-%20Diamonds.mp3")!
-		filesURL.append(f)
-		selectedFiles = filesURL
-		uploadChoice = UploadChoice.album
-		navigateToUploadView = true
-	}
+
 	
     func onEvent(event : ProfileEvents){
         switch(event){
@@ -117,28 +99,4 @@ class ProfileViewModel: ObservableObject{
         navigateToUploadView = true
     }
     
-    
-    func uploadTracks(url: URL){
-        uploadingFile = true
-        DispatchQueue.global(qos: .userInitiated).async{
-            let musicService = MusicService()
-			let publisher = musicService.uploadTrack(fileURL: url)
-            DispatchQueue.main.async {
-                publisher?.subscribe(Subscribers.Sink(
-                    receiveCompletion: { result in
-                    switch result{
-                    case .finished:
-                        self.uploadingFile = false
-                        self.getUserProfile()
-                    case .failure(_):
-                        self.uploadingFile = false
-                        print("completion failure")
-                    }
-                },
-                receiveValue: {
-                    self.uploadProgress = $0
-                }))
-            }
-        }
-    }
 }

@@ -16,7 +16,7 @@ struct NavBar: View {
     }
     var body: some View {
         TabView(selection: $selection) {
-            HomeView().tabItem {
+            HomeView(viewModel: HomeViewModel()).tabItem {
                 VStack {
                     Image(systemName: "house.fill")
                     Text("Home")
