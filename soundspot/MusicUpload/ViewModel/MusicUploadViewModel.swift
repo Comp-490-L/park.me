@@ -71,7 +71,7 @@ class MusicUploadViewModel : ObservableObject{
 			var publishers : (AnyPublisher<Double, Error>, AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure>)?
 			= nil
 			do{
-				publishers = try musicService.uploadTrack(track: tracks[i], albumId: album.albumId) // TODO show error
+				publishers = try musicService.uploadTrack(track: tracks[i], albumId: album.id) // TODO show error
 			}catch{}
 			DispatchQueue.main.async {
 				guard let publishers = publishers else {
@@ -84,6 +84,7 @@ class MusicUploadViewModel : ObservableObject{
 					switch result{
 					case .finished:
 						tracks[i].uploading = false
+						tracks[i].uploaded = true
 					case .failure(_):
 						tracks[i].uploading = false
 						print("completion failure")
@@ -108,7 +109,7 @@ class MusicUploadViewModel : ObservableObject{
 					print ("Received completion: \(completion).")
 					switch(completion){
 					case .finished:
-						if(self.album.albumId != nil){
+						if(self.album.id != nil){
 							self.uploadTracks()
 						}
 					case .failure(_):
@@ -122,7 +123,7 @@ class MusicUploadViewModel : ObservableObject{
 							  return
 						  }
 					if let decoded = try? JSONDecoder().decode(CreateAlbumResult.self, from: element.data){
-						self.album.albumId = decoded.albumId
+						self.album.id = decoded.albumId
 					} // TODO show error
 				}
 			))
@@ -206,7 +207,6 @@ class MusicUploadViewModel : ObservableObject{
 	private func removeTrackAt(_ index : Int){
 		do{
 			let fileManager = FileManager.default
-			try fileManager.removeItem(at: tracks[index].fileURL)
 			if let pictureURL = tracks[index].pictureURL{
 				try fileManager.removeItem(at: pictureURL)
 			}

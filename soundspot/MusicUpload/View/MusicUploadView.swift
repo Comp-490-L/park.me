@@ -98,19 +98,32 @@ struct MusicUploadView : View {
 							.aspectRatio(contentMode: .fit)
 							.frame(width: 50, height: 50 )
 					}
-					
-					Text(track.title).lineLimit(1)
+					VStack(alignment: .leading){
+						Spacer()
+						Text(track.title).lineLimit(1)
+						Spacer()
+						if(track.uploaded){
+							Text("Uploaded")
+								.fontWeight(.light)
+								.font(.italic(.caption)())
+						}
+					}
 					Spacer()
-					Image(systemName: "trash").onTapGesture {
-						onEvent(MusicUploadEvent.removeTrackClicked(index))
+					if(!track.uploading && !track.uploaded){
+						Image(systemName: "trash").onTapGesture {
+							onEvent(MusicUploadEvent.removeTrackClicked(index))
+						}
 					}
 				}.frame(height: 50).onTapGesture {
-					onEvent(MusicUploadEvent.trackClicked(track: track))
+					if(!track.uploading && !track.uploaded){
+						onEvent(MusicUploadEvent.trackClicked(track: track))
+					}
 				}
 				
 				if(track.uploading){
 					ProgressBar(currentProgress: $track.uploadProgress)
 				}
+				
 			}
 		}
 	}

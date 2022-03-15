@@ -27,4 +27,5 @@ class TrackUpload : HashableClass, PageHeaderData, ObservableObject{
 	var artists : String
 	@Published var uploadProgress : Double = 0.0
 	@Published var uploading = false
+	@Published var uploaded = false
 }
