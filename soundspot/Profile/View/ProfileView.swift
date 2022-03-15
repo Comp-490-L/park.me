@@ -224,7 +224,7 @@ struct ProfileView: View{
     struct trackCard : View
     {
 
-        @Binding var single : MusicModel
+        @Binding var single : Track
         var body: some View
         {
             VStack
@@ -254,7 +254,7 @@ struct ProfileView: View{
     
     struct CardWithNavigationLink : View{
         let index : Int
-        @Binding var list : Array<MusicModel>
+        @Binding var list : Array<Track>
         @ViewBuilder var body: some View{
             HStack
             {

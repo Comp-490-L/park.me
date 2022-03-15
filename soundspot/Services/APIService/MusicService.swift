@@ -46,6 +46,8 @@ struct MusicService{
 		return publishers
 	}
 
+	
+	
 	func uploadTrack(track : TrackUpload, albumId: String?) throws -> (ProgressPublisher, ResultPublisher){
 		let metadata = TrackMetadata(albumId: albumId, title: track.title, artists: track.artists)
 		let url = URL(string: "\(Server.url)/api/track")
@@ -88,22 +90,7 @@ struct MusicService{
 		}else{ throw APIServiceError.FailedToSendRequest(reason: "Cannot read from file") }
 		return requestBuilder
 	}
-	
-    
-	func uploadTrack(fileURL: URL) -> AnyPublisher<Double, Error>?{
-		let uploader = FileUploader()
-		let url = URL(string: "\(Server.url)/api/UploadTracks")!
-	
-		do{
-			return try uploader.uploadFile(at: fileURL, to: url, accessToken: UserAuthRepository.getToken())
-		}catch let error{
-			print("Error: \(error)")
-		}
-		return nil
-	}
-    
-    
-	
+
 	private struct TrackMetadata : Codable{
 		var albumId : String?
 		var title: String

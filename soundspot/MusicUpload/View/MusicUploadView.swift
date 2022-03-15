@@ -42,9 +42,7 @@ struct MusicUploadView : View {
                     ProgressView().frame(maxHeight: .infinity)
                 }else{
 					ForEach(viewModel.tracks.indices, id: \.self){ i in
-						
 							TrackView(index: i, track: viewModel.tracks[i], onEvent: viewModel.onEvent)
-						
                     }
                 }
                     

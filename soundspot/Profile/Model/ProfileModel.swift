@@ -11,11 +11,11 @@ struct ProfileModel : Codable, Hashable{
     var profileLink: String
     var displayName: String
     var biography: String
-    var singlesList: Array<MusicModel>?
-    var albumsList: Array<MusicModel>?
+    var singlesList: Array<Track>?
+    var albumsList: Array<Track>?
 }
 
-struct MusicModel : Codable, Hashable{
+struct Track : Codable, Hashable{
     
     init(name : String, link: String, trackDownloaded : Bool, pictureLink : String?, pictureDownloaded : Bool, pictureData: Data? ){
         self.name = name

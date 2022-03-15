@@ -11,11 +11,11 @@ import UIKit
 
 
 class PlayerViewModel : ObservableObject{
-    init(trackList: Array<MusicModel>, trackIndex: Int){
+    init(trackList: Array<Track>, trackIndex: Int){
         self.trackList = trackList
         self.trackIndex = trackIndex
     }
-    @Published var trackList: Array<MusicModel>
+    @Published var trackList: Array<Track>
     @Published var trackIndex: Int
     @Published var isPlaying : Bool = false
     // Slider progress from 0 to 100
@@ -60,8 +60,8 @@ class PlayerViewModel : ObservableObject{
     private func playTrack() {
         loadSession()
         // Track download link
-        guard let trackLink = getCurrentTrackURL() else {return}
-        let fileURL = downloadTrack(link: trackLink)
+	
+        let fileURL = downloadTrack(index: trackIndex)
         if(fileURL != nil){
             do{
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
@@ -143,8 +143,7 @@ class PlayerViewModel : ObservableObject{
     
     
     private func playNextTrack() {
-        guard let trackLink = getNextTrackURL() else {return}
-        let fileURL = downloadTrack(link: trackLink)
+		let fileURL = downloadTrack(index: increaseIndex()) // TODO don't download if next track is current track (same for previous)
         if(fileURL != nil){
             do{
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
@@ -168,8 +167,7 @@ class PlayerViewModel : ObservableObject{
     }
     
     private func playPreviousTrack() {
-        guard let trackLink = getPrevTrackURL() else {return}
-        let fileURL = downloadTrack(link: trackLink)
+        let fileURL = downloadTrack(index: decreaseIndex())
         if(fileURL != nil){
             do{
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
@@ -191,66 +189,32 @@ class PlayerViewModel : ObservableObject{
             print("Audio file is nil")
         }
     }
-        
-
-    
-    private func getCurrentTrackURL() -> String? {
-        if(trackList.count - 1 < trackIndex){
-            return nil
-        }
-        let link = trackList[trackIndex].link
-        if(link == ""){
-            print("Track url is empty")
-            return nil
-        }
-        return link
-    }
     
     
-    private func getNextTrackURL() -> String? {
-        if (trackList.count < trackIndex){
-            return nil
-        }
-        
-        if (trackIndex + 1 >= trackList.count) {
-            trackIndex = 0
+    private func increaseIndex() -> Int {
+        if (trackIndex + 1 > trackList.count) {
+			trackIndex = 0
         }
         else {
             trackIndex = trackIndex + 1
         }
         
-        let link = trackList[trackIndex].link
-        
-        if(link == ""){
-            print("Track url is empty")
-            return nil
-        }
-        return link
+        return trackIndex
     }
     
-    private func getPrevTrackURL() -> String? {
-        if (trackList.count < trackIndex){
-            return nil
-        }
-        
-        if (trackIndex - 1 <= 0) {
+    private func decreaseIndex() -> Int {
+  
+        if (trackIndex - 1 < 0) {
             trackIndex = trackList.count - 1
         }
         else {
             trackIndex = trackIndex - 1
         }
-        let link = trackList[trackIndex].link
-        if(link == ""){
-            print("Track url is empty")
-            return nil
-        }
-        return link
+        return trackIndex
     }
     
-    private func downloadTrack(link : String) -> URL? {
-        print("Downloading \(link)")
-        let track = Track(name: "", artist: "", previewURL: URL(string: link)!, index: 0)
-        return downloadService.startDownload(track)
+	private func downloadTrack(index : Int) -> URL? {
+        return downloadService.startDownload(trackList[index])
     }
     
     private func playPause()

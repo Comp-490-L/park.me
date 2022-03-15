@@ -15,7 +15,7 @@ class ProfileViewModel: ObservableObject{
 	@Published var profile: ProfileModel? = nil
     @Published var showFilePicker = false
     @Published var clickedTrack :Int? = nil
-    @State var tracksList = Array<MusicModel>()
+    @State var tracksList = Array<Track>()
     @Published var uploadingFile = false
     @Published var uploadProgress : Double = 0.0
     @Published var navigateToUploadView = false
@@ -60,14 +60,19 @@ class ProfileViewModel: ObservableObject{
     
     private func getPictures(){
         print("Getting pictures")
-        for (index, _) in profile!.singlesList!.enumerated(){
-            if(profile?.singlesList![index].pictureLink != nil){
-                profileRepo.getTrackPicture(url: URL(string: (profile?.singlesList![index].pictureLink)!)!) { result in
+		guard let profile = profile else {
+			return
+		}
+
+		guard var list = profile.singlesList else { return }
+        for (index, _) in list.enumerated(){
+            if(profile.singlesList![index].pictureLink != nil){
+                profileRepo.getTrackPicture(url: URL(string: (list[index].pictureLink)!)!) { result in
                     switch result{
                     case .success(let data):
 						DispatchQueue.main.async {
-							self.profile?.singlesList?[index].pictureData = data
-							self.profile?.singlesList![index].pictureDownloaded = true
+							list[index].pictureData = data
+							list[index].pictureDownloaded = true
 						}
                     case .failure(_):
                         print("Failed to get picture of track ")

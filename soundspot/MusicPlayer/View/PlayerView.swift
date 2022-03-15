@@ -24,13 +24,14 @@ struct PlayerView : View
                 Image("defaultTrackImg")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .background(Color.white)
                     .shadow(radius: 1)
+					.padding(20)
             }else{
                 Image(uiImage: UIImage(data: viewModel.trackList[viewModel.trackIndex].pictureData!)!)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .shadow(radius: 1)
+					.padding(20)
             }
             
             Text(viewModel.trackList[viewModel.trackIndex].name)
@@ -116,10 +117,10 @@ struct PlayerView : View
 
 struct PlayerView_Previews: PreviewProvider {
      
-    static func getMusicModel() ->  Array<MusicModel>{
-        var model = MusicModel(name: "music Name", link: "", trackDownloaded: false, pictureLink: nil, pictureDownloaded: false, pictureData: nil)
+    static func getMusicModel() ->  Array<Track>{
+        var model = Track(name: "music Name", link: "", trackDownloaded: false, pictureLink: nil, pictureDownloaded: false, pictureData: nil)
         
-        var list = Array<MusicModel>()
+        var list = Array<Track>()
         list.append(model)
         return list
     }
