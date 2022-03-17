@@ -50,16 +50,6 @@ struct PlaylistView: View
 			//Change to for loop
 			List
 			{
-				SongRow(title: "Test Song 1")
-				SongRow(title: "Test Song 2")
-				SongRow(title: "Test Song 3")
-				SongRow(title: "Test Song 4")
-				SongRow(title: "Test Song 5")
-				SongRow(title: "Test Song 6")
-				SongRow(title: "Test Song 7")
-				SongRow(title: "Test Song 8")
-				SongRow(title: "Test Song 9")
-				SongRow(title: "Test Song 10")
 				
 			}
 		}

@@ -135,7 +135,7 @@ struct ProfileView: View{
 								{
 									index in
 									CardWithNavigationLink(
-										index: index,
+                                        index: index, viewModel: PlayerViewModel(trackList: viewModel.tracksList, trackIndex: index),
 										list: Binding(
 											get: {
 												viewModel.profile!.singlesList!
@@ -254,25 +254,12 @@ struct ProfileView: View{
     
     struct CardWithNavigationLink : View{
         let index : Int
+        @StateObject var viewModel : PlayerViewModel
         @Binding var list : Array<Track>
         @ViewBuilder var body: some View{
             HStack
             {
-                NavigationLink(destination:PlayerView(viewModel: PlayerViewModel(trackList: list, trackIndex: index)))
-                {
-                    trackCard(single: $list[index])
-                }
-                Spacer()
-                
-                Menu
-                {
-                    Button("Add to queue", action:{})
-                    Button("Add to playlist", action:{})
-                    Button("Like", action:{})
-                } label:
-                {
-                    Label("", systemImage: "ellipsis").padding(15)
-                }
+                SongRow(single: $list[index], viewModel : viewModel)
             }
 
         }

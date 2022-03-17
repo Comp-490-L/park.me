@@ -159,7 +159,7 @@ struct HomeMainView: View {
 					VStack {
 						ForEach(0..<10) { indicator in
 							HStack {
-								PlaylistView()
+                                PlaylistRow(title: "PlaylistThing")
 								
 							}
 							
