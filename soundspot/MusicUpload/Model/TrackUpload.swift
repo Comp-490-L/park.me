@@ -9,8 +9,8 @@ import Foundation
 
 class TrackUpload : HashableClass, PageHeaderData, ObservableObject{
 	
-	init(name: String, pictureURL: URL?, fileURL: URL, artists: String){
-		self.title = name
+	init(title: String, pictureURL: URL?, fileURL: URL, artists: String){
+		self.title = title
 		self.pictureURL = pictureURL
 		self.fileURL = fileURL
 		self.artists = artists

@@ -130,15 +130,15 @@ struct ProfileView: View{
                             
                            
 							// Check if profile is found and user has some music uploaded
-							if(viewModel.profile != nil && viewModel.profile!.singlesList != nil){
-								ForEach(0..<viewModel.profile!.singlesList!.count, id: \.self)
+							if(viewModel.profile != nil){
+								ForEach(0..<viewModel.profile!.singlesList.count, id: \.self)
 								{
 									index in
 									CardWithNavigationLink(
                                         index: index, viewModel: PlayerViewModel(trackList: viewModel.tracksList, trackIndex: index),
 										list: Binding(
 											get: {
-												viewModel.profile!.singlesList!
+												viewModel.profile!.singlesList
 											},
 											set: {
 												viewModel.profile!.singlesList = $0
@@ -245,7 +245,7 @@ struct ProfileView: View{
 				}
 				
 		
-                Text(single.name)
+                Text(single.title)
                     .foregroundColor(Color.gray)
                     .font(.system(size:10))
             }

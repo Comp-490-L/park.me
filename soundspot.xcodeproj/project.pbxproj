@@ -38,6 +38,7 @@
 		80704C5427E14D5E00F650C1 /* PlaylistRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80704C5327E14D5E00F650C1 /* PlaylistRow.swift */; };
 		80704C5627E14D8600F650C1 /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80704C5527E14D8600F650C1 /* PlaylistView.swift */; };
 		80704C5827E14DAF00F650C1 /* SongRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80704C5727E14DAF00F650C1 /* SongRow.swift */; };
+		80704C5A27E1506C00F650C1 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80704C5927E1506C00F650C1 /* Track.swift */; };
 		80848C2427388B9300AF5ACC /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80848C2327388B9300AF5ACC /* SignUp.swift */; };
 		80848C322738963900AF5ACC /* AuthenticateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80848C312738963900AF5ACC /* AuthenticateUser.swift */; };
 		8088ED3227B9ADE000AB0ABD /* MusicPlayerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8088ED3127B9ADE000AB0ABD /* MusicPlayerEvent.swift */; };
@@ -59,6 +60,8 @@
 		80D1BEEA2717D24200300524 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D1BEE92717D24200300524 /* Colors.xcassets */; };
 		80D2D52E27DA75240078AD3A /* CreateAlbumResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D2D52D27DA75240078AD3A /* CreateAlbumResult.swift */; };
 		80D2D53327DA7F7C0078AD3A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D2D53227DA7F7C0078AD3A /* HomeViewModel.swift */; };
+		80E116D827EE7CC00079A3FD /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E116D727EE7CC00079A3FD /* Album.swift */; };
+		80E116DA27EE7CCE0079A3FD /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E116D927EE7CCE0079A3FD /* Music.swift */; };
 		80E5FDE62740B08600247717 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E5FDE52740B08600247717 /* UserService.swift */; };
 		80EAB5A327D13357007F3F95 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EAB5A227D13357007F3F95 /* ImagePicker.swift */; };
 		80F042EA27AA00F40067E8FA /* TokenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F042E927AA00F40067E8FA /* TokenData.swift */; };
@@ -137,6 +140,7 @@
 		80704C5327E14D5E00F650C1 /* PlaylistRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistRow.swift; sourceTree = "<group>"; };
 		80704C5527E14D8600F650C1 /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
 		80704C5727E14DAF00F650C1 /* SongRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongRow.swift; sourceTree = "<group>"; };
+		80704C5927E1506C00F650C1 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		80848C2327388B9300AF5ACC /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		80848C312738963900AF5ACC /* AuthenticateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateUser.swift; sourceTree = "<group>"; };
 		8088ED3127B9ADE000AB0ABD /* MusicPlayerEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerEvent.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 		80D1BEE92717D24200300524 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		80D2D52D27DA75240078AD3A /* CreateAlbumResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAlbumResult.swift; sourceTree = "<group>"; };
 		80D2D53227DA7F7C0078AD3A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		80E116D727EE7CC00079A3FD /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		80E116D927EE7CCE0079A3FD /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		80E5FDE52740B08600247717 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		80EAB5A227D13357007F3F95 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		80F042E927AA00F40067E8FA /* TokenData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenData.swift; sourceTree = "<group>"; };
@@ -237,6 +243,7 @@
 		8025AD7E275F170A00D7A7FC /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				80E116D627EE7C720079A3FD /* Model */,
 				8025AD80275F172000D7A7FC /* ViewModel */,
 				8025AD7F275F171700D7A7FC /* View */,
 				8088ED3127B9ADE000AB0ABD /* MusicPlayerEvent.swift */,
@@ -567,6 +574,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		80E116D627EE7C720079A3FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				80704C5927E1506C00F650C1 /* Track.swift */,
+				80E116D727EE7CC00079A3FD /* Album.swift */,
+				80E116D927EE7CCE0079A3FD /* Music.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		80EAB5A127D13333007F3F95 /* Image Picker */ = {
 			isa = PBXGroup;
 			children = (
@@ -862,6 +879,7 @@
 				808C327B27CFE51000D0D485 /* TrackUpload.swift in Sources */,
 				8025AD82275F173300D7A7FC /* PlayerView.swift in Sources */,
 				8025AD67275F151800D7A7FC /* LoginModel.swift in Sources */,
+				80E116D827EE7CC00079A3FD /* Album.swift in Sources */,
 				80848C322738963900AF5ACC /* AuthenticateUser.swift in Sources */,
 				80D2D52E27DA75240078AD3A /* CreateAlbumResult.swift in Sources */,
 				E5A48A39271F4C2200110DDD /* NavBar.swift in Sources */,
@@ -882,6 +900,8 @@
 				8025AD6D275F162000D7A7FC /* DownloadService.swift in Sources */,
 				8025AD66275F151800D7A7FC /* RegisterModel.swift in Sources */,
 				E5A48A40271F4C2F00110DDD /* Song.swift in Sources */,
+				80E116DA27EE7CCE0079A3FD /* Music.swift in Sources */,
+				80704C5A27E1506C00F650C1 /* Track.swift in Sources */,
 				8025AD7D275F168D00D7A7FC /* FileUploader.swift in Sources */,
 				80CB4E7227D29BCA0042725A /* ModifyTrackViewModel.swift in Sources */,
 				8025AD99275F1A6A00D7A7FC /* MusicService.swift in Sources */,

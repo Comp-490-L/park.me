@@ -48,7 +48,7 @@ class ProfileViewModel: ObservableObject{
                 switch result{
                 case .success(let savedProfile):
                     self.profile = savedProfile
-                    print("Got user profile, list count \(savedProfile.singlesList?.count ?? 0)")
+                    print("Got user profile, list count \(savedProfile.singlesList.count)")
                     self.getPictures()
                 case .failure(_):
                     self.showErrorLoadingProfile()
@@ -64,9 +64,9 @@ class ProfileViewModel: ObservableObject{
 			return
 		}
 
-		guard var list = profile.singlesList else { return }
+		var list = profile.singlesList
         for (index, _) in list.enumerated(){
-            if(profile.singlesList![index].pictureLink != nil){
+            if(profile.singlesList[index].pictureLink != nil){
                 profileRepo.getTrackPicture(url: URL(string: (list[index].pictureLink)!)!) { result in
                     switch result{
                     case .success(let data):
@@ -88,8 +88,9 @@ class ProfileViewModel: ObservableObject{
     
     
     private func launchPlayer(index: Int){
+		if(profile == nil){return}
         @State var isActive = true
-        _ = NavigationLink(self.localString, destination: PlayerView(viewModel: PlayerViewModel(trackList: (self.profile?.singlesList!)!, trackIndex: index)), isActive: $isActive)
+        _ = NavigationLink(self.localString, destination: PlayerView(viewModel: PlayerViewModel(trackList: (self.profile?.singlesList)!, trackIndex: index)), isActive: $isActive)
     }
     
     

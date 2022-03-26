@@ -34,7 +34,7 @@ struct PlayerView : View
 					.padding(20)
             }
             
-            Text(viewModel.trackList[viewModel.trackIndex].name)
+            Text(viewModel.trackList[viewModel.trackIndex].title)
                 .foregroundColor(Color.gray).padding().font(.title2)
            
            

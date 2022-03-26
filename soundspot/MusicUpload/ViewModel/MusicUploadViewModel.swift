@@ -160,7 +160,7 @@ class MusicUploadViewModel : ObservableObject{
                     }
 					
                     let track = TrackUpload(
-						name: title ?? "",
+						title: title ?? "",
 						pictureURL: pictureURL,
 						fileURL: url,
 						artists: "")
