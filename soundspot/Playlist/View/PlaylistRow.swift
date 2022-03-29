@@ -10,7 +10,6 @@ import SwiftUI
 
 struct PlaylistRow: View
 {
-	//var rowThing: PlaylistThing
 	let title : String
 	
 	var body: some View

@@ -8,11 +8,14 @@
 import Foundation
 
 struct Album : Music, Codable, Hashable{
+	static func == (lhs: Album, rhs: Album) -> Bool {
+		return false
+	}
 	
-	init(name : String, link: String, trackDownloaded : Bool, pictureLink : String?, pictureDownloaded : Bool, pictureData: Data? ){
+	
+	init(name : String, link: String, pictureLink : String?, pictureDownloaded : Bool, pictureData: Data? ){
 		self.title = name
 		self.link = link
-		self.trackDownloaded = trackDownloaded
 		self.pictureLink = pictureLink
 		self.pictureDownloaded = pictureDownloaded
 		self.pictureData = pictureData
@@ -20,7 +23,6 @@ struct Album : Music, Codable, Hashable{
 	
 	var title: String
 	var link: String
-	var trackDownloaded: Bool = false
 	var pictureLink: String?
 	var pictureDownloaded: Bool = false
 	var pictureData: Data? = nil

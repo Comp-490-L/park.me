@@ -90,9 +90,9 @@ class MusicUploadViewModel : ObservableObject{
 						print("completion failure")
 					}
 				},
-				receiveValue: {
-					tracks[i].uploadProgress = $0
-				}))
+					receiveValue: {
+						tracks[i].uploadProgress = $0
+					}))
 			}
 		}
 		}

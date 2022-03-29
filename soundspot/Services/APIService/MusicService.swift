@@ -97,7 +97,6 @@ struct MusicService{
 		var artists: String
 	}
     
-    
 	
 	
     struct Download{
@@ -169,6 +168,12 @@ struct MusicService{
             }
         }
     }
+	
+	
+	
+	struct Album{
+		
+	}
     
 }
                 

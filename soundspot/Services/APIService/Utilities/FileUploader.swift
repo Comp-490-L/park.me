@@ -25,8 +25,7 @@ class FileUploader: NSObject {
     private var subjectsByTaskID = [Int : Subject]()
 	
 	// Publisher and ResultPublisher are type aliases
-	func send(request: URLRequest) -> (progress: Publisher,
-									   result: ResultPublisher){
+	func send(request: URLRequest) -> (progress: Publisher, result: ResultPublisher){
 		
 		// Initialze CurrentValueSubject<Percentage, Error> with with value 0 for percentage
 		let subject = Subject(0)
@@ -56,6 +55,7 @@ class FileUploader: NSObject {
 			self?.subjectsByTaskID.removeValue(forKey: task.taskIdentifier)
 		}
 		
+		print("\n\n\n Calling \(request.url) \n\n\n")
 		task.resume()
 		return (subject.eraseToAnyPublisher(), resultPublisher)
 		

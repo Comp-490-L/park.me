@@ -22,8 +22,8 @@ class PlayerViewModel : ObservableObject{
     @Published var progressPercentage : Double = 0
     private var player: AVPlayer? = nil
     private var timeObserverToken : Any?
-    @Published var trackLength = "0:00"
-    @Published var progress = "0:00"
+    @Published var trackLength = "00:00"
+    @Published var progress = "00:00"
     private var trackLengthInSeconds : Double = 0
     private var isDraggingSlider : Bool = false
     private var trackEnded = false

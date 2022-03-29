@@ -31,7 +31,7 @@ struct ProfileRepository{
         }
     }
     
-    func getTrackPicture(url : URL, completion: @escaping (Swift.Result<Data, Error>) -> Void){
+    func getPicture(url : URL, completion: @escaping (Swift.Result<Data, Error>) -> Void){
         let task = DataTaskRequest()
         task.sendRequest(body: nil, url: url, method: "GET"){ data, response, error in
             if let data = data {

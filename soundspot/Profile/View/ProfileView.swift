@@ -22,208 +22,205 @@ struct ProfileView: View{
                 ScrollView{
                     ZStack{
                         
-                    Banner()
+                        Banner()
                         
-                    VStack(alignment: .center){
-                 
+                        VStack(alignment: .center){
                             
-                                Image("FLCL")
-                                    .resizable()
-                                    .clipShape(Circle())
-                                    .shadow(radius: 10)
-                                    .overlay(Circle()
-                                    .stroke(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)), lineWidth: 5))
-                                    .frame(width: 200, height: 200)
-                                    .scaledToFit()
-                                    .padding(.top, 40)
-                                
-                                Text(viewModel.profile?.displayName ?? "Username")
-                                    .font(.title2)
-                                    .foregroundColor(.white)
-                                    .fontWeight(.bold)
-                                    
-                     
-                    }
+                            
+                            Image("FLCL")
+                                .resizable()
+                                .clipShape(Circle())
+                                .shadow(radius: 10)
+                                .overlay(Circle()
+                                            .stroke(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)), lineWidth: 5))
+                                .frame(width: 200, height: 200)
+                                .scaledToFit()
+                                .padding(.top, 40)
+                            
+                            Text(viewModel.profile?.displayName ?? "Username")
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .fontWeight(.bold)
+                            
+                            
+                        }
+                        
+                    }    // End of Zstack
                     
-                }    // End of Zstack
-                        
-                        
-                        
-                        VStack(alignment: .leading)
+                    
+                    
+                    VStack(alignment: .leading)
+                    {
+                        HStack
                         {
                             
-                            HStack
+                            Button(action:{self.didTap = true})
                             {
-                                
-                                Button(action:{self.didTap = true})
-                                {
-                                    SwiftUI.Text("Playlists")
-                                        //.font(.headline)
-                                        .font(.system(size: 25))
-                                        .fontWeight(.bold)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .padding(.vertical, 10.0)
-                                        .foregroundColor( .white)
-                                        .background(didTap ? Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)): Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)) ).onTapGesture {
-                                            showUpload.toggle()
-                                        }
-                                        
-                                        //.cornerRadius(8)
-                                        //.padding()
-                                }
-                                
-                                //Your Likes Playlist
-                                
-                                Spacer()
-                            }
-                            
-                            VStack
-                            {
-								/*
-                                    NavigationLink(destination: PlaylistView(), label:
-                                    {
-                                        PlaylistRow(title: "Liked Songs")
-                                    }).buttonStyle(PlainButtonStyle())
-								
-								*/
-                                /*:Button(action:{})
-                                {
-                                    HStack
-                                    {
-                                        Image("SadMachineSingleCover")
-                                            .resizable()
-                                            .frame(width: 50, height: 50)
-                                        Text("Your Likes")
-                                    
-                                        Spacer()
-                                        
-                                        Button(action:{})
-                                        {
-                                            HStack
-                                            {
-                                                Image(systemName: "ellipsis").padding(15)
-                                            }
-                                        }
+                                SwiftUI.Text("Playlists")
+                                //.font(.headline)
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.vertical, 10.0)
+                                    .foregroundColor( .white)
+                                    .background(didTap ? Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)): Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)) ).onTapGesture {
+                                        showUpload.toggle()
                                     }
-                                }*/
-
-
-                            }
-                            
-                            Spacer()
-                            HStack{
                                 
-                                Button(action: {
-                                    self.didTap = true
-                                }){
-                                    SwiftUI.Text("Your Music")
-                                        //.font(.headline)
-                                        .font(.system(size: 25))
-                                        .fontWeight(.bold)
-                                        .frame(alignment: .leading)
-                                        .padding(.vertical, 10.0)
-                                        .foregroundColor( .white)
-                                        .background(didTap ? Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)): Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)) )
-                                }
-                                Spacer()
-                                }
-                            
-                           
-							// Check if profile is found and user has some music uploaded
-							if(viewModel.profile != nil){
-								ForEach(0..<viewModel.profile!.singlesList.count, id: \.self)
-								{
-									index in
-									CardWithNavigationLink(
-                                        index: index, viewModel: PlayerViewModel(trackList: viewModel.tracksList, trackIndex: index),
-										list: Binding(
-											get: {
-												viewModel.profile!.singlesList
-											},
-											set: {
-												viewModel.profile!.singlesList = $0
-											}
-										)
-									)
-
-								}
+                                
                             }
+                            Spacer()
+                        }
                         
-                         
+                        
+                        Spacer()
+                        HStack{
+                            
+                            Button(action: {
+                                self.didTap = true
+                            }){
+                                SwiftUI.Text("Your Music")
+                                //.font(.headline)
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                    .frame(alignment: .leading)
+                                    .padding(.vertical, 10.0)
+                                    .foregroundColor( .white)
+                                    .background(didTap ? Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)): Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)) )
+                            }
+                            Spacer()
+                        }
+                        
+                        
+                        // Check if profile is found and user has some music uploaded
+                        if(viewModel.profile != nil){
+                            
+                            ForEach(0..<viewModel.profile!.singlesList.count, id: \.self)
+                            {
+                                index in
+                                MusicRow(music: Binding(
+                                    get: {
+                                        viewModel.profile!.singlesList[index]
+                                    },
+                                    set: {
+                                        viewModel.profile!.singlesList[index] = $0 as! Track
+                                    }),
+                                         heart: "heart",
+                                         index: index,
+                                         onClick: viewModel.navigateToPlayerView)
+                            }
+                            
+                            // Navigate to PlayerView
+                            if let profile = viewModel.profile{
+                                NavigationLink(destination :
+                                                PlayerView(viewModel:
+                                                            PlayerViewModel(trackList: profile.singlesList, trackIndex: viewModel.clickedTrack)
+                                                          ), isActive: $viewModel.navigateToPlayerView){}
+                            }
+                            
+                            
+                            
+                            // Albums
+                            ForEach(0..<viewModel.profile!.albumsList.count, id: \.self)
+                            {
+                                index in
+                                MusicRow(music: Binding(
+                                    get: {
+                                        viewModel.profile!.albumsList[index]
+                                    },
+                                    set: {
+                                        viewModel.profile!.albumsList[index] = $0 as! Album
+                                    }),
+                                         heart: "heart",
+                                         index: index,
+                                         onClick: viewModel.navigateToPlaylistView)
+                            }
+                            // Navigate to playlistView
+                            if let profile = viewModel.profile{
+                                if(profile.albumsList.count > 0){
+                                    NavigationLink(destination :
+                                                    PlaylistView(
+                                                        viewModel: PlaylistViewModel(
+                                                            album: profile.albumsList[viewModel.clickedAlbum])
+                                                    ),
+                                                   isActive: $viewModel.navigateToPlaylistView){}
+                                }
+                            }
+                            
+                        }
+                        
+                        
+                        
+                    }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+                        .onAppear{
+                            viewModel.onEvent(event: ProfileEvents.ProfileViewLoaded)
+                        }
                     
                 }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
-						.onAppear{
-							viewModel.onEvent(event: ProfileEvents.ProfileViewLoaded)
-						}
+                    .edgesIgnoringSafeArea(.all)
                 
-               
-            
-                    //Spacer().frame(maxHeight: .infinity)
-            }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
-                .edgesIgnoringSafeArea(.all)
-            
-                //UploadChoice()
-            
-            HStack{
                 
-                if(viewModel.uploadingFile){
-                    VStack(alignment : .leading){
-                        Text("Upload Progress")
-                        ProgressBar(currentProgress: $viewModel.uploadProgress)
-                            .frame(height : 20)
-                    }
-                }else{
+                
+                HStack{
                     
-                    Menu{
-                        Button("Tracks"){
-                            viewModel.onEvent(event: ProfileEvents.UploadTracksClicked)
+                    if(viewModel.uploadingFile){
+                        VStack(alignment : .leading){
+                            Text("Upload Progress")
+                            ProgressBar(currentProgress: $viewModel.uploadProgress)
+                                .frame(height : 20)
                         }
-                        Button("Album"){
-                            viewModel.onEvent(event: ProfileEvents.UploadAlbumClicked)
+                    }else{
+                        
+                        Menu{
+                            Button("Tracks"){
+                                viewModel.onEvent(event: ProfileEvents.UploadTracksClicked)
+                            }
+                            Button("Album"){
+                                viewModel.onEvent(event: ProfileEvents.UploadAlbumClicked)
+                            }
+                            
+                        } label: {
+                            SwiftUI.Text("Upload music")
+                                .font(.headline)
+                                .padding(.horizontal, 60.0)
+                                .padding(.vertical, 10.0)
+                                .foregroundColor(.white)
+                                .background(Color.purple)
+                                .cornerRadius(10)
+                        }
+                        .sheet(isPresented: $viewModel.showFilePicker){
+                            viewModel.showDocumentPicker()
                         }
                         
-                    } label: {
-                        SwiftUI.Text("Upload music")
-                            .font(.headline)
-                            .padding(.horizontal, 60.0)
-                            .padding(.vertical, 10.0)
-                            .foregroundColor(.white)
-                            .background(Color.purple)
-                            .cornerRadius(10)
                     }
-                    .sheet(isPresented: $viewModel.showFilePicker){
-                            viewModel.showDocumentPicker()
-					}
-            
+                    
                 }
+                .padding(.bottom, 10)
+                .background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
                 
-            }
-            .padding(.bottom, 10)
-            .background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
-            
-				
+                
                 NavigationLink(
                     destination: MusicUploadView(viewModel: MusicUploadViewModel(uploadChoice: viewModel.uploadChoice, selectedFiles: viewModel.selectedFiles)),
-					isActive: $viewModel.navigateToUploadView){}
-				
-				
-					
+                    isActive: $viewModel.navigateToUploadView){}
                 
                 
-        }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
-				.onLoad{
-					//viewModel.testUpload()
-				}
-		}.navigationBarTitle("")
-		.navigationBarHidden(true)
-		.navigationBarBackButtonHidden(true)
-		
-}
-
+                
+                
+                
+            }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+                .onLoad{
+                    //viewModel.testUpload()
+                }
+        }.navigationBarTitle("")
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
+        
+    }
+    
     
     struct trackCard : View
     {
-
+        
         @Binding var single : Track
         var body: some View
         {
@@ -235,16 +232,16 @@ struct ProfileView: View{
                         .resizable()
                         .frame(width: 150, height: 150)
                 }
-				
-				else if let data = single.pictureData{
-					if let image = UIImage(data: data){
-							Image(uiImage: image)
-							.resizable()
-							.frame(width: 150, height: 150)
-					}
-				}
-				
-		
+                
+                else if let data = single.pictureData{
+                    if let image = UIImage(data: data){
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 150, height: 150)
+                    }
+                }
+                
+                
                 Text(single.title)
                     .foregroundColor(Color.gray)
                     .font(.system(size:10))
@@ -252,42 +249,29 @@ struct ProfileView: View{
         }
     }
     
-    struct CardWithNavigationLink : View{
-        let index : Int
-        @StateObject var viewModel : PlayerViewModel
-        @Binding var list : Array<Track>
-        @ViewBuilder var body: some View{
-            HStack
-            {
-                SongRow(single: $list[index], viewModel : viewModel)
-            }
-
-        }
-    }
-    
     
     struct ProgressBar : View{
         @Binding var currentProgress : Double
         var body: some View{
-           
+            
             GeometryReader{
                 geometry in
                 ZStack{
-                ZStack(alignment: .leading){
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundColor(.purple)
-                        .frame(width: geometry.size.width,
-                               height: geometry.size.height,
-                               alignment: .center)
-                        .opacity(0.5)
-                    
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundColor(.purple)
-                        .frame(width: min(currentProgress * geometry.size.width, geometry.size.width),
-                               height: geometry.size.height,
-                               alignment: .center)
-                        .animation(.linear)
-                }
+                    ZStack(alignment: .leading){
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(.purple)
+                            .frame(width: geometry.size.width,
+                                   height: geometry.size.height,
+                                   alignment: .center)
+                            .opacity(0.5)
+                        
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(.purple)
+                            .frame(width: min(currentProgress * geometry.size.width, geometry.size.width),
+                                   height: geometry.size.height,
+                                   alignment: .center)
+                            .animation(.linear)
+                    }
                     Text("\(String(format: "%.2f", currentProgress * 100)) %")
                 }
             }
