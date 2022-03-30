@@ -24,19 +24,24 @@ struct MusicService{
 		requestBuilder.addTextField(named: "title", value: "{ \"title\" : \"\(title)\" }")
 		// Add picture to request
 		if let pictureURL = pictureURL {
+			
+			requestBuilder = try addFileToRequest(fileURL: pictureURL, fieldName: "picture", fileName: "picture.jpg", requestBuilder: requestBuilder)
+			/*
 			guard let handle: FileHandle = try? FileHandle(forReadingFrom: pictureURL)
 			else{
 				print("Cannot open file")
 				throw APIServiceError.FailedToSendRequest(reason: "Cannot open file")
 			}
 		
-		
+			
+			
 			if let readData: Data = try handle.readToEnd(){
 				requestBuilder.addDataField(fieldName: "picture", fileName: "picture.jpg", fileData: readData, mimeType: "multipart/form-data")
 				do{
 					try handle.close()
 				}catch{}
 			}else{ throw APIServiceError.FailedToSendRequest(reason: "Cannot read from file") }
+			*/
 		}
 		
 		var request = requestBuilder.getFinalRequest();
@@ -62,7 +67,7 @@ struct MusicService{
 		let encodedString = String(decoding: encoded, as: UTF8.self)
 		requestBuilder.addTextField(named: "trackMetadata", value: encodedString)
 		
-		requestBuilder = try addFileToRequest(fileURL: track.fileURL, fieldName: "track", fileName: "track", requestBuilder: requestBuilder)
+		requestBuilder = try addFileToRequest(fileURL: track.fileURL, fieldName: "track", fileName: "track.mp3", requestBuilder: requestBuilder)
 		if let pictureURL = track.pictureURL{
 			requestBuilder = try addFileToRequest(fileURL: pictureURL, fieldName: "picture", fileName: "picture.jpeg", requestBuilder: requestBuilder)
 		}

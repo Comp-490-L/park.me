@@ -33,7 +33,7 @@ class ProfileViewModel: ObservableObject{
 	@Published var navigateToPlaylistView = false
 	var clickedAlbum : Int = 0
 	
-	private var functionCalled = false
+	var loading = true
 	
 	
 	func onEvent(event : ProfileEvents){
@@ -68,27 +68,33 @@ class ProfileViewModel: ObservableObject{
 	private func getPictures(){
 		print("Getting pictures")
 		
-		if(profile == nil){ return }
-		
+		if(profile == nil || profile!.singlesList.count == 0){
+			loading = false
+			return
+		}
 		
 		
 		
 		for (index, _) in profile!.singlesList.enumerated(){
 			if let link = profile!.singlesList[index].pictureLink {
 				if let url = URL(string: link){
-				profileRepo.getPicture(url:  url){ result in
-					switch result{
-					case .success(let data):
-						DispatchQueue.main.async {
-							self.profile!.singlesList[index].pictureData = data
-							self.profile!.singlesList[index].pictureDownloaded = true
+					profileRepo.getPicture(url:  url){ result in
+						switch result{
+						case .success(let data):
+							DispatchQueue.main.async {
+								self.profile!.singlesList[index].pictureData = data
+								self.profile!.singlesList[index].pictureDownloaded = true
+							}
+						case .failure(_):
+							print("Failed to get picture of track ")
 						}
-					case .failure(_):
-						print("Failed to get picture of track ")
+						
+						DispatchQueue.main.async {
+							self.loading = false
+						}
 					}
 				}
 			}
-									   }
 		}
 	}
 	
@@ -96,13 +102,13 @@ class ProfileViewModel: ObservableObject{
 		
 	}
 	
-	
+	/*
 	private func launchPlayer(index: Int){
 		if(profile == nil){return}
 		@State var isActive = true
 		_ = NavigationLink(self.localString, destination: PlayerView(viewModel: PlayerViewModel(trackList: (self.profile?.singlesList)!, trackIndex: index)), isActive: $isActive)
 	}
-	
+	*/
 	
 	func showDocumentPicker() -> some UIViewControllerRepresentable{
 		return DocumentPicker(onDocPicked: launchUploadView, contentType: UTType.mp3, allowMutipleSelection: true)

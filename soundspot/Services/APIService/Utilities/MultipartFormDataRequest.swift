@@ -51,31 +51,15 @@ struct MultipartFormDataRequest {
         fieldData.append("\r\n")
         fieldData.append(fileData)
         fieldData.append("\r\n")
-
-        print("request data form field \(fieldData)")
         
         return fieldData as Data
     }
 	
 	mutating func getFinalRequest() -> URLRequest{
 		httpBody.append("--\(boundary)--")
-		print(String(data: httpBody as Data, encoding: .utf8))
 		request.httpBody = httpBody as Data
 		return request
 	}
-    
-    // Will be removed in the future
-    func getURLRequest(fieldName: String, fileName: String, fileData: Data, mimeType: String) -> URLRequest{
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        addDataField(fieldName: fieldName, fileName: fileName, fileData:fileData, mimeType: mimeType)
-        httpBody.append("--\(boundary)--")
-        print("Final Request")
-        print(String(data: httpBody as Data, encoding: .utf8))
-        request.httpBody = httpBody as Data
-        return request
-    }
 }
 
 // Move to extensions file

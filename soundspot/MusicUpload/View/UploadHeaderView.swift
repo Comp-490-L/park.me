@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct UploadPageHeader : View {
-	@StateObject var viewModel : UPHViewModel
+struct UploadHeaderView : View {
+	@StateObject var viewModel : UHViewModel
 	@State var showPhotoLibrary = false
 	@State var showImageFilePicker = false
 	var body: some View{
@@ -41,9 +41,22 @@ struct UploadPageHeader : View {
 				}
 		
 		
-		VStack{
+		VStack(alignment: .leading){
 			TextField(viewModel.placeholder, text: $viewModel.headerData.title)
-				.font(.title).padding(.top)
+				.font(.title)
+				.padding(.top)
+				.disableAutocorrection(true)
+				
+			
+			if(viewModel.showTitleError && viewModel.headerData.title == ""){
+				Text("Title cannot be empty")
+					.foregroundColor(.red)
+					.font(.caption)
+			}
+		}.onLoad{
+			viewModel.onLoad()
 		}
+		
+		
 	}
 }

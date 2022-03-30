@@ -17,7 +17,7 @@ class FileUploader: NSObject {
     private typealias Subject = CurrentValueSubject<Percentage, Error>
 
     private lazy var urlSession = URLSession(
-        configuration: .default,
+		configuration: .ephemeral,
         delegate: self,
         delegateQueue: .main
     )
@@ -31,8 +31,6 @@ class FileUploader: NSObject {
 		let subject = Subject(0)
 		var removeSubject: (() -> Void)?
 		
-		
-		var resultPublisher = urlSession.dataTaskPublisher(for: request).eraseToAnyPublisher()
 		
 		let task = urlSession.dataTask(with: request, completionHandler:{
 			data, response, error in
@@ -54,8 +52,11 @@ class FileUploader: NSObject {
 		removeSubject = { [weak self] in
 			self?.subjectsByTaskID.removeValue(forKey: task.taskIdentifier)
 		}
+		DispatchQueue.main.async {
+			print("\n\n\n Calling \(request.url) \n\n\n")
+		}
 		
-		print("\n\n\n Calling \(request.url) \n\n\n")
+		let resultPublisher = urlSession.dataTaskPublisher(for: request).eraseToAnyPublisher()
 		task.resume()
 		return (subject.eraseToAnyPublisher(), resultPublisher)
 		

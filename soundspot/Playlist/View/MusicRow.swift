@@ -71,7 +71,8 @@ struct MusicRow: View
 			{
 				Label("", systemImage: "ellipsis").padding(15)
 			}
-		}
+		}.padding(.top, 3)
+			.padding(.bottom, 3)
 	}
 	
 	

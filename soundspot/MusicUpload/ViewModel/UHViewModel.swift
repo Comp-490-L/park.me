@@ -7,11 +7,13 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
-class UPHViewModel : ObservableObject{
-	init(placeholder : String, headerData: PageHeaderData){
+class UHViewModel : ObservableObject{
+	init(placeholder : String, headerData: PageHeaderData, titleError :  AnyPublisher<Bool, Never>){
 		self.placeholder = placeholder
 		self.headerData = headerData
+		self.titleError = titleError
 		if let pictureURL = headerData.pictureURL {
 			if let image = UIImage(contentsOfFile: pictureURL.path){
 				self.picture = Image(uiImage: image)
@@ -20,9 +22,23 @@ class UPHViewModel : ObservableObject{
 	}
 	
 	let placeholder : String
-	var headerData : PageHeaderData
+	@Published var headerData : PageHeaderData
+	
+	var titleError : AnyPublisher<Bool, Never>
+	@Published var showTitleError = false
+	
 	@Published var picture : Image = Image("defaultTrackImg")
 
+	func onLoad(){
+		titleError.subscribe(Subscribers.Sink<Bool, Never>(
+			receiveCompletion: {_ in },
+			receiveValue:{ hasError in
+				if(hasError){
+					self.showTitleError = true
+				}
+			}
+		))
+	}
 
 	func picturePicked(_ image : UIImage){
 		if let imageData = image.jpegData(compressionQuality: 1){
@@ -78,10 +94,6 @@ class UPHViewModel : ObservableObject{
 					if let uiImage = UIImage(data: imageData){
 						picture = Image(uiImage: uiImage)
 					}
-					/*let imageData = UIImage(contentsOfFile: savedPictureURL.path)
-						if let imageData = imageData{
-							picture = Image(uiImage: imageData)
-						}*/
 				}catch{
 					print("\nImage cannot be saved\n")
 				} // TODO show error: Image cannot be saved to be uploaded later to server

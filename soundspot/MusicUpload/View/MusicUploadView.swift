@@ -12,7 +12,7 @@ import UniformTypeIdentifiers
 struct MusicUploadView : View {
 	@Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @ObservedObject var viewModel : MusicUploadViewModel
-	@State var uploadClicked = false
+	
     
     var body : some View {
 		NavigationView{
@@ -25,16 +25,15 @@ struct MusicUploadView : View {
 						self.mode.wrappedValue.dismiss()
 					}
 					Spacer()
-					if(viewModel.tracks.count > 0 && !uploadClicked){
+					if(viewModel.tracks.count > 0 && viewModel.showUploadBtn){
 						Button("Upload"){
-							uploadClicked = true
 							viewModel.onEvent(event: MusicUploadEvent.uploadClicked)
 						}
 					}
 				}
 				
                 if(viewModel.uploadChoice == UploadChoice.album){
-					UploadPageHeader(viewModel: viewModel.uphViewModel)
+					UploadHeaderView(viewModel: viewModel.uphViewModel)
                     
                 }
                 
@@ -52,8 +51,9 @@ struct MusicUploadView : View {
                 .padding(.horizontal)
 			
 			if(viewModel.clickedTrack != nil){
-					NavigationLink(destination: ModifyTrack(viewModel: ModifyTrackViewModel(viewModel.clickedTrack!)),
+					NavigationLink(destination: ModifyTrackView(viewModel: ModifyTrackViewModel(viewModel.clickedTrack!)),
 								   isActive: $viewModel.navigateToModifyTrack){}
+								   .navigationBarHidden(true)
 			}
 			
 		}.onAppear{
@@ -167,26 +167,13 @@ struct MusicUploadView : View {
 
 
 
-
+/*
 struct MusicUploadView_Previews: PreviewProvider {
-    private static func getFilesURL() -> [URL]{
-        var filesURL = [URL]()
-        var f : URL = URL(string: "file:///Users/yassineregragui/Library/Developer/CoreSimulator/Devices/CB67FC80-ADA1-4179-8906-EC30F271B58D/data/Containers/Shared/AppGroup/C01D9C52-3FD1-4ABA-9CA0-887EEA24A32E/File%20Provider%20Storage/Ty%20Dolla%20$ign%20-%20Clout%20(feat.%2021%20Savage).mp3")!
-        filesURL.append(f)
-		
-		f = URL(string: "file:///Users/yassineregragui/Library/Developer/CoreSimulator/Devices/CB67FC80-ADA1-4179-8906-EC30F271B58D/data/Containers/Shared/AppGroup/C01D9C52-3FD1-4ABA-9CA0-887EEA24A32E/File%20Provider%20Storage/Ty%20Dolla%20$ign%20-%20Clout%20(feat.%2021%20Savage).mp3")!
-		filesURL.append(f)
-		
-		f = URL(string:
-					"file:///Users/yassineregragui/Library/Developer/CoreSimulator/Devices/CB67FC80-ADA1-4179-8906-EC30F271B58D/data/Containers/Shared/AppGroup/C01D9C52-3FD1-4ABA-9CA0-887EEA24A32E/File%20Provider%20Storage/Young%20Scooter%20-%20Diamonds.mp3")!
-		filesURL.append(f)
-        return filesURL
-    }
-    
+
     static var previews: some View {
         MusicUploadView(viewModel: MusicUploadViewModel(uploadChoice: UploadChoice.album, selectedFiles: getFilesURL()
         )).previewDevice("iPhone 13")
     }
-}
+}*/
 
 

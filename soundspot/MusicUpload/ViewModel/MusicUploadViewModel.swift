@@ -17,7 +17,8 @@ class MusicUploadViewModel : ObservableObject{
         filesURL = selectedFiles
 		let a = AlbumUpload()
 		album = a
-		uphViewModel = UPHViewModel(placeholder: "Album title", headerData: a)
+		self.titleErrorPassthrough = PassthroughSubject<Bool, Never>()
+		uphViewModel = UHViewModel(placeholder: "Album title", headerData: a, titleError: titleErrorPassthrough.eraseToAnyPublisher())
     }
     
     @Published var uploadChoice : UploadChoice
@@ -26,9 +27,11 @@ class MusicUploadViewModel : ObservableObject{
     @Published var processing = false
 	@Published var showPhotoLibrary = false
 	@Published var albumImage : Image = Image("defaultTrackImg")
-	// title cannot be empty
-	@Published var showTitleError = false
-	var uphViewModel : UPHViewModel
+	@Published private (set) var showUploadBtn = true
+
+	var uphViewModel : UHViewModel
+	var titleErrorPassthrough : PassthroughSubject<Bool, Never>
+	
 	
 	// Shows the file picker to choose picture for album artwork
 	@Published var showImageFilePicker = false
@@ -41,24 +44,51 @@ class MusicUploadViewModel : ObservableObject{
 	// Block processing files when coming back from ModifyTrackView
 	private var firstTimeLoad = true
 	
+	// Testing for bug
+	private var createAlbumCalled = false
+	private var createAlbumQueue = DispatchQueue(label: "a")
+	
 	func onEvent(event : MusicUploadEvent){
 		switch(event){
 		case .trackClicked(let track):
 			clickedTrack = track
 			navigateToModifyTrack = true
+			
 		case .onAppear:
 			if(firstTimeLoad){
 				processFiles()
 			}
 			firstTimeLoad = false
+			
 		case .removeTrackClicked(let index):
 			removeTrackAt(index)
+			
 		case .uploadClicked:
-			if(uploadChoice == UploadChoice.album){
-				createAlbum() // Track will be uploaded when the album is created
+			uploadClicked()
+		}
+	}
+	
+
+	private func uploadClicked(){
+		createAlbumQueue.sync{
+			if(createAlbumCalled){
 				return
+			}else{
+				if(uploadChoice == UploadChoice.album){
+					if(album.title == ""){
+						titleErrorPassthrough.send(true)
+						return
+					}
+					showUploadBtn = false
+					createAlbum() // Track will be uploaded when the album is created
+					return
+					
+				}else{
+					showUploadBtn = false
+					uploadTracks()
+				}
+				createAlbumCalled = true
 			}
-			uploadTracks()
 		}
 	}
 	

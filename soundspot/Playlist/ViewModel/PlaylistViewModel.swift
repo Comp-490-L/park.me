@@ -19,6 +19,9 @@ class PlaylistViewModel : ObservableObject{
 	private lazy var repo = MusicRepository()
 	// just temp
 	let playerView = PlayerView(viewModel: PlayerViewModel(trackList: [Track](), trackIndex: 0))
+    
+	private var loadedPictures : Int32 = 0
+	private var picturesToLoad : Int32 = 0
 	
 	// Used for navigation link
 	var clickedTrack : Int? = nil
@@ -32,12 +35,19 @@ class PlaylistViewModel : ObservableObject{
 	}
 	
 	private func loadAlbum(){
+		
+		if(album.pictureLink != nil){
+			picturesToLoad = 1
+		}else{
+			picturesToLoad = 0
+		}
+		
 		if let url = URL(string: album.link){
 			repo.getAlbumTracks(url: url) { result in
 				switch(result){
 				case .success(let trackList):
 					DispatchQueue.main.async {
-						self.loading = false
+						self.picturesToLoad = self.picturesToLoad + Int32(trackList.count)
 						self.tracksList = trackList
 					}
 					self.loadPictures()
@@ -54,6 +64,7 @@ class PlaylistViewModel : ObservableObject{
 		for(i, track) in tracksList.enumerated() {
 			if let link = track.pictureLink{
 				if let url = URL(string: link){
+					
 					repo.getPicture(url: url){ result in
 						switch(result){
 						case .success(let data):
@@ -64,7 +75,12 @@ class PlaylistViewModel : ObservableObject{
 						case .failure(_):
 							break;
 						}
+						// Views wait for all pictures to be loaded to remove loading view
+						DispatchQueue.main.async {
+							self.pictureLoaded()
+						}
 					}
+					
 				}
 			}
 		}
@@ -73,6 +89,7 @@ class PlaylistViewModel : ObservableObject{
 	private func getAlbumPicture(){
 		if let link = album.pictureLink{
 			if let url = URL(string: link){
+				
 				repo.getPicture(url: url){ result in
 					switch(result){
 					case .success(let data):
@@ -83,10 +100,24 @@ class PlaylistViewModel : ObservableObject{
 					case .failure(_):
 						break;
 					}
+					
+					DispatchQueue.main.async {
+						self.pictureLoaded()
+					}
 				}
+				
 			}
 		}
 	}
+    
+    // Used to keep count of loaded picture
+    // in the playlist to remove the loading from the view
+    private func pictureLoaded(){
+		OSAtomicIncrement32(&loadedPictures)
+		if(loadedPictures == picturesToLoad){
+			loading = false
+		}
+    }
 	
 	private func failedToLoad(){
 		

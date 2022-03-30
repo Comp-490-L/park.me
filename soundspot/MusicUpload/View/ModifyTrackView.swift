@@ -9,13 +9,21 @@ import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct ModifyTrack : View{
+struct ModifyTrackView : View{
+	@Environment(\.presentationMode) var mode: Binding<PresentationMode>
 	@ObservedObject var viewModel : ModifyTrackViewModel
 	
 	var body: some View {
+		
 		VStack{
-			VStack(alignment: .center){
-				UploadPageHeader(viewModel: viewModel.uphViewModel)
+			
+			VStack(alignment: .leading){
+				Button("Back"){
+					viewModel.backPressed(view: self)
+				}
+				
+				VStack(alignment: .center){
+				UploadHeaderView(viewModel: viewModel.uphViewModel)
 					
 				HStack{
 					Text("Artists:").font(.title3)
@@ -27,12 +35,16 @@ struct ModifyTrack : View{
 				
 				
 				Spacer()
-				
+				}
 			}.padding(.top, 100)
 				.padding(.horizontal)
 		}
 		.background(Color.backgroundColor)
-		.ignoresSafeArea(.all)
+		//.ignoresSafeArea(.all)
+		.navigationBarTitle("")
+		.navigationBarBackButtonHidden(true)
+		 .navigationBarHidden(true)
+		  .ignoresSafeArea(.all)
 	}
 }
 
@@ -55,6 +67,6 @@ struct ModifyTrack_Previews : PreviewProvider{
 	}
 	
 	static var previews: some View {
-		ModifyTrack(viewModel: ModifyTrackViewModel(getTrack())).previewDevice("iPhone 13 Pro")
+		ModifyTrackView(viewModel: ModifyTrackViewModel(getTrack())).previewDevice("iPhone 13 Pro")
 	}
 }
