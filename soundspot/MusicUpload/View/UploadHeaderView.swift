@@ -18,7 +18,6 @@ struct UploadHeaderView : View {
 		VStack{
 				viewModel.picture
 				.resizable()
-				.aspectRatio(contentMode: .fit)
 				.frame(maxWidth: 110, maxHeight: 110)
 				
 				Menu{

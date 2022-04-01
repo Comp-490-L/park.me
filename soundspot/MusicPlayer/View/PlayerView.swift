@@ -27,15 +27,22 @@ struct PlayerView : View
                     .shadow(radius: 1)
 					.padding(20)
             }else{
-                Image(uiImage: UIImage(data: viewModel.trackList[viewModel.trackIndex].pictureData!)!)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .shadow(radius: 1)
-					.padding(20)
+				if let data = viewModel.trackList[viewModel.trackIndex].pictureData{
+					if let uiImage = UIImage(data: data){
+						Image(uiImage: uiImage)
+							.resizable()
+							.aspectRatio(contentMode: .fill)
+							.shadow(radius: 1)
+							.padding(20)
+					}
+				}
             }
             
             Text(viewModel.trackList[viewModel.trackIndex].title)
-                .foregroundColor(Color.gray).padding().font(.title2)
+                .foregroundColor(Color.gray)
+				.padding()
+				.font(.title2)
+				.lineLimit(1)
            
            
             ZStack
@@ -118,7 +125,7 @@ struct PlayerView : View
 struct PlayerView_Previews: PreviewProvider {
      
     static func getMusicModel() ->  Array<Track>{
-        var model = Track(name: "music Name", link: "", trackDownloaded: false, pictureLink: nil, pictureDownloaded: false, pictureData: nil)
+		let model = Track(name: "music Name", link: "", trackDownloaded: false, pictureLink: nil, pictureDownloaded: false, pictureData: nil)
         
         var list = Array<Track>()
         list.append(model)

@@ -56,8 +56,26 @@ struct ProfileView: View{
 								ProgressView()
 									.padding(.trailing, 5)
 								Text("Loading...")
-							}.padding(.top, 50)
-						}else{
+							}.padding(.top, 150)
+							
+						}
+						else if(viewModel.errorLoading){
+							VStack(alignment: .center){
+								Text("Error loading your profile")
+									.font(.headline)
+								Button("Try Again ?"){
+									viewModel.onEvent(event: ProfileEvents.LoadProfile)
+								}
+								.font(.headline)
+								.padding(.horizontal, 10.0)
+								 .padding(.vertical, 10.0)
+								 .foregroundColor(.white)
+								 .background(Color.pink)
+								 .cornerRadius(10)
+								
+							}.padding(.top, 150)
+						}
+						else{
 							HStack
 							{
 								
@@ -173,7 +191,7 @@ struct ProfileView: View{
 					}.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
 						.padding(.leading, 10)
 						.onAppear{
-							viewModel.onEvent(event: ProfileEvents.ProfileViewLoaded)
+							viewModel.onEvent(event: ProfileEvents.LoadProfile)
 						}
 					
 				}.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))

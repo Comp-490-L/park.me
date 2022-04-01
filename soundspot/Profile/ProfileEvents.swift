@@ -8,7 +8,7 @@
 import Foundation
 
 enum ProfileEvents{
-    case ProfileViewLoaded
+    case LoadProfile
     case UploadAlbumClicked
     case UploadTracksClicked
 }

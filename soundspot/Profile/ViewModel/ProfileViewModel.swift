@@ -21,7 +21,7 @@ class ProfileViewModel: ObservableObject{
 	@Published var uploadProgress : Double = 0.0
 	@Published var navigateToUploadView = false
 	
-	private var localString = ""
+
 	private var profileRepo = ProfileRepository()
 	private var profileFirstLoad = true
 	
@@ -33,12 +33,13 @@ class ProfileViewModel: ObservableObject{
 	@Published var navigateToPlaylistView = false
 	var clickedAlbum : Int = 0
 	
-	var loading = true
+	@Published private (set) var loading = true
+	@Published private (set) var errorLoading = false
 	
 	
 	func onEvent(event : ProfileEvents){
 		switch(event){
-		case .ProfileViewLoaded:
+		case .LoadProfile:
 			getUserProfile()
 		case .UploadAlbumClicked:
 			uploadChoice = UploadChoice.album
@@ -50,6 +51,8 @@ class ProfileViewModel: ObservableObject{
 	}
 	
 	private func getUserProfile(){
+		loading = true
+		errorLoading = false
 		profileRepo.getUserProfile{ result in
 			DispatchQueue.main.async {
 				switch result{
@@ -99,7 +102,8 @@ class ProfileViewModel: ObservableObject{
 	}
 	
 	private func showErrorLoadingProfile(){
-		
+		errorLoading = true
+		loading = false
 	}
 	
 	/*
