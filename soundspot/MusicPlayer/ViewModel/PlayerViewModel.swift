@@ -20,32 +20,23 @@ class PlayerViewModel : ObservableObject{
     @Published var isPlaying : Bool = false
     // Slider progress from 0 to 100
     @Published var progressPercentage : Double = 0
-    private var player: AVPlayer? = nil
+	
+	private lazy var player = AVPlayer()
+	
     private var timeObserverToken : Any?
     @Published var trackLength = "00:00"
     @Published var progress = "00:00"
     private var trackLengthInSeconds : Double = 0
     private var isDraggingSlider : Bool = false
     private var trackEnded = false
-    
-    
-    var downloadService = DownloadService()
-    let instance = Session()
-    lazy var downloadsSession: URLSession = URLSession(configuration: URLSessionConfiguration.default, delegate: instance, delegateQueue: nil)
-    
-    /*override func willMove(toParent parent: UIViewController?){
-        super.willMove(toParent: parent)
-        if parent == nil {
-            
-        }
-    }*/
+
     
     func onEvent(event : MusicPlayerEvent) -> Void{
         switch event {
         case .Launched:
-            playTrack()
+            PlayerLaunched()
         case .PlayPausePressed:
-            playPause()
+            playPauseBtnPressed()
         case .PreviousPressed:
             playPreviousTrack()
         case .NextPressed:
@@ -57,47 +48,49 @@ class PlayerViewModel : ObservableObject{
         }
     }
     
-    private func playTrack() {
-        loadSession()
-        // Track download link
 	
-        let fileURL = downloadTrack(index: trackIndex)
-        if(fileURL != nil){
-            do{
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-            }
-            catch{}
-            
-            player = AVPlayer(url: fileURL!)
-            // Adds an observer to the player state that will call playerDidFinishPlaying() when the track end
-            NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
-            playPause()
-            addPeriodicTimeObserver()
-            if let duration = player?.currentItem?.asset.duration {
-                trackLength = duration.positionalTime
-                trackLengthInSeconds = duration.roundedSeconds
-            }
-            if(player == nil){
-                print("player is nil")
-            }
-            
-        }else{
-            print("Audio file is nil")
-        }
-    }
+	private func PlayerLaunched(){
+		playTrack()
+	}
+	
+	/**
+	 Starts a track from the begining based on trackIndex
+	 Change trackIndex before calling
+	 */
+	private func playTrack(){
+		if let url = URL(string: trackList[trackIndex].link) {
+
+			let urlAsset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": ["Authorization": "Bearer \(UserAuthRepository.getToken())"]])
+			
+			let playerItem = AVPlayerItem(asset: urlAsset)
+			player.replaceCurrentItem(with: playerItem)
+			
+			// Adds an observer to the player state that will call playerDidFinishPlaying() when the track end
+			NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+			if(!isPlaying){
+				playerPlay()
+			}
+			addPeriodicTimeObserver()
+			if let duration = player.currentItem?.asset.duration {
+				trackLength = duration.positionalTime
+				trackLengthInSeconds = duration.roundedSeconds
+			}
+		}else{
+			print("wrong url")
+		}
+	}
     
     @objc func playerDidFinishPlaying(){
         trackEnded = true
-        playPause()
+        playPauseBtnPressed()
     }
     
     private func addPeriodicTimeObserver() {
-        if(player == nil){return}
         // Notify every half second
         let timeScale = CMTimeScale(NSEC_PER_SEC)
         let time = CMTime(seconds: 0.5, preferredTimescale: timeScale)
 
-        timeObserverToken = player!.addPeriodicTimeObserver(forInterval: time,
+        timeObserverToken = player.addPeriodicTimeObserver(forInterval: time,
                                                           queue: .main) {
             [weak self] time in
             // update player transport UI
@@ -112,9 +105,8 @@ class PlayerViewModel : ObservableObject{
     }
 
     private func removePeriodicTimeObserver() {
-        if(player == nil){return}
         if let timeObserverToken = timeObserverToken {
-            player!.removeTimeObserver(timeObserverToken)
+            player.removeTimeObserver(timeObserverToken)
             self.timeObserverToken = nil
         }
     }
@@ -123,9 +115,9 @@ class PlayerViewModel : ObservableObject{
         let newProgress = (trackLengthInSeconds * (progressPercentage / 100)).rounded()
         let timeScale = CMTimeScale(NSEC_PER_SEC)
         let time = CMTime(seconds: newProgress, preferredTimescale: timeScale)
-        if let player = player {
-            player.seek(to: time)
-        }
+        
+		player.seek(to: time)
+        
         progressPercentage = newProgress
         isDraggingSlider = false
     }
@@ -143,66 +135,25 @@ class PlayerViewModel : ObservableObject{
     
     
     private func playNextTrack() {
-		let fileURL = downloadTrack(index: increaseIndex()) // TODO don't download if next track is current track (same for previous)
-        if(fileURL != nil){
-            do{
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-            }
-            catch{}
-            print("\n\n Playing fileURL \(fileURL)")
-            player = AVPlayer(url: fileURL!)
-            playPause()
-            addPeriodicTimeObserver()
-            if let duration = player?.currentItem?.asset.duration {
-                trackLength = duration.positionalTime
-                trackLengthInSeconds = duration.roundedSeconds
-            }
-            if(player == nil){
-                print("player is nil")
-            }
-
-        }else{
-            print("Audio file is nil")
-        }
-    }
-    
+		increaseIndex()
+		playTrack()
+	}
     private func playPreviousTrack() {
-        let fileURL = downloadTrack(index: decreaseIndex())
-        if(fileURL != nil){
-            do{
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-            }
-            catch{}
-            print("\n\n Playing fileURL \(fileURL)")
-            player = AVPlayer(url: fileURL!)
-            playPause()
-            addPeriodicTimeObserver()
-            if let duration = player?.currentItem?.asset.duration {
-                trackLength = duration.positionalTime
-                trackLengthInSeconds = duration.roundedSeconds
-            }
-            if(player == nil){
-                print("player is nil")
-            }
-
-        }else{
-            print("Audio file is nil")
-        }
+		decreaseIndex()
+		playTrack()
     }
     
     
-    private func increaseIndex() -> Int {
-        if (trackIndex + 1 > trackList.count) {
+    private func increaseIndex(){
+        if (trackIndex + 1 >= trackList.count) {
 			trackIndex = 0
         }
         else {
             trackIndex = trackIndex + 1
         }
-        
-        return trackIndex
     }
     
-    private func decreaseIndex() -> Int {
+    private func decreaseIndex() {
   
         if (trackIndex - 1 < 0) {
             trackIndex = trackList.count - 1
@@ -210,41 +161,40 @@ class PlayerViewModel : ObservableObject{
         else {
             trackIndex = trackIndex - 1
         }
-        return trackIndex
     }
     
-	private func downloadTrack(index : Int) -> URL? {
-        return downloadService.startDownload(trackList[index])
-    }
     
-    private func playPause()
+	private func playerPlay(){
+		player.play()
+		isPlaying = true
+	}
+	
+	private func playerPause(){
+		player.pause()
+		isPlaying = false
+	}
+	
+	/**
+	 function used by play pause button only
+	 */
+    private func playPauseBtnPressed()
     {
         isPlaying.toggle()
         if isPlaying == false{
-            player?.pause()
+            player.pause()
         }else{
             if(trackEnded){
                 progressPercentage = 0
                 updatePlayerProgress()
                 trackEnded.toggle()
+				trackEnded = false
+				playNextTrack()
             }
-            player?.play()
+            player.play()
         }
     }
     
-   
-    
-    // After the view is loaded load downloadTask
-    private func loadSession(){
-        print("Load Session called")
-        downloadService.downloadsSession = downloadsSession
-    }
-    
-    /*func downloadComplete (data: Data?, response: URLResponse?, error: Error?) {
-        
-    }*/
 }
-
 
 
 extension CMTime {

@@ -12,8 +12,6 @@
 		8025AD63275F150900D7A7FC /* FormType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025AD62275F150900D7A7FC /* FormType.swift */; };
 		8025AD66275F151800D7A7FC /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025AD64275F151800D7A7FC /* RegisterModel.swift */; };
 		8025AD67275F151800D7A7FC /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025AD65275F151800D7A7FC /* LoginModel.swift */; };
-		8025AD6D275F162000D7A7FC /* DownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025AD6C275F162000D7A7FC /* DownloadService.swift */; };
-		8025AD72275F166500D7A7FC /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025AD71275F166500D7A7FC /* Download.swift */; };
 		8025AD79275F168D00D7A7FC /* MultipartFormDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025AD74275F168C00D7A7FC /* MultipartFormDataRequest.swift */; };
 		8025AD7A275F168D00D7A7FC /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025AD75275F168D00D7A7FC /* Session.swift */; };
 		8025AD7B275F168D00D7A7FC /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025AD76275F168D00D7A7FC /* Server.swift */; };
@@ -115,8 +113,6 @@
 		8025AD62275F150900D7A7FC /* FormType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormType.swift; sourceTree = "<group>"; };
 		8025AD64275F151800D7A7FC /* RegisterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		8025AD65275F151800D7A7FC /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
-		8025AD6C275F162000D7A7FC /* DownloadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadService.swift; sourceTree = "<group>"; };
-		8025AD71275F166500D7A7FC /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
 		8025AD74275F168C00D7A7FC /* MultipartFormDataRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartFormDataRequest.swift; sourceTree = "<group>"; };
 		8025AD75275F168D00D7A7FC /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		8025AD76275F168D00D7A7FC /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
@@ -231,7 +227,6 @@
 		8025AD70275F165800D7A7FC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8025AD71275F166500D7A7FC /* Download.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -426,7 +421,6 @@
 			children = (
 				80E5FDE52740B08600247717 /* UserService.swift */,
 				8025AD98275F1A6A00D7A7FC /* MusicService.swift */,
-				8025AD6C275F162000D7A7FC /* DownloadService.swift */,
 				8025AD73275F167500D7A7FC /* Utilities */,
 				8025AD70275F165800D7A7FC /* Model */,
 			);
@@ -926,8 +920,6 @@
 				80704C5627E14D8600F650C1 /* PlaylistView.swift in Sources */,
 				E5263F212734789F004FF1B8 /* StartUp.swift in Sources */,
 				8025AD8A275F17E700D7A7FC /* ProfileViewModel.swift in Sources */,
-				8025AD72275F166500D7A7FC /* Download.swift in Sources */,
-				8025AD6D275F162000D7A7FC /* DownloadService.swift in Sources */,
 				8025AD66275F151800D7A7FC /* RegisterModel.swift in Sources */,
 				E5A48A40271F4C2F00110DDD /* Song.swift in Sources */,
 				80E116DA27EE7CCE0079A3FD /* Music.swift in Sources */,
