@@ -98,18 +98,17 @@ class MusicUploadViewModel : ObservableObject{
 			tracks[i].uploading = true
 		DispatchQueue.global(qos: .userInitiated).async{
 			[self] in
-			var publishers : (AnyPublisher<Double, Error>, AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure>)?
+			var publishers : AnyPublisher<Double, Error>?
 			= nil
 			do{
-				publishers = try musicService.uploadTrack(track: tracks[i], albumId: album.id) // TODO show error
+				publishers = try musicService.uploadTrack(track: tracks[i], albumId: album.id){_,_,_ in } // TODO show error
 			}catch{}
 			DispatchQueue.main.async {
 				guard let publishers = publishers else {
 					return //TODO show error
 				}
 
-				let progressPublisher = publishers.0
-				progressPublisher.subscribe(Subscribers.Sink(
+				publishers.subscribe(Subscribers.Sink(
 					receiveCompletion: { result in
 					switch result{
 					case .finished:
@@ -131,32 +130,18 @@ class MusicUploadViewModel : ObservableObject{
 	private func createAlbum(){
 		let musicService = MusicService()
 		do{
-			let publishers = try musicService.createAlbum(title: album.title, pictureURL: album.pictureURL)
-			let resultPublisher = publishers.1
-			
-			resultPublisher.subscribe(Subscribers.Sink(
-				receiveCompletion: { completion in
-					print ("Received completion: \(completion).")
-					switch(completion){
-					case .finished:
-						if(self.album.id != nil){
-							self.uploadTracks()
+			_ = try musicService.createAlbum(title: album.title, pictureURL: album.pictureURL){data, response, error in
+				if let httpResponse = response as? HTTPURLResponse{
+					if(httpResponse.statusCode == 200){
+						if let data = data {
+							if let decoded = try? JSONDecoder().decode(CreateAlbumResult.self, from: data){
+								self.album.id = decoded.albumId
+								self.uploadTracks()
+							} // TODO show error
 						}
-					case .failure(_):
-						break
 					}
-				},
-				receiveValue: {element in
-					guard let httpResponse = element.response as? HTTPURLResponse,
-						  httpResponse.statusCode == 200 else {
-							//throw URLError(.badServerResponse)
-							  return
-						  }
-					if let decoded = try? JSONDecoder().decode(CreateAlbumResult.self, from: element.data){
-						self.album.id = decoded.albumId
-					} // TODO show error
 				}
-			))
+			}
 		}catch{}
 	}
 	
@@ -166,7 +151,7 @@ class MusicUploadViewModel : ObservableObject{
         DispatchQueue.global(qos: .userInitiated).async {
             [self] in
             var selectedTracks : [TrackUpload] = [TrackUpload]()
-            for (i, url) in self.filesURL.enumerated(){
+			for (_, url) in self.filesURL.enumerated(){
                 let fileManager = FileManager.default
                 if fileManager.fileExists(atPath: url.path){
                     let playerItem = AVPlayerItem(url: url)

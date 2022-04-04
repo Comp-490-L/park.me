@@ -15,7 +15,7 @@ struct ProfileRepository{
         
         task.sendRequest(body: nil, url: url, method: "GET"){ data, response, error in
             let httpResponse = response as? HTTPURLResponse
-            print("Profile RespCode: \(httpResponse?.statusCode)")
+			print("Profile RespCode: \(String(describing: httpResponse?.statusCode))")
             if let data = data {
                 if let decoded = try? JSONDecoder().decode(ProfileModel.self, from: data){
                     completion(.success(decoded))

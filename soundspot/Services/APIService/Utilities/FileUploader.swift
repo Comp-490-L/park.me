@@ -12,7 +12,6 @@ import Combine
 class FileUploader: NSObject {
     typealias Percentage = Double
     typealias Publisher = AnyPublisher<Percentage, Error>
-	typealias ResultPublisher = AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure>
     
     private typealias Subject = CurrentValueSubject<Percentage, Error>
 
@@ -25,7 +24,7 @@ class FileUploader: NSObject {
     private var subjectsByTaskID = [Int : Subject]()
 	
 	// Publisher and ResultPublisher are type aliases
-	func send(request: URLRequest) -> (progress: Publisher, result: ResultPublisher){
+	func send(request: URLRequest, completionHander: @escaping (Data?, URLResponse?, Error?) -> Void) -> Publisher{
 		
 		// Initialze CurrentValueSubject<Percentage, Error> with with value 0 for percentage
 		let subject = Subject(0)
@@ -34,13 +33,18 @@ class FileUploader: NSObject {
 		
 		let task = urlSession.dataTask(with: request, completionHandler:{
 			data, response, error in
+			
+			completionHander(data, response, error)
+			
 			if let httpResponse = response as? HTTPURLResponse{
 				print("Upload File Response \(httpResponse)")
 				if(error != nil){
 					print("Error \(error!)")
 					subject.send(completion: .failure(error!))
 				}
-				
+				if(httpResponse.statusCode == 200){
+					subject.send(completion: .finished)
+				}
 			}
 			
 			subject.send(completion: .finished)
@@ -52,13 +56,9 @@ class FileUploader: NSObject {
 		removeSubject = { [weak self] in
 			self?.subjectsByTaskID.removeValue(forKey: task.taskIdentifier)
 		}
-		DispatchQueue.main.async {
-			print("\n\n\n Calling \(request.url) \n\n\n")
-		}
 		
-		let resultPublisher = urlSession.dataTaskPublisher(for: request).eraseToAnyPublisher()
 		task.resume()
-		return (subject.eraseToAnyPublisher(), resultPublisher)
+		return (subject.eraseToAnyPublisher())
 		
 	}
 }

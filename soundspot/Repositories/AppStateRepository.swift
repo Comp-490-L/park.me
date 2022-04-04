@@ -12,9 +12,9 @@ struct AppStateRepository{
     func getAppState() -> AppState?{
         do{
             let realm = try Realm()
-            print("URL db file\n\n\n")
+            /*print("URL db file\n\n\n")
             print(realm.configuration.fileURL)
-            print("\n\n\n\n")
+            print("\n\n\n\n")*/
             let launchCollection = realm.objects(AppState.self)
             if(launchCollection.count == 0){
                 return nil

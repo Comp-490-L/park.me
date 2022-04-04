@@ -11,11 +11,10 @@ import Combine
 struct MusicService{
 	
 	typealias ProgressPublisher = AnyPublisher<Double, Error>
-	typealias ResultPublisher = AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure>
 	let fileUploader = FileUploader()
 	
-	func createAlbum(title: String, pictureURL: URL?)
-	throws -> (ProgressPublisher, ResultPublisher)
+	func createAlbum(title: String, pictureURL: URL?, completionHander: @escaping (Data?, URLResponse?, Error?) -> Void)
+	throws -> ProgressPublisher
 	{
 		let url = URL(string: "\(Server.url)/api/Album")!
 		var requestBuilder = MultipartFormDataRequest(url: url)
@@ -30,13 +29,13 @@ struct MusicService{
 		var request = requestBuilder.getFinalRequest();
 		request.addValue("Bearer \(UserAuthRepository.getToken())", forHTTPHeaderField: "Authorization")
 		
-		let publishers = fileUploader.send(request: request)
+		let publishers = fileUploader.send(request: request, completionHander: completionHander)
 		return publishers
 	}
 
 	
 	
-	func uploadTrack(track : TrackUpload, albumId: String?) throws -> (ProgressPublisher, ResultPublisher){
+	func uploadTrack(track : TrackUpload, albumId: String?, completionHander: @escaping (Data?, URLResponse?, Error?) -> Void) throws -> ProgressPublisher{
 		let metadata = TrackMetadata(albumId: albumId, title: track.title, artists: track.artists)
 		let url = URL(string: "\(Server.url)/api/track")
 		guard let url = url else {
@@ -56,7 +55,7 @@ struct MusicService{
 		}
 		var request = requestBuilder.getFinalRequest()
 		request.addValue("Bearer \(UserAuthRepository.getToken())", forHTTPHeaderField: "Authorization")
-		let publishers = fileUploader.send(request: request)
+		let publishers = fileUploader.send(request: request, completionHander: completionHander)
 		return publishers
 		
 	}
@@ -84,84 +83,5 @@ struct MusicService{
 		var title: String
 		var artists: String
 	}
-    
-	
-	
-    struct Download{
-        
-        var downloadTask: URLSessionDownloadTask? = nil
-        var progressLabel: UILabel? = nil
-        
-        mutating func tracks(trackId: String){
-            let instance = Session()
-            lazy var urlSession = URLSession(configuration: URLSessionConfiguration.default, delegate: instance, delegateQueue: nil)
-            
-            let requestUrl = URL(string: "\(Server.url)/api/StreamTrack?id=\(trackId)")!
-            
-            var request = URLRequest(url: requestUrl)
-            request.httpMethod = "GET"
-            request.addValue("Bearer \(UserAuthRepository.getToken())", forHTTPHeaderField: "Authorization")
-            
-            let downloadTask = urlSession.downloadTask(with: request){
-                fileurl, response, error in
-                
-                if(error != nil){
-                    print(error!)
-                }
-                if(response != nil){
-                    print(response!)
-                }
-                
-                guard let fileURL = fileurl
-                else {
-                    print("URL is nil")
-                    return
-                }
-                print(fileURL)
-                do {
-                    let documentsURL = try
-                    FileManager.default.url(for: .documentDirectory,
-                                               in: .userDomainMask,
-                                               appropriateFor: nil,
-                                               create: false)
-                        // TODO fix file already exists
-                    var fileName = ""
-                    if (response?.suggestedFilename != nil || response?.suggestedFilename != ""){
-                        fileName = response!.suggestedFilename!
-                    }else{fileName = fileURL.lastPathComponent}
-                    
-                    let savedURL = documentsURL.appendingPathComponent(fileName)
-                    try FileManager.default.moveItem(at: fileURL, to: savedURL)
-                    print("File moved to : \(savedURL)")
-                } catch {
-                    print ("file error: \(error)")
-                }
-            }
-            downloadTask.resume()
-            self.downloadTask = downloadTask
-        }
-        
-        func urlSession(_ session: URLSession,
-                        downloadTask: URLSessionDownloadTask,
-                        didWriteData bytesWritten: Int64,
-                        totalBytesWritten: Int64,
-                        totalBytesExpectedToWrite: Int64) {
-            
-            if downloadTask == self.downloadTask {
-                var calculatedProgress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
-                DispatchQueue.main.async {
-                    //self.progressLabel.text = self.percentFormatter.string(from:
-                                                                            //NSNumber(value: calculatedProgress))
-                }
-            }
-        }
-    }
-	
-	
-	
-	struct Album{
-		
-	}
-    
 }
                 
