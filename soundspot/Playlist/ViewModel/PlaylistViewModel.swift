@@ -17,14 +17,15 @@ class PlaylistViewModel : ObservableObject{
 	@Published var loading = true
 	@Published var tracksList = [Track]()
 	private lazy var repo = MusicRepository()
-	// just temp
-	let playerView = PlayerView(viewModel: PlayerViewModel(trackList: [Track](), trackIndex: 0))
+	
     
-	private var loadedPictures : Int32 = 0
-	private var picturesToLoad : Int32 = 0
+	// queue used to increament picture loaded and removes loading from view
+	private var processQueue = DispatchQueue(label: "load queue")
+	private var processed = 0
+	private var picturesToBeProcessed = 0
 	
 	// Used for navigation link
-	var clickedTrack : Int? = nil
+	var clickedTrack = 0
 	@Published var navigateToPlayerView = false
 	
 	func onEvent(event : PlaylistEvent){
@@ -35,19 +36,11 @@ class PlaylistViewModel : ObservableObject{
 	}
 	
 	private func loadAlbum(){
-		
-		if(album.pictureLink != nil){
-			picturesToLoad = 1
-		}else{
-			picturesToLoad = 0
-		}
-		
 		if let url = URL(string: album.link){
 			repo.getAlbumTracks(url: url) { result in
 				switch(result){
 				case .success(let trackList):
 					DispatchQueue.main.async {
-						self.picturesToLoad = self.picturesToLoad + Int32(trackList.count)
 						self.tracksList = trackList
 					}
 					self.loadPictures()
@@ -59,25 +52,24 @@ class PlaylistViewModel : ObservableObject{
 	}
 	
 	private func loadPictures(){
+		picturesToBeProcessed = 0
+		processed = 0
 		getAlbumPicture()
 		
 		for(i, track) in tracksList.enumerated() {
 			if let link = track.pictureLink{
 				if let url = URL(string: link){
-					
+					picturesToBeProcessed += 1
 					repo.getPicture(url: url){ result in
-						switch(result){
-						case .success(let data):
-							DispatchQueue.main.async {
+						DispatchQueue.main.async {
+							switch(result){
+							case .success(let data):
 								self.tracksList[i].pictureData = data
 								self.tracksList[i].pictureDownloaded = true
+							case .failure(_):
+								break
 							}
-						case .failure(_):
-							break;
-						}
-						// Views wait for all pictures to be loaded to remove loading view
-						DispatchQueue.main.async {
-							self.pictureLoaded()
+							self.incrementProcessedPictures()
 						}
 					}
 					
@@ -89,20 +81,18 @@ class PlaylistViewModel : ObservableObject{
 	private func getAlbumPicture(){
 		if let link = album.pictureLink{
 			if let url = URL(string: link){
-				
+				picturesToBeProcessed += 1
 				repo.getPicture(url: url){ result in
-					switch(result){
-					case .success(let data):
-						DispatchQueue.main.async {
-							self.album.pictureData = data
-							self.album.pictureDownloaded = true
-						}
-					case .failure(_):
-						break;
-					}
-					
 					DispatchQueue.main.async {
-						self.pictureLoaded()
+						switch(result){
+							case .success(let data):
+									self.album.pictureData = data
+									self.album.pictureDownloaded = true
+								
+							case .failure(_):
+								break;
+						}
+						self.incrementProcessedPictures()
 					}
 				}
 				
@@ -110,14 +100,19 @@ class PlaylistViewModel : ObservableObject{
 		}
 	}
     
-    // Used to keep count of loaded picture
-    // in the playlist to remove the loading from the view
-    private func pictureLoaded(){
-		OSAtomicIncrement32(&loadedPictures)
-		if(loadedPictures == picturesToLoad){
-			loading = false
+	/**
+	 Pictures are the last to be loaded on the view
+	 The function removes the loading view from the screen
+	 when counter reaches total tracks by incrementing the integer atomicaly
+	 **/
+	private func incrementProcessedPictures(){
+		processQueue.sync {
+			processed += 1
+			if(processed == picturesToBeProcessed){
+				loading = false
+			}
 		}
-    }
+	}
 	
 	private func failedToLoad(){
 		

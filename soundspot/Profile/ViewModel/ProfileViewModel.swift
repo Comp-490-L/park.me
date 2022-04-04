@@ -36,6 +36,9 @@ class ProfileViewModel: ObservableObject{
 	@Published private (set) var loading = true
 	@Published private (set) var errorLoading = false
 	
+	// queue used to increament picture loaded and removes loading from view
+	private var processQueue = DispatchQueue(label: "load queue")
+	private var processed = 0
 	
 	func onEvent(event : ProfileEvents){
 		switch(event){
@@ -76,27 +79,51 @@ class ProfileViewModel: ObservableObject{
 			return
 		}
 		
-		
+		var processed = 0
 		
 		for (index, _) in profile!.singlesList.enumerated(){
 			if let link = profile!.singlesList[index].pictureLink {
+				processed += 1
 				if let url = URL(string: link){
 					profileRepo.getPicture(url:  url){ result in
-						switch result{
-						case .success(let data):
-							DispatchQueue.main.async {
-								self.profile!.singlesList[index].pictureData = data
-								self.profile!.singlesList[index].pictureDownloaded = true
-							}
-						case .failure(_):
-							print("Failed to get picture of track ")
-						}
-						
 						DispatchQueue.main.async {
-							self.loading = false
+							switch result{
+									case .success(let data):
+										self.profile!.singlesList[index].pictureData = data
+										self.profile!.singlesList[index].pictureDownloaded = true
+										print("Got pictures")
+										
+									case .failure(_):
+										print("Failed to get picture of track ")
+										break
+							}
+							self.incrementProcessedPictures()
 						}
 					}
 				}
+			}else{
+				self.incrementProcessedPictures()
+			}
+		}
+		
+		// Case list is empty
+		if(processed == 0){
+			self.loading = false
+			print("removing loading")
+		}
+	}
+	
+	/**
+	 Pictures are the last to be loaded on the view
+	 The function removes the loading view from the screen
+	 when counter reaches total tracks by incrementing the integer atomicaly
+	 **/
+	private func incrementProcessedPictures(){
+		processQueue.sync {
+			processed += 1
+			if(processed == profile?.singlesList.count){
+				loading = false
+				processed = 0
 			}
 		}
 	}
@@ -106,13 +133,6 @@ class ProfileViewModel: ObservableObject{
 		loading = false
 	}
 	
-	/*
-	private func launchPlayer(index: Int){
-		if(profile == nil){return}
-		@State var isActive = true
-		_ = NavigationLink(self.localString, destination: PlayerView(viewModel: PlayerViewModel(trackList: (self.profile?.singlesList)!, trackIndex: index)), isActive: $isActive)
-	}
-	*/
 	
 	func showDocumentPicker() -> some UIViewControllerRepresentable{
 		return DocumentPicker(onDocPicked: launchUploadView, contentType: UTType.mp3, allowMutipleSelection: true)

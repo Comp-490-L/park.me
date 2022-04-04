@@ -148,7 +148,7 @@ struct ProfileView: View{
 										if let profile = viewModel.profile{
 											NavigationLink(destination :
 															PlayerView(viewModel:
-																		PlayerViewModel(trackList: profile.singlesList, trackIndex: viewModel.clickedTrack)
+																		PlayerViewModel.instancePlayTracks(tracksList: profile.singlesList, index: viewModel.clickedTrack)
 																	  ), isActive: $viewModel.navigateToPlayerView){}
 										}
 									}

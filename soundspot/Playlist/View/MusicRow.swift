@@ -34,6 +34,10 @@ struct MusicRow: View
 						Image(uiImage: image)
 							.resizable()
 							.frame(width: 50, height: 50)
+					}else {
+						Image("defaultTrackImg")
+							.resizable()
+							.frame(width: 50, height: 50)
 					}
 				}
 				

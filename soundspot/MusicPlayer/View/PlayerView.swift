@@ -12,7 +12,7 @@ import AVFoundation
 
 struct PlayerView : View
 {
-    @StateObject var viewModel : PlayerViewModel
+	@StateObject var viewModel : PlayerViewModel
     
     
     var body: some View
@@ -135,7 +135,7 @@ struct PlayerView_Previews: PreviewProvider {
     static var previews: some View {
     
     let list = PlayerView_Previews.getMusicModel()
-    PlayerView(viewModel: PlayerViewModel(trackList: list, trackIndex: 0))
+		PlayerView(viewModel: PlayerViewModel.instancePlayTracks(tracksList: list, index: 0))
                 .previewDevice("iPhone 13 Pro")
     }
 }

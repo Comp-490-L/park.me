@@ -11,12 +11,15 @@ import UIKit
 
 
 class PlayerViewModel : ObservableObject{
-    init(trackList: Array<Track>, trackIndex: Int){
-        self.trackList = trackList
-        self.trackIndex = trackIndex
-    }
-    @Published var trackList: Array<Track>
-    @Published var trackIndex: Int
+    
+	/**
+	 This class is used as a singleton
+	 Use PlayerViewModel.getInstance()
+	 */
+	private init(){}
+	
+    @Published var trackList = Array<Track>()
+    @Published var trackIndex: Int = 0
     @Published var isPlaying : Bool = false
     // Slider progress from 0 to 100
     @Published var progressPercentage : Double = 0
@@ -30,6 +33,18 @@ class PlayerViewModel : ObservableObject{
     private var isDraggingSlider : Bool = false
     private var trackEnded = false
 
+	private static var instance = PlayerViewModel()
+	
+	static func getInstance() -> PlayerViewModel{
+		return instance
+	}
+	
+	static func instancePlayTracks(tracksList: [Track], index : Int) -> PlayerViewModel{
+		instance.trackList = tracksList
+		instance.trackIndex = index
+		instance.playTrack()
+		return instance
+	}
     
     func onEvent(event : MusicPlayerEvent) -> Void{
         switch event {
@@ -48,6 +63,23 @@ class PlayerViewModel : ObservableObject{
         }
     }
     
+	func resetPlayer(tracks: [Track]){
+		playerPause()
+		trackList = tracks
+		trackIndex = 0
+	}
+	
+	func setTrackIndex(_ index : Int){
+		trackIndex = index
+	}
+	
+	func addToQueue(track : Track){
+		trackList.append(track)
+	}
+	
+	func addToQueue(tracks : [Track]){
+		trackList.append(contentsOf: tracks)
+	}
 	
 	private func PlayerLaunched(){
 		playTrack()
