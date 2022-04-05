@@ -40,6 +40,13 @@ struct MusicUploadView : View {
                 if(viewModel.processing){
                     ProgressView().frame(maxHeight: .infinity)
                 }else{
+                    if(viewModel.uploading){
+                        HStack{
+                            ProgressView()
+                                .padding(.trailing, 5)
+                            Text("Uploading music")
+                        }
+                    }
 					ForEach(viewModel.tracks.indices, id: \.self){ i in
 							TrackView(index: i, track: viewModel.tracks[i], onEvent: viewModel.onEvent)
                     }
@@ -167,13 +174,19 @@ struct MusicUploadView : View {
 
 
 
-/*
+
 struct MusicUploadView_Previews: PreviewProvider {
 
+    static func getFilesURL() -> [URL]{
+        return [URL](
+            arrayLiteral: URL(string: "/Users/yassineregragui/Library/Developer/CoreSimulator/Devices/ECD2F3AB-0DA2-47B5-B0B2-FCB49369B29B/data/Containers/Data/Application/CAB8B2AA-B18F-4788-AEBC-6753C0B41953/Documents/sGkBwhn9.jpeg")!
+        )
+    }
+    
     static var previews: some View {
         MusicUploadView(viewModel: MusicUploadViewModel(uploadChoice: UploadChoice.album, selectedFiles: getFilesURL()
         )).previewDevice("iPhone 13")
     }
-}*/
+}
 
 

@@ -31,7 +31,13 @@ class MusicUploadViewModel : ObservableObject{
 
 	var uphViewModel : UHViewModel
 	var titleErrorPassthrough : PassthroughSubject<Bool, Never>
-	
+    
+    /**
+     Next 3 lines show upload status when upload is clicked
+     **/
+    @Published private (set) var uploading = false
+	private var uploadCounter = 0
+    private var counterQueue = DispatchQueue(label: "increment counter")
 	
 	// Shows the file picker to choose picture for album artwork
 	@Published var showImageFilePicker = false
@@ -43,10 +49,9 @@ class MusicUploadViewModel : ObservableObject{
 	
 	// Block processing files when coming back from ModifyTrackView
 	private var firstTimeLoad = true
-	
-	// Testing for bug
-	private var createAlbumCalled = false
-	private var createAlbumQueue = DispatchQueue(label: "a")
+    
+    private var createAlbumCalled = false
+
 	
 	func onEvent(event : MusicUploadEvent){
 		switch(event){
@@ -70,26 +75,26 @@ class MusicUploadViewModel : ObservableObject{
 	
 
 	private func uploadClicked(){
-		createAlbumQueue.sync{
-			if(createAlbumCalled){
-				return
-			}else{
-				if(uploadChoice == UploadChoice.album){
-					if(album.title == ""){
-						titleErrorPassthrough.send(true)
-						return
-					}
-					showUploadBtn = false
-					createAlbum() // Track will be uploaded when the album is created
-					return
-					
-				}else{
-					showUploadBtn = false
-					uploadTracks()
-				}
-				createAlbumCalled = true
-			}
-		}
+        uploading = true
+        if(createAlbumCalled){
+            return
+        }else{
+            if(uploadChoice == UploadChoice.album){
+                if(album.title == ""){
+                    titleErrorPassthrough.send(true)
+                    return
+                }
+                showUploadBtn = false
+                createAlbum() // Track will be uploaded when the album is created
+                return
+                
+            }else{
+                showUploadBtn = false
+                uploadTracks()
+            }
+            createAlbumCalled = true
+        }
+    
 	}
 	
 	private func uploadTracks(){
@@ -110,14 +115,18 @@ class MusicUploadViewModel : ObservableObject{
 
 				publishers.subscribe(Subscribers.Sink(
 					receiveCompletion: { result in
-					switch result{
-					case .finished:
-						tracks[i].uploading = false
-						tracks[i].uploaded = true
-					case .failure(_):
-						tracks[i].uploading = false
-						print("completion failure")
-					}
+                        DispatchQueue.main.async{
+                            switch result{
+                            case .finished:
+                                tracks[i].uploading = false
+                                tracks[i].uploaded = true
+                            case .failure(_):
+                                tracks[i].uploading = false
+                                print("completion failure")
+                                // TODO show error and try again button
+                            }
+                            incrementCounter()
+                        }
 				},
 					receiveValue: {
 						tracks[i].uploadProgress = $0
@@ -126,6 +135,16 @@ class MusicUploadViewModel : ObservableObject{
 		}
 		}
 	}
+    
+    private func incrementCounter(){
+        counterQueue.sync {
+            uploadCounter += 1
+            if(uploadCounter == tracks.count){
+                uploadCounter = 0
+                uploading = false
+            }
+        }
+    }
 	
 	private func createAlbum(){
 		let musicService = MusicService()
