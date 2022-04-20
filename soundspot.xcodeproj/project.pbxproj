@@ -76,6 +76,7 @@
 		D19B7A5F275F359A00F5F42F /* wavy.png in Resources */ = {isa = PBXBuildFile; fileRef = D19B7A5E275F359A00F5F42F /* wavy.png */; };
 		E5263F212734789F004FF1B8 /* StartUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5263F202734789E004FF1B8 /* StartUp.swift */; };
 		E5263F23273478E7004FF1B8 /* LoginFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5263F22273478E6004FF1B8 /* LoginFields.swift */; };
+		E55DDBFD281006F900049A56 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55DDBFC281006F900049A56 /* SettingsPage.swift */; };
 		E5A48A2E271F4BF800110DDD /* Boarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A2D271F4BF800110DDD /* Boarding.swift */; };
 		E5A48A32271F4C0A00110DDD /* BoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A2F271F4C0A00110DDD /* BoardingPage.swift */; };
 		E5A48A33271F4C0A00110DDD /* CheckOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A30271F4C0A00110DDD /* CheckOut.swift */; };
@@ -185,6 +186,7 @@
 		D276940E7D3AA836F1C770BB /* Pods-soundspot-soundspotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundspot-soundspotUITests.release.xcconfig"; path = "Target Support Files/Pods-soundspot-soundspotUITests/Pods-soundspot-soundspotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E5263F202734789E004FF1B8 /* StartUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartUp.swift; sourceTree = "<group>"; };
 		E5263F22273478E6004FF1B8 /* LoginFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginFields.swift; sourceTree = "<group>"; };
+		E55DDBFC281006F900049A56 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		E5A48A2D271F4BF800110DDD /* Boarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boarding.swift; sourceTree = "<group>"; };
 		E5A48A2F271F4C0A00110DDD /* BoardingPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardingPage.swift; sourceTree = "<group>"; };
 		E5A48A30271F4C0A00110DDD /* CheckOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOut.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				80DCB9942738DE4200B4C481 /* Boarding */,
 				80848C272738916600AF5ACC /* Authentication */,
 				E5A48A3C271F4C2F00110DDD /* Song.swift */,
+				E55DDBFC281006F900049A56 /* SettingsPage.swift */,
 				803E65BF27177C9500E341F6 /* soundspotApp.swift */,
 				808B9CA627C01D430048828D /* extensions.swift */,
 				E5A48A36271F4C2200110DDD /* NavBar.swift */,
@@ -917,6 +920,7 @@
 				80CB4E7B27D2D4130042725A /* MusicUploadEvents.swift in Sources */,
 				80EAB5A327D13357007F3F95 /* ImagePicker.swift in Sources */,
 				80CB4E7627D2C9680042725A /* UploadHeaderView.swift in Sources */,
+				E55DDBFD281006F900049A56 /* SettingsPage.swift in Sources */,
 				80704C5627E14D8600F650C1 /* PlaylistView.swift in Sources */,
 				E5263F212734789F004FF1B8 /* StartUp.swift in Sources */,
 				8025AD8A275F17E700D7A7FC /* ProfileViewModel.swift in Sources */,

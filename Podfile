@@ -6,8 +6,7 @@ target 'soundspot' do
   use_frameworks!
 
   # Pods for soundspot
-  pod 'RealmSwift', '~>10'
-  pod 'JWTDecode', '~> 2.6'
+  pod 'RealmSwift', '~>10.25'
 
   target 'soundspotTests' do
     inherit! :search_paths
