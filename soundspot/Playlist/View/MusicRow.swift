@@ -10,24 +10,20 @@ import SwiftUI
 
 struct MusicRow: View
 {
-	// Music means track or album
-	@Binding var music : Music
-	@State var heart = "heart"
-	var index : Int
-	var onClick : (Int) -> Void
+	@StateObject var viewModel : MusicRowViewModel
 	
 	var body: some View
 	{
 		HStack{
 			HStack
 			{
-				if (!music.pictureDownloaded)
+				if (!viewModel.music.pictureDownloaded)
 				{
 					Image("defaultTrackImg")
 						.resizable()
 						.frame(width: 50, height: 50)
 				}
-				else if let data = music.pictureData
+				else if let data = viewModel.music.pictureData
 				{
 					if let image = UIImage(data: data)
 					{
@@ -41,7 +37,7 @@ struct MusicRow: View
 					}
 				}
 				
-				Text(music.title)
+				Text(viewModel.music.title)
 					.foregroundColor(.white)
 					.lineLimit(2)
 				Spacer()
@@ -51,19 +47,25 @@ struct MusicRow: View
 				
 				Button(
 					action:{
-						withAnimation(.spring(dampingFraction: 0.5)){ isLiked() }
+						withAnimation(.spring(dampingFraction: 0.5)){ viewModel.onEvent(event: MusicRowEvents.heartClicked) }
 					}
 				){
 					HStack
 					{
-						Image(systemName: heart)
-							.foregroundColor(.purple)
+						if(viewModel.music.isLiked){
+							Image(systemName: "heart.fill")
+								.foregroundColor(.purple)
+						}else{
+							Image(systemName: "heart")
+								.foregroundColor(.purple)
+						}
+						
 					}
 				}
 				
 				
 			}.onTapGesture {
-				onClick(index)
+				viewModel.onEvent(event: MusicRowEvents.onClick)
 			}
 			
 			Menu
@@ -79,19 +81,6 @@ struct MusicRow: View
 			.padding(.bottom, 3)
 	}
 	
-	
-	func isLiked()
-	{
-		if (heart == "heart")
-		{
-			heart = "heart.fill"
-		}
-		else
-		{
-			heart="heart"
-		}
-		
-	}
 	
 }
 

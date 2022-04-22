@@ -19,7 +19,7 @@ struct HomeView: View {
 	var body: some View {
 		NavigationView{
 			TabView(selection: $selection){
-				HomeMainView()
+				HomeMainView(viewModel: viewModel)
 					.navigationBarBackButtonHidden(true).navigationBarHidden(true)
 					.tabItem {
 						VStack {
@@ -51,6 +51,7 @@ struct HomeView: View {
 struct HomeMainView: View {
 	@State var hero = false
 	@State var data = TrendingCard
+    @StateObject var viewModel : HomeViewModel
 	var body: some View {
 		
 		VStack {
@@ -149,7 +150,7 @@ struct HomeMainView: View {
 					Spacer()
 					Spacer()
 					HStack{
-						Text("Playlist")
+						Text("New Music")
 							.bold()
 							.multilineTextAlignment(.trailing)
 							.padding(.leading, 20)
@@ -157,14 +158,33 @@ struct HomeMainView: View {
 						Spacer()
 					}
 					VStack {
-						ForEach(0..<10) { indicator in
-							HStack {
-                                PlaylistRow(title: "PlaylistThing")
-								
-							}
+                        ForEach(0..<viewModel.availableTracks.tracks.count, id: \.self){ i in
+							/*
+							 Binding(
+							 get:{ viewModel.availableTracks.tracks[i] },
+							 set: { music in
+								 viewModel.availableTracks.tracks[i] = music as! Track
+							      }
+							 
+						  
+							 */
 							
+							MusicRow(viewModel : MusicRowViewModel(
+								music: viewModel.availableTracks.tracks[i],
+								index: i, onClick: viewModel.onTrackClicked)
+								)
+                        }
+						if(viewModel.endOfTracks){
+							Text("Looks like you've reached the end.")
+								.font(.footnote)
+							Text("Try again later for more music")
+								.font(.footnote)
 						}
-						
+                        HStack{
+                            Text("View more")
+                        }.onTapGesture{
+							viewModel.onEvent(event: HomeViewEvent.viewMoreTracks)
+						}.padding()
 					}
 					
 					//end of playlist
@@ -228,11 +248,15 @@ struct HomeMainView: View {
 				
 			}
 			
-			
+            NavigationLink(
+                destination: PlayerView(viewModel: PlayerViewModel.instancePlayTracks(tracksList: viewModel.availableTracks.tracks, index: viewModel.clickedTrack)), isActive: $viewModel.navigateToPlayer){}
 			
 			
 		}.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
 			.edgesIgnoringSafeArea(.top)
+            .onAppear{
+                viewModel.onEvent(event: HomeViewEvent.onLoad)
+            }
 		
 	}
 }

@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct ProfileModel : Codable, Hashable{
+struct ProfileModel : Codable{
+	static func == (lhs: ProfileModel, rhs: ProfileModel) -> Bool {
+		return false
+	}
+	
     var profileLink: String
     var displayName: String
     var biography: String

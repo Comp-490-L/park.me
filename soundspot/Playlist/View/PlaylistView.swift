@@ -65,14 +65,20 @@ struct PlaylistView: View
 				
 				ForEach(0..<viewModel.tracksList.count, id: \.self){
 					i in
-					MusicRow(
-						music: Binding(get: {
-							viewModel.tracksList[i]
-						}, set: {
-							viewModel.tracksList[i] = $0 as! Track
-						}),
-						heart: "", index: i,
-						onClick: viewModel.navigateToPlayerView)
+					/*
+					 MusicRow(
+						 music: Binding(get: {
+							 viewModel.tracksList[i]
+						 }, set: {
+							 viewModel.tracksList[i] = $0 as! Track
+						 }),
+						 heart: "", index: i,
+						 onClick: viewModel.navigateToPlayerView)
+					 */
+					MusicRow(viewModel: MusicRowViewModel(
+						music: viewModel.tracksList[i] as Music,
+						index: i,
+						onClick: viewModel.navigateToPlayerView))
 				}
 				Spacer()
 			}
@@ -88,6 +94,14 @@ struct PlaylistView_Previews: PreviewProvider
 {
 	static var previews: some View
 	{
-		PlaylistView(viewModel: PlaylistViewModel (album: Album(name: "Title", link: "", pictureLink: nil, pictureDownloaded: false, pictureData: nil))).previewDevice("iPhone 13")
+		PlaylistView(viewModel: PlaylistViewModel (
+			album: Album(
+			id: "",
+			name: "Title",
+			link: "",
+			pictureLink: nil,
+			pictureDownloaded: false,
+			pictureData: nil,
+			isLiked: true))).previewDevice("iPhone 13")
 	}
 }
