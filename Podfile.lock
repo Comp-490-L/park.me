@@ -1,26 +1,22 @@
 PODS:
-  - JWTDecode (2.6.3)
-  - Realm (10.22.0):
-    - Realm/Headers (= 10.22.0)
-  - Realm/Headers (10.22.0)
-  - RealmSwift (10.22.0):
-    - Realm (= 10.22.0)
+  - Realm (10.25.1):
+    - Realm/Headers (= 10.25.1)
+  - Realm/Headers (10.25.1)
+  - RealmSwift (10.25.1):
+    - Realm (= 10.25.1)
 
 DEPENDENCIES:
-  - JWTDecode (~> 2.6)
-  - RealmSwift (~> 10)
+  - RealmSwift (~> 10.25)
 
 SPEC REPOS:
   trunk:
-    - JWTDecode
     - Realm
     - RealmSwift
 
 SPEC CHECKSUMS:
-  JWTDecode: 33e5e26e5ddbd21b2065820894c08fef0cad9509
-  Realm: d9e4e5877095a6722145811f56fe89a531c9659d
-  RealmSwift: e4191b4b957fcfcbed23751ec65eec98f8173ab5
+  Realm: 1a6e9b4f6983711655d8c0bcb6d2d29c3afbb1f3
+  RealmSwift: e72669550d27082aa4fad5d176f5076cfe806245
 
-PODFILE CHECKSUM: 15b93b5236ee17a6604c855839ab1a1fb6a6483b
+PODFILE CHECKSUM: b723f7dbd83f3997981a2b4a1e39e5c98bbfc47a
 
 COCOAPODS: 1.11.2

@@ -330,6 +330,8 @@ struct ProfileView: View{
 struct Banner : View {
 	var body: some View{
 		VStack{
+            
+            
 			Rectangle()
 				.strokeBorder(Color(#colorLiteral(red: 0.5, green: 0, blue: 1, alpha: 1))
 							  , lineWidth: 10)
@@ -362,6 +364,24 @@ struct Banner : View {
 				.strokeBorder(Color(#colorLiteral(red: 0.5, green: 0, blue: 1, alpha: 1)), lineWidth: 10)
 				.frame(maxWidth: .infinity).frame(height : 20)
 		}
+        HStack{
+            Spacer()
+            Spacer()
+            VStack{
+                Spacer()
+                Button(action:{}) {
+                    VStack(alignment: .center){
+                        Image(systemName: "gear")
+                            .resizable()
+                          //  .padding(25)
+                            .scaledToFit()
+                            .frame(width: 50, height: 50).foregroundColor(.white)
+                }
+                }
+            }
+            
+            
+        }
 	}
 }
 
