@@ -87,6 +87,12 @@ struct PlayerView : View
         var body: some View{
             HStack
             {
+                Button(action: {viewModel.onEvent(event: MusicPlayerEvent.ShufflePressed)
+                    }, label: {
+                        Image(systemName: viewModel.isShuffle ? "shuffle.circle.fill" : "shuffle.circle").resizable()
+                        .foregroundColor(.purple)
+                }).frame(width: 70, height: 70, alignment: .center)
+                
                 Button(action: {
                     viewModel.onEvent(event: MusicPlayerEvent.PreviousPressed)
                 },  label: {
@@ -107,6 +113,12 @@ struct PlayerView : View
                 }, label: {
                     Image("nextTrack").resizable()
                 }).frame(width: 50, height: 50, alignment: .center).foregroundColor(Color.gray.opacity(0.2))
+                
+                Button(action: {viewModel.onEvent(event: MusicPlayerEvent.LikePressed)
+                    }, label: {
+                        Image(systemName: viewModel.isLiked ? "heart.fill" : "heart").resizable()
+                        .foregroundColor(.purple)
+                }).frame(width: 70, height: 70, alignment: .center)
             }
         }
     }

@@ -21,6 +21,8 @@ class PlayerViewModel : ObservableObject{
     @Published var trackList = Array<Track>()
     @Published var trackIndex: Int = 0
     @Published var isPlaying : Bool = false
+    @Published var isShuffle : Bool = false
+    @Published var isLiked   : Bool = false
     // Slider progress from 0 to 100
     @Published var progressPercentage : Double = 0
 	
@@ -56,6 +58,10 @@ class PlayerViewModel : ObservableObject{
             playPreviousTrack()
         case .NextPressed:
             playNextTrack()
+        case .ShufflePressed:
+            shuffleSongs()
+        case .LikePressed:
+            likeSong()
         case .SliderChanged:
             updatePlayerProgress()
         case .DraggingSlider:
@@ -223,6 +229,30 @@ class PlayerViewModel : ObservableObject{
 				playNextTrack()
             }
             player.play()
+        }
+    }
+    
+    private func shuffleSongs()
+    {
+        if (isShuffle == false)
+        {
+            isShuffle = true
+        }
+        else
+        {
+            isShuffle = false
+        }
+    }
+    
+    private func likeSong()
+    {
+        if (isLiked == false)
+        {
+            isLiked = true
+        }
+        else
+        {
+            isLiked = false
         }
     }
     
