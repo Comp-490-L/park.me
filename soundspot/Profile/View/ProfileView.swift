@@ -188,7 +188,7 @@ struct ProfileView: View{
 											NavigationLink(destination :
 															PlaylistView(
 																viewModel: PlaylistViewModel(
-																	album: profile.albumsList[viewModel.clickedAlbum])
+																	music: profile.albumsList[viewModel.clickedAlbum])
 															),
 														   isActive: $viewModel.navigateToPlaylistView){}
 											

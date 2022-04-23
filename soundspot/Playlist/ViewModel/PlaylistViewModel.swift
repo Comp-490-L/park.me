@@ -9,11 +9,11 @@ import Foundation
 import SwiftUI
 
 class PlaylistViewModel : ObservableObject{
-	init(album : Album){
-		self.album = album
+	init(music : Music){
+		self.music = music
 	}
 	
-	@Published var album : Album
+	@Published var music : Music
 	@Published var loading = true
 	@Published var tracksList = [Track]()
 	private lazy var repo = MusicRepository()
@@ -36,7 +36,7 @@ class PlaylistViewModel : ObservableObject{
 	}
 	
 	private func loadAlbum(){
-		if let url = URL(string: album.link){
+		if let url = URL(string: music.link){
 			repo.getAlbumTracks(url: url) { result in
 				switch(result){
 				case .success(let trackList):
@@ -54,7 +54,7 @@ class PlaylistViewModel : ObservableObject{
 	private func loadPictures(){
 		picturesToBeProcessed = 0
 		processed = 0
-		getAlbumPicture()
+		getPlaylistPicture()
 		
 		for(i, track) in tracksList.enumerated() {
 			if let link = track.pictureLink{
@@ -78,16 +78,16 @@ class PlaylistViewModel : ObservableObject{
 		}
 	}
 	
-	private func getAlbumPicture(){
-		if let link = album.pictureLink{
+	private func getPlaylistPicture(){
+		if let link = music.pictureLink{
 			if let url = URL(string: link){
 				picturesToBeProcessed += 1
 				repo.getPicture(url: url){ result in
 					DispatchQueue.main.async {
 						switch(result){
 							case .success(let data):
-									self.album.pictureData = data
-									self.album.pictureDownloaded = true
+									self.music.pictureData = data
+									self.music.pictureDownloaded = true
 								
 							case .failure(_):
 								break;

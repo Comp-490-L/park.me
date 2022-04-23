@@ -18,12 +18,12 @@ struct PlaylistView: View
 			if(viewModel.loading){
 				ProgressView()
 			}else{
-				if(viewModel.album.pictureLink == nil){
+				if(viewModel.music.pictureLink == nil){
 					Image("defaultTrackImg")
 						.resizable()
                         .frame(maxWidth: 150, maxHeight: 150)
 				}else{
-					if let data = viewModel.album.pictureData{
+					if let data = viewModel.music.pictureData{
 						if let image = UIImage(data: data){
 							Image(uiImage: image)
                                 .resizable()
@@ -33,7 +33,7 @@ struct PlaylistView: View
 				}
 				
 				
-				Text(viewModel.album.title)
+				Text(viewModel.music.title)
 				
 				Text("Playlist Description")
 					.font(.system(size:10))
@@ -95,7 +95,7 @@ struct PlaylistView_Previews: PreviewProvider
 	static var previews: some View
 	{
 		PlaylistView(viewModel: PlaylistViewModel (
-			album: Album(
+			music: Album(
 			id: "",
 			name: "Title",
 			link: "",

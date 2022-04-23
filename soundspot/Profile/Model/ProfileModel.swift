@@ -17,6 +17,7 @@ struct ProfileModel : Codable{
     var biography: String
     var singlesList: Array<Track>
     var albumsList: Array<Album>
+	var playlistList : Array<Playlist>
 }
 
 
