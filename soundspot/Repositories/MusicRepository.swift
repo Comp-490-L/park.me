@@ -116,6 +116,29 @@ struct MusicRepository{
 		
 	}
 	
+	func getPlaylist(playlistId :String, completion: @escaping (Swift.Result<String, Error>) -> Void){
+		
+	}
+	
+	func addToPlaylist(playlistId: String, trackId : String, completion: @escaping (Swift.Result<String, Error>) -> Void){
+		
+	}
+	
+	func removeFromPlaylist(playlistId: String, trackId : String, completion: @escaping (Swift.Result<String, Error>) -> Void){
+		
+	}
+	
+	func renamePlaylist(playlistId: String, title: String, completion: @escaping (Swift.Result<String, Error>) -> Void){
+		
+	}
+	
+	func updatePlaylistPicture(playlistId : String, fileURL : URL, completion: @escaping (Swift.Result<String, Error>) -> Void){
+		
+	}
+	
+	
+	
+	
 }
 
 enum RepoError : Error{

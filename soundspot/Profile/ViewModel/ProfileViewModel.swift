@@ -40,6 +40,9 @@ class ProfileViewModel: ObservableObject{
 	private var processQueue = DispatchQueue(label: "load queue")
 	private var processed = 0
 	
+	var clickedPlaylist = 0
+	var navigateToPlaylist = false
+	
 	func onEvent(event : ProfileEvents){
 		switch(event){
 		case .LoadProfile:
@@ -159,6 +162,15 @@ class ProfileViewModel: ObservableObject{
 			if(index < profile.albumsList.count){
 				clickedAlbum = index
 				navigateToPlaylistView = true
+			}
+		}
+	}
+	
+	func navigateToPlaylist(index : Int){
+		if let profile = profile {
+			if(index < profile.playlistList.count){
+				clickedPlaylist = index
+				navigateToPlaylist = true
 			}
 		}
 	}

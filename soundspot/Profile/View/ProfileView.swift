@@ -130,18 +130,7 @@ struct ProfileView: View{
 									ForEach(0..<viewModel.profile!.singlesList.count, id: \.self)
 									{
 										index in
-										
-										/*MusicRow(music: Binding(
-											get: {
-												viewModel.profile!.singlesList[index]
-											},
-											set: {
-												viewModel.profile!.singlesList[index] = $0 as! Track
-											}),
-												 heart: "heart",
-												 index: index,
-												 onClick: viewModel.navigateToPlayerView)*/
-										
+	
 										MusicRow(viewModel: MusicRowViewModel.init(
 											music: viewModel.profile!.singlesList[index],
 											index: index,
@@ -164,18 +153,7 @@ struct ProfileView: View{
 									ForEach(0..<viewModel.profile!.albumsList.count, id: \.self)
 									{
 										index in
-										/*
-										MusicRow(music: Binding(
-											get: {
-												viewModel.profile!.albumsList[index]
-											},
-											set: {
-												viewModel.profile!.albumsList[index] = $0 as! Album
-											}),
-												 heart: "heart",
-												 index: index,
-												 onClick: viewModel.navigateToPlaylistView)*/
-										
+
 										MusicRow(viewModel: MusicRowViewModel.init(
 											music: viewModel.profile!.albumsList[index],
 											index: index,
@@ -194,6 +172,17 @@ struct ProfileView: View{
 											
 										}
 									}
+									
+									
+									// Playlists
+									ForEach(0..<viewModel.profile!.playlistList.count, id: \.self){ index in
+										MusicRow(viewModel: MusicRowViewModel.init(
+											music: viewModel.profile!.playlistList[index],
+											index: index,
+											onClick: viewModel.navigateToPlaylist))
+									}
+									//TODO add navigation for playlists here
+									
 								}
 								
 							}
