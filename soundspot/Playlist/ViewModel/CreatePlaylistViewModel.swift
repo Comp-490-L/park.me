@@ -23,7 +23,7 @@ class CreatePlaylistViewModel : ObservableObject{
 	}
 	
 	private func createPlaylist(){
-		musicRepo.createPlaylist(name: title){ result in
+		musicRepo.createPlaylist(title: title){ result in
 			DispatchQueue.main.async {
 				switch(result){
 				case .success(let id):

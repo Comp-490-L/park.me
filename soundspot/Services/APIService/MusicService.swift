@@ -60,7 +60,7 @@ struct MusicService{
 		
 	}
 	
-	private func addFileToRequest(fileURL : URL, fieldName: String, fileName: String, requestBuilder: MultipartFormDataRequest)
+	func addFileToRequest(fileURL : URL, fieldName: String, fileName: String, requestBuilder: MultipartFormDataRequest)
 	throws -> MultipartFormDataRequest{
 		guard let handle: FileHandle = try? FileHandle(forReadingFrom: fileURL)
 		else{
