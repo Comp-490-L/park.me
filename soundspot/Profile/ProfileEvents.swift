@@ -11,4 +11,5 @@ enum ProfileEvents{
     case LoadProfile
     case UploadAlbumClicked
     case UploadTracksClicked
+    case PictureClicked
 }

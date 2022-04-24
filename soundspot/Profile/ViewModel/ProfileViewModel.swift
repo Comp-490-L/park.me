@@ -20,6 +20,7 @@ class ProfileViewModel: ObservableObject{
 	@Published var uploadingFile = false
 	@Published var uploadProgress : Double = 0.0
 	@Published var navigateToUploadView = false
+    @Published var updateProfilePic = false
 	
 
 	private var profileRepo = ProfileRepository()
@@ -53,8 +54,34 @@ class ProfileViewModel: ObservableObject{
 		case .UploadTracksClicked:
 			uploadChoice = UploadChoice.tracks
 			showFilePicker.toggle()
+        case .PictureClicked:
+            updateProfilePic = true
 		}
 	}
+    
+    private func getProfilePic(){
+        guard let profile = profile else{return}
+        let url = URL(string: profile.pictureLink)
+        if let url = url {
+            profileRepo.getPicture(url: url){
+                result in
+                switch result{
+                
+                    case .success(let data):
+                    let image = UIImage(data: data)
+                    if let image = image{
+                        profile.image = Image(uiImage: image)
+                    }
+                    case .failure(_):
+                        return
+                
+                
+                    
+                }
+            }
+        }
+        
+    }
 	
 	private func getUserProfile(){
 		loading = true

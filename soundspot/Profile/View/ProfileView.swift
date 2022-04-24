@@ -26,24 +26,50 @@ struct ProfileView: View{
 						
 						VStack(alignment: .center){
 							
-							
-							Image("FLCL")
-								.resizable()
-								.clipShape(Circle())
-								.shadow(radius: 10)
-								.overlay(Circle()
-											.stroke(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)), lineWidth: 5))
-								.frame(width: 200, height: 200)
-								.scaledToFit()
-								.padding(.top, 40)
-							
-							Text(viewModel.profile?.displayName ?? "Username")
-								.font(.title2)
-								.foregroundColor(.white)
-								.fontWeight(.bold)
-							
-							
-						}
+                            if (!viewModel.loading){
+                                if let profile = viewModel.profile{
+                                    if let image = profile.image{
+                                        image
+                                            .resizable()
+                                            .clipShape(Circle())
+                                            .shadow(radius: 10)
+                                            .overlay(Circle()
+                                                        .stroke(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)), lineWidth: 5))
+                                            .frame(width: 200, height: 200)
+                                            .scaledToFit()
+                                            .padding(.top, 40)
+                                            .onTapGesture{}
+
+                                    }
+                                    
+                                }else{
+                                    Image("FLCL")
+                                        .resizable()
+                                        .clipShape(Circle())
+                                        .shadow(radius: 10)
+                                        .overlay(Circle()
+                                                    .stroke(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)), lineWidth: 5))
+                                        .frame(width: 200, height: 200)
+                                        .scaledToFit()
+                                        .padding(.top, 40)
+                                }
+                                Text(viewModel.profile?.displayName ?? "Username")
+                                    .font(.title2)
+                                    .foregroundColor(.white)
+                                    .fontWeight(.bold)
+                                
+                                if(viewModel.updateProfilePic){
+                                    Menu{
+                                        Button("updatePicture", action: {})
+                                    } label:{
+                                        Label("",systemImage: "ellipsis")
+                                    }
+                                }
+                                
+                            }
+                                
+                            }
+                            
 						
 					}    // End of Zstack
 					
