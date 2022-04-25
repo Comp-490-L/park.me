@@ -70,10 +70,14 @@ struct MusicRepository{
 	}
     
     
-	func getAvailableTracks(loadMoreURL: URL?, completion: @escaping (Swift.Result<AvailableTracks, Error>) -> Void){
+	func getAvailableTracks(newest: String?, oldest: String?, completion: @escaping (Swift.Result<AvailableTracks, Error>) -> Void){
         var url = URL(string: "\(Server.url)/api/Music")
-		if(loadMoreURL != nil){
-			url = loadMoreURL
+		
+		if(newest != nil && oldest != nil){
+			let escapedNewest = newest!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+			let escapedOldest = oldest!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+			
+			url = URL(string: "\(Server.url)/api/Music?newest=\(escapedNewest)&oldest=\(escapedOldest)")
 		}
         if let url = url{
             // GET request should not have a body

@@ -10,5 +10,6 @@ import Foundation
 
 struct AvailableTracks : Decodable{
     var tracks = [Track]()
-	var loadMoreURL : URL? = nil
+	var newest : String? = nil
+	var oldest : String? = nil
 }

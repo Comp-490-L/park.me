@@ -26,7 +26,7 @@ class HomeViewModel : ObservableObject{
     }
     
     private func onLoad(){
-		getAvailableTracks(loadMoreURL: nil, append: false)
+		getAvailableTracks(newest: nil, oldest: nil, append: false)
     }
     
     func onTrackClicked(index: Int){
@@ -34,8 +34,8 @@ class HomeViewModel : ObservableObject{
         navigateToPlayer = true
     }
 	
-	private func getAvailableTracks(loadMoreURL : URL?, append : Bool){
-		musicRepo.getAvailableTracks(loadMoreURL : loadMoreURL){ result in
+	private func getAvailableTracks(newest: String?, oldest: String?, append : Bool){
+		musicRepo.getAvailableTracks(newest: newest, oldest: oldest){ result in
 			DispatchQueue.main.async{
 				switch result{
 				case .success(let availableTracks):
@@ -47,8 +47,9 @@ class HomeViewModel : ObservableObject{
 					if(!append){
 						self.availableTracks = availableTracks
 					}else{
-							self.availableTracks.tracks.append(contentsOf: availableTracks.tracks)
-							self.availableTracks.loadMoreURL = availableTracks.loadMoreURL
+						self.availableTracks.tracks.append(contentsOf: availableTracks.tracks)
+						self.availableTracks.newest = availableTracks.newest
+						self.availableTracks.oldest = availableTracks.oldest
 					}
 					self.endOfTracks = false
 				case .failure(_):
@@ -61,8 +62,7 @@ class HomeViewModel : ObservableObject{
     }
 	
 	private func loadMoreTracks(){
-		if(availableTracks.loadMoreURL != nil){
-			getAvailableTracks(loadMoreURL: availableTracks.loadMoreURL, append: true)
-		}
+		getAvailableTracks(newest: availableTracks.newest, oldest: availableTracks.newest, append: true)
+		
 	}
 }

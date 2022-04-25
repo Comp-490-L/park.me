@@ -24,6 +24,7 @@
 		8025AD8E275F17F800D7A7FC /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025AD8D275F17F800D7A7FC /* ProfileModel.swift */; };
 		8025AD97275F18A500D7A7FC /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025AD96275F18A500D7A7FC /* DocumentPicker.swift */; };
 		8025AD99275F1A6A00D7A7FC /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8025AD98275F1A6A00D7A7FC /* MusicService.swift */; };
+		8035FE9E28168A4A0056F3E3 /* AvailableTracksRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8035FE9D28168A4A0056F3E3 /* AvailableTracksRequest.swift */; };
 		803E65C027177C9500E341F6 /* soundspotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E65BF27177C9500E341F6 /* soundspotApp.swift */; };
 		803E65C427177C9900E341F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803E65C327177C9900E341F6 /* Assets.xcassets */; };
 		803E65C727177C9900E341F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803E65C627177C9900E341F6 /* Preview Assets.xcassets */; };
@@ -135,6 +136,7 @@
 		8025AD8D275F17F800D7A7FC /* ProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		8025AD96275F18A500D7A7FC /* DocumentPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		8025AD98275F1A6A00D7A7FC /* MusicService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
+		8035FE9D28168A4A0056F3E3 /* AvailableTracksRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableTracksRequest.swift; sourceTree = "<group>"; };
 		803E65BC27177C9500E341F6 /* soundspot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = soundspot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		803E65BF27177C9500E341F6 /* soundspotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soundspotApp.swift; sourceTree = "<group>"; };
 		803E65C327177C9900E341F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 			isa = PBXGroup;
 			children = (
 				80C9A46D27FCD202007121C0 /* AvailableTracks.swift */,
+				8035FE9D28168A4A0056F3E3 /* AvailableTracksRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -941,6 +944,7 @@
 				E5A48A32271F4C0A00110DDD /* BoardingPage.swift in Sources */,
 				80524E8C273E199E00FD7DE0 /* UserAuthRepository.swift in Sources */,
 				808C327627CFE13700D0D485 /* UploadChoice.swift in Sources */,
+				8035FE9E28168A4A0056F3E3 /* AvailableTracksRequest.swift in Sources */,
 				EAE15F342811F464008FC6C6 /* CreatePlaylistView.swift in Sources */,
 				80704C5427E14D5E00F650C1 /* PlaylistRow.swift in Sources */,
 				8025AD8E275F17F800D7A7FC /* ProfileModel.swift in Sources */,

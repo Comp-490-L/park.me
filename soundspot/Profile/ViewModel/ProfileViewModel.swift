@@ -61,7 +61,8 @@ class ProfileViewModel: ObservableObject{
     
     private func getProfilePic(){
         guard let profile = profile else{return}
-        let url = URL(string: profile.pictureLink)
+		guard let link = profile.pictureLink else {return}
+        let url = URL(string: link)
         if let url = url {
             profileRepo.getPicture(url: url){
                 result in
