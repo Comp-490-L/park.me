@@ -51,7 +51,7 @@ struct HomeView: View {
 struct HomeMainView: View {
 	@State var hero = false
 	@State var data = TrendingCard
-    @StateObject var viewModel : HomeViewModel
+    @ObservedObject var viewModel : HomeViewModel
 	var body: some View {
 		
 		VStack {
@@ -159,18 +159,10 @@ struct HomeMainView: View {
 					}
 					VStack {
                         ForEach(0..<viewModel.availableTracks.tracks.count, id: \.self){ i in
-							/*
-							 Binding(
-							 get:{ viewModel.availableTracks.tracks[i] },
-							 set: { music in
-								 viewModel.availableTracks.tracks[i] = music as! Track
-							      }
-							 
-						  
-							 */
+							
 							
 							MusicRow(viewModel : MusicRowViewModel(
-								music: viewModel.availableTracks.tracks[i],
+								music: viewModel.availableTracks.tracks[i] ,
 								index: i, onClick: viewModel.onTrackClicked)
 								)
                         }

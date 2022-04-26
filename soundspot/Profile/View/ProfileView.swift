@@ -123,6 +123,17 @@ struct ProfileView: View{
 								Spacer()
 							}
 							
+							if(viewModel.profile != nil){
+								// Playlists
+								ForEach(0..<viewModel.profile!.playlistList.count, id: \.self){ index in
+									MusicRow(viewModel: MusicRowViewModel.init(
+										music: viewModel.profile!.playlistList[index],
+										index: index,
+										onClick: viewModel.navigateToPlaylist))
+								}
+								//TODO add navigation for playlists here
+							}
+							
 							
 							Spacer()
 							
@@ -198,16 +209,6 @@ struct ProfileView: View{
 											
 										}
 									}
-									
-									
-									// Playlists
-									ForEach(0..<viewModel.profile!.playlistList.count, id: \.self){ index in
-										MusicRow(viewModel: MusicRowViewModel.init(
-											music: viewModel.profile!.playlistList[index],
-											index: index,
-											onClick: viewModel.navigateToPlaylist))
-									}
-									//TODO add navigation for playlists here
 									
 								}
 								

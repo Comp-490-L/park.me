@@ -88,7 +88,7 @@ struct MusicRepository{
 						let decoded = try JSONDecoder().decode(AvailableTracks.self, from: data)
 						completion(.success(decoded))
 					}catch{
-						completion(.failure(RepoError.ResponseError))
+						completion(.success(AvailableTracks())) // No new music (temp fix, should check for code 204)
 					}
 				case .failure(_):
 					completion(.failure(RepoError.ResponseError))

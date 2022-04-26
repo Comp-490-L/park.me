@@ -17,7 +17,7 @@ class MusicRowViewModel : ObservableObject{
 	}
 	
 	// Music means track or album
-	@Published var music : Music
+	var music : Music
 
 	var index : Int
 	var onClick : (Int) -> Void
