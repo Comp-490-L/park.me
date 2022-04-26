@@ -46,10 +46,13 @@ class HomeViewModel : ObservableObject{
 					
 					if(!append){
 						self.availableTracks = availableTracks
+						self.loadPictures(start: 0)
 					}else{
+						let start = self.availableTracks.tracks.count
 						self.availableTracks.tracks.append(contentsOf: availableTracks.tracks)
 						self.availableTracks.newest = availableTracks.newest
 						self.availableTracks.oldest = availableTracks.oldest
+						self.loadPictures(start: start)
 					}
 					self.endOfTracks = false
 				case .failure(_):
@@ -62,7 +65,30 @@ class HomeViewModel : ObservableObject{
     }
 	
 	private func loadMoreTracks(){
-		getAvailableTracks(newest: availableTracks.newest, oldest: availableTracks.newest, append: true)
-		
+		getAvailableTracks(newest: availableTracks.newest, oldest: availableTracks.oldest, append: true)
+	}
+	
+	private func loadPictures(start : Int){
+		for i in start..<availableTracks.tracks.count{
+			if let pictureLink = availableTracks.tracks[i].pictureLink{
+				let url = URL(string: pictureLink)
+				guard let url = url else {
+					return
+				}
+				musicRepo.getPicture(url: url){ result in
+					DispatchQueue.main.async {
+						[self] in
+						switch result{
+						case .success(let data):
+							availableTracks.tracks[i].pictureData = data
+							objectWillChange.send()
+							availableTracks.tracks[i].pictureDownloaded = true
+						case .failure(_):
+							return
+						}
+					}
+				}
+			}
+		}
 	}
 }

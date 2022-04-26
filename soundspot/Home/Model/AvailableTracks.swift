@@ -8,8 +8,8 @@
 import Foundation
 
 
-struct AvailableTracks : Decodable{
-    var tracks = [Track]()
+class AvailableTracks : Decodable{
+    var tracks = Array<Track>()
 	var newest : String? = nil
 	var oldest : String? = nil
 }

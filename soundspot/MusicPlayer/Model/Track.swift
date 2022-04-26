@@ -29,27 +29,7 @@ class Track : Music, Codable, Hashable{
 		self.isLiked = isLiked
 	}
 	
-	/*
-	// Encodable
-	func encode(to encoder : Encoder) throws{
-		var container = encoder.container(keyedBy: CodingKeys.self)
-		try container.encode(id, forKey: .id)
-		try container.encode(title, forKey: .title)
-		try container.encode(link, forKey: .link)
-		try container.encode(pictureLink, forKey: .pictureLink)
-		try container.encode(isLiked, forKey: .isLiked)
-	}
-	
-	// Decodable
-	required init(from decoder: Decoder) throws {
-		let values = try decoder.container(keyedBy: CodingKeys.self)
-		id = try values.decode(String.self, forKey: .id)
-		title = try values.decode(String.self, forKey: .title)
-		link = try values.decode(String.self, forKey: .link)
-		pictureLink = try values.decode(String.self, forKey: .pictureLink)
-		isLiked = try values.decode(Bool.self, forKey: .isLiked)
-	}
-	*/
+
 	
 	var id: String
 	var title: String
