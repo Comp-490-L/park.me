@@ -71,8 +71,29 @@ struct MusicRow: View
 			Menu
 			{
 				Button("Add to queue", action:{})
-				Button("Add to playlist", action:{})
-				Button("Like", action:{})
+				Button("Add to playlist", action:
+                {
+                    if(true)
+                    {
+                        /*// Playlists
+                        ForEach(0..<ProfileModel.playlistList.count, id: \.self)
+                        { index in
+                            MusicRow(viewModel: MusicRowViewModel.init(
+                                music: ProfileViewModel.profile!.playlistList[index],
+                                index: index,
+                                onClick: ProfileViewModel.navigateToPlaylist))
+                        }*/
+                    }
+                })
+               
+                if(viewModel.music.isLiked)
+                {
+                    Button("Unlike Song", action: {viewModel.onEvent(event: MusicRowEvents.heartClicked)})
+                }
+                else
+                {
+                    Button("Like Song", action:{viewModel.onEvent(event: MusicRowEvents.heartClicked)})
+                }
 			} label:
 			{
 				Label("", systemImage: "ellipsis").padding(15)

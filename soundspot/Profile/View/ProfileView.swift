@@ -23,6 +23,29 @@ struct ProfileView: View{
 					ZStack{
 						
 						Banner()
+                        HStack
+                        {
+                            Spacer()
+                            Spacer()
+                            VStack
+                            {
+                                Spacer()
+                                NavigationLink(destination: SettingsPage(), isActive: $viewModel.navigateToSettingsView)
+                                {
+                                    Button(action:{viewModel.navigateToSettingsView = true})
+                                    {
+                                        VStack(alignment: .center)
+                                        {
+                                            Image(systemName: "gear")
+                                                .resizable()
+                                              //  .padding(25)
+                                                .scaledToFit()
+                                                .frame(width: 50, height: 50).foregroundColor(.white)
+                                        }
+                                    }
+                                }
+                            }
+                        }
 						
 						VStack(alignment: .center){
 							
@@ -121,6 +144,16 @@ struct ProfileView: View{
 									
 								}
 								Spacer()
+                                //Navigate to CreatePlaylistView
+                                NavigationLink(destination: CreatePlaylistView(viewModel: CreatePlaylistViewModel() ), isActive: $viewModel.navigateToCreatePlaylistView)
+                                {
+                                    Button(action:{viewModel.navigateToCreatePlaylistView = true})
+                                    {
+                                        Image(systemName: "plus")
+                                            .foregroundColor(.white)
+                                            .font(.title2)
+                                    }
+                                }
 							}
 							
 							if(viewModel.profile != nil){
@@ -223,6 +256,7 @@ struct ProfileView: View{
 					
 				}.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
 					.edgesIgnoringSafeArea(.all)
+                
 				
 				
 				
@@ -269,6 +303,7 @@ struct ProfileView: View{
 					isActive: $viewModel.navigateToUploadView){}
 				
 				
+                VideoControls()
 				
 				
 				
@@ -343,60 +378,43 @@ struct ProfileView: View{
 }
 
 
-struct Banner : View {
-	var body: some View{
-		VStack{
-            
-            
-			Rectangle()
-				.strokeBorder(Color(#colorLiteral(red: 0.5, green: 0, blue: 1, alpha: 1))
-							  , lineWidth: 10)
-				.frame(width: .infinity, height: 20)
-			Rectangle()
-				.strokeBorder(Color(#colorLiteral(red: 0.6, green: 0.1, blue: 1, alpha: 1)), lineWidth: 10)
-				.frame(width: .infinity, height: 22)
-			Rectangle()
-				.strokeBorder(Color(#colorLiteral(red: 0.7, green: 0.2, blue: 1, alpha: 1)), lineWidth: 8)
-				.frame(width: .infinity, height: 24)
-			Rectangle()
-				.strokeBorder(Color(#colorLiteral(red: 0.8, green: 0.3, blue: 1, alpha: 1)), lineWidth: 6)
-				.frame(width: .infinity, height: 26)
-			Rectangle()
-				.strokeBorder(Color(#colorLiteral(red: 0.9, green: 0.4, blue: 1, alpha: 1)), lineWidth: 4)
-				.frame(width: .infinity, height: 28)
-			Rectangle()
-				.strokeBorder(Color(#colorLiteral(red: 0.9, green: 0.4, blue: 1, alpha: 1)), lineWidth: 4)
-				.frame(width: .infinity, height: 28)
-			Rectangle()
-				.strokeBorder(Color(#colorLiteral(red: 0.8, green: 0.3, blue: 1, alpha: 1)), lineWidth: 6)
-				.frame(width: .infinity, height: 26)
-			Rectangle()
-				.strokeBorder(Color(#colorLiteral(red: 0.7, green: 0.2, blue: 1, alpha: 1)), lineWidth: 8)
-				.frame(width: .infinity, height: 24)
-			Rectangle()
-				.strokeBorder(Color(#colorLiteral(red: 0.6, green: 0.1, blue: 1, alpha: 1)), lineWidth: 10)
-				.frame(width: .infinity, height: 22)
-			Rectangle()
-				.strokeBorder(Color(#colorLiteral(red: 0.5, green: 0, blue: 1, alpha: 1)), lineWidth: 10)
-				.frame(maxWidth: .infinity).frame(height : 20)
-		}
-        HStack{
-            Spacer()
-            Spacer()
-            VStack{
-                Spacer()
-                Button(action:{}) {
-                    VStack(alignment: .center){
-                        Image(systemName: "gear")
-                            .resizable()
-                          //  .padding(25)
-                            .scaledToFit()
-                            .frame(width: 50, height: 50).foregroundColor(.white)
-                }
-                }
-            }
-            
-            
+struct Banner : View
+{
+	var body: some View
+    {
+        VStack
+        {
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.5, green: 0, blue: 1, alpha: 1))
+                              , lineWidth: 10)
+                .frame(width: .infinity, height: 20)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.6, green: 0.1, blue: 1, alpha: 1)), lineWidth: 10)
+                .frame(width: .infinity, height: 22)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.7, green: 0.2, blue: 1, alpha: 1)), lineWidth: 8)
+                .frame(width: .infinity, height: 24)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.8, green: 0.3, blue: 1, alpha: 1)), lineWidth: 6)
+                .frame(width: .infinity, height: 26)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.9, green: 0.4, blue: 1, alpha: 1)), lineWidth: 4)
+                .frame(width: .infinity, height: 28)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.9, green: 0.4, blue: 1, alpha: 1)), lineWidth: 4)
+                .frame(width: .infinity, height: 28)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.8, green: 0.3, blue: 1, alpha: 1)), lineWidth: 6)
+                .frame(width: .infinity, height: 26)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.7, green: 0.2, blue: 1, alpha: 1)), lineWidth: 8)
+                .frame(width: .infinity, height: 24)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.6, green: 0.1, blue: 1, alpha: 1)), lineWidth: 10)
+                .frame(width: .infinity, height: 22)
+            Rectangle()
+                .strokeBorder(Color(#colorLiteral(red: 0.5, green: 0, blue: 1, alpha: 1)), lineWidth: 10)
+                .frame(maxWidth: .infinity).frame(height : 20)
         }
 	}
 }

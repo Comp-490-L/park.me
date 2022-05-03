@@ -59,7 +59,6 @@ struct CreatePlaylistView : View
 						Button("Skip", action:{ viewModel.onEvent(event: CreatePlaylistEvents.createPlaylist) })
 					}else{
 						Button("Next", action:{ viewModel.onEvent(event: CreatePlaylistEvents.createPlaylist) })
-						Spacer()
 					}
 				}
 			}

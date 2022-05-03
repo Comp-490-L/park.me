@@ -68,4 +68,9 @@ class MusicRowViewModel : ObservableObject{
 	private func removeFromLiked(){
 		
 	}
+    
+    private func addToPlaylist()
+    {
+        
+    }
 }

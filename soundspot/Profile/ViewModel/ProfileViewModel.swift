@@ -30,6 +30,8 @@ class ProfileViewModel: ObservableObject{
 	var selectedFiles : [URL] = [URL]()
 	// Used for navigation link
 	@Published var navigateToPlayerView = false
+    @Published var navigateToCreatePlaylistView = false
+    @Published var navigateToSettingsView = false
 	
 	@Published var navigateToPlaylistView = false
 	var clickedAlbum : Int = 0
@@ -184,6 +186,11 @@ class ProfileViewModel: ObservableObject{
 			}
 		}
 	}
+    
+    func navToCreatePlaylistView()
+    {
+        navigateToCreatePlaylistView = true
+    }
 	
 	func navigateToPlaylistView(index : Int){
 		if let profile = profile {

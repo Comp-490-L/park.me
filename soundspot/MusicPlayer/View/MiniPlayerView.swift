@@ -88,6 +88,7 @@ struct MiniPlayerView: View
 struct VideoControls: View
 {
     //@EnvironmentObject var player: PlayerView
+    var isPlay = false
     var body: some View
     {
         HStack
@@ -121,8 +122,8 @@ struct VideoControls: View
             })
             Spacer()
             
-            Button(action: {}, label: {
-                Image(systemName: "pause.fill")
+            Button(action: {togglePlay()}, label: {
+                Image(systemName: isPlay ? "pause.fill" : "play.fill")
                     .font(.title2)
                     .foregroundColor(.black)
             })
@@ -143,6 +144,11 @@ struct VideoControls: View
         .padding(.trailing)
         .background(Color.gray)
         .frame(maxWidth: .infinity)
+    }
+    
+    func togglePlay()
+    {
+
     }
 }
 
