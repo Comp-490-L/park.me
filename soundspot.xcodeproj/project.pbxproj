@@ -95,6 +95,8 @@
 		E5A48A40271F4C2F00110DDD /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A3C271F4C2F00110DDD /* Song.swift */; };
 		E5A48A42271F4C2F00110DDD /* TrendingWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A48A3E271F4C2F00110DDD /* TrendingWeek.swift */; };
 		EA4EB06E9ECDE25D23A40AFD /* Pods_soundspotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2094A4470F16B33CD8E0E6C2 /* Pods_soundspotTests.framework */; };
+		EA85B4C2282142B70018FBF2 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA85B4C1282142B70018FBF2 /* BlurView.swift */; };
+		EA85B4C428214A160018FBF2 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA85B4C328214A150018FBF2 /* TabBar.swift */; };
 		EAE15F342811F464008FC6C6 /* CreatePlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE15F332811F464008FC6C6 /* CreatePlaylistView.swift */; };
 		EAE15F382811F5E7008FC6C6 /* MiniPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE15F372811F5E7008FC6C6 /* MiniPlayerView.swift */; };
 /* End PBXBuildFile section */
@@ -214,6 +216,8 @@
 		E5A48A37271F4C2200110DDD /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		E5A48A3C271F4C2F00110DDD /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		E5A48A3E271F4C2F00110DDD /* TrendingWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingWeek.swift; sourceTree = "<group>"; };
+		EA85B4C1282142B70018FBF2 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		EA85B4C328214A150018FBF2 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		EAE15F332811F464008FC6C6 /* CreatePlaylistView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePlaylistView.swift; sourceTree = "<group>"; };
 		EAE15F372811F5E7008FC6C6 /* MiniPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -594,6 +598,8 @@
 			isa = PBXGroup;
 			children = (
 				E5A48A37271F4C2200110DDD /* HomeView.swift */,
+				EA85B4C328214A150018FBF2 /* TabBar.swift */,
+				EA85B4C1282142B70018FBF2 /* BlurView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -948,12 +954,14 @@
 				EAE15F342811F464008FC6C6 /* CreatePlaylistView.swift in Sources */,
 				80704C5427E14D5E00F650C1 /* PlaylistRow.swift in Sources */,
 				8025AD8E275F17F800D7A7FC /* ProfileModel.swift in Sources */,
+				EA85B4C428214A160018FBF2 /* TabBar.swift in Sources */,
 				8088ED3227B9ADE000AB0ABD /* MusicPlayerEvent.swift in Sources */,
 				80704C5827E14DAF00F650C1 /* MusicRow.swift in Sources */,
 				808C327B27CFE51000D0D485 /* TrackUpload.swift in Sources */,
 				80842F7D28128E5300306A9D /* Playlist.swift in Sources */,
 				8025AD82275F173300D7A7FC /* PlayerView.swift in Sources */,
 				8025AD67275F151800D7A7FC /* LoginModel.swift in Sources */,
+				EA85B4C2282142B70018FBF2 /* BlurView.swift in Sources */,
 				EAE15F382811F5E7008FC6C6 /* MiniPlayerView.swift in Sources */,
 				80E116D827EE7CC00079A3FD /* Album.swift in Sources */,
 				80848C322738963900AF5ACC /* AuthenticateUser.swift in Sources */,

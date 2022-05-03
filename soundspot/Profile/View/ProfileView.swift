@@ -303,7 +303,7 @@ struct ProfileView: View{
 					isActive: $viewModel.navigateToUploadView){}
 				
 				
-                VideoControls()
+                //VideoControls()
 				
 				
 				

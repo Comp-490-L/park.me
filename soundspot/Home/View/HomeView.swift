@@ -21,33 +21,10 @@ struct HomeView: View {
         
         VStack
         {
-            NavigationView{
-                TabView(selection: $selection){
-                    HomeMainView(viewModel: viewModel)
-                        .navigationBarBackButtonHidden(true).navigationBarHidden(true)
-                        .tabItem {
-                            VStack {
-                                Image(systemName: "globe")
-                                    .foregroundColor(Color.white)
-                                Text("Categories")
-                            }
-                        }//.navigationBarBackButtonHidden(true).navigationBarHidden(true)
-                    
-                        .tag(0)
-                    
-                    ProfileView(viewModel: ProfileViewModel()).navigationBarBackButtonHidden(true).navigationBarHidden(true)
-                        .tabItem {
-                            VStack {
-                                Image(systemName: "person").background(Color.white)
-                                Text("Profile")
-                            }
-                        }
-                    /*.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))*/
-                        .tag(1)
-                }//.foregroundColor(Color.backgroundColor).background(Color.backgroundColor)
-                
+            NavigationView
+            {
+                TabBar(viewModel : viewModel)
             }.navigationBarBackButtonHidden(true).navigationBarHidden(false)
-        
         }
     }
 }
@@ -252,7 +229,7 @@ struct HomeMainView: View {
                 }.padding(.top, 90)
                 
             }
-            VideoControls()
+            //VideoControls()
             
             NavigationLink(
                 destination: PlayerView(viewModel: PlayerViewModel.instancePlayTracks(tracksList: viewModel.availableTracks.tracks, index: viewModel.clickedTrack)), isActive: $viewModel.navigateToPlayer){}
