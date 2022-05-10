@@ -97,7 +97,6 @@
 		EA4EB06E9ECDE25D23A40AFD /* Pods_soundspotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2094A4470F16B33CD8E0E6C2 /* Pods_soundspotTests.framework */; };
 		EA85B4C2282142B70018FBF2 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA85B4C1282142B70018FBF2 /* BlurView.swift */; };
 		EA85B4C428214A160018FBF2 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA85B4C328214A150018FBF2 /* TabBar.swift */; };
-		EA85B4C62821B8230018FBF2 /* SongSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA85B4C52821B8230018FBF2 /* SongSettingsView.swift */; };
 		EAE15F342811F464008FC6C6 /* CreatePlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE15F332811F464008FC6C6 /* CreatePlaylistView.swift */; };
 		EAE15F382811F5E7008FC6C6 /* MiniPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE15F372811F5E7008FC6C6 /* MiniPlayerView.swift */; };
 /* End PBXBuildFile section */
@@ -219,7 +218,6 @@
 		E5A48A3E271F4C2F00110DDD /* TrendingWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingWeek.swift; sourceTree = "<group>"; };
 		EA85B4C1282142B70018FBF2 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		EA85B4C328214A150018FBF2 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		EA85B4C52821B8230018FBF2 /* SongSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongSettingsView.swift; path = "../../../../../Temp Stuff/SongSettingsView.swift"; sourceTree = "<group>"; };
 		EAE15F332811F464008FC6C6 /* CreatePlaylistView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePlaylistView.swift; sourceTree = "<group>"; };
 		EAE15F372811F5E7008FC6C6 /* MiniPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -665,7 +663,6 @@
 				80704C5727E14DAF00F650C1 /* MusicRow.swift */,
 				EAE15F332811F464008FC6C6 /* CreatePlaylistView.swift */,
 				80704C5527E14D8600F650C1 /* PlaylistView.swift */,
-				EA85B4C52821B8230018FBF2 /* SongSettingsView.swift */,
 				80704C5327E14D5E00F650C1 /* PlaylistRow.swift */,
 			);
 			path = View;
@@ -1009,7 +1006,6 @@
 				8025AD8C275F17EE00D7A7FC /* ProfileView.swift in Sources */,
 				808B9CA727C01D430048828D /* extensions.swift in Sources */,
 				80E5FDE62740B08600247717 /* UserService.swift in Sources */,
-				EA85B4C62821B8230018FBF2 /* SongSettingsView.swift in Sources */,
 				80842F81281297D400306A9D /* CreatePlaylistEvents.swift in Sources */,
 				8025AD7A275F168D00D7A7FC /* Session.swift in Sources */,
 				80FADBA427D59A58008B1D79 /* ModifyTrackEvents.swift in Sources */,
