@@ -42,6 +42,7 @@ class ProfileModel : Codable{
     var pictureLink : String? = ""
     var image : Image? = nil
     
+    
     private enum CodingKeys: String, CodingKey{
         case profileLink
         case displayName

@@ -31,6 +31,7 @@ struct HomeView: View {
 
 
 struct HomeMainView: View {
+    
     @State var hero = false
     @State var data = TrendingCard
     @StateObject var viewModel : HomeViewModel

@@ -23,6 +23,8 @@ class Playlist : Music, Codable{
 	var pictureDownloaded: Bool = false
 	var pictureData: Data? = nil
 	var isLiked: Bool
+    
+    var tracks = [Track]()
 	
 	// Decode only the following
 	private enum CodingKeys: String, CodingKey {

@@ -22,7 +22,7 @@ struct TabBar: View
     {
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom),
             content: {
-            
+            var profileViewModel = ProfileViewModel()
             TabView(selection: $selection)
             {
                 HomeMainView(viewModel: viewModel)
@@ -37,7 +37,7 @@ struct TabBar: View
                 
                     .tag(0)
                 
-                ProfileView(viewModel: ProfileViewModel()).navigationBarBackButtonHidden(true).navigationBarHidden(true)
+                ProfileView(viewModel: profileViewModel).navigationBarBackButtonHidden(true).navigationBarHidden(true)
                     .tabItem {
                         VStack {
                             Image(systemName: "person").background(Color.white)

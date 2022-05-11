@@ -23,7 +23,7 @@ class MusicRowViewModel : ObservableObject{
 	var onClick : (Int) -> Void
 	
 	
-	private lazy var profileRepo = ProfileRepository()
+    private lazy var profileRepo = ProfileRepository.getInstance()
 	
 	func onEvent(event : MusicRowEvents){
 		switch event {

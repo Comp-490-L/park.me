@@ -9,6 +9,8 @@ import Foundation
 
 struct MusicRepository{
 	
+    private lazy var profileRepo = ProfileRepository.getInstance()
+    
 	func getPicture(url : URL, completion: @escaping (Swift.Result<Data, Error>) -> Void){
 		let task = DataTaskRequest()
 		task.sendRequest(body: nil, url: url, method: "GET"){ data, response, error in
@@ -138,89 +140,6 @@ struct MusicRepository{
 					}
 				}
 		}else{completion(.failure(RepoError.RequestError))}
-		
-	}
-	
-	func addToPlaylist(playlistId: String, trackId : String, completion: @escaping (Swift.Result<Void, Error>) -> Void){
-		let url = URL(string: "\(Server.url)/api/AddToPlaylist?playlistId=\(playlistId)&trackId=\(trackId)")
-		if let url = url {
-			dataTask(url: url, method: "POST", body: nil){ response in
-				switch response{
-					case .success(_):
-						completion(.success(Void()))
-					case .failure(_):
-						completion(.failure(RepoError.ResponseError))
-					}
-				}
-		}else{completion(.failure(RepoError.RequestError))}
-	}
-	
-	func removeFromPlaylist(playlistId: String, trackId : String, completion: @escaping (Swift.Result<Void, Error>) -> Void){
-		let url = URL(string: "\(Server.url)/api/RemoveFromPlaylist?playlistId=\(playlistId)&trackId=\(trackId)")
-		if let url = url {
-			dataTask(url: url, method: "DELETE", body: nil){ response in
-				switch response{
-					case .success(_):
-						completion(.success(Void()))
-					case .failure(_):
-						completion(.failure(RepoError.ResponseError))
-					}
-				}
-		}else{completion(.failure(RepoError.RequestError))}
-	}
-	
-	func renamePlaylist(playlistId: String, title: String, completion: @escaping (Swift.Result<Void, Error>) -> Void){
-		let escapedTitle = title.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-		let url = URL(string: "\(Server.url)/api/RenamePlaylist?playlistId=\(playlistId)&title=\(escapedTitle ?? "")")
-		if let url = url {
-			dataTask(url: url, method: "PUT", body: nil){ response in
-				switch response{
-					case .success(_):
-						completion(.success(Void()))
-					case .failure(_):
-						completion(.failure(RepoError.ResponseError))
-					}
-				}
-		}else{completion(.failure(RepoError.RequestError))}
-	}
-	
-	// If fileURL is nil the picture will be deleted
-	func updatePlaylistPicture(playlistId : String, fileURL : URL?, completion: @escaping (Swift.Result<Void, Error>) -> Void){
-		let url = URL(string: "\(Server.url)/api/PlaylistPicture?playlistId=\(playlistId)")
-		guard let url = url else{
-			completion(.failure(RepoError.RequestError))
-			return
-		}
-		var requestBuilder = MultipartFormDataRequest(url: url)
-		let service = MusicService()
-		if let fileURL = fileURL {
-			do{
-				requestBuilder = try service.addFileToRequest(fileURL: fileURL, fieldName: "picture", fileName: "picture", requestBuilder: requestBuilder)
-			}catch{
-				completion(.failure(RepoError.RequestError))
-				return
-			}
-		}
-		
-		var request = requestBuilder.getFinalRequest()
-		request.addValue("Bearer \(UserAuthRepository.getToken())", forHTTPHeaderField: "Authorization")
-		request.httpMethod = "PUT"
-		
-		let instance = Session()
-		let urlSession = URLSession(configuration: URLSessionConfiguration.default, delegate: instance, delegateQueue: nil)
-		
-		let task = urlSession.dataTask(with: request){ _, response, error in
-			if let httpResponse = response as? HTTPURLResponse{
-				if(error != nil){
-					completion(.failure(RepoError.ResponseError))
-				}
-				if(httpResponse.statusCode == 200){
-					completion(.success(Void()))
-				}
-			}
-		}
-		
-		task.resume()
 		
 	}
 	
