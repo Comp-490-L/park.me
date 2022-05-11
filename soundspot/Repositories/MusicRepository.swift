@@ -47,7 +47,7 @@ struct MusicRepository{
 	
 	private func dataTask(url : URL, method : String, body: Data?, completion: @escaping (Swift.Result<Data, Error>) -> Void){
 		let task = DataTaskRequest()
-		task.sendRequest(body: body, url: url, method: "GET"){ data, response, error in
+		task.sendRequest(body: body, url: url, method: method){ data, response, error in
 			
 			if let response = response as? HTTPURLResponse {
 				let status = ResponseStatus.translateReponseCode(statusCode: response.statusCode)
@@ -105,12 +105,13 @@ struct MusicRepository{
 			dataTask(url: url, method: "POST", body: nil){ response in
 				switch response{
 				case .success(let data):
-					do {
-						let decoded = try JSONDecoder().decode(String.self, from: data)
-						completion(.success(decoded))
-					}catch{
-						completion(.failure(RepoError.ResponseError))
-					}
+					
+                    let playlistId = String(decoding: data, as: UTF8.self)
+                    if(playlistId == ""){
+                        return completion(.failure(RepoError.ResponseError))
+                    }
+                    completion(.success(playlistId))
+					
 				case .failure(_):
 					completion(.failure(RepoError.ResponseError))
 				}

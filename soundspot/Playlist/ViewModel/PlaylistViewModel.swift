@@ -42,6 +42,7 @@ class PlaylistViewModel : ObservableObject{
 				case .success(let trackList):
 					DispatchQueue.main.async {
 						self.tracksList = trackList
+                        self.loading = false
 					}
 					self.loadPictures()
 				case .failure(_):

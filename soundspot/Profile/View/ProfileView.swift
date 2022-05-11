@@ -30,7 +30,7 @@ struct ProfileView: View{
                             VStack
                             {
                                 Spacer()
-                                NavigationLink(destination: SettingsPage(), isActive: $viewModel.navigateToSettingsView)
+                                NavigationLink(destination: SettingsPage(viewModel: self.viewModel), isActive: $viewModel.navigateToSettingsView)
                                 {
                                     Button(action:{viewModel.navigateToSettingsView = true})
                                     {

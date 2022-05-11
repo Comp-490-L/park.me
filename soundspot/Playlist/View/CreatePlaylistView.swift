@@ -11,7 +11,7 @@ import SwiftUI
 struct CreatePlaylistView : View
 {
 	@ObservedObject var viewModel : CreatePlaylistViewModel
-    @State private var playlistName: String = ""
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body : some View
     {
@@ -52,7 +52,7 @@ struct CreatePlaylistView : View
 				HStack
 				{
 					
-					Button("Cancel", action: {})
+					Button("Cancel", action: {self.mode.wrappedValue.dismiss()})
 					Spacer()
 						.frame(width: 30)
 					if(viewModel.title == ""){
@@ -70,7 +70,10 @@ struct CreatePlaylistView : View
 				destination : PlaylistView(viewModel: self.viewModel.playlistViewModel),
 						   isActive: $viewModel.navigateToPlaylist){}
 
-        }
+        }.navigationBarTitle("")
+            .navigationBarBackButtonHidden(true)
+             .navigationBarHidden(true)
+              .ignoresSafeArea(.all)
     }
     
 

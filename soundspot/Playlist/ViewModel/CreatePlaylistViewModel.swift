@@ -28,7 +28,8 @@ class CreatePlaylistViewModel : ObservableObject{
 				switch(result){
 				case .success(let id):
 					self.playlistViewModel.music.title = self.title
-					self.playlistViewModel.music.link = id // TODO form link
+                    self.playlistViewModel.music.link = "\(Server.url)/api/Playlist?playlistId=\(id)"
+                    self.playlistViewModel.music.id = id
 					self.navigateToPlaylist = true
 				case .failure(_):
 					self.creatingPlaylist = false
