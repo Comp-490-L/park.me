@@ -88,8 +88,6 @@ struct PlaylistView: View
 		}.onLoad{
 			viewModel.onEvent(event: PlaylistEvent.onLoad)
 		}
-		
-		NavigationLink(destination: PlayerView(viewModel: PlayerViewModel.instancePlayTracks(tracksList: viewModel.tracksList, index: viewModel.clickedTrack)), isActive: $viewModel.navigateToPlayerView){}
 	}
 }
 

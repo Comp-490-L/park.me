@@ -18,6 +18,7 @@ struct TabBar: View
     
     @Namespace var animation
     
+    
     var body: some View
     {
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom),
@@ -47,8 +48,8 @@ struct TabBar: View
                 /*.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))*/
                     .tag(1)
             }
-            
-            testPlayer(animation: animation, expand: $expand)
+            MiniPlayerView(animation: animation, expand: $expand)
+            //testPlayer(animation: animation, expand: $expand)
         })
     }
 }

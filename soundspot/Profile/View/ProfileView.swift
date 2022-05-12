@@ -212,19 +212,22 @@ struct ProfileView: View{
 										MusicRow(viewModel: MusicRowViewModel.init(
 											music: profileRepo.profile!.singlesList[index],
 											index: index,
-											onClick: viewModel.navigateToPlayerView,
+											onClick: viewModel.PlayTrackInPlayerView,
                                             containedIn: ContainedIn(container: Container.Track, id: profileRepo.profile!.singlesList[index].id)))
 									}
+                                    
+                                    
+                                
 									
 									// Navigate to PlayerView
-									if(viewModel.navigateToPlayerView){
+									/*if(viewModel.navigateToPlayerView){
 										if let profile = profileRepo.profile{
 											NavigationLink(destination :
 															PlayerView(viewModel:
 																		PlayerViewModel.instancePlayTracks(tracksList: profile.singlesList, index: viewModel.clickedTrack)
 																	  ), isActive: $viewModel.navigateToPlayerView){}
 										}
-									}
+									}*/
 									
 									
 									

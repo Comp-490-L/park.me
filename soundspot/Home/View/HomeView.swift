@@ -232,9 +232,7 @@ struct HomeMainView: View {
                 
             }
             //VideoControls()
-            
-            NavigationLink(
-                destination: PlayerView(viewModel: PlayerViewModel.instancePlayTracks(tracksList: viewModel.availableTracks.tracks, index: viewModel.clickedTrack)), isActive: $viewModel.navigateToPlayer){}
+        
             
             
         }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))

@@ -197,14 +197,13 @@ class ProfileViewModel: ObservableObject{
         navigateToUploadView = true
     }
     
-    func navigateToPlayerView(index : Int){
-        if let profile = profileRepo.profile {
-            if(index < profile.singlesList.count){
-                clickedTrack = index
-                navigateToPlayerView = true
-            }
-        }
+    
+    func PlayTrackInPlayerView(index : Int){
+        if(profileRepo.profile == nil){ return }
+        _ = PlayerViewModel.instancePlayTracks(tracksList: profileRepo.profile!.singlesList, index: index)
+        
     }
+
     
     func navToCreatePlaylistView()
     {
@@ -219,6 +218,7 @@ class ProfileViewModel: ObservableObject{
             }
         }
     }
+    
     
     func navigateToPlaylist(index : Int){
         if let profile = profileRepo.profile {

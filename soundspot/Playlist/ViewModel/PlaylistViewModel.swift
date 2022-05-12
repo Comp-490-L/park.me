@@ -125,9 +125,7 @@ class PlaylistViewModel : ObservableObject{
 	
 	func navigateToPlayerView(index : Int){
 		if(index < tracksList.count){
-			clickedTrack = index
-			navigateToPlayerView = true
-			
+            _ = PlayerViewModel.instancePlayTracks(tracksList: tracksList, index: index)
 		}
 	}
 }

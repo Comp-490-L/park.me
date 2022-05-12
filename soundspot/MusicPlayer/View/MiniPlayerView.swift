@@ -10,7 +10,8 @@ import SwiftUI
 
 struct MiniPlayerView: View
 {
-    @StateObject var viewModel : PlayerViewModel
+    
+    @ObservedObject var viewModel = PlayerViewModel.getInstance()
     
     
     var animation: Namespace.ID
@@ -21,7 +22,7 @@ struct MiniPlayerView: View
     
     var safeArea = UIApplication.shared.windows.first?.safeAreaInsets
     
-    var musicThing = PlayerViewModel.getInstance()
+
     
     //Volume Slider
     @State var volume : CGFloat = 0
@@ -39,7 +40,7 @@ struct MiniPlayerView: View
     var body: some View
     {
         //if (viewModel.show == true)
-        if (true)
+        if (viewModel.trackList.count > 0)
         {
             VStack
             {
@@ -54,14 +55,14 @@ struct MiniPlayerView: View
                 {
                     if expand{Spacer(minLength: 0)} //Change to song image
                     
-                    if(musicThing.trackList[musicThing.trackIndex].pictureData == nil && !musicThing.trackList[musicThing.trackIndex].pictureDownloaded){
+                    if(viewModel.trackList[viewModel.trackIndex].pictureData == nil || !viewModel.trackList[viewModel.trackIndex].pictureDownloaded){
                         Image("defaultTrackImg")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: expand ? height : 55, height: expand ? height : 55)
                             .cornerRadius(15)
                     }else{
-                        if let data = musicThing.trackList[musicThing.trackIndex].pictureData{
+                        if let data = viewModel.trackList[viewModel.trackIndex].pictureData{
                             if let uiImage = UIImage(data: data){
                                 Image(uiImage: uiImage)
                                     .resizable()
@@ -74,7 +75,7 @@ struct MiniPlayerView: View
                     
                     if !expand      //Change to Song Title
                     {
-                        Text(musicThing.trackList[musicThing.trackIndex].title)
+                        Text(viewModel.trackList[viewModel.trackIndex].title)
                             .font(.title2)
                             .fontWeight(.bold)
                             .matchedGeometryEffect(id: "Label", in: animation)
@@ -120,7 +121,7 @@ struct MiniPlayerView: View
                     {
                         if expand
                         {
-                            Text(musicThing.trackList[musicThing.trackIndex].title)
+                            Text(viewModel.trackList[viewModel.trackIndex].title)
                                 .font(.title2)
                                 .foregroundColor(.primary)
                                 .fontWeight(.bold)
@@ -553,12 +554,21 @@ struct PlayerSlider : View {
 }
 
 /*
+struct MiniPlayer_Previews: PreviewProvider {
+    @State static var expand = false
+    @Namespace static var animation
+    static var previews: some View {
+        MiniPlayerView(viewModel: PlayerViewModel.instancePlayTracks(tracksList: [Track](), index: 0), animation: self.animation, expand: $expand).previewDevice("iPhone 13")
+    }
+}*/
+
+/*
 struct MiniPlayerView_Previews: PreviewProvider
 {
     var expand : Bool = true
     
     static var previews: some View
     {
-        testPlayer(animation: <#Namespace.ID#>, expand: expand)
+        testPlayer(animation: Namespace.ID, expand: expand)
     }
 }*/

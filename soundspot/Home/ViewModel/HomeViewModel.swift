@@ -31,7 +31,7 @@ class HomeViewModel : ObservableObject{
     
     func onTrackClicked(index: Int){
         clickedTrack = index
-        navigateToPlayer = true
+        _ = PlayerViewModel.instancePlayTracks(tracksList: availableTracks.tracks, index: index)
     }
 	
 	private func getAvailableTracks(newest: String?, oldest: String?, append : Bool){
