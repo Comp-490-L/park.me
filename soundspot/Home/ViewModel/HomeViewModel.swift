@@ -15,6 +15,7 @@ class HomeViewModel : ObservableObject{
     @Published var navigateToPlayer = false
 	private lazy var musicRepo = MusicRepository()
 	@Published private (set) var endOfTracks = false
+    @Published var trending = [Track]()
     
     func onEvent(event : HomeViewEvent){
         switch event {
@@ -26,6 +27,7 @@ class HomeViewModel : ObservableObject{
     }
     
     private func onLoad(){
+        loadTrending()
 		getAvailableTracks(newest: nil, oldest: nil, append: false)
     }
     
@@ -46,13 +48,13 @@ class HomeViewModel : ObservableObject{
 					
 					if(!append){
 						self.availableTracks = availableTracks
-						self.loadPictures(start: 0)
+                        self.loadPictures(tracks: self.availableTracks.tracks, start: 0)
 					}else{
 						let start = self.availableTracks.tracks.count
 						self.availableTracks.tracks.append(contentsOf: availableTracks.tracks)
 						self.availableTracks.newest = availableTracks.newest
 						self.availableTracks.oldest = availableTracks.oldest
-						self.loadPictures(start: start)
+                        self.loadPictures(tracks: self.availableTracks.tracks, start: start)
 					}
 					self.endOfTracks = false
 				case .failure(_):
@@ -68,9 +70,9 @@ class HomeViewModel : ObservableObject{
 		getAvailableTracks(newest: availableTracks.newest, oldest: availableTracks.oldest, append: true)
 	}
 	
-	private func loadPictures(start : Int){
-		for i in start..<availableTracks.tracks.count{
-			if let pictureLink = availableTracks.tracks[i].pictureLink{
+    private func loadPictures(tracks: [Track], start : Int){
+		for i in start..<tracks.count{
+			if let pictureLink = tracks[i].pictureLink{
 				let url = URL(string: pictureLink)
 				guard let url = url else {
 					return
@@ -80,9 +82,9 @@ class HomeViewModel : ObservableObject{
 						[self] in
 						switch result{
 						case .success(let data):
-							availableTracks.tracks[i].pictureData = data
+							tracks[i].pictureData = data
 							objectWillChange.send()
-							availableTracks.tracks[i].pictureDownloaded = true
+							tracks[i].pictureDownloaded = true
 						case .failure(_):
 							return
 						}
@@ -91,4 +93,19 @@ class HomeViewModel : ObservableObject{
 			}
 		}
 	}
+    
+    private func loadTrending(){
+        musicRepo.getTrending{ response in
+            DispatchQueue.main.async {
+                [self] in
+                switch(response){
+                case .success(let tracks):
+                    trending = tracks
+                    loadPictures(tracks: tracks, start: 0)
+                case .failure(_):
+                    return;
+                }
+            }
+        }
+    }
 }

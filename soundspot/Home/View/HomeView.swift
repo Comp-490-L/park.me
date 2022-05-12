@@ -47,6 +47,7 @@ struct HomeMainView: View {
     @State var hero = false
     @State var data = TrendingCard
     @StateObject var viewModel : HomeViewModel
+    
     var body: some View {
         
         VStack {
@@ -64,28 +65,21 @@ struct HomeMainView: View {
                                 .padding(.leading, 20)
                             
                             Spacer()
-                            Text("View all >")
-                                .multilineTextAlignment(.leading)
-                                .foregroundColor(.white)
-                                .padding(.trailing, 20)
                         }
                         // Card View
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
-                                ForEach(TrendingCard) { card in
-                                    NavigationLink(
-                                        destination: Song(Song :card),
-                                        label: {
-                                            Trending(trendingSong: card)
-                                                .background(Color.purple)
-                                                .cornerRadius(15)
-                                                .shadow(radius: 1)
-                                            
-                                        })
+                                ForEach(0..<viewModel.trending.count, id: \.self) { index in
+                                    Trending(track: viewModel.trending[index])
+                                        .cornerRadius(15)
+                                        .shadow(radius: 1)
                                         .buttonStyle(PlainButtonStyle())
-                                }
-                                .padding(.bottom, 10)
-                                .padding(.leading, 30)
+                                        .onTapGesture{
+                                            _=PlayerViewModel.instancePlayTracks(tracksList: viewModel.trending, index: index)
+                                        }
+                                }.padding(.leading, 15)
+                                .padding(.trailing, 5)
+                                
                                 
                             }
                         }
@@ -181,61 +175,12 @@ struct HomeMainView: View {
                         }.onTapGesture{
                             viewModel.onEvent(event: HomeViewEvent.viewMoreTracks)
                         }.padding()
-                    }
+                    }.padding(.bottom, 90)
+                        .padding(.leading,10)
                     
                     //end of playlist
                     
-                    //Our picks
-                    VStack{
-                        HStack {
-                            Text("Our picks")
-                                .bold()
-                                .multilineTextAlignment(.trailing)
-                                .padding(.leading, 20)
-                                .foregroundColor(.white)
-                            
-                            Spacer()
-                            Text("View all >")
-                                .multilineTextAlignment(.leading)
-                                .foregroundColor(.white)
-                                .padding(.trailing, 20)
-                        }
-                        .opacity(self.hero ? 0 : 1)
-                        
-                        
-                        // Card View
-                        VStack(spacing: 100) {
-                            ForEach(0..<self.data.count){i in
-                                GeometryReader{g in
-                                    OurPicks(card: self.$data[i], hero: self.$hero)
-                                    
-                                        .offset(y: self.data[i].expand ? -g.frame(in: .global).minY : 0)
-                                        .opacity(self.hero ? (self.data[i].expand ? 1 : 0) : 1)
-                                        .onTapGesture {
-                                            
-                                            withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.8, blendDuration: 0)){
-                                                if !self.data[i].expand{
-                                                    self.hero.toggle()
-                                                    self.data[i].expand.toggle()
-                                                }
-                                            }
-                                            
-                                        }
-                                    
-                                }
-                                // going to increase height based on expand...
-                                .frame(height: self.data[i].expand ? UIScreen.main.bounds.height : 250)
-                                .simultaneousGesture(DragGesture(minimumDistance: self.data[i].expand ? 0 : 800).onChanged({ (_) in
-                                    
-                                    print("dragging")
-                                }))
-                            }
-                            
-                            
-                        }
-                        
-                    }.padding(.top, 50)
-                        .padding(.bottom, 150)
+
                     
                     Spacer()
                     

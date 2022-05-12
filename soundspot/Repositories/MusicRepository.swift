@@ -121,6 +121,32 @@ struct MusicRepository{
 		}else{completion(.failure(RepoError.RequestError))}
 		
 	}
+    
+    func increaseStreamCount(trackId: String){
+        let url = URL(string: "\(Server.url)/api/addStream\(trackId)")
+        if let url = url {
+            dataTask(url: url, method: "PUT", body: nil){ response in
+                // Does not matter
+            }
+        }
+    }
+    
+    func getTrending(completion: @escaping (Swift.Result<[Track], Error>) -> Void){
+        let url = URL(string: "\(Server.url)/api/Trending")
+        if let url = url {
+            dataTask(url: url, method: "GET", body: nil){ response in
+                do{
+                    switch response{
+                    case .success(let data):
+                        let decoded = try JSONDecoder().decode([Track].self, from: data)
+                        completion(.success(decoded))
+                    case .failure(_):
+                        completion(.failure(RepoError.RequestError))
+                    }
+                }catch{}
+            }
+        }
+    }
 	
 }
 

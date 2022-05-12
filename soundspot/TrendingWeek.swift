@@ -10,42 +10,45 @@
 import SwiftUI
 
 struct Trending: View {
-    @State var trendingSong : Card
+    var track : Track
     var body: some View {
         ZStack{
-            Image(trendingSong.image)
-                .resizable()
+            if let data = track.pictureData{
+                if let uiimage = UIImage(data: data){
+                    ZStack{
+                     Image(uiImage: uiimage).resizable()
+                        .frame(width: 270, height:270)
+                    }.opacity(0.5)
+                }else{
+                    Image("defaultTrackImg").resizable()
+                        .frame(width: 270, height:270).background(Color.gray)
+                }
+            }else{
+                Image("defaultTrackImg").resizable()
                 .frame(width: 270, height:270)
+                .background(Color.gray)
+            }
+                
         
         VStack {
             Spacer()
             HStack {
-                Text(trendingSong.title)
+                Text(track.title)
                     .bold()
                     .foregroundColor(.white)
-                    .padding(.all, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+                    .padding(.all, 4)
                 Spacer()
             }
             
             HStack {
-                Text(trendingSong.descrip)
+                Text("\(String(track.streams)) Streams")
                     .font(.subheadline)
                     .foregroundColor(.white)
                     .padding(.leading, 10)
+                    .padding(.bottom, 20)
                 Spacer()
             }
             
-            HStack {
-                ForEach(0 ..< trendingSong.stars) { item in
-                    Image(systemName: "star.fill")
-                        .foregroundColor(.yellow)
-                        .font(.subheadline)
-                }
-                Spacer()
-            }
-            .padding(.bottom, 30)
-            .padding(.leading, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-            .padding(.trailing, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
             
         }.padding(.leading, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
             
@@ -57,8 +60,9 @@ struct Trending: View {
     
 }
 
+/*
 struct Trending_Previews: PreviewProvider {
     static var previews: some View {
         Trending(trendingSong: TrendingCard[0])
     }
-}
+}*/

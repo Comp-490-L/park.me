@@ -28,25 +28,18 @@ struct ProfileView: View{
                         {
                             Spacer()
                             Spacer()
-                            VStack
+                            NavigationLink(destination: SettingsPage(viewModel: self.viewModel), isActive: $viewModel.navigateToSettingsView)
                             {
-                                Spacer()
-                                NavigationLink(destination: SettingsPage(viewModel: self.viewModel), isActive: $viewModel.navigateToSettingsView)
+                                Button(action:{viewModel.navigateToSettingsView = true})
                                 {
-                                    Button(action:{viewModel.navigateToSettingsView = true})
-                                    {
-                                        VStack(alignment: .center)
-                                        {
-                                            Image(systemName: "gear")
-                                                .resizable()
-                                              //  .padding(25)
-                                                .scaledToFit()
-                                                .frame(width: 50, height: 50).foregroundColor(.white)
-                                        }
-                                    }
+                                    Image(systemName: "gear")
+                                        .resizable()
+                                      //  .padding(25)
+                                        .scaledToFit()
+                                        .frame(width: 35, height: 35).foregroundColor(.white)
                                 }
                             }
-                        }
+                        }.padding(.trailing, 10)
 						
 						VStack(alignment: .center){
 							
@@ -145,16 +138,32 @@ struct ProfileView: View{
 									
 								}
 								Spacer()
+                                
+                                Menu{
+                                    Button("Upload tracks"){
+                                        viewModel.onEvent(event: ProfileEvents.UploadTracksClicked)
+                                    }
+                                    Button("Upload album"){
+                                        viewModel.onEvent(event: ProfileEvents.UploadAlbumClicked)
+                                    }
+                                    Button("Create playlist"){
+                                        viewModel.navigateToCreatePlaylistView = true
+                                    }
+                                    
+                                    
+                                } label: {
+                                    Image(systemName: "plus")
+                                        .foregroundColor(.white)
+                                        .font(.title2).padding(.trailing, 15)
+                                }
+                                .sheet(isPresented: $viewModel.showFilePicker){
+                                    viewModel.showDocumentPicker()
+                                }
+                                
+                                
                                 //Navigate to CreatePlaylistView
                                 NavigationLink(destination: CreatePlaylistView(viewModel: CreatePlaylistViewModel() ), isActive: $viewModel.navigateToCreatePlaylistView)
-                                {
-                                    Button(action:{viewModel.navigateToCreatePlaylistView = true})
-                                    {
-                                        Image(systemName: "plus")
-                                            .foregroundColor(.white)
-                                            .font(.title2)
-                                    }
-                                }
+                                {}
 							}
 							
 							if(profileRepo.profile != nil){
@@ -263,42 +272,6 @@ struct ProfileView: View{
 				
 				
 				
-				HStack{
-					
-					if(viewModel.uploadingFile){
-						VStack(alignment : .leading){
-							Text("Upload Progress")
-							ProgressBar(currentProgress: $viewModel.uploadProgress)
-								.frame(height : 20)
-						}
-					}else{
-						
-						Menu{
-							Button("Tracks"){
-								viewModel.onEvent(event: ProfileEvents.UploadTracksClicked)
-							}
-							Button("Album"){
-								viewModel.onEvent(event: ProfileEvents.UploadAlbumClicked)
-							}
-							
-						} label: {
-							SwiftUI.Text("Upload music")
-								.font(.headline)
-								.padding(.horizontal, 60.0)
-								.padding(.vertical, 10.0)
-								.foregroundColor(.white)
-								.background(Color.purple)
-								.cornerRadius(10)
-						}
-						.sheet(isPresented: $viewModel.showFilePicker){
-							viewModel.showDocumentPicker()
-						}
-						
-					}
-					
-				}
-				.padding(.bottom, 10)
-				.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
 				
 				
 				NavigationLink(
@@ -310,11 +283,13 @@ struct ProfileView: View{
 				
 				
 				
-			}.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+            }
+            .background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
 				
-		}.navigationBarTitle("")
+        }.navigationBarTitle("").opacity(1)
 			.navigationBarHidden(true)
 			.navigationBarBackButtonHidden(true)
+            .ignoresSafeArea(.all)
 		
 	}
 	

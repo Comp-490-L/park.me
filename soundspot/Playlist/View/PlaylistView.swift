@@ -13,6 +13,7 @@ struct PlaylistView: View
 	@ObservedObject var viewModel : PlaylistViewModel
 	var body: some View
 	{
+        VStack{
 		VStack
 		{
 			if(viewModel.loading){
@@ -66,16 +67,7 @@ struct PlaylistView: View
                 
 				ForEach(0..<viewModel.tracksList.count, id: \.self){
 					i in
-					/*
-					 MusicRow(
-						 music: Binding(get: {
-							 viewModel.tracksList[i]
-						 }, set: {
-							 viewModel.tracksList[i] = $0 as! Track
-						 }),
-						 heart: "", index: i,
-						 onClick: viewModel.navigateToPlayerView)
-					 */
+					
                     
 					MusicRow(viewModel: MusicRowViewModel(
 						music: viewModel.tracksList[i] as Music,
@@ -85,9 +77,15 @@ struct PlaylistView: View
 				}
 				Spacer()
 			}
-		}.onLoad{
+        }
+                
+                .padding(.top, 100)
+                .background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+        .onLoad{
 			viewModel.onEvent(event: PlaylistEvent.onLoad)
 		}
+        }.navigationBarTitle("")
+            .edgesIgnoringSafeArea(.all)
 	}
 }
 

@@ -137,7 +137,7 @@ struct PlayerView : View
 struct PlayerView_Previews: PreviewProvider {
      
     static func getMusicModel() ->  Array<Track>{
-		let model = Track(id: "", name: "music Name", link: "", trackDownloaded: false, pictureLink: nil, pictureDownloaded: false, pictureData: nil, isLiked: true)
+		let model = Track(id: "", name: "music Name", link: "", trackDownloaded: false, pictureLink: nil, pictureDownloaded: false, pictureData: nil, isLiked: true, owner: true, streams: 22)
         
         var list = Array<Track>()
         list.append(model)

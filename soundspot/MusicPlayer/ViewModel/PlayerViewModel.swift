@@ -34,6 +34,10 @@ class PlayerViewModel : ObservableObject{
     private var trackLengthInSeconds : Double = 0
     private var isDraggingSlider : Bool = false
     private var trackEnded = false
+    private var streamed : Double = 0.0
+    private var streamCounterUpdated = false
+    
+    private lazy var musicRepo = MusicRepository()
 
 	private static var instance = PlayerViewModel()
 	
@@ -120,6 +124,8 @@ class PlayerViewModel : ObservableObject{
     
     @objc func playerDidFinishPlaying(){
         trackEnded = true
+        streamed = 0.0
+        streamCounterUpdated = false
         playPauseBtnPressed()
     }
     
@@ -147,6 +153,19 @@ class PlayerViewModel : ObservableObject{
             player.removeTimeObserver(timeObserverToken)
             self.timeObserverToken = nil
         }
+    }
+    
+    private func addStreamedSeconds(){
+        if(isPlaying){
+            streamed = streamed + 0.5
+        }
+        if(streamed > 10 && !streamCounterUpdated){
+            DispatchQueue.global().async {
+                [self] in
+                musicRepo.increaseStreamCount(trackId: trackList[trackIndex].id)
+            }
+        }
+        
     }
     
     private func updatePlayerProgress(){
