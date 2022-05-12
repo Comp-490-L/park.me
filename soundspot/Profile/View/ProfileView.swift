@@ -217,17 +217,7 @@ struct ProfileView: View{
 									}
                                     
                                     
-                                
-									
-									// Navigate to PlayerView
-									/*if(viewModel.navigateToPlayerView){
-										if let profile = profileRepo.profile{
-											NavigationLink(destination :
-															PlayerView(viewModel:
-																		PlayerViewModel.instancePlayTracks(tracksList: profile.singlesList, index: viewModel.clickedTrack)
-																	  ), isActive: $viewModel.navigateToPlayerView){}
-										}
-									}*/
+                            
 									
 									
 									

@@ -66,14 +66,19 @@ struct CreatePlaylistView : View
             Spacer()
                 .frame(height: 400)
 			
+            
 			NavigationLink(
 				destination : PlaylistView(viewModel: self.viewModel.playlistViewModel),
-						   isActive: $viewModel.navigateToPlaylist){}
+                isActive: $viewModel.navigateToPlaylist){}
 
         }.navigationBarTitle("")
             .navigationBarBackButtonHidden(true)
              .navigationBarHidden(true)
               .ignoresSafeArea(.all)
+              .onAppear{
+                  if(viewModel.navigateToPlaylist){
+                  self.mode.wrappedValue.dismiss()
+              }}
     }
     
 
