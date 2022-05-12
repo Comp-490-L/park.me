@@ -12,7 +12,8 @@ import AudioToolbox
 
 struct ProfileView: View{
 	
-	@ObservedObject var viewModel: ProfileViewModel
+    @ObservedObject var profileRepo = ProfileRepository.getInstance()
+	@StateObject var viewModel: ProfileViewModel
 	@State var didTap = false
 	@State var showUpload = false
 	
@@ -50,7 +51,7 @@ struct ProfileView: View{
 						VStack(alignment: .center){
 							
                             if (!viewModel.loading){
-                                if let profile = viewModel.profile{
+                                if let profile = profileRepo.profile{
                                     if let image = profile.image{
                                         image
                                             .resizable()
@@ -76,7 +77,7 @@ struct ProfileView: View{
                                         .scaledToFit()
                                         .padding(.top, 40)
                                 }
-                                Text(viewModel.profile?.displayName ?? "Username")
+                                Text(profileRepo.profile?.displayName ?? "Username")
                                     .font(.title2)
                                     .foregroundColor(.white)
                                     .fontWeight(.bold)
@@ -156,18 +157,19 @@ struct ProfileView: View{
                                 }
 							}
 							
-							if(viewModel.profile != nil){
+							if(profileRepo.profile != nil){
 								// Playlists
-								ForEach(0..<viewModel.profile!.playlistList.count, id: \.self){ index in
+								ForEach(0..<profileRepo.profile!.playlistList.count, id: \.self){ index in
 									MusicRow(viewModel: MusicRowViewModel.init(
-										music: viewModel.profile!.playlistList[index],
+										music: profileRepo.profile!.playlistList[index],
 										index: index,
-										onClick: viewModel.navigateToPlaylist))
+										onClick: viewModel.navigateToPlaylist,
+                                        containedIn: ContainedIn(container: Container.Playlist, id: profileRepo.profile!.playlistList[index].id)))
 								}
                                 
                                 NavigationLink(destination: PlaylistView(
                                     viewModel: PlaylistViewModel(
-                                        music: viewModel.profile!.playlistList[viewModel.clickedPlaylist])),
+                                        music: profileRepo.profile!.playlistList[viewModel.clickedPlaylist])),
                                                isActive: $viewModel.navigateToPlaylist){}
 								//TODO add navigation for playlists here
 							}
@@ -175,8 +177,8 @@ struct ProfileView: View{
 							
 							Spacer()
 							
-							if(viewModel.profile?.singlesList.count == 0
-							   && viewModel.profile?.albumsList.count == 0){
+                            if(profileRepo.profile?.singlesList.count == 0
+							   && profileRepo.profile?.albumsList.count == 0){
 								Text("Uploaded music will be shown here.")
 									.frame(maxWidth: .infinity)
 							}else{
@@ -200,21 +202,22 @@ struct ProfileView: View{
 								
 								
 								// Check if profile is found and user has some music uploaded
-								if(viewModel.profile != nil){
+								if(profileRepo.profile != nil){
 									
-									ForEach(0..<viewModel.profile!.singlesList.count, id: \.self)
+									ForEach(0..<profileRepo.profile!.singlesList.count, id: \.self)
 									{
 										index in
 	
 										MusicRow(viewModel: MusicRowViewModel.init(
-											music: viewModel.profile!.singlesList[index],
+											music: profileRepo.profile!.singlesList[index],
 											index: index,
-											onClick: viewModel.navigateToPlayerView))
+											onClick: viewModel.navigateToPlayerView,
+                                            containedIn: ContainedIn(container: Container.Track, id: profileRepo.profile!.singlesList[index].id)))
 									}
 									
 									// Navigate to PlayerView
 									if(viewModel.navigateToPlayerView){
-										if let profile = viewModel.profile{
+										if let profile = profileRepo.profile{
 											NavigationLink(destination :
 															PlayerView(viewModel:
 																		PlayerViewModel.instancePlayTracks(tracksList: profile.singlesList, index: viewModel.clickedTrack)
@@ -225,18 +228,19 @@ struct ProfileView: View{
 									
 									
 									// Albums
-									ForEach(0..<viewModel.profile!.albumsList.count, id: \.self)
+									ForEach(0..<profileRepo.profile!.albumsList.count, id: \.self)
 									{
 										index in
 
 										MusicRow(viewModel: MusicRowViewModel.init(
-											music: viewModel.profile!.albumsList[index],
+											music: profileRepo.profile!.albumsList[index],
 											index: index,
-											onClick: viewModel.navigateToPlaylistView))
+											onClick: viewModel.navigateToPlaylistView,
+                                            containedIn: ContainedIn(container: Container.Album, id: profileRepo.profile!.albumsList[index].id)))
 									}
 									// Navigate to playlistView
 									if(viewModel.navigateToPlaylistView){
-										if let profile = viewModel.profile{
+										if let profile = profileRepo.profile{
 											
 											NavigationLink(destination :
 															PlaylistView(
@@ -255,7 +259,7 @@ struct ProfileView: View{
 						
 					}.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
 						.padding(.leading, 10)
-						.onAppear{
+						.onLoad{
 							viewModel.onEvent(event: ProfileEvents.LoadProfile)
 						}
 					

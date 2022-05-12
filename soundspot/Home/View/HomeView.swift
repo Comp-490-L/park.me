@@ -154,7 +154,8 @@ struct HomeMainView: View {
                             
                             MusicRow(viewModel : MusicRowViewModel(
                                 music: viewModel.availableTracks.tracks[i],
-                                index: i, onClick: viewModel.onTrackClicked)
+                                index: i, onClick: viewModel.onTrackClicked,
+                                containedIn: ContainedIn(container: Container.Track, id: viewModel.availableTracks.tracks[i].id))
                                 )
                         }
                         if(viewModel.endOfTracks){

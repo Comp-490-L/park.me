@@ -100,28 +100,7 @@ struct MusicRepository{
 		}else{completion(.failure(RepoError.RequestError))}
     }
 	
-	func createPlaylist(title: String, completion: @escaping (Swift.Result<String, Error>) -> Void){
-		let escapedTitle = title.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-		let url = URL(string: "\(Server.url)/api/Playlist?title=\(escapedTitle ?? "")")
-		if let url = url {
-			dataTask(url: url, method: "POST", body: nil){ response in
-				switch response{
-				case .success(let data):
-					
-                    let playlistId = String(decoding: data, as: UTF8.self)
-                    if(playlistId == ""){
-                        return completion(.failure(RepoError.ResponseError))
-                    }
-                    completion(.success(playlistId))
-					
-				case .failure(_):
-					completion(.failure(RepoError.ResponseError))
-				}
-			}
-			
-		}else{completion(.failure(RepoError.RequestError))}
-		
-	}
+	
 	
 	func getPlaylist(playlistId :String, completion: @escaping (Swift.Result<Playlist, Error>) -> Void){
 		let url = URL(string: "\(Server.url)/api/Playlist?playlistId=\(playlistId)")

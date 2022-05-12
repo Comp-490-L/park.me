@@ -14,6 +14,7 @@ import SwiftUI
 struct SettingsPage: View
 {
     @ObservedObject var viewModel: ProfileViewModel
+    @ObservedObject var profileRepo = ProfileRepository.getInstance()
     @State private var volume = 50.0
     @State private var newVolume = false
     
@@ -25,7 +26,7 @@ struct SettingsPage: View
             
             if (!viewModel.loading)
             {
-                if let profile = viewModel.profile{
+                if let profile = profileRepo.profile{
                     if let image = profile.image{
                         image
                             .resizable()
@@ -52,7 +53,7 @@ struct SettingsPage: View
                         .padding(.top, 40)
                 }
                 
-                Text(viewModel.profile?.displayName ?? "Username")
+                Text(profileRepo.profile?.displayName ?? "Username")
                     .font(.title2)
                     .foregroundColor(.white)
                     .fontWeight(.bold)

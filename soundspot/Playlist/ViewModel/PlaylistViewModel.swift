@@ -11,11 +11,15 @@ import SwiftUI
 class PlaylistViewModel : ObservableObject{
 	init(music : Music){
 		self.music = music
+        if(music is Album){
+            containedIn = Container.Album
+        }
 	}
 	
 	@Published var music : Music
 	@Published var loading = true
 	@Published var tracksList = [Track]()
+    var containedIn = Container.Playlist
 	private lazy var repo = MusicRepository()
 	
     

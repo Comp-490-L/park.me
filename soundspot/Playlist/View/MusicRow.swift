@@ -12,6 +12,7 @@ struct MusicRow: View
 {
 	@StateObject var viewModel : MusicRowViewModel
     @State var showPlaylists = false
+    var profileRepo = ProfileRepository.getInstance()
 	
 	var body: some View
 	{
@@ -69,29 +70,68 @@ struct MusicRow: View
 				viewModel.onEvent(event: MusicRowEvents.onClick)
 			}
 			
-            if(viewModel.music is Track){
+            
                 Menu
                 {
-                    Button("Add to queue", action:{})
-                    Button("Add to playlist", action:
-                    {
-                        showPlaylists = true
+                    if(viewModel.music is Track){
+                        Button("Add to queue", action:{})
+                        Button("Add to playlist", action:
+                        {
+                            showPlaylists = true
+                        })
+                    }
+                    
+                    if(viewModel.music is Track){
+                        switch viewModel.containedIn.container{
+                        case .Playlist:
+                            Button("Remove from playlist", action: {
+                                profileRepo.removeFromPlaylist(
+                                    playlistId: viewModel.containedIn.id, trackId: viewModel.music.id){ _ in}
+                            })
+                        case .Album:
+                            Button("Remove from album", action:{
+                                profileRepo.removeFromAlbum()
+                            })
+                        default:
+                            VStack{} // not needed
+                        }
+                        
+                    }
+                    
+                    Button("Delete", action: {
+                        switch viewModel.music{
+                        case is Track:
+                            // TODO check if track is in playlist and if it needs to be removed from playlist
+                            profileRepo.deleteTrack()
+                        case is Playlist:
+                            profileRepo.deletePlaylist()
+                        case is Album:
+                            profileRepo.deleteAlbum()
+                        default:
+                            break
+                        }
+                    })
+                    
+                    Button("Rename", action: {
+                        switch viewModel.music{
+                        case is Track:
+                            // TODO check if track is in playlist and if it needs to be removed from playlist
+                            profileRepo.renameTrack()
+                        case is Playlist:
+                            profileRepo.renamePlaylist()
+                        case is Album:
+                            profileRepo.renameTrack()
+                        default:
+                            break
+                        }
                     })
                     
                    
-                    if(viewModel.music.isLiked)
-                    {
-                        Button("Unlike Song", action: {viewModel.onEvent(event: MusicRowEvents.heartClicked)})
-                    }
-                    else
-                    {
-                        Button("Like Song", action:{viewModel.onEvent(event: MusicRowEvents.heartClicked)})
-                    }
                 } label:
                 {
                     Label("", systemImage: "ellipsis").padding(15)
                 }
-            }
+            
 		}.padding(.top, 3)
 			.padding(.bottom, 3)
             .sheet(isPresented: $showPlaylists){

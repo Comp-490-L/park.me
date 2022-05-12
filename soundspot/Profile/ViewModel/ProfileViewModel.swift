@@ -13,11 +13,11 @@ import UniformTypeIdentifiers
 class ProfileViewModel: ObservableObject{
     init(){
         profileRepo = ProfileRepository.getInstance()
-        profile = profileRepo.profile
     }
     
-    @Published var profile: ProfileModel?
+    //var profile: Published<ProfileModel?>.Publisher
     @Published var showFilePicker = false
+    
     
     @Published var clickedTrack :Int = 0
     
@@ -40,7 +40,7 @@ class ProfileViewModel: ObservableObject{
     @Published var navigateToPlaylistView = false
     var clickedAlbum : Int = 0
     
-    @Published private (set) var loading = true
+    @Published var loading = true
     @Published private (set) var errorLoading = false
     
     // queue used to increament picture loaded and removes loading from view
@@ -49,6 +49,8 @@ class ProfileViewModel: ObservableObject{
     
     var clickedPlaylist = 0
     @Published var navigateToPlaylist = false
+    
+    var didAppear = false
     
     func onEvent(event : ProfileEvents){
         switch(event){
@@ -66,8 +68,9 @@ class ProfileViewModel: ObservableObject{
     }
     
     private func getProfilePic(){
-        guard let profile = profile else{return}
-        guard let link = profile.pictureLink else {return}
+        
+        guard let profile = profileRepo.profile else{return}
+        guard let link = profileRepo.profile?.pictureLink else {return}
         let url = URL(string: link)
         if let url = url {
             profileRepo.getPicture(url: url){
@@ -91,8 +94,13 @@ class ProfileViewModel: ObservableObject{
     }
     
     private func getUserProfile(){
+        if(didAppear){
+            return
+        }else{
+            didAppear = true
+        }
         print("\nLoad Profile\n")
-        if(profile != nil){ //TODO check if data has changed on the server
+        if(profileRepo.profile != nil){ //TODO check if data has changed on the server
             loading = false
             errorLoading = false
             return
@@ -103,7 +111,7 @@ class ProfileViewModel: ObservableObject{
             DispatchQueue.main.async {
                 switch result{
                 case .success(let savedProfile):
-                    //self.profile = savedProfile
+                    //self.profile = self.profileRepo.profile
                     print("Got user profile, list count \(savedProfile.singlesList.count)")
                     self.getPictures()
                 case .failure(_):
@@ -117,23 +125,23 @@ class ProfileViewModel: ObservableObject{
     private func getPictures(){
         print("Getting pictures")
         
-        if(profile == nil || profile!.singlesList.count == 0){
+        if(profileRepo.profile == nil || profileRepo.profile!.singlesList.count == 0){
             loading = false
             return
         }
         
         var processed = 0
         
-        for (index, _) in profile!.singlesList.enumerated(){
-            if let link = profile!.singlesList[index].pictureLink {
+        for (index, _) in profileRepo.profile!.singlesList.enumerated(){
+            if let link = profileRepo.profile!.singlesList[index].pictureLink {
                 processed += 1
                 if let url = URL(string: link){
                     profileRepo.getPicture(url:  url){ result in
                         DispatchQueue.main.async {
                             switch result{
                                     case .success(let data):
-                                        self.profile!.singlesList[index].pictureData = data
-                                        self.profile!.singlesList[index].pictureDownloaded = true
+                                        self.profileRepo.profile!.singlesList[index].pictureData = data
+                                        self.profileRepo.profile!.singlesList[index].pictureDownloaded = true
                                         print("Got pictures")
                                         
                                     case .failure(_):
@@ -164,7 +172,7 @@ class ProfileViewModel: ObservableObject{
     private func incrementProcessedPictures(){
         processQueue.sync {
             processed += 1
-            if(processed == profile?.singlesList.count){
+            if(processed == profileRepo.profile?.singlesList.count){
                 loading = false
                 processed = 0
                 print("removing loading in incrementProcessedPictures")
@@ -190,7 +198,7 @@ class ProfileViewModel: ObservableObject{
     }
     
     func navigateToPlayerView(index : Int){
-        if let profile = profile {
+        if let profile = profileRepo.profile {
             if(index < profile.singlesList.count){
                 clickedTrack = index
                 navigateToPlayerView = true
@@ -204,7 +212,7 @@ class ProfileViewModel: ObservableObject{
     }
     
     func navigateToPlaylistView(index : Int){
-        if let profile = profile {
+        if let profile = profileRepo.profile {
             if(index < profile.albumsList.count){
                 clickedAlbum = index
                 navigateToPlaylistView = true
@@ -213,7 +221,7 @@ class ProfileViewModel: ObservableObject{
     }
     
     func navigateToPlaylist(index : Int){
-        if let profile = profile {
+        if let profile = profileRepo.profile {
             if(index < profile.playlistList.count){
                 clickedPlaylist = index
                 navigateToPlaylist = true

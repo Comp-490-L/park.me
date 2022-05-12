@@ -11,7 +11,7 @@ class ProfileRepository : ObservableObject{
     private init(){}
     @Published var profile : ProfileModel? = nil
     private static var instance = ProfileRepository()
-    var queue = DispatchQueue(label: "sync update of profile", qos: .userInitiated)
+    //var queue = DispatchQueue(label: "sync update of profile", qos: .userInitiated)
     
     static func getInstance() -> ProfileRepository{
         return instance
@@ -41,7 +41,7 @@ class ProfileRepository : ObservableObject{
     }
     
     private func setProfile(profile: ProfileModel){
-        queue.async {
+        DispatchQueue.main.async {
             self.profile = profile
         }
     }
@@ -110,12 +110,44 @@ class ProfileRepository : ObservableObject{
         addToPlaylist(playlistId: playlistId, track: track)
     }
     
+    func createPlaylist(title: String, completion: @escaping (Swift.Result<String, Error>) -> Void){
+        let escapedTitle = title.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        let url = URL(string: "\(Server.url)/api/Playlist?title=\(escapedTitle ?? "")")
+        if let url = url {
+            dataTask(url: url, method: "POST", body: nil){ response in
+                switch response{
+                case .success(let data):
+                    let playlistId = String(decoding: data, as: UTF8.self)
+                    self.createPlaylist(title: title, playlistId: playlistId)
+                    if(playlistId == ""){
+                        return completion(.failure(RepoError.ResponseError))
+                    }
+                    completion(.success(playlistId))
+                    
+                case .failure(_):
+                    completion(.failure(RepoError.ResponseError))
+                }
+            }
+            
+        }else{completion(.failure(RepoError.RequestError))}
+        
+    }
+    
+    private func createPlaylist(title: String, playlistId: String){
+        let url = "\(Server.url)/api/Playlist?playlistId=\(playlistId)"
+        let playlist = Playlist(id: playlistId, title: title, link: url, pictureLink: nil, isLiked: false)
+        DispatchQueue.main.async {
+            [self] in
+            profile!.playlistList.append(playlist)
+        }
+    }
+    
     private func addToPlaylist(playlistId: String, track: Track){
         if(profile == nil){
             return
         }
         
-        queue.async {
+        DispatchQueue.main.async {
             [self] in
             for (index, playlist) in profile!.playlistList.enumerated(){
                 if(playlist.id == playlistId){
@@ -194,11 +226,27 @@ class ProfileRepository : ObservableObject{
         
     }
     
+    func deleteTrack(){}
     
+    func deletePlaylist(){}
     
+    func deleteAlbum(){}
     
+    func renamePlaylist(){
+        
+    }
     
+    func renameAlbum(){
+        
+    }
     
+    func renameTrack(){
+        
+    }
+    
+    func removeFromAlbum(){
+        
+    }
     
     private func dataTask(url : URL, method : String, body: Data?, completion: @escaping (Swift.Result<Data, Error>) -> Void){
         let task = DataTaskRequest()

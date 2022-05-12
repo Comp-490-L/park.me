@@ -10,10 +10,11 @@ import SwiftUI
 
 class MusicRowViewModel : ObservableObject{
 	
-	init(music : Music, index : Int, onClick : @escaping (Int) -> Void){
+    init(music : Music, index : Int, onClick : @escaping (Int) -> Void, containedIn: ContainedIn){
 		self.music = music
 		self.index = index
 		self.onClick = onClick
+        self.containedIn = containedIn
 	}
 	
 	// Music means track or album
@@ -21,6 +22,7 @@ class MusicRowViewModel : ObservableObject{
 
 	var index : Int
 	var onClick : (Int) -> Void
+    var containedIn : ContainedIn
 	
 	
     private lazy var profileRepo = ProfileRepository.getInstance()

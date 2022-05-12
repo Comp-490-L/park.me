@@ -13,7 +13,7 @@ class CreatePlaylistViewModel : ObservableObject{
 	@Published var creatingPlaylist = false
 	var playlistViewModel = PlaylistViewModel(music: Playlist(id: "", title: "", link: "", pictureLink: nil, isLiked: false))
 	@Published var navigateToPlaylist = false
-	private lazy var musicRepo = MusicRepository()
+    private lazy var profileRepo = ProfileRepository.getInstance()
 	
 	func onEvent(event: CreatePlaylistEvents){
 		switch event {
@@ -23,7 +23,7 @@ class CreatePlaylistViewModel : ObservableObject{
 	}
 	
 	private func createPlaylist(){
-		musicRepo.createPlaylist(title: title){ result in
+        profileRepo.createPlaylist(title: title){ result in
 			DispatchQueue.main.async {
 				switch(result){
 				case .success(let id):

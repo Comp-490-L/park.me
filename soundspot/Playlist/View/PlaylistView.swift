@@ -63,6 +63,7 @@ struct PlaylistView: View
 					Spacer()
 				}
 				
+                
 				ForEach(0..<viewModel.tracksList.count, id: \.self){
 					i in
 					/*
@@ -75,10 +76,12 @@ struct PlaylistView: View
 						 heart: "", index: i,
 						 onClick: viewModel.navigateToPlayerView)
 					 */
+                    
 					MusicRow(viewModel: MusicRowViewModel(
 						music: viewModel.tracksList[i] as Music,
 						index: i,
-						onClick: viewModel.navigateToPlayerView))
+						onClick: viewModel.navigateToPlayerView,
+                        containedIn: ContainedIn(container: viewModel.containedIn, id: viewModel.music.id)))
 				}
 				Spacer()
 			}
