@@ -69,6 +69,7 @@ class MusicUploadViewModel : ObservableObject{
 			removeTrackAt(index)
 			
 		case .uploadClicked:
+            ProfileRepository.getInstance().profileUpdated = true
 			uploadClicked()
 		}
 	}

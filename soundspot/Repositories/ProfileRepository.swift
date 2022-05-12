@@ -11,6 +11,7 @@ class ProfileRepository : ObservableObject{
     private init(){}
     @Published var profile : ProfileModel? = nil
     private static var instance = ProfileRepository()
+    var profileUpdated = false
     //var queue = DispatchQueue(label: "sync update of profile", qos: .userInitiated)
     
     static func getInstance() -> ProfileRepository{

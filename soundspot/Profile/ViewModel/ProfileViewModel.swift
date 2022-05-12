@@ -94,13 +94,13 @@ class ProfileViewModel: ObservableObject{
     }
     
     private func getUserProfile(){
-        if(didAppear){
+        if(didAppear && !profileRepo.profileUpdated){
             return
         }else{
             didAppear = true
         }
         print("\nLoad Profile\n")
-        if(profileRepo.profile != nil){ //TODO check if data has changed on the server
+        if(!profileRepo.profileUpdated && profileRepo.profile != nil){ //TODO check if data has changed on the server
             loading = false
             errorLoading = false
             return
