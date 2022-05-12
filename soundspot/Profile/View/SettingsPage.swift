@@ -17,14 +17,17 @@ struct SettingsPage: View
     @ObservedObject var profileRepo = ProfileRepository.getInstance()
     @State private var volume = 50.0
     @State private var newVolume = false
+    @State var navigateToLogin = false
+    @StateObject var showTabBar = TabBarVisibility()
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
         VStack{
             
-            Text("Settings Page").foregroundColor(.white)
+            Text("Settings").foregroundColor(.white)
             .font(.system(size: 30).bold())
             
-            if (!viewModel.loading)
+            /*if (!viewModel.loading)
             {
                 if let profile = profileRepo.profile{
                     if let image = profile.image{
@@ -58,10 +61,21 @@ struct SettingsPage: View
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                 
-            }
+            }*/
             Spacer()
             
-            Button(action:{}){ Text("LOG OUT")
+            Button(action:{
+                let stateRepo = AppStateRepository()
+                stateRepo.updateAppStateAsync(appState: AppState(firstLaunch: false, userLoggedIn: false))
+                let authRepo = UserAuthRepository()
+                authRepo.removeSavedTokens()
+                let ins = ProfileRepository.getInstance()
+                ins.profile = nil
+                TabBarVisibility.getInstance().show = false
+                
+                
+                //self.mode.wrappedValue.dismiss()
+            }){ Text("LOG OUT")
                 
             }
             .font(.headline)
@@ -70,6 +84,9 @@ struct SettingsPage: View
                 .foregroundColor(.white)
                 .background(Color.purple)
                 .cornerRadius(10)
+                
+            
+            NavigationLink(destination: StartUp(viewModel: AuthenticateUser()), isActive: $navigateToLogin){}.isDetailLink(false)
             Spacer()
         Form
         {

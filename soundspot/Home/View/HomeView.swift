@@ -12,6 +12,8 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var viewModel : HomeViewModel
     @State private var selection = 0
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @ObservedObject var tabBarVisibility = TabBarVisibility.getInstance()
     init(viewModel : HomeViewModel) {
         UITabBar.appearance().backgroundColor = UIColor(Color.backgroundColor)
         self.viewModel = viewModel
@@ -21,11 +23,21 @@ struct HomeView: View {
         
         VStack
         {
+            if(tabBarVisibility.show){
             NavigationView
             {
                 TabBar(viewModel : viewModel)
             }.navigationBarBackButtonHidden(true).navigationBarHidden(false)
+            }else{
+                NavigationView
+                {
+                    StartUp(viewModel: AuthenticateUser())
+                }
+            }
         }
+            
+        
+        
     }
 }
 
@@ -238,6 +250,7 @@ struct HomeMainView: View {
         }.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
             .edgesIgnoringSafeArea(.top)
             .onAppear{
+                //TabBar.showTab.show = true
                 viewModel.onEvent(event: HomeViewEvent.onLoad)
             }
         

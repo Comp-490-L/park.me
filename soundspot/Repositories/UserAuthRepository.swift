@@ -35,6 +35,12 @@ struct UserAuthRepository{
         return success
     }
     
+    func removeSavedTokens(){
+        do{
+            try saveToken(token: "", refreshToken: "")
+        }catch{}
+    }
+    
     private func saveToken(token : String, refreshToken: String) throws{
         
             let realm = try Realm()

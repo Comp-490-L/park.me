@@ -43,6 +43,7 @@ final class AuthenticateUser : ObservableObject{
                 [self] in
                 switch result{
                 case .success(let allowUser):
+                    TabBarVisibility.getInstance().show = true
                     authenticated = allowUser
                 case .failure(let error):
                     switch error{
@@ -89,6 +90,7 @@ final class AuthenticateUser : ObservableObject{
                 [self] in
                 switch result{
                 case .success(let allowUser):
+                    TabBarVisibility.getInstance().show = true
                     authenticated = allowUser
                 case .failure(let error):
                     switch error{

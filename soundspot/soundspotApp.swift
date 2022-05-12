@@ -18,6 +18,7 @@ struct soundspotApp: SwiftUI.App {
             stateRepo.updateAppStateAsync(appState: AppState(firstLaunch: false, userLoggedIn: false))
         }else if(state != nil){
             if(state!.userLoggedIn){
+                TabBarVisibility.getInstance().show = true
                 view = OnLaunchView.Home
                 
             }else{
