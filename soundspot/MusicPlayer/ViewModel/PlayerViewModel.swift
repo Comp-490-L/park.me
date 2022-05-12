@@ -100,6 +100,8 @@ class PlayerViewModel : ObservableObject{
 	 Change trackIndex before calling
 	 */
 	private func playTrack(){
+        streamed = 0.0
+        streamCounterUpdated = false
 		if let url = URL(string: trackList[trackIndex].link) {
 
 			let urlAsset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": ["Authorization": "Bearer \(UserAuthRepository.getToken())"]])
@@ -124,8 +126,6 @@ class PlayerViewModel : ObservableObject{
     
     @objc func playerDidFinishPlaying(){
         trackEnded = true
-        streamed = 0.0
-        streamCounterUpdated = false
         playPauseBtnPressed()
     }
     
@@ -145,6 +145,7 @@ class PlayerViewModel : ObservableObject{
                     self?.progressPercentage = (((time.roundedSeconds / seconds) * 100).rounded())
                     }
             }
+            self?.addStreamedSeconds()
         }
     }
 
@@ -160,6 +161,7 @@ class PlayerViewModel : ObservableObject{
             streamed = streamed + 0.5
         }
         if(streamed > 10 && !streamCounterUpdated){
+            streamCounterUpdated = true
             DispatchQueue.global().async {
                 [self] in
                 musicRepo.increaseStreamCount(trackId: trackList[trackIndex].id)

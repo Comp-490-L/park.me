@@ -20,7 +20,7 @@ struct ProfileView: View{
 	var body: some View{
 		NavigationView{
 			VStack{
-				ScrollView{
+                ScrollView(.vertical, showsIndicators: false){
 					ZStack{
 						
 						Banner()
@@ -213,7 +213,7 @@ struct ProfileView: View{
 								
 								// Check if profile is found and user has some music uploaded
 								if(profileRepo.profile != nil){
-									
+                                    VStack{
 									ForEach(0..<profileRepo.profile!.singlesList.count, id: \.self)
 									{
 										index in
@@ -241,6 +241,7 @@ struct ProfileView: View{
 											onClick: viewModel.navigateToPlaylistView,
                                             containedIn: ContainedIn(container: Container.Album, id: profileRepo.profile!.albumsList[index].id)))
 									}
+                                    }.padding(.bottom, 200)
 									// Navigate to playlistView
 									if(viewModel.navigateToPlaylistView){
 										if let profile = profileRepo.profile{
@@ -268,6 +269,7 @@ struct ProfileView: View{
 					
 				}.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
 					.edgesIgnoringSafeArea(.all)
+                    
                 
 				
 				
@@ -279,17 +281,20 @@ struct ProfileView: View{
 					isActive: $viewModel.navigateToUploadView){}
 				
 				
-                //VideoControls()
+               
 				
 				
 				
             }
             .background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
 				
-        }.navigationBarTitle("").opacity(1)
+        }
+        .navigationBarTitle("").opacity(1)
 			.navigationBarHidden(true)
 			.navigationBarBackButtonHidden(true)
-            .ignoresSafeArea(.all)
+            //.background(Color(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)))
+                .edgesIgnoringSafeArea(.top)
+            
 		
 	}
 	

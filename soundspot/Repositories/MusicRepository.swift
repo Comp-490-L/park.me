@@ -123,7 +123,7 @@ struct MusicRepository{
 	}
     
     func increaseStreamCount(trackId: String){
-        let url = URL(string: "\(Server.url)/api/addStream\(trackId)")
+        let url = URL(string: "\(Server.url)/api/addStream?trackId=\(trackId)")
         if let url = url {
             dataTask(url: url, method: "PUT", body: nil){ response in
                 // Does not matter
