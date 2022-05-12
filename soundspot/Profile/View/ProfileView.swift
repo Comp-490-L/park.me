@@ -166,11 +166,12 @@ struct ProfileView: View{
 										onClick: viewModel.navigateToPlaylist,
                                         containedIn: ContainedIn(container: Container.Playlist, id: profileRepo.profile!.playlistList[index].id)))
 								}
-                                
+                                if(viewModel.navigateToPlaylist){
                                 NavigationLink(destination: PlaylistView(
                                     viewModel: PlaylistViewModel(
                                         music: profileRepo.profile!.playlistList[viewModel.clickedPlaylist])),
                                                isActive: $viewModel.navigateToPlaylist){}
+                                }
 								//TODO add navigation for playlists here
 							}
 							
